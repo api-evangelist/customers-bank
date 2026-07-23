@@ -1,0 +1,108 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json path + schema id-reference analysis
+note: Entity graph derived from resource paths and id-reference fields across the embedded-banking APIs.
+  The partner/customer/account hierarchy is the spine; payment and lending objects belong to accounts.
+entities:
+- name: Partner
+  api: partners
+  description: Top-level fintech/corporate partner tenant on the platform.
+  relationships:
+  - type: has_many
+    target: User
+    via: partnerId
+  - type: has_many
+    target: Customer
+    via: partnerId
+- name: User
+  api: partners
+  description: A user belonging to a partner, entitled to accounts.
+  relationships:
+  - type: belongs_to
+    target: Partner
+    via: partnerId
+- name: Customer
+  api: accounts
+  description: A partner's end customer.
+  relationships:
+  - type: belongs_to
+    target: Partner
+    via: partnerId
+  - type: has_many
+    target: Account
+    via: customerId
+- name: Account
+  api: accounts
+  description: Deposit/ledger account; the anchor for payments and transfers.
+  relationships:
+  - type: belongs_to
+    target: Customer
+    via: customerId
+  - type: has_many
+    target: Subaccount
+    via: accountId
+  - type: has_many
+    target: Transaction
+    via: accountId
+- name: Subaccount
+  api: accounts
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: Transaction
+  api: accounts
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: AchPayment
+  api: ach
+  description: Outgoing/incoming ACH credit or debit.
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: InstantPayment
+  api: instantpayments
+  description: FedNow / RTP real-time payment.
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: Wire
+  api: wires
+  description: Fedwire incoming/outgoing wire (v2).
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: BookTransfer
+  api: transfers
+  description: Internal book transfer between accounts, plus address-book payees.
+  relationships:
+  - type: belongs_to
+    target: Account
+    via: accountId
+- name: LoanApplication
+  api: consumerlending
+  relationships:
+  - type: has_one
+    target: Loan
+    via: applicationId
+  - type: belongs_to
+    target: PartnerProgram
+    via: programId
+- name: Loan
+  api: consumerlending
+  relationships:
+  - type: belongs_to
+    target: LoanApplication
+    via: applicationId
+- name: WebhookSubscription
+  api: webhooks
+  description: Event subscription with HMAC secret and callback URL.
+  relationships:
+  - type: has_many
+    target: EventDelivery
+    via: subscriptionId

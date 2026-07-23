@@ -1,0 +1,24 @@
+generated: '2026-07-23'
+method: generated
+source: openapi/*.json (operationIds verified) + conventions/ + errors/ + asyncapi/
+skills:
+  - file: customers-bank-authenticate-and-list-accounts.md
+    name: Authenticate and list accounts
+    api: openapi/customers-bank-security-openapi.json
+    operations: [post-oauth2-token, get, get-accountid, get-accountid-transactions]
+  - file: customers-bank-originate-ach-payment.md
+    name: Originate an ACH payment
+    api: openapi/customers-bank-ach-openapi.json
+    operations: [post-outgoing-credit, post-outgoing-debit, get-outgoing-id, post-outgoing-id-cancel, post-outgoing-id-reverse]
+  - file: customers-bank-book-transfer.md
+    name: Create and approve a book transfer
+    api: openapi/customers-bank-transfers-openapi.json
+    operations: [post, get-id, post-id-approve, post-id-decline]
+  - file: customers-bank-originate-loan.md
+    name: Originate a consumer loan
+    api: openapi/customers-bank-consumerlending-openapi.json
+    operations: [post-application, get-application-id, get-program-id, post-loan-id-funding, post-loan-id-complete, post-loan-id-cancel]
+  - file: customers-bank-subscribe-webhooks.md
+    name: Subscribe to webhooks and verify HMAC
+    api: openapi/customers-bank-webhooks-openapi.json
+    operations: [get-eventtypes, post, get-id, post-id-disable, post-id-enable, get-eventhistory]

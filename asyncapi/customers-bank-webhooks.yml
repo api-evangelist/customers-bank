@@ -1,0 +1,114 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/docs/webhooks-1 + /docs/event-types + /docs/hmac-signature-validation
+spec_type: Webhooks
+note: Customers Bank documents webhooks but publishes no AsyncAPI document. This is the captured webhook/event catalog. Subscriptions
+  and delivery are managed by the Webhooks API (openapi/customers-bank-webhooks-openapi.json).
+delivery:
+  transport: HTTP POST to subscriber callbackUrl
+  security: HMAC-SHA256 signature
+  security_headers:
+  - 'Authorization: HMAC-SHA256 Signature={base64}'
+  - Authorization-Timestamp
+  - X-Event-Type
+  secret: Base64-encoded secretText supplied at subscription time
+  ip_allowlist: Webhook source IP allowlist managed via the Webhooks API
+  replay: Event history replay supported (POST /{subscriptionId}/event-history/{id}/replay, POST /EventHistory/{id}/replay)
+  docs: https://cubiapi.readme.io/docs/hmac-signature-validation
+management:
+  subscribe: openapi/customers-bank-webhooks-openapi.json#post
+  list_event_types: openapi/customers-bank-webhooks-openapi.json#get-eventtypes
+  event_history: openapi/customers-bank-webhooks-openapi.json#get-eventhistory
+event_type_count: 61
+event_groups:
+- domain: accounts
+  count: 7
+  event_types:
+  - accounts.account-added
+  - accounts.account-deleted
+  - accounts.account-frozen
+  - accounts.account-not-found
+  - accounts.account-unfrozen
+  - accounts.ibs-account-already-associated
+  - accounts.transaction-posted
+- domain: ach
+  count: 5
+  event_types:
+  - ach.outgoing-cancelled
+  - ach.outgoing-completed
+  - ach.outgoing-initiated
+  - ach.outgoing-pending
+  - ach.outgoing-returned
+- domain: consumerlending
+  count: 6
+  event_types:
+  - consumerlending.loanapplication-created
+  - consumerlending.loanapplication-received
+  - consumerlending.loanapplication-rejected
+  - consumerlending.partnerprogram-added
+  - consumerlending.partnerprogram-deleted
+  - consumerlending.partnerprogram-updated
+- domain: fednow
+  count: 4
+  event_types:
+  - fednow.incoming-received
+  - fednow.outgoing-completed
+  - fednow.outgoing-initiated
+  - fednow.outgoing-pending
+- domain: internal-partners
+  count: 1
+  event_types:
+  - internal-partners.user-created
+- domain: partner
+  count: 7
+  event_types:
+  - partner.account.entitlement-changed
+  - partner.account.wires.enabled
+  - partner.account.xfer.enabled
+  - partner.partner.wires.disabled
+  - partner.partner.wires.enabled
+  - partner.user-deleted
+  - partner.user.xfer.disabled
+- domain: partners
+  count: 8
+  event_types:
+  - partners.partner-created
+  - partners.partner-deactivated
+  - partners.partner-deleted
+  - partners.partner-frozen
+  - partners.partner-unfrozen
+  - partners.partner-updated
+  - partners.user-frozen
+  - partners.user-unfrozen
+- domain: rtp
+  count: 4
+  event_types:
+  - rtp.incoming-received
+  - rtp.outgoing-completed
+  - rtp.outgoing-initiated
+  - rtp.outgoing-pending
+- domain: transfers
+  count: 11
+  event_types:
+  - transfers.account-link-approved
+  - transfers.account-link-declined
+  - transfers.account-link-removed
+  - transfers.addressbook-entry-incoming-request
+  - transfers.book-approved
+  - transfers.book-completed
+  - transfers.book-declined
+  - transfers.book-initiated
+  - transfers.book-received
+  - transfers.book-rejected
+  - transfers.book-requires-approval
+- domain: wires
+  count: 8
+  event_types:
+  - wires.incoming-received
+  - wires.outgoing-accepted
+  - wires.outgoing-cancelled
+  - wires.outgoing-completed
+  - wires.outgoing-initiated
+  - wires.outgoing-pending
+  - wires.outgoing-rejected
+  - wires.outgoing-returned

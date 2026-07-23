@@ -1,0 +1,29 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/docs + llms.txt changelog entries
+versioning:
+  scheme: uri-path
+  detail: Version segment in the service base path (/accounts/v1 ... /Wires/v2).
+  current:
+    accounts: v1
+    ach: v1
+    consumerlending: v1
+    instantpayments: v1
+    itoperations: v1
+    partners: v1
+    security: v1
+    transfers: v1
+    webhooks: v1
+    wires: v2
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support is publicly documented.
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_note: No public status page (status.customersbank.com not resolvable) as of this round.
+changelog: https://cubiapi.readme.io/docs/getting-started
+changelog_detail: changelog/customers-bank-changelog.yml
+deprecated_operations: []

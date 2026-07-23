@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Customers Bank Security
+  version: 1.0.0
+extends: openapi/customers-bank-security-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: customers-bank
+    x-apievangelist-auth: OAuth2 client-credentials (Bearer); token at /security/v1/oauth2/token
+    x-apievangelist-idempotency: x-idempotency-key (UUID v4) required on POST/PATCH; 48h retention
+    x-apievangelist-errors: RFC 9457 application/problem+json
+    x-apievangelist-review: enrichment round 2026-07-23

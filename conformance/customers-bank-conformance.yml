@@ -1,0 +1,43 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json + https://cubiapi.readme.io/docs
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OAuth2 client-credentials grant issued at /security/v1/oauth2/token; Bearer access tokens
+    (expires_in 3600s).
+- id: rfc9457-problem-details
+  conforms: true
+  evidence: 4xx/5xx responses use application/problem+json with title/detail members (1,153 problem+json
+    responses across specs).
+- id: rfc7231-idempotency
+  conforms: true
+  evidence: x-idempotency-key request header (UUID v4, 48h retention) required on POST/PATCH; documented
+    at /docs/idempotency.
+- id: hmac-webhook-signatures
+  conforms: true
+  evidence: 'Webhook callbacks signed HMAC-SHA256 (Authorization: HMAC-SHA256 Signature=..., Authorization-Timestamp);
+    /docs/hmac-signature-validation.'
+- id: openapi-3.0
+  conforms: true
+  evidence: All 10 service specifications are OpenAPI 3.0.1.
+- id: nacha-ach
+  conforms: true
+  evidence: ACH origination API (outgoing credit/debit, reversal, returns) aligns to NACHA ACH rails.
+- id: fednow-rtp-instant
+  conforms: true
+  evidence: Instant Payments API exposes FedNow and RTP (The Clearing House) outgoing/incoming rails.
+- id: fedwire
+  conforms: true
+  evidence: Wires API (v2) originates and manages Fedwire outgoing/incoming wire transfers with purpose/reference
+    codes.
+- id: fdx
+  conforms: false
+  evidence: No FDX-conformant consumer-permissioned data-sharing endpoint is publicly documented; this
+    is a partner-gated BaaS surface.
+- id: cfpb-1033
+  conforms: false
+  evidence: No Section 1033 consumer data-access endpoint is publicly documented.
+- id: fapi
+  conforms: false
+  evidence: Client-credentials M2M auth; no FAPI security profile (PAR/JARM/PKCE) documented.

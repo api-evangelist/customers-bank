@@ -1,0 +1,62 @@
+generated: '2026-07-23'
+method: derived
+source: mcp/customers-bank-mcp.yml + openapi/*.json
+note: >-
+  Customers Bank exposes the ReadMe GENERIC MCP server, whose tools are spec/documentation
+  meta-tools rather than one tool per API operation. There is therefore no 1:1 tool->operationId
+  binding; instead a single execute-request tool can invoke ANY of the 211 REST operations by
+  HAR request. This crosswalk records that divergence honestly rather than fabricating per-operation tools.
+surfaces:
+  openapi:
+    files: 10
+    operations: 211
+    gated: false
+    note: OpenAPI 3.0.1 specs are public via the ReadMe portal; the live API host is partner-gated (OAuth2).
+  mcp:
+    url: https://cubiapi.readme.io/mcp
+    gated: false
+    note: tools/list returns anonymously; execute-request against the live API requires an OAuth2 Bearer token.
+  graphql:
+    present: false
+crosswalk: []
+mcp_only:
+  - tool: list-endpoints
+    reason: Meta-tool that enumerates spec paths/methods; not backed by a single REST operation.
+  - tool: get-endpoint
+    reason: Meta-tool returning spec detail for one path/method; reads the OpenAPI, does not call the API.
+  - tool: search-endpoints
+    reason: Meta-tool that searches across all specs; no single backing operation.
+  - tool: list-specs
+    reason: Enumerates the 10 OpenAPI documents; no backing REST operation.
+  - tool: search
+    reason: Documentation search; no backing REST operation.
+  - tool: fetch
+    reason: Documentation content retrieval by id; no backing REST operation.
+  - tool: execute-request
+    reason: >-
+      Universal HAR executor. It can invoke any of the 211 REST operations (accounts, ach,
+      wires, instant payments, transfers, consumer lending, partners, webhooks, security),
+      so it maps to ALL operations rather than one; its real input contract is the target
+      operation's parameters + requestBody in the referenced OpenAPI.
+rest_only:
+  note: >-
+    All 211 REST operations are reachable only through the generic execute-request tool; none
+    has a dedicated MCP tool. Capability groups below are addressable via execute-request.
+  groups:
+    - {api: accounts, operations: 29}
+    - {api: ach, operations: 20}
+    - {api: consumerlending, operations: 12}
+    - {api: instantpayments, operations: 31}
+    - {api: itoperations, operations: 9}
+    - {api: partners, operations: 35}
+    - {api: security, operations: 3}
+    - {api: transfers, operations: 34}
+    - {api: webhooks, operations: 17}
+    - {api: wires, operations: 21}
+coverage:
+  tools_named: 7
+  tools_bound_to_single_operation: 0
+  mcp_only_meta_tools: 6
+  universal_execution_tools: 1
+  rest_operations_total: 211
+  rest_operations_with_dedicated_tool: 0

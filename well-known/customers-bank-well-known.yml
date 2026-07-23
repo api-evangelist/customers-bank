@@ -1,0 +1,21 @@
+generated: '2026-07-23'
+method: searched
+note: The API gateway host returns 403 to anonymous /.well-known/* probes (partner-gated); the marketing
+  host returns 404. No public well-known discovery documents were served. Absence recorded for audit.
+hosts:
+- host: https://cubi-sandbox-api.customersbank.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+  - path: /.well-known/oauth-protected-resource
+    status: 403
+  - path: /.well-known/api-catalog
+    status: 403
+- host: https://www.customersbank.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404

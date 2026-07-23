@@ -1,0 +1,41 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/docs/authenticate-1
+docs: https://cubiapi.readme.io/docs/authenticate-1
+note: >-
+  The OpenAPI documents do not declare securitySchemes in-spec; the auth model is documented
+  in the ReadMe developer portal. Access is machine-to-machine OAuth2 client-credentials;
+  webhook callbacks are authenticated separately with HMAC-SHA256 signatures.
+summary:
+  types: [oauth2, http-bearer, hmac]
+  api_key_in: []
+  oauth2_flows: [clientCredentials]
+schemes:
+  - name: OAuth2ClientCredentials
+    type: oauth2
+    flow: clientCredentials
+    token_url: https://cubi-sandbox-api.customersbank.com/security/v1/oauth2/token
+    grant_type: client_credentials
+    request_content_type: application/x-www-form-urlencoded
+    parameters: [client_Id, client_Secret, grant_type]
+    token_type: Bearer
+    token_lifetime_seconds: 3600
+    scopes: none-documented
+    note: >-
+      client_Id is a UUID; client_Secret is up to 40 chars (shown once at creation).
+      Cache the token for expires_in seconds. Credentials are provisioned via the Partners API
+      (client-credentials / M2M application registration).
+  - name: BearerAuth
+    type: http
+    scheme: bearer
+    applies_to: All resource APIs (accounts, ach, wires, instant payments, transfers, consumer lending, partners, webhooks, it-operations)
+    header: 'Authorization: Bearer {access_token}'
+  - name: WebhookHMAC
+    type: hmac
+    algorithm: HMAC-SHA256
+    direction: inbound-callback
+    applies_to: Webhook callback delivery to the subscriber callbackUrl
+    headers: [Authorization, Authorization-Timestamp, X-Event-Type]
+    signature_format: 'Authorization: HMAC-SHA256 Signature={base64}'
+    secret: secretText (Base64-encoded) supplied at webhook subscription time
+    docs: https://cubiapi.readme.io/docs/hmac-signature-validation

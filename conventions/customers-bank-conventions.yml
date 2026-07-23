@@ -1,0 +1,46 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/docs/idempotency + /docs/error-handling + /docs/event-types + openapi/*.json
+authentication:
+  style: OAuth2 client-credentials (Bearer)
+  detail: authentication/customers-bank-authentication.yml
+idempotency:
+  supported: true
+  header: x-idempotency-key
+  value_format: UUID v4
+  required_on: [POST, PATCH]
+  optional_on: [GET, PUT, DELETE, OPTIONS, HEAD]
+  retention_hours: 48
+  constraints:
+    - Key MUST be unique and MUST NOT be reused with a different payload for the same operation.
+    - MUST NOT include more than one x-idempotency-key header in a single request.
+  behavior:
+    first_time: Request processed normally.
+    retry_after_completion: Returns the stored result of the original operation (no reprocessing).
+    concurrent_retry: Returns 409 Conflict while the original is still processing.
+  error_scenarios:
+    - {condition: missing required key, status: 400}
+    - {condition: key reused with different payload, status: 422}
+    - {condition: retried while still processing, status: 409}
+    - {condition: more than one key header, status: 400}
+  docs: https://cubiapi.readme.io/docs/idempotency
+pagination:
+  style: page-number
+  request_params: [paginateResults, page, perPage, sortOn, sortAscending]
+  response_fields: [pageSize, pageOffset, totalPages, totalItemCount, items]
+  note: sortOn accepts any field present in the response payload.
+error_envelope:
+  media_type: application/problem+json
+  standard: RFC 9457
+  members: [title, detail]
+  catalog: errors/customers-bank-problem-types.yml
+versioning:
+  scheme: uri-path
+  detail: Version segment in the base path (e.g. /accounts/v1, /Wires/v2). Most services are v1; Wires is v2.
+webhooks:
+  delivery: HTTP POST to subscriber callbackUrl
+  security: HMAC-SHA256 signature (Authorization + Authorization-Timestamp headers)
+  catalog: asyncapi/customers-bank-webhooks.yml
+environments:
+  sandbox_host: https://cubi-sandbox-api.customersbank.com
+  detail: sandbox/customers-bank-sandbox.yml

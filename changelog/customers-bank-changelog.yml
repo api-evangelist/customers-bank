@@ -1,0 +1,21 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/llms.txt (dated release-notes pages)
+scheme: date-based release notes (YYYY.MM.DD) published in the ReadMe portal
+current: '2026.04.16'
+note: >-
+  Customers Bank publishes dated release-notes pages in its developer portal. Dates and page URLs are
+  captured verbatim from the portal's llms.txt index; per-entry breaking/additions detail lives on each
+  linked page and is not reproduced here to avoid fabrication.
+entries:
+  - {date: '2026.04.16', url: 'https://cubiapi.readme.io/docs/copy-of-20260305.md'}
+  - {date: '2026.03.05', url: 'https://cubiapi.readme.io/docs/copy-of-20251030.md'}
+  - {date: '2025.10.30', url: 'https://cubiapi.readme.io/docs/copy-of-20250917.md'}
+  - {date: '2025.09.17', url: 'https://cubiapi.readme.io/docs/20250807-copy.md'}
+  - {date: '2025.08.07', url: 'https://cubiapi.readme.io/docs/20250520-copy.md'}
+  - {date: '2025.05.20', url: 'https://cubiapi.readme.io/docs/20250515.md'}
+  - {date: '2025.05.01', url: 'https://cubiapi.readme.io/docs/20250501.md'}
+  - {date: '2024.11.14', url: 'https://cubiapi.readme.io/docs/20241114.md'}
+  - {date: '2024.10.31', url: 'https://cubiapi.readme.io/docs/20241031.md'}
+  - {date: '2024.10.17', url: 'https://cubiapi.readme.io/docs/20241017.md'}
+  - {date: '2024.09.25', url: 'https://cubiapi.readme.io/docs/20240925.md'}

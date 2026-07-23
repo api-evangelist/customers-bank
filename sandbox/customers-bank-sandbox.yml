@@ -1,0 +1,26 @@
+generated: '2026-07-23'
+method: searched
+source: https://cubiapi.readme.io/docs/authenticate-1 + /docs/getting-started
+note: >-
+  The Customers Bank embedded-banking platform is sandbox-first: the documented base host is the
+  sandbox environment. Access is provisioned to partners; the docs publish the sandbox host and the
+  OAuth2 token flow but do NOT publish shared magic test values (test accounts/cards). Only what the
+  docs publish verbatim is recorded here — no test values are invented.
+environments:
+  sandbox:
+    host: https://cubi-sandbox-api.customersbank.com
+    token_endpoint: https://cubi-sandbox-api.customersbank.com/security/v1/oauth2/token
+    auth: OAuth2 client-credentials (client_Id + client_Secret, grant_type=client_credentials)
+    token_lifetime_seconds: 3600
+  production:
+    host: null
+    note: Production host is provisioned per partner and not publicly documented.
+test_credentials:
+  provisioning: >-
+    Sandbox client_Id (UUID) and client_Secret (<=40 chars, shown once at creation) are created via the
+    Partners API client-credentials / API-credentials endpoints, then exchanged at the token endpoint.
+  shared_magic_values: none-published
+webhook_testing:
+  note: >-
+    Webhook docs demonstrate delivery/HMAC verification against a webhook.site callback URL; subscribers
+    supply their own callbackUrl and Base64-encoded secretText at subscription time.

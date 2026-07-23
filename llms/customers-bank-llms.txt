@@ -1,0 +1,206 @@
+# Customers Bank Documentation
+
+> Documentation for Customers Bank
+
+## Guides
+- [Customers Bank APIs](https://cubiapi.readme.io/docs/getting-started.md)
+- [Authenticate](https://cubiapi.readme.io/docs/authenticate-1.md)
+- [Accounts](https://cubiapi.readme.io/docs/accounts-3.md)
+- [Entitlements](https://cubiapi.readme.io/docs/entitlements.md)
+- [Address Book](https://cubiapi.readme.io/docs/address-book.md)
+- [Book Transfers](https://cubiapi.readme.io/docs/book-transfers.md)
+- [Entitlements](https://cubiapi.readme.io/docs/entitlements-1.md)
+- [Incoming Wires](https://cubiapi.readme.io/docs/incoming-wires.md)
+- [Outgoing Wires](https://cubiapi.readme.io/docs/outgoing-wires.md)
+- [Loan Application](https://cubiapi.readme.io/docs/loan-application.md)
+- [Partner Program](https://cubiapi.readme.io/docs/partner-program.md)
+- [Loan](https://cubiapi.readme.io/docs/loan-1.md)
+- [HMAC Security](https://cubiapi.readme.io/docs/hmac-signature-validation.md)
+- [Event Types](https://cubiapi.readme.io/docs/event-types.md)
+- [Webhooks](https://cubiapi.readme.io/docs/webhooks-1.md)
+- [Webhook Event Data](https://cubiapi.readme.io/docs/webhook-event-data.md)
+- [Webhook Ip Allowlist](https://cubiapi.readme.io/docs/webhook-ip-allowlist.md)
+- [Messages](https://cubiapi.readme.io/docs/messages-1.md)
+- [Partners](https://cubiapi.readme.io/docs/partners-1.md)
+- [Users](https://cubiapi.readme.io/docs/users-1.md)
+- [Idempotency](https://cubiapi.readme.io/docs/idempotency.md)
+- [Error Handling](https://cubiapi.readme.io/docs/error-handling.md)
+- [Send Address Book Request](https://cubiapi.readme.io/docs/send-address-book-request.md)
+- [Accept Incoming Address Book Request](https://cubiapi.readme.io/docs/accept-incoming-address-book-request.md)
+- [Decline Incoming Address Book Request](https://cubiapi.readme.io/docs/decline-incoming-address-book-request.md)
+- [Approve Instant Transfer](https://cubiapi.readme.io/docs/approve-instant-transfer.md)
+- [Decline Instant Transfer](https://cubiapi.readme.io/docs/decline-instant-transfer.md)
+- [Create New API Credentials](https://cubiapi.readme.io/docs/create-new-api-credentials.md)
+- [MCP](https://cubiapi.readme.io/docs/mcp.md)
+- [2024.09.25](https://cubiapi.readme.io/docs/20240925.md)
+- [2024.10.17](https://cubiapi.readme.io/docs/20241017.md)
+- [2024.10.31](https://cubiapi.readme.io/docs/20241031.md)
+- [2024.11.14](https://cubiapi.readme.io/docs/20241114.md)
+- [2025.05.01](https://cubiapi.readme.io/docs/20250501.md)
+- [2025.05.20](https://cubiapi.readme.io/docs/20250515.md)
+- [2025.08.07](https://cubiapi.readme.io/docs/20250520-copy.md)
+- [2025.09.17](https://cubiapi.readme.io/docs/20250807-copy.md)
+- [2025.10.30](https://cubiapi.readme.io/docs/copy-of-20250917.md)
+- [2026.03.05](https://cubiapi.readme.io/docs/copy-of-20251030.md)
+- [2026.04.16](https://cubiapi.readme.io/docs/copy-of-20260305.md)
+
+## API Reference
+- [/oauth2/token - POST](https://cubiapi.readme.io/reference/post-oauth2-token.md): Gets an auth token for the provided client id, secret, and grant type
+- [/reference-data - GET](https://cubiapi.readme.io/reference/get-reference-data-2.md): Returns accounts related codes and definitions
+- [/ - GET](https://cubiapi.readme.io/reference/get.md): Get a list of accounts
+- [/{accountId} - GET](https://cubiapi.readme.io/reference/get-accountid.md): Get an account
+- [/{accountId}/transactions - GET](https://cubiapi.readme.io/reference/get-accountid-transactions.md): Search transactions for an account
+- [/download - GET](https://cubiapi.readme.io/reference/get-download-2.md): Download a list of all accounts
+- [/{accountId} - PUT](https://cubiapi.readme.io/reference/put-accountid.md)
+- [/{accountId}/searchable - PUT](https://cubiapi.readme.io/reference/put-accountid-searchable.md)
+- [/Customers - GET](https://cubiapi.readme.io/reference/get-customers.md): Get a list of customers for the caller's partner
+- [/Customers - POST](https://cubiapi.readme.io/reference/post-customers.md): Creates a new customer
+- [/Customers/{id} - GET](https://cubiapi.readme.io/reference/get-customers-id.md): Get a customer by id
+- [/Customers/{id} - PUT](https://cubiapi.readme.io/reference/put-customers-id.md): Updates an existing customer
+- [/Customers/{id} - DELETE](https://cubiapi.readme.io/reference/delete-customers-id.md): Deletes an existing customer
+- [/Subaccounts - GET](https://cubiapi.readme.io/reference/get-subaccounts.md): Get a list of subaccounts for the given account
+- [/Subaccounts - POST](https://cubiapi.readme.io/reference/post-subaccounts.md): Creates a new subaccount under the given account
+- [/Subaccounts/{id} - GET](https://cubiapi.readme.io/reference/get-subaccounts-id.md): Get a subaccount by id
+- [/Subaccounts/{id} - PUT](https://cubiapi.readme.io/reference/put-subaccounts-id.md): Updates an existing subaccount
+- [/Subaccounts/{id} - DELETE](https://cubiapi.readme.io/reference/delete-subaccounts-id.md): Closes an existing subaccount
+- [/Subaccounts/{id}/freeze - POST](https://cubiapi.readme.io/reference/post-subaccounts-id-freeze.md): Freezes an existing subaccount
+- [/Subaccounts/{id}/unfreeze - POST](https://cubiapi.readme.io/reference/post-subaccounts-id-unfreeze.md): Unfreezes an existing subaccount
+- [/Subaccounts/{id}/tags/{tagId} - POST](https://cubiapi.readme.io/reference/post-subaccounts-id-tags-tagid.md): Attaches a tag to an existing subaccount
+- [/Subaccounts/{id}/tags/{tagId} - DELETE](https://cubiapi.readme.io/reference/delete-subaccounts-id-tags-tagid.md): Detaches a tag from an existing subaccount
+- [/Tags - GET](https://cubiapi.readme.io/reference/get-tags.md): Get a list of tags for the caller's partner
+- [/Tags - POST](https://cubiapi.readme.io/reference/post-tags.md): Creates a new tag
+- [/Tags/{id} - GET](https://cubiapi.readme.io/reference/get-tags-id.md): Get a tag by id
+- [/Tags/{id} - PUT](https://cubiapi.readme.io/reference/put-tags-id.md): Updates an existing tag
+- [/Tags/{id} - DELETE](https://cubiapi.readme.io/reference/delete-tags-id.md): Deletes an existing tag
+- [/AccountEntitlements - GET](https://cubiapi.readme.io/reference/get-accountentitlements.md)
+- [/AccountEntitlements/{userId} - GET](https://cubiapi.readme.io/reference/get-accountentitlements-userid.md)
+- [/AccountEntitlements/{userId} - PUT](https://cubiapi.readme.io/reference/put-accountentitlements-userid.md)
+- [/AddressBook/entries - GET](https://cubiapi.readme.io/reference/get-addressbook-entries.md)
+- [/AddressBook/entries/{id} - GET](https://cubiapi.readme.io/reference/get-addressbook-entries-id.md)
+- [/AddressBook/entries/{id} - DELETE](https://cubiapi.readme.io/reference/delete-addressbook-entries-id.md)
+- [/AddressBook/entries - POST](https://cubiapi.readme.io/reference/post-addressbook-entries.md)
+- [/AddressBook/entries/{id}/approve - POST](https://cubiapi.readme.io/reference/post-addressbook-entries-id-approve.md)
+- [/AddressBook/entries/{id}/decline - POST](https://cubiapi.readme.io/reference/post-addressbook-entries-id-decline.md)
+- [/AddressBook/entries/requests - GET](https://cubiapi.readme.io/reference/get-addressbook-entries-requests.md)
+- [/AddressBook/entries/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-addressbook-entries-id-cancel.md)
+- [/AddressBook/requests - GET](https://cubiapi.readme.io/reference/get-addressbook-requests.md)
+- [/AddressBook/requests/{id}/approve - POST](https://cubiapi.readme.io/reference/post-addressbook-requests-id-approve.md)
+- [/AddressBook/requests/{id}/decline - POST](https://cubiapi.readme.io/reference/post-addressbook-requests-id-decline.md)
+- [/AddressBook/availableAccounts?partnerName={partnerName} - GET](https://cubiapi.readme.io/reference/get-addressbook-availableaccounts-partnername-partnername.md)
+- [/AddressBook/accountlinksettings/{id} - GET](https://cubiapi.readme.io/reference/get-addressbook-accountlinksettings-id.md)
+- [/AddressBook/accountlinksettings/{id} - PUT](https://cubiapi.readme.io/reference/put-addressbook-accountlinksettings-id.md)
+- [/ - POST](https://cubiapi.readme.io/reference/post.md)
+- [/{id} - GET](https://cubiapi.readme.io/reference/get-id.md)
+- [/?id={id} - GET](https://cubiapi.readme.io/reference/get-id-id.md)
+- [/{id}/approve - POST](https://cubiapi.readme.io/reference/post-id-approve.md)
+- [/{id}/decline - POST](https://cubiapi.readme.io/reference/post-id-decline.md)
+- [/purposeCodes - GET](https://cubiapi.readme.io/reference/get-purposecodes.md)
+- [/reference-data - GET](https://cubiapi.readme.io/reference/get-reference-data-1.md): Returns wires-related codes and lookup values.
+- [/AccountEntitlements - GET](https://cubiapi.readme.io/reference/get-accountentitlements-1.md): Gets the specific entitlement for a given account
+- [/AccountEntitlements/{userId} - GET](https://cubiapi.readme.io/reference/get-accountentitlements-userid-1.md): Gets account entitlements for a specific user
+- [/AccountEntitlements/{userId} - PUT](https://cubiapi.readme.io/reference/put-accountentitlements-userid-1.md): Updates account entitlements for a given user
+- [/incoming - GET](https://cubiapi.readme.io/reference/get-incoming.md): Searches incoming wire payments
+- [/incoming/{id} - GET](https://cubiapi.readme.io/reference/get-incoming-id.md): Retrieves an incoming wire payment, by ID
+- [/outgoing - POST](https://cubiapi.readme.io/reference/post-outgoing.md): Initiates a new outgoing wire payment
+- [/outgoing - GET](https://cubiapi.readme.io/reference/get-outgoing.md): Searches for existing wire payments
+- [/outgoing/{id} - GET](https://cubiapi.readme.io/reference/get-outgoing-id.md): Retrieves an existing wire payment
+- [/outgoing/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-outgoing-id-cancel.md): Requests cancellation of an existing wire payment. Wires may only be cancelled if they are in an Initiated status.
+- [/outgoing/{id}/approve - POST](https://cubiapi.readme.io/reference/post-outgoing-id-approve.md): Approves a pending outgoing wire
+- [/outgoing/{id}/decline - POST](https://cubiapi.readme.io/reference/post-outgoing-id-decline.md): Declines a wire which is pending approval
+- [/outgoing/bulk-approve - POST](https://cubiapi.readme.io/reference/post-outgoing-bulk-approve.md): Approves multiple pending outgoing wires
+- [/outgoing/bulk-decline - POST](https://cubiapi.readme.io/reference/post-outgoing-bulk-decline.md): Declines multiple pending outgoing wires
+- [/ControlType - GET](https://cubiapi.readme.io/reference/get-controltype.md): Gets the specific control type for all accounts
+- [/ControlType/{id} - GET](https://cubiapi.readme.io/reference/get-controltype-id.md): Gets the control type for a given account
+- [/ControlType/{id} - PUT](https://cubiapi.readme.io/reference/put-controltype-id.md): Saves the control type for a given account
+- [/programs - GET](https://cubiapi.readme.io/reference/get-programs.md): Searches the available partner programs
+- [/programs/{id} - GET](https://cubiapi.readme.io/reference/get-programs-id.md): Gets a partner program
+- [/outgoing/credit - POST](https://cubiapi.readme.io/reference/post-outgoing-credit.md): Initiates an outgoing ACH credit transaction
+- [/outgoing/debit - POST](https://cubiapi.readme.io/reference/post-outgoing-debit.md): Initiates an outgoing ACH debit transaction
+- [/outgoing - GET](https://cubiapi.readme.io/reference/get-outgoing-1.md): Searches all sent ACH transactions
+- [/outgoing/{id} - GET](https://cubiapi.readme.io/reference/get-outgoing-id-1.md): Gets a sent ACH transaction
+- [/outgoing/{id}/reverse - POST](https://cubiapi.readme.io/reference/post-outgoing-id-reverse.md): Attempts to reverse a previously sent ACH transaction (either debit or credit). May only be used on transactions in a completed status
+- [/outgoing/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-outgoing-id-cancel-1.md): Attempts to cancel an initiated outgoing ACH transaction May only be used on transactions in a pending status
+- [/outgoing/{id}/approve - POST](https://cubiapi.readme.io/reference/post-outgoing-id-approve-1.md): Approves a pending outgoing payment
+- [/outgoing/{id}/decline - POST](https://cubiapi.readme.io/reference/post-outgoing-id-decline-1.md): Declines a payment which is pending approval
+- [/incoming - GET](https://cubiapi.readme.io/reference/get-incoming-1.md): Searches all received ACH transactions
+- [/incoming/{id} - GET](https://cubiapi.readme.io/reference/get-incoming-id-1.md): Gets a sent ACH transaction
+- [/reference-data - GET](https://cubiapi.readme.io/reference/get-reference-data.md): Returns ACH codes and definitions
+- [/AccountAccess/{id} - GET](https://cubiapi.readme.io/reference/get-accountaccess-id.md): Gets the enablement type for a given account
+- [/accountaccess/fednow/{accountId} - GET](https://cubiapi.readme.io/reference/get-accountaccess-fednow-accountid.md): Get account enabled for FedNow by account id
+- [/accountaccess/rtp/{accountId} - GET](https://cubiapi.readme.io/reference/get-accountaccess-rtp-accountid.md): Get account enabled for RTP by account id
+- [/outgoing - POST](https://cubiapi.readme.io/reference/post-outgoing-3.md): Initiates a new instant payment that will be delivered on either the FedNow or RTP rails.   The rail will be determined  based on the receiver bank's rail eligibilty among other factors.
+- [/outgoing - GET](https://cubiapi.readme.io/reference/get-outgoing-2.md): Searches for outgoing Instant Payments
+- [/outgoing/{id} - GET](https://cubiapi.readme.io/reference/get-outgoing-id-2.md): Retrieves an existing instant payment
+- [/outgoing/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-outgoing-id-cancel-2.md): Cancels an existing payment
+- [/outgoing/rtp - POST](https://cubiapi.readme.io/reference/post-outgoing-rtp.md): Initiates a payment on the RTP rail.  This method exists to allow for direct RTP initiation, however, in most cases it's prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity when sending to the receiver bank.
+- [/outgoing/rtp - GET](https://cubiapi.readme.io/reference/get-outgoing-rtp.md): Searches for outgoing RTPs
+- [/outgoing/rtp/{id} - GET](https://cubiapi.readme.io/reference/get-outgoing-rtp-id.md): Retrieves an existing RTP
+- [/outgoing/rtp/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-outgoing-rtp-id-cancel.md): Cancels an existing RTP payment
+- [/outgoing/rtp/{id}/approve - POST](https://cubiapi.readme.io/reference/post-outgoing-rtp-id-approve.md): Approves a pending outgoing payment
+- [/outgoing/rtp/{id}/decline - POST](https://cubiapi.readme.io/reference/post-outgoing-rtp-id-decline.md): Declines a payment which is pending approval
+- [/outgoing/fednow - POST](https://cubiapi.readme.io/reference/post-outgoing-fednow.md): Initiates a payment on the FedNow rail.  This method exists to allow for direct FedNow initiation, however, in most cases it's prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity when sending to the receiver bank.
+- [/outgoing/fednow - GET](https://cubiapi.readme.io/reference/get-outgoing-fednow.md): Searches for outgoing FedNow payments
+- [/outgoing/fednow/{id} - GET](https://cubiapi.readme.io/reference/get-outgoing-fednow-id.md): Retrieves an existing FedNow payment
+- [/outgoing/fednow/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-outgoing-fednow-id-cancel.md): Cancels an existing FedNow payment
+- [/outgoing/fednow/{id}/approve - POST](https://cubiapi.readme.io/reference/post-outgoing-fednow-id-approve.md): Approves a pending outgoing payment
+- [/outgoing/fednow/{id}/decline - POST](https://cubiapi.readme.io/reference/post-outgoing-fednow-id-decline.md): Declines a payment which is pending approval
+- [/incoming - GET](https://cubiapi.readme.io/reference/get-incoming-4.md): Searches for incoming instant payments
+- [/incoming/{id} - GET](https://cubiapi.readme.io/reference/get-incoming-id-4.md): Retrieves an existing incoming instant payment
+- [/incoming/rtp - GET](https://cubiapi.readme.io/reference/get-incoming-rtp.md): Searches for incoming RTPs
+- [/incoming/rtp/{id} - GET](https://cubiapi.readme.io/reference/get-incoming-rtp-id.md): Retrieves an existing incoming RTP
+- [/incoming/fednow - GET](https://cubiapi.readme.io/reference/get-incoming-fednow.md): Searches for incoming FedNow payments
+- [/incoming/fednow/{id} - GET](https://cubiapi.readme.io/reference/get-incoming-fednow-id.md): Retrieves an existing incoming FEDNOW payment
+- [/EventTypes - GET](https://cubiapi.readme.io/reference/get-eventtypes.md)
+- [/ - POST](https://cubiapi.readme.io/reference/post-1.md)
+- [/ - GET](https://cubiapi.readme.io/reference/get-3.md)
+- [/{id} - GET](https://cubiapi.readme.io/reference/get-id-1.md)
+- [/{id} - PUT](https://cubiapi.readme.io/reference/put-id.md)
+- [/{id} - DELETE](https://cubiapi.readme.io/reference/delete-id.md)
+- [/{id}/disable - POST](https://cubiapi.readme.io/reference/post-id-disable.md)
+- [/{id}/enable - POST](https://cubiapi.readme.io/reference/post-id-enable.md)
+- [/{id}/event-history - GET](https://cubiapi.readme.io/reference/get-id-event-history.md)
+- [/{subscriptionId}/event-history/{id}/replay - POST](https://cubiapi.readme.io/reference/post-subscriptionid-event-history-id-replay.md)
+- [/EventHistory - GET](https://cubiapi.readme.io/reference/get-eventhistory.md)
+- [/EventHistory/{id}/runs - GET](https://cubiapi.readme.io/reference/get-eventhistory-id-runs.md)
+- [/EventHistory/{id}/replay - POST](https://cubiapi.readme.io/reference/post-eventhistory-id-replay.md)
+- [/Messages - GET](https://cubiapi.readme.io/reference/get-messages.md)
+- [/credentials - POST](https://cubiapi.readme.io/reference/post-credentials.md)
+- [/ - GET](https://cubiapi.readme.io/reference/get-1.md)
+- [/credentials - GET](https://cubiapi.readme.io/reference/get-credentials.md)
+- [/credentials/{id} - DELETE](https://cubiapi.readme.io/reference/delete-credentials-id.md)
+- [/Users - POST](https://cubiapi.readme.io/reference/post-users.md)
+- [/Users - GET](https://cubiapi.readme.io/reference/get-users.md)
+- [/Users/{id} - GET](https://cubiapi.readme.io/reference/get-users-id.md)
+- [/Users - PUT](https://cubiapi.readme.io/reference/put-users.md)
+- [/Users/{userId} - DELETE](https://cubiapi.readme.io/reference/delete-users-userid.md)
+- [/notification-email/verify - POST](https://cubiapi.readme.io/reference/post-notification-email-verify.md)
+- [/notification-email/send-code - POST](https://cubiapi.readme.io/reference/post-notification-email-send-code.md)
+- [/notification-email - GET](https://cubiapi.readme.io/reference/get-notification-email.md)
+- [/notification-email - PUT](https://cubiapi.readme.io/reference/put-notification-email.md)
+- [/client-credentials - POST](https://cubiapi.readme.io/reference/post-client-credentials.md): Creates a new client credential for the partner.
+- [/client-credentials - GET](https://cubiapi.readme.io/reference/get-client-credentials.md): Gets all client credentials for the partner.
+- [/client-credentials/me - GET](https://cubiapi.readme.io/reference/get-client-credentials-me.md): Gets the client credential for the calling M2M application (from JWT).
+- [/client-credentials/{clientId} - GET](https://cubiapi.readme.io/reference/get-client-credentials-clientid.md): Gets a specific client credential by client ID.
+- [/client-credentials/{clientId} - PUT](https://cubiapi.readme.io/reference/put-client-credentials-clientid.md): Updates the roles for a specific client credential.
+- [/client-credentials/{clientId} - DELETE](https://cubiapi.readme.io/reference/delete-client-credentials-clientid.md): Deletes a specific client credential. Self-delete is not allowed.
+- [/Banks - GET](https://cubiapi.readme.io/reference/get-banks-1.md): Searches for banks
+- [/Banks/{id} - GET](https://cubiapi.readme.io/reference/get-banks-id-1.md): Retrieves a specific bank, by locationId
+- [/Banks/aba - GET](https://cubiapi.readme.io/reference/get-banks-aba-1.md): Searches all ABA records
+- [/Banks/aba/{abaNumber} - GET](https://cubiapi.readme.io/reference/get-banks-aba-abanumber-1.md): Retrieves a single ABA record, by ABA
+- [/Banks/bic - GET](https://cubiapi.readme.io/reference/get-banks-bic-1.md): Searches all BIC records
+- [/Banks/bic/{bic} - GET](https://cubiapi.readme.io/reference/get-banks-bic-bic-1.md): Retrieves a single BIC record, by BIC
+- [/CorrespondentInstructions - GET](https://cubiapi.readme.io/reference/get-correspondentinstructions-1.md): Searches for known correspondence instructions (ssi) for various payment rails, given a target beneficiary bank (either ABA or BIC). Will only return results for USD. Banks may have multiple or zero results, and instructions should be validated with beneficiary banks prior to production usage
+- [/CorrespondentInstructions/download?rail={rail} - GET](https://cubiapi.readme.io/reference/get-correspondentinstructions-download-rail-rail-1.md)
+- [/WebPubSub/client-access-uri - GET](https://cubiapi.readme.io/reference/get-webpubsub-client-access-uri-1.md)
+- [/application - POST](https://cubiapi.readme.io/reference/post-application.md): Creates a new loan application in the system. Creating an application will initiate the approval process. If that process is successful the application will be converted to a loan.
+- [/application - GET](https://cubiapi.readme.io/reference/get-application.md): Retrieve a paginated list of loan applications filtered by the search options provided.
+- [/application/{id} - GET](https://cubiapi.readme.io/reference/get-application-id.md): Retrieve a specific loan application using its Id value.
+- [/program - GET](https://cubiapi.readme.io/reference/get-program.md): Retrieve a paginated list of program (policy) details filtered by the search options provided.
+- [/program/{id} - GET](https://cubiapi.readme.io/reference/get-program-id.md): Retrieve the details of a specific program (policy) using its Id.
+- [/loan/{id}/funding - POST](https://cubiapi.readme.io/reference/post-loan-id-funding.md): Submit a funding instruction to initiate a disbursement for the specified loan.
+- [/loan/{id}/complete - POST](https://cubiapi.readme.io/reference/post-loan-id-complete.md): Declare that the process to complete a loan is being initiated. A loan can immediately be completed if there are no outstanding fundings being processed. If there are outstanding fundings being processed the loan well be marked as pending completion until those fundings have been successfully processed which will trigger completing the loan. Once completed the loan can no longer be funded.
+- [/loan/{id}/cancel - POST](https://cubiapi.readme.io/reference/post-loan-id-cancel.md): Declare that a loan's status is being changed to cancelled. Once cancelled the loan can no longer be funded.
+- [/loan - GET](https://cubiapi.readme.io/reference/get-loan.md): Retrieve a paginated list of loans filtered by the search options provided.
+- [/loan/{id} - GET](https://cubiapi.readme.io/reference/get-loan-id.md): Retrieve the details of a specific loan using its Id value.
+- [/loan/{id}/funding - GET](https://cubiapi.readme.io/reference/get-loan-id-funding.md): Retrieve a list of funding instruction details that have been submitted on the specified loan.
+- [/loan/{id}/funding/{fundingInstructionId} - GET](https://cubiapi.readme.io/reference/get-loan-id-funding-fundinginstructionid.md): Retrieve the details of a specific funding instruction, using its Id, for the specified loan.

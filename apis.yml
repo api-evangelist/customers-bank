@@ -2,20 +2,18 @@ aid: customers-bank
 url: https://raw.githubusercontent.com/api-evangelist/customers-bank/refs/heads/main/apis.yml
 name: Customers Bank
 kind: company
-description: Customers Bank is a Pennsylvania state-chartered, FDIC-insured full-service
-  commercial bank and the principal subsidiary of Customers Bancorp, Inc. (NYSE CUBI),
-  a super-regional bank holding company with roughly $22 billion in assets headquartered
-  in West Reading, Pennsylvania. Beyond traditional commercial and consumer banking
-  it operates a national embedded-banking / Banking-as-a-Service platform, exposing
-  a first-party, OAuth2-secured REST API surface (accounts, ACH, wires, instant payments,
-  book transfers, consumer lending, plus partner, IT-operations and webhook management)
-  to fintech and corporate partners through a public ReadMe developer portal at
-  cubiapi.readme.io, complete with a hosted Model Context Protocol (MCP) server for
-  AI agents. This is proprietary, partner-gated integration infrastructure rather
-  than an FDX or CFPB Section 1033 consumer-permissioned data-sharing API; no
-  FDX-conformant or Section 1033 data-access endpoint is publicly documented, and
-  the surface is a sandbox-first partner API secured by OAuth2 client-credentials
-  with HMAC-signed webhooks.
+description: Customers Bank is a Pennsylvania state-chartered, FDIC-insured full-service commercial
+  bank and the principal subsidiary of Customers Bancorp, Inc. (NYSE CUBI), a super-regional
+  bank holding company with roughly $22 billion in assets headquartered in West Reading, Pennsylvania.
+  Beyond traditional commercial and consumer banking it operates a national embedded-banking
+  / Banking-as-a-Service platform, exposing a first-party, OAuth2-secured REST API surface (accounts,
+  ACH, wires, instant payments, book transfers, consumer lending, plus partner, IT-operations
+  and webhook management) to fintech and corporate partners through a public ReadMe developer
+  portal at cubiapi.readme.io, complete with a hosted Model Context Protocol (MCP) server for
+  AI agents. This is proprietary, partner-gated integration infrastructure rather than an FDX
+  or CFPB Section 1033 consumer-permissioned data-sharing API; no FDX-conformant or Section
+  1033 data-access endpoint is publicly documented, and the surface is a sandbox-first partner
+  API secured by OAuth2 client-credentials with HMAC-signed webhooks.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Financial Services
@@ -31,9 +29,9 @@ specificationVersion: '0.19'
 apis:
 - aid: customers-bank:customers-bank-accounts-api
   name: Customers Bank Accounts API
-  description: First-party embedded-banking Accounts API for listing accounts, retrieving
-    account and subaccount detail, searching transactions, managing tags and account
-    entitlements, and downloading account data. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: First-party embedded-banking Accounts API for listing accounts, retrieving account
+    and subaccount detail, searching transactions, managing tags and account entitlements, and
+    downloading account data. OpenAPI 3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/accounts-3
   baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
   tags:
@@ -47,10 +45,12 @@ apis:
     url: https://cubiapi.readme.io/docs/accounts-3
   - type: APIReference
     url: https://cubiapi.readme.io/reference/get
+  - type: Overlay
+    url: overlays/customers-bank-accounts-overlay.yaml
 - aid: customers-bank:customers-bank-ach-api
   name: Customers Bank ACH API
-  description: ACH payment origination and management API for the Customers Bank
-    embedded-banking platform. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: ACH payment origination and management API for the Customers Bank embedded-banking
+    platform. OpenAPI 3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/reference
   baseURL: https://cubi-sandbox-api.customersbank.com/ach/v1
   tags:
@@ -63,11 +63,13 @@ apis:
     url: https://cubiapi.readme.io/docs/getting-started
   - type: APIReference
     url: https://cubiapi.readme.io/reference
+  - type: Overlay
+    url: overlays/customers-bank-ach-overlay.yaml
 - aid: customers-bank:customers-bank-consumer-lending-api
   name: Customers Bank Consumer Lending API
-  description: Consumer Lending API for creating and searching loan applications,
-    retrieving program (policy) details, and originating, funding, completing and
-    cancelling loans. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Consumer Lending API for creating and searching loan applications, retrieving
+    program (policy) details, and originating, funding, completing and cancelling loans. OpenAPI
+    3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/loan-application
   baseURL: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
   tags:
@@ -80,10 +82,12 @@ apis:
     url: https://cubiapi.readme.io/docs/loan-application
   - type: APIReference
     url: https://cubiapi.readme.io/reference/post-application
+  - type: Overlay
+    url: overlays/customers-bank-consumerlending-overlay.yaml
 - aid: customers-bank:customers-bank-instant-payments-api
   name: Customers Bank Instant Payments API
-  description: Instant Payments API for real-time payment origination and management
-    on the Customers Bank platform. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Instant Payments API for real-time payment origination and management on the
+    Customers Bank platform. OpenAPI 3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/reference
   baseURL: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
   tags:
@@ -96,11 +100,13 @@ apis:
     url: https://cubiapi.readme.io/docs/getting-started
   - type: APIReference
     url: https://cubiapi.readme.io/reference
+  - type: Overlay
+    url: overlays/customers-bank-instantpayments-overlay.yaml
 - aid: customers-bank:customers-bank-it-operations-api
   name: Customers Bank IT Operations API
-  description: IT Operations / reference-data API providing bank lookups (ABA, BIC),
-    correspondent (SSI) instructions across payment rails, and WebPubSub client
-    access. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: IT Operations / reference-data API providing bank lookups (ABA, BIC), correspondent
+    (SSI) instructions across payment rails, and WebPubSub client access. OpenAPI 3.0.1, OAuth2
+    client-credentials.
   humanURL: https://cubiapi.readme.io/reference
   baseURL: https://cubi-sandbox-api.customersbank.com/itoperations/v1
   tags:
@@ -113,11 +119,13 @@ apis:
     url: https://cubiapi.readme.io/docs/getting-started
   - type: APIReference
     url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Overlay
+    url: overlays/customers-bank-itoperations-overlay.yaml
 - aid: customers-bank:customers-bank-partners-api
   name: Customers Bank Partners API
-  description: Partner-administration API for managing partners, users, customers,
-    messages, API credentials and client credentials (M2M application registration)
-    on the embedded-banking platform. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Partner-administration API for managing partners, users, customers, messages,
+    API credentials and client credentials (M2M application registration) on the embedded-banking
+    platform. OpenAPI 3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/partners-1
   baseURL: https://cubi-sandbox-api.customersbank.com/partners/v1
   tags:
@@ -131,11 +139,13 @@ apis:
     url: https://cubiapi.readme.io/docs/partners-1
   - type: APIReference
     url: https://cubiapi.readme.io/reference/post-customers
+  - type: Overlay
+    url: overlays/customers-bank-partners-overlay.yaml
 - aid: customers-bank:customers-bank-security-api
   name: Customers Bank Security API
-  description: OAuth2 token/security API. Issues bearer access tokens via the
-    client-credentials grant for machine-to-machine access to all Customers Bank
-    embedded-banking APIs. OpenAPI 3.0.1.
+  description: OAuth2 token/security API. Issues bearer access tokens via the client-credentials
+    grant for machine-to-machine access to all Customers Bank embedded-banking APIs. OpenAPI
+    3.0.1.
   humanURL: https://cubiapi.readme.io/docs/authenticate-1
   baseURL: https://cubi-sandbox-api.customersbank.com/security/v1
   tags:
@@ -149,11 +159,13 @@ apis:
     url: https://cubiapi.readme.io/docs/authenticate-1
   - type: APIReference
     url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Overlay
+    url: overlays/customers-bank-security-overlay.yaml
 - aid: customers-bank:customers-bank-transfers-api
   name: Customers Bank Transfers API
-  description: Transfers API covering book transfers, address-book payee management
-    and approvals, account-link settings, instant-transfer approvals, and account
-    entitlements. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Transfers API covering book transfers, address-book payee management and approvals,
+    account-link settings, instant-transfer approvals, and account entitlements. OpenAPI 3.0.1,
+    OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/book-transfers
   baseURL: https://cubi-sandbox-api.customersbank.com/transfers/v1
   tags:
@@ -167,11 +179,13 @@ apis:
     url: https://cubiapi.readme.io/docs/book-transfers
   - type: APIReference
     url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Overlay
+    url: overlays/customers-bank-transfers-overlay.yaml
 - aid: customers-bank:customers-bank-webhooks-api
   name: Customers Bank Webhooks API
-  description: Webhooks API for subscribing to platform event types, delivering
-    signed event payloads (HMAC signature validation), and managing webhook IP
-    allowlists. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Webhooks API for subscribing to platform event types, delivering signed event
+    payloads (HMAC signature validation), and managing webhook IP allowlists. OpenAPI 3.0.1,
+    OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/webhooks-1
   baseURL: https://cubi-sandbox-api.customersbank.com/webhooks/v1
   tags:
@@ -184,11 +198,13 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: APIReference
     url: https://cubiapi.readme.io/reference
+  - type: Overlay
+    url: overlays/customers-bank-webhooks-overlay.yaml
 - aid: customers-bank:customers-bank-wires-api
   name: Customers Bank Wires API
-  description: Wires API (v2) for originating and managing incoming and outgoing
-    wire transfers, retrieving purpose and reference-data codes, and managing wire
-    account entitlements. OpenAPI 3.0.1, OAuth2 client-credentials.
+  description: Wires API (v2) for originating and managing incoming and outgoing wire transfers,
+    retrieving purpose and reference-data codes, and managing wire account entitlements. OpenAPI
+    3.0.1, OAuth2 client-credentials.
   humanURL: https://cubiapi.readme.io/docs/outgoing-wires
   baseURL: https://cubi-sandbox-api.customersbank.com/Wires/v2
   tags:
@@ -201,7 +217,13 @@ apis:
     url: https://cubiapi.readme.io/docs/outgoing-wires
   - type: APIReference
     url: https://cubiapi.readme.io/reference
+  - type: Overlay
+    url: overlays/customers-bank-wires-overlay.yaml
 common:
+- type: AgenticAccess
+  url: agentic-access/customers-bank-agentic-access.yml
+- type: DomainSecurity
+  url: security/customers-bank-domain-security.yml
 - type: Website
   url: https://www.customersbank.com
 - type: DeveloperPortal
@@ -210,10 +232,42 @@ common:
   url: https://cubiapi.readme.io/docs/getting-started
 - type: MCP
   url: https://cubiapi.readme.io/mcp
+- type: MCPServer
+  url: mcp/customers-bank-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/customers-bank-tool-crosswalk.yml
 - type: GitHubOrganization
   url: https://github.com/CustomersBank
 - type: LinkedIn
   url: https://www.linkedin.com/company/customers-bank
+- type: GettingStarted
+  url: https://cubiapi.readme.io/docs/getting-started
+- type: APIReference
+  url: https://cubiapi.readme.io/reference
+- type: Authentication
+  url: authentication/customers-bank-authentication.yml
+- type: Conventions
+  url: conventions/customers-bank-conventions.yml
+- type: Idempotency
+  url: conventions/customers-bank-conventions.yml
+- type: ErrorCatalog
+  url: errors/customers-bank-problem-types.yml
+- type: Conformance
+  url: conformance/customers-bank-conformance.yml
+- type: Lifecycle
+  url: lifecycle/customers-bank-lifecycle.yml
+- type: ChangeLog
+  url: changelog/customers-bank-changelog.yml
+- type: Sandbox
+  url: sandbox/customers-bank-sandbox.yml
+- type: Webhooks
+  url: asyncapi/customers-bank-webhooks.yml
+- type: DataModel
+  url: data-model/customers-bank-data-model.yml
+- type: LLMsTxt
+  url: llms/customers-bank-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
 - type: PrivacyPolicy
   url: https://www.customersbank.com/privacy-policy/
 - type: TermsOfService

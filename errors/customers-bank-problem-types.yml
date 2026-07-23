@@ -1,0 +1,63 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json 4xx/5xx responses + https://cubiapi.readme.io/docs/error-handling
+format: rfc9457
+note: Errors are returned as RFC 9457 application/problem+json with title/detail members across the embedded-banking
+  APIs. Idempotency-specific problems (missing/duplicate x-idempotency-key) are detailed in conventions/customers-bank-conventions.yml.
+envelope:
+  media_type: application/problem+json
+  members:
+  - title
+  - detail
+problems:
+- status: 400
+  title: Bad Request
+  content_type: application/problem+json
+  remediation: Review request syntax, required headers, parameters and payload format; validate input
+    data types.
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
+- status: 401
+  title: Unauthorized
+  content_type: application/problem+json
+  remediation: Refresh the OAuth2 access token (client-credentials) if expired and confirm the caller
+    has permission.
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
+- status: 403
+  title: Forbidden
+  content_type: application/problem+json
+  remediation: Confirm the caller IP is allowlisted and the client credentials are entitled to the resource.
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
+- status: 404
+  title: Not Found
+  content_type: application/problem+json
+  remediation: Verify the endpoint URL and resource id; check for renamed paths in the changelog.
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
+- status: 422
+  title: Unprocessable Content
+  content_type: application/problem+json
+  remediation: 'Review the payload: all required fields present and correctly formatted; also returned
+    when an x-idempotency-key is reused with a different payload.'
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
+- status: 500
+  title: Internal Server Error
+  content_type: application/problem+json
+  remediation: Transient server error; retry idempotent requests using the same x-idempotency-key.
+  example_operations:
+  - openapi/customers-bank-accounts-openapi.json#put-accountid
+  - openapi/customers-bank-accounts-openapi.json#get-accountid
+  - openapi/customers-bank-accounts-openapi.json#get
