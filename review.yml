@@ -1,0 +1,103 @@
+aid: customers-bank
+name: Customers Bank
+review:
+  question: Does Customers Bank expose a public first-party developer API, and what
+    is its US open-finance posture (FDX / CFPB 1033 / aggregator)?
+  answer: true
+  date: '2026-07-23'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    Customers Bank (subsidiary of Customers Bancorp, Inc., NYSE: CUBI, a
+    Pennsylvania state-chartered ~$22B super-regional bank) runs a genuine,
+    publicly documented first-party embedded-banking / Banking-as-a-Service
+    API program. The public developer portal is a ReadMe-hosted hub at
+    https://cubiapi.readme.io (confirmed HTTP 200), linked from the bank's
+    own marketing page at https://www.customersbank.com/digital-you/apis/
+    (HTTP 200). Ten product APIs are documented and their OpenAPI 3.0.1
+    definitions are publicly downloadable via the ReadMe api-registry:
+    Accounts, ACH, Consumer Lending, Instant Payments, IT Operations
+    (reference data / bank lookup), Partners, Security, Transfers, Webhooks,
+    and Wires (v2) — 173 documented paths in total. All were harvested
+    verbatim into openapi/. The platform is sandbox-first; every server URL
+    resolves to https://cubi-sandbox-api.customersbank.com/<product>/<version>.
+
+    Authentication is OAuth2 client-credentials (machine-to-machine): a POST
+    to /security/v1/oauth2/token with client_Id + client_Secret returns a
+    Bearer token (expires_in ~3600s), documented at
+    https://cubiapi.readme.io/docs/authenticate-1. Webhooks are secured with
+    HMAC signature validation plus an IP allowlist. The portal also
+    advertises a hosted remote MCP server at https://cubiapi.readme.io/mcp
+    for AI development tools (Cursor, Windsurf, Claude Desktop).
+
+    Open-finance posture: this is PROPRIETARY, PARTNER-GATED integration
+    infrastructure — an embedded-banking/BaaS API for fintech and corporate
+    partners — NOT a consumer-permissioned data-sharing API. No
+    FDX-conformant (Financial Data Exchange) data-access API and no stated
+    CFPB Section 1033 (Personal Financial Data Rights) posture were found in
+    the public developer materials. There is likewise no first-party
+    consumer aggregator endpoint documented; consumer-permissioned data
+    sharing, where it exists, would occur through third-party aggregators
+    rather than this API. GitHub organization github.com/CustomersBank exists
+    (0 public repos). Access to live credentials requires a partner
+    onboarding inquiry, but the documentation and OpenAPI specs are fully
+    public.
+  posture:
+    firstPartyDeveloperPortal: true
+    developerPortalUrl: https://cubiapi.readme.io
+    developerPortalHttpStatus: 200
+    marketingApiPageUrl: https://www.customersbank.com/digital-you/apis/
+    marketingApiPageHttpStatus: 200
+    downloadableOpenAPI: true
+    openapiCount: 10
+    openapiVersion: 3.0.1
+    documentedPaths: 173
+    authModel: OAuth2 client-credentials (M2M) Bearer tokens; HMAC-signed webhooks
+    mcpServer: https://cubiapi.readme.io/mcp
+    fdxParticipant: false
+    section1033Posture: none published
+    aggregatorOnly: false
+    charterType: Pennsylvania state-chartered, FDIC-insured commercial bank (Customers Bancorp, Inc., NYSE CUBI)
+  transports:
+  - protocol: REST
+    scheme: https
+    baseURL: https://cubi-sandbox-api.customersbank.com
+    documented: true
+    note: Sandbox host. Per-product base paths, e.g. /accounts/v1, /ach/v1, /wires/v2, /security/v1.
+  - protocol: Webhooks
+    scheme: https
+    documented: true
+    note: Event delivery secured by HMAC signature validation and an IP allowlist.
+  specProvenance:
+    source: ReadMe api-registry (public)
+    method: Harvested verbatim via https://dash.readme.com/api/v1/api-registry/<uuid> for each product spec referenced by the ReadMe reference pages.
+    harvestedFiles:
+    - openapi/customers-bank-accounts-openapi.json
+    - openapi/customers-bank-ach-openapi.json
+    - openapi/customers-bank-consumerlending-openapi.json
+    - openapi/customers-bank-instantpayments-openapi.json
+    - openapi/customers-bank-itoperations-openapi.json
+    - openapi/customers-bank-partners-openapi.json
+    - openapi/customers-bank-security-openapi.json
+    - openapi/customers-bank-transfers-openapi.json
+    - openapi/customers-bank-webhooks-openapi.json
+    - openapi/customers-bank-wires-openapi.json
+sources:
+- url: https://www.customersbank.com/digital-you/apis/
+  type: Website
+  note: Bank marketing page describing Customer, Deposit, Loan and Payment API products; links to the developer portal.
+- url: https://cubiapi.readme.io
+  type: DeveloperPortal
+  note: ReadMe-hosted developer portal (HTTP 200). Guides, API reference, changelog, and MCP documentation.
+- url: https://cubiapi.readme.io/docs/authenticate-1
+  type: Documentation
+  note: OAuth2 client-credentials token flow; token endpoint /security/v1/oauth2/token on cubi-sandbox-api.customersbank.com.
+- url: https://cubiapi.readme.io/llms.txt
+  type: Documentation
+  note: Machine-readable index of all docs pages and API-reference endpoints.
+- url: https://cubiapi.readme.io/docs/mcp
+  type: Documentation
+  note: Hosted remote MCP server at https://cubiapi.readme.io/mcp.
+- url: https://github.com/CustomersBank
+  type: GitHubOrganization
+  note: Confirmed organization (0 public repositories).
