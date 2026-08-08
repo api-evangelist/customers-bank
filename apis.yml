@@ -230,7 +230,7 @@ common:
   url: https://cubiapi.readme.io
 - type: Documentation
   url: https://cubiapi.readme.io/docs/getting-started
-- type: MCP
+- type: MCPServer
   url: https://cubiapi.readme.io/mcp
 - type: MCPServer
   url: mcp/customers-bank-mcp.yml
