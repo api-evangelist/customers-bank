@@ -266,7 +266,7 @@ common:
   url: data-model/customers-bank-data-model.yml
 - type: LLMsTxt
   url: llms/customers-bank-llms.txt
-- type: AgentSkill
+- type: AgentSkills
   url: skills/_index.yml
 - type: PrivacyPolicy
   url: https://www.customersbank.com/privacy-policy/
