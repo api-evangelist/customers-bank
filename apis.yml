@@ -14,6 +14,17 @@ description: Customers Bank is a Pennsylvania state-chartered, FDIC-insured full
   or CFPB Section 1033 consumer-permissioned data-sharing API; no FDX-conformant or Section
   1033 data-access endpoint is publicly documented, and the surface is a sandbox-first partner
   API secured by OAuth2 client-credentials with HMAC-signed webhooks.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Financial Services
@@ -220,6 +231,8 @@ apis:
   - type: Overlay
     url: overlays/customers-bank-wires-overlay.yaml
 common:
+- type: AgentSkill
+  url: skills/customers-bank-authenticate-and-list-accounts.md
 - type: AgenticAccess
   url: agentic-access/customers-bank-agentic-access.yml
 - type: DomainSecurity
