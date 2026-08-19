@@ -1,0 +1,720 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wires",
+    "version": "v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountAccess",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AccountAccess/{accountId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/AccountAccess/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the account"
+              }
+            ]
+          },
+          "docs": "Returns the api wires settings for a given account"
+        },
+        {
+          "info": {
+            "name": "/AccountAccess - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/AccountAccess"
+          },
+          "docs": "Gets all api wire settings for all accounts"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountControlType",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/ControlType - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/ControlType"
+          },
+          "docs": "Gets the specific control type for all accounts"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account"
+              }
+            ]
+          },
+          "docs": "Gets the control type for a given account"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves the control type for a given account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountEntitlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AccountEntitlements - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/AccountEntitlements"
+          },
+          "docs": "Gets the specific entitlement for a given account"
+        },
+        {
+          "info": {
+            "name": "/AccountEntitlements/{userId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/AccountEntitlements/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the user for which to retrieve account entitlements"
+              }
+            ]
+          },
+          "docs": "Gets account entitlements for a specific user"
+        },
+        {
+          "info": {
+            "name": "/AccountEntitlements/{userId} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/AccountEntitlements/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the user for which to set entitlements"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates account entitlements for a given user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IncomingWiresV",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/incoming/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/incoming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the wire payment to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves an incoming wire payment by ID"
+        },
+        {
+          "info": {
+            "name": "/incoming - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/incoming",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The omad, imad, beneficiary name, originator name, amount or status, for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches incoming wire payments"
+        },
+        {
+          "info": {
+            "name": "/incoming/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/incoming/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The omad, imad, beneficiary name, originator name, amount or status, for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads a full collection of all incoming wire payments (unpaginated)"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OutgoingWiresV",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/outgoing - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing",
+            "params": [
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "The statuses for which to search"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The omad, imad, beneficiary name, originator name, amount or status for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for existing outgoing wire payments"
+        },
+        {
+          "info": {
+            "name": "/outgoing - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "d3eb1333-0071-49c3-901a-708dd2b6b3ef"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a new outgoing wire payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing outgoing wire payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "6d6eecbb-c560-43f3-8882-49d3661c190a"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the wire payment to cancel"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Requests cancellation of an existing wire payment.\r\nWires may only be cancelled if they are in an Initiated status."
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "67bc79da-31e3-4573-9ec4-2acde27c6a63"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the wire to approve"
+              }
+            ]
+          },
+          "docs": "Approves a pending outgoing wire"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "aaaf26b7-891c-4170-97aa-7eae34dc86a8"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the wire to decline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines a wire which is pending approval"
+        },
+        {
+          "info": {
+            "name": "/outgoing/bulk-approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/bulk-approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "fbd6c524-be7a-4ad8-b0f1-7acefafd2b0d"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approves multiple pending outgoing wires"
+        },
+        {
+          "info": {
+            "name": "/outgoing/bulk-decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/bulk-decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "1c79f2fd-b97f-4ec4-8338-9e8e69bcf22f"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines multiple pending outgoing wires"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SearchIncomingWiresV",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/incoming/search - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/incoming/search",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The omad, imad, beneficiary name, originator name, amount or status, for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Search filter values"
+              }
+            ]
+          },
+          "docs": "Searches incoming wire payments"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SearchOutgoingWiresV",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/outgoing/search - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/Wires/v2/outgoing/search",
+            "params": [
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "The statuses for which to search"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The omad, imad, beneficiary name, originator name, amount or status for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Search filter values"
+              }
+            ]
+          },
+          "docs": "Searches for existing wire payments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

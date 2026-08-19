@@ -1,0 +1,652 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACH",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PartnerProgram",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/programs/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/programs/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the partner program to get"
+              }
+            ]
+          },
+          "docs": "Gets a partner program"
+        },
+        {
+          "info": {
+            "name": "/programs - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/programs",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches the available partner programs"
+        },
+        {
+          "info": {
+            "name": "/programs/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/programs/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all partner programs"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OutgoingAch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/outgoing/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the ach transaction to GET"
+              }
+            ]
+          },
+          "docs": "Gets a sent ACH transaction"
+        },
+        {
+          "info": {
+            "name": "/outgoing - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing",
+            "params": [
+              {
+                "name": "FromDate",
+                "value": "",
+                "type": "query",
+                "description": "The date from which to search for originated payments"
+              },
+              {
+                "name": "ToDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to search until for originated payments"
+              },
+              {
+                "name": "AccountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account for which the payments were originated"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches all sent ACH transactions"
+        },
+        {
+          "info": {
+            "name": "/outgoing/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/download",
+            "params": [
+              {
+                "name": "FromDate",
+                "value": "",
+                "type": "query",
+                "description": "The date from which to search for originated payments"
+              },
+              {
+                "name": "ToDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to search until for originated payments"
+              },
+              {
+                "name": "AccountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account for which the payments were originated"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all sent ACH transactions"
+        },
+        {
+          "info": {
+            "name": "/outgoing/credit - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/credit",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "b6541a7e-4073-4870-bc13-05912c5416f4"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an outgoing ACH credit transaction"
+        },
+        {
+          "info": {
+            "name": "/outgoing/debit - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/debit",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "0d5052f5-1e9e-4f86-a8a9-f6cc31f05222"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates an outgoing ACH debit transaction"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/reverse - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/:id/reverse",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "b49e24e1-1ccd-4b8a-8f25-6c04feb491b0"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ACH transaction for which to attempt reversal"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attempts to reverse a previously sent ACH transaction (either debit or credit).\r\nMay only be used on transactions in a completed status"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "c606c9a8-5765-449c-8da2-ad1e586f2f02"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the outgoing ACH transaction for which to attempt cancellation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attempts to cancel an initiated outgoing ACH transaction\r\nMay only be used on transactions in a pending status"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "a2905257-07e2-449b-8f1b-a2fdb0cf5317"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to approve"
+              }
+            ]
+          },
+          "docs": "Approves a pending outgoing payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/outgoing/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "65faf650-e6dc-470b-9ce9-982ea0bbf613"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to decline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines a payment which is pending approval"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IncomingAch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/incoming/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/incoming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the ach transaction to GET"
+              }
+            ]
+          },
+          "docs": "Gets a sent ACH transaction"
+        },
+        {
+          "info": {
+            "name": "/incoming - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/incoming",
+            "params": [
+              {
+                "name": "FromDate",
+                "value": "",
+                "type": "query",
+                "description": "The date from which to search for incoming payments"
+              },
+              {
+                "name": "ToDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to search until for incoming payments"
+              },
+              {
+                "name": "AccountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account for which the payments were applied"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches all received ACH transactions"
+        },
+        {
+          "info": {
+            "name": "/incoming/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/incoming/download",
+            "params": [
+              {
+                "name": "FromDate",
+                "value": "",
+                "type": "query",
+                "description": "The date from which to search for incoming payments"
+              },
+              {
+                "name": "ToDate",
+                "value": "",
+                "type": "query",
+                "description": "The date to search until for incoming payments"
+              },
+              {
+                "name": "AccountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the account for which the payments were applied"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all received ACH transactions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountControlType",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/ControlType - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/ControlType"
+          },
+          "docs": "Gets the specific control type for all accounts"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account"
+              }
+            ]
+          },
+          "docs": "Gets the control type for a given account"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves the control type for a given account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ReferenceData",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/reference-data - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/reference-data"
+          },
+          "docs": "Returns ACH codes and definitions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountAccess",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AccountAccess/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/ach/v1/AccountAccess/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "T\r\n            he ID of the account"
+              }
+            ]
+          },
+          "docs": "Gets the enablement type for a given account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

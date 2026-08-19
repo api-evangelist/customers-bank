@@ -7,35 +7,41 @@ server:
   vendor: Customers Bank (ReadMe-hosted MCP)
   transport: http
   url: https://cubiapi.readme.io/mcp
-  authentication: >-
-    Anonymous tools/list succeeds. The docs-navigation tools operate over the public
-    OpenAPI/documentation set; execute-request calls the live partner API and requires
-    the caller to pass an OAuth2 Bearer token (client-credentials) via MCP client headers.
-  description: >-
-    Customers Bank hosts a remote Model Context Protocol server (the ReadMe generic MCP)
-    that lets AI editors (Cursor, Windsurf, Claude Desktop) browse the API/documentation
-    and execute requests against the embedded-banking platform. The tool set is the ReadMe
-    generic meta-tool surface (spec navigation + HAR execution + docs search), not one
-    tool per API operation.
+  authentication: Anonymous tools/list succeeds. The docs-navigation tools operate over the public OpenAPI/documentation
+    set; execute-request calls the live partner API and requires the caller to pass an OAuth2 Bearer token
+    (client-credentials) via MCP client headers.
+  description: Customers Bank hosts a remote Model Context Protocol server (the ReadMe generic MCP) that
+    lets AI editors (Cursor, Windsurf, Claude Desktop) browse the API/documentation and execute requests
+    against the embedded-banking platform. The tool set is the ReadMe generic meta-tool surface (spec
+    navigation + HAR execution + docs search), not one tool per API operation.
 tools:
-  - name: list-endpoints
-    description: Lists all API paths and their HTTP methods with summaries, organized by path.
-    kind: meta
-  - name: get-endpoint
-    description: Gets detailed information about a specific API endpoint, including security schemes and servers.
-    kind: meta
-  - name: search-endpoints
-    description: Deep search through paths, operations, and parameters to discover relevant endpoints.
-    kind: meta
-  - name: list-specs
-    description: Lists all available OpenAPI specs (the 10 Customers Bank service specifications).
-    kind: meta
-  - name: execute-request
-    description: Executes an API request with a given HAR request object against the live API.
-    kind: execution
-  - name: search
-    description: Searches through documentation with a query, returning matching results.
-    kind: docs
-  - name: fetch
-    description: Gets detailed documentation content by ID returned from the search tool.
-    kind: docs
+- name: list-endpoints
+  description: Lists all API paths and their HTTP methods with summaries, organized by path.
+  kind: meta
+- name: get-endpoint
+  description: Gets detailed information about a specific API endpoint, including security schemes and
+    servers.
+  kind: meta
+- name: search-endpoints
+  description: Deep search through paths, operations, and parameters to discover relevant endpoints.
+  kind: meta
+- name: list-specs
+  description: Lists all available OpenAPI specs (the 10 Customers Bank service specifications).
+  kind: meta
+- name: execute-request
+  description: Executes an API request with a given HAR request object against the live API.
+  kind: execution
+- name: search
+  description: Searches through documentation with a query, returning matching results.
+  kind: docs
+- name: fetch
+  description: Gets detailed documentation content by ID returned from the search tool.
+  kind: docs
+deployment:
+  mode: remote
+  endpoint: https://cubiapi.readme.io/mcp
+  verified: probed
+  probe: live
+  tools: 7
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,349 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IT Operations",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Banks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Banks - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks",
+            "params": [
+              {
+                "name": "bankName",
+                "value": "Customers",
+                "type": "query",
+                "description": "The name of the bank for which to search"
+              },
+              {
+                "name": "routingCode",
+                "value": "123456789",
+                "type": "query",
+                "description": "The routing code to search for.  Can be an ABA, BIC/Swift, or any other international routing code"
+              },
+              {
+                "name": "routingType",
+                "value": "ABA",
+                "type": "query",
+                "description": "The routing code type to search for (eg. BIC, ABA, etc.)"
+              },
+              {
+                "name": "countryCode",
+                "value": "US",
+                "type": "query",
+                "description": "The country code to search for"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for banks"
+        },
+        {
+          "info": {
+            "name": "/Banks/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The locationId of the bank to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific bank, by locationId"
+        },
+        {
+          "info": {
+            "name": "/Banks/aba/{abaNumber} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks/aba/:abaNumber",
+            "params": [
+              {
+                "name": "abaNumber",
+                "value": "",
+                "type": "path",
+                "description": "The ABA to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a single ABA record, by ABA"
+        },
+        {
+          "info": {
+            "name": "/Banks/bic/{bic} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks/bic/:bic",
+            "params": [
+              {
+                "name": "bic",
+                "value": "",
+                "type": "path",
+                "description": "The BIC to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a single BIC record, by BIC"
+        },
+        {
+          "info": {
+            "name": "/Banks/aba - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks/aba",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches all ABA records"
+        },
+        {
+          "info": {
+            "name": "/Banks/bic - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/Banks/bic",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches all BIC records"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CorrespondentInstructions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/CorrespondentInstructions - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/CorrespondentInstructions",
+            "params": [
+              {
+                "name": "rail",
+                "value": "",
+                "type": "query",
+                "description": "The payment rail to search for.  Most typically 'fedwire' or 'ach', but may also be used to search itnernational settlement systems such as TISS, ZECH, etc."
+              },
+              {
+                "name": "abaNumber",
+                "value": "",
+                "type": "query",
+                "description": "The ABA of the desired beneficiary bank, if the bank is US based"
+              },
+              {
+                "name": "bic",
+                "value": "",
+                "type": "query",
+                "description": "The BIC of the desired beneficiary bank"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for known correspondence instructions (ssi) for various payment rails, given a target beneficiary bank (either ABA or BIC).\r\nWill only return results for USD.\r\nBanks may have multiple or zero results, and instructions should be validated with beneficiary banks prior to production usage"
+        },
+        {
+          "info": {
+            "name": "/CorrespondentInstructions/download?rail={rail} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/CorrespondentInstructions/download",
+            "params": [
+              {
+                "name": "rail",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "abaNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bic",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/CorrespondentInstructions/download?rail={rail} - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "WebPubSub",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/WebPubSub/client-access-uri - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/itoperations/v1/WebPubSub/client-access-uri"
+          },
+          "docs": "/WebPubSub/client-access-uri - GET"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

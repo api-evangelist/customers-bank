@@ -1,0 +1,607 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Webhooks",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EventTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/EventTypes - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventTypes",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/EventTypes - GET"
+        },
+        {
+          "info": {
+            "name": "/EventTypes/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventTypes/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/EventTypes/download - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/ - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/ - GET"
+        },
+        {
+          "info": {
+            "name": "/ - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "938ba792-c9be-455e-af3c-7f00f93e5584"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/ - POST"
+        },
+        {
+          "info": {
+            "name": "/{id}/event-history - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id/event-history",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/{id}/event-history - GET"
+        },
+        {
+          "info": {
+            "name": "/{subscriptionId}/event-history/{id}/replay - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:subscriptionId/event-history/:id/replay",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "3b0e53f7-8c4d-46b4-a70d-00c3eece1521"
+              }
+            ],
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{subscriptionId}/event-history/{id}/replay - POST"
+        },
+        {
+          "info": {
+            "name": "/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{id} - GET"
+        },
+        {
+          "info": {
+            "name": "/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/{id} - PUT"
+        },
+        {
+          "info": {
+            "name": "/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{id} - DELETE"
+        },
+        {
+          "info": {
+            "name": "/{id}/disable - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id/disable",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "f48896b7-6820-47b3-9eb0-893ad09033da"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{id}/disable - POST"
+        },
+        {
+          "info": {
+            "name": "/{id}/enable - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id/enable",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "3a5a8448-e4f0-418e-b04d-c32469360cde"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{id}/enable - POST"
+        },
+        {
+          "info": {
+            "name": "/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/download - GET"
+        },
+        {
+          "info": {
+            "name": "/{id}/event-history/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/:id/event-history/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/{id}/event-history/download - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EventHistory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/EventHistory - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventHistory",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/EventHistory - GET"
+        },
+        {
+          "info": {
+            "name": "/EventHistory/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventHistory/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/EventHistory/download - GET"
+        },
+        {
+          "info": {
+            "name": "/EventHistory/{id}/replay - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventHistory/:id/replay",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "60812f94-6d40-4b50-b8db-7253e88534e4"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/EventHistory/{id}/replay - POST"
+        },
+        {
+          "info": {
+            "name": "/EventHistory/{id}/runs - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/webhooks/v1/EventHistory/:id/runs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/EventHistory/{id}/runs - GET"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

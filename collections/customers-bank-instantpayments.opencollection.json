@@ -1,0 +1,1093 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "InstantPayments",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IncomingPayments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/incoming/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the FEDNOW payment to get"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing incoming instant payment"
+        },
+        {
+          "info": {
+            "name": "/incoming/fednow/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/fednow/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the FEDNOW payment to get"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing incoming FEDNOW payment"
+        },
+        {
+          "info": {
+            "name": "/incoming/rtp/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/rtp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the RTP to get"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing incoming RTP"
+        },
+        {
+          "info": {
+            "name": "/incoming - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for incoming instant payments"
+        },
+        {
+          "info": {
+            "name": "/incoming/rtp - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/rtp",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for incoming RTPs"
+        },
+        {
+          "info": {
+            "name": "/incoming/fednow - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/fednow",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for incoming FedNow payments"
+        },
+        {
+          "info": {
+            "name": "/incoming/fednow/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/fednow/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all received FedNow transactions"
+        },
+        {
+          "info": {
+            "name": "/incoming/rtp/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/incoming/rtp/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all received Rtp transactions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "OutgoingPayments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/outgoing - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for outgoing Instant Payments"
+        },
+        {
+          "info": {
+            "name": "/outgoing - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "05c6f225-d90e-4449-a280-b3ae9924fdec"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a new instant payment that will be delivered on either the FedNow or RTP rails.   The rail will be determined \r\nbased on the receiver bank's rail eligibilty among other factors."
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for outgoing RTPs"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "edfdcaaa-01c8-48d2-b9b8-5f1d9d5a3153"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a payment on the RTP rail.  This method exists to allow for direct RTP initiation, however,\r\nin most cases it's prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity\r\nwhen sending to the receiver bank."
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Searches for outgoing FedNow payments"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "1ccc8be2-1719-4a62-a135-41bbe2c6a10a"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a payment on the FedNow rail.  This method exists to allow for direct FedNow initiation, however,\r\nin most cases it's prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity\r\nwhen sending to the receiver bank."
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing instant payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "48d8fc4f-bace-44a0-a3c8-8a26c366938a"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an existing payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing RTP"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "987f837f-6eb3-4bd0-8c12-c3980dea8722"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an existing RTP payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ]
+          },
+          "docs": "Retrieves an existing FedNow payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "131aa893-b7d7-4e80-b10b-9a71a29ea881"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID (uuid) of the payment to retreive"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels an existing FedNow payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all sent Rtp transactions"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow/download",
+            "params": [
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for which to search"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status to search"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "query",
+                "description": "The account ID for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads all sent FedNow transactions"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "44c4b4f3-ffd7-4bd5-9fca-c13ed091e9ab"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to approve"
+              }
+            ]
+          },
+          "docs": "Approves a pending outgoing payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "4ca13e4b-4239-4eb5-93c7-753119c25346"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to approve"
+              }
+            ]
+          },
+          "docs": "Approves a pending outgoing payment"
+        },
+        {
+          "info": {
+            "name": "/outgoing/rtp/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/rtp/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "eb1141c8-f3d5-4679-bf50-dd2490625682"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to decline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines a payment which is pending approval"
+        },
+        {
+          "info": {
+            "name": "/outgoing/fednow/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/outgoing/fednow/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "b50777ee-6e52-4f07-b48b-73e1d3d9c903"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the payment to decline"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declines a payment which is pending approval"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountControlType",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/ControlType - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/ControlType"
+          },
+          "docs": "Gets the specific control type for all accounts"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account"
+              }
+            ]
+          },
+          "docs": "Gets the control type for a given account"
+        },
+        {
+          "info": {
+            "name": "/ControlType/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/ControlType/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the account to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves the control type for a given account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountAccess",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/accountaccess/fednow/{accountId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/accountaccess/fednow/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get account enabled for FedNow by account id"
+        },
+        {
+          "info": {
+            "name": "/accountaccess/rtp/{accountId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/InstantPayments/v1/accountaccess/rtp/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get account enabled for RTP by account id"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

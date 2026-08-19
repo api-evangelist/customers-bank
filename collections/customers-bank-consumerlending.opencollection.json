@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ConsumerLending",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LoanApplication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/application - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/application",
+            "params": [
+              {
+                "name": "programId",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The partner program id to search applications for"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of loan applications filtered by the search options provided."
+        },
+        {
+          "info": {
+            "name": "/application - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/application",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "3169e68b-93ce-49a7-aec5-907f52099868"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new loan application in the system. Creating an application will initiate the approval process. If that process is successful the application will be converted to a loan."
+        },
+        {
+          "info": {
+            "name": "/application/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/application/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific loan application using its Id value."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PartnerProgram",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/program/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/program/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific program (policy) using its Id."
+        },
+        {
+          "info": {
+            "name": "/program - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/program",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of program (policy) details filtered by the search options provided."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Loan",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/loan/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific loan using its Id value."
+        },
+        {
+          "info": {
+            "name": "/loan/{id}/funding - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id/funding",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "submissionId",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The funding submission id to search loan funding instructions for"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of funding instruction details that have been submitted on the specified loan."
+        },
+        {
+          "info": {
+            "name": "/loan/{id}/funding - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id/funding",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "951dc66d-aaee-4591-8ee7-7ca0d2648e77"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a funding instruction to initiate a disbursement for the specified loan."
+        },
+        {
+          "info": {
+            "name": "/loan/{id}/funding/{fundingInstructionId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id/funding/:fundingInstructionId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fundingInstructionId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve the details of a specific funding instruction, using its Id, for the specified loan."
+        },
+        {
+          "info": {
+            "name": "/loan - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of loans filtered by the search options provided."
+        },
+        {
+          "info": {
+            "name": "/loan/{id}/complete - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id/complete",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "d288e766-b5ca-4f97-b5e6-751a143a4621"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declare that the process to complete a loan is being initiated. A loan can immediately be completed if there are no outstanding fundings being processed. If there are outstanding fundings being processed the loan well be marked as pending completion until those fundings have been successfully processed which will trigger completing the loan. Once completed the loan can no longer be funded."
+        },
+        {
+          "info": {
+            "name": "/loan/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/consumerlending/v1/loan/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "2ad7c34d-7841-433d-986a-64269a9b7d05"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Declare that a loan's status is being changed to cancelled. Once cancelled the loan can no longer be funded."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

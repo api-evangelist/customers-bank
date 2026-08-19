@@ -1,0 +1,855 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Accounts",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/{accountId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an account"
+        },
+        {
+          "info": {
+            "name": "/{accountId} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/{accountId} - PUT"
+        },
+        {
+          "info": {
+            "name": "/ - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/",
+            "params": [
+              {
+                "name": "accountName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "balances",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of accounts"
+        },
+        {
+          "info": {
+            "name": "/{accountId}/transactions - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId/transactions",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fromDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "toDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search transactions for an account"
+        },
+        {
+          "info": {
+            "name": "/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/download",
+            "params": [
+              {
+                "name": "accountName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "balances",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Download a list of all accounts"
+        },
+        {
+          "info": {
+            "name": "/{accountId}/searchable - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId/searchable",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/{accountId}/searchable - PUT"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "InterestPayments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/{accountId}/InterestPayments - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId/InterestPayments",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/{accountId}/InterestPayments - GET"
+        },
+        {
+          "info": {
+            "name": "/{accountId}/InterestPayments - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId/InterestPayments",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "6a788875-be89-43ce-b6b1-580183430897"
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/{accountId}/InterestPayments - POST"
+        },
+        {
+          "info": {
+            "name": "/{accountId}/InterestPayments/{interestPaymentId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/:accountId/InterestPayments/:interestPaymentId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "interestPaymentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/{accountId}/InterestPayments/{interestPaymentId} - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Customers - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Customers",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Optional name fragment to filter customers by"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of customers for the caller's partner"
+        },
+        {
+          "info": {
+            "name": "/Customers - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Customers",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "f02e3d30-71a8-4d05-8ec5-bbda1cf75da1"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer"
+        },
+        {
+          "info": {
+            "name": "/Customers/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the customer to retrieve"
+              }
+            ]
+          },
+          "docs": "Get a customer by id"
+        },
+        {
+          "info": {
+            "name": "/Customers/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the customer to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing customer"
+        },
+        {
+          "info": {
+            "name": "/Customers/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the customer to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing customer"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subaccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Subaccounts - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Optional name fragment to filter subaccounts by"
+              },
+              {
+                "name": "ParentAccountId",
+                "value": "",
+                "type": "query",
+                "description": "The ID (UUID) of the parent account"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Optional tag names to filter subaccounts by. A subaccount must have every listed tag to match (AND semantics).\r\nRepeat the query parameter to supply multiple values, e.g. `?tag=Umbrella_Corp&tag=John_Doe`."
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of subaccounts for the given account"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "0d2e93df-0013-4301-b335-aeb0be7aa0aa"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subaccount under the given account"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to retrieve"
+              }
+            ]
+          },
+          "docs": "Get a subaccount by id"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing subaccount"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to close"
+              }
+            ]
+          },
+          "docs": "Closes an existing subaccount"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id}/freeze - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id/freeze",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "6e8011af-46f3-449e-bf1e-eb7e06757364"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to freeze"
+              }
+            ]
+          },
+          "docs": "Freezes an existing subaccount"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id}/unfreeze - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id/unfreeze",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "a9a9ff17-c65c-418e-a540-8789a581899e"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to unfreeze"
+              }
+            ]
+          },
+          "docs": "Unfreezes an existing subaccount"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id}/tags/{tagId} - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id/tags/:tagId",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "251049d1-ee95-4d04-a92a-ea48f24ee3aa"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to tag"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the tag to attach"
+              }
+            ]
+          },
+          "docs": "Attaches a tag to an existing subaccount"
+        },
+        {
+          "info": {
+            "name": "/Subaccounts/{id}/tags/{tagId} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Subaccounts/:id/tags/:tagId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the subaccount to untag"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "path",
+                "description": "The id of the tag to detach"
+              }
+            ]
+          },
+          "docs": "Detaches a tag from an existing subaccount"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ReferenceData",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/reference-data - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/reference-data"
+          },
+          "docs": "Returns accounts related codes and definitions"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Tags - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Tags",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Optional name fragment to filter tags by"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get a list of tags for the caller's partner"
+        },
+        {
+          "info": {
+            "name": "/Tags - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Tags",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "2e4d3fe7-7d35-48c9-9aef-4bbdafa04ec3"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new tag"
+        },
+        {
+          "info": {
+            "name": "/Tags/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the tag to retrieve"
+              }
+            ]
+          },
+          "docs": "Get a tag by id"
+        },
+        {
+          "info": {
+            "name": "/Tags/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the tag to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing tag"
+        },
+        {
+          "info": {
+            "name": "/Tags/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/accounts/v1/Tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the tag to delete"
+              }
+            ]
+          },
+          "docs": "Deletes an existing tag"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

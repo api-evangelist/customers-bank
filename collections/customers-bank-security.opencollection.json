@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Security",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "WebPubSub",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/WebPubSub/client-access-uri - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/security/v1/WebPubSub/client-access-uri",
+            "params": [
+              {
+                "name": "groupIds",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Gets a url for push notifications from the server"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authenticate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/authenticate/token - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/security/v1/authenticate/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets an auth token for the provided client id and secret"
+        },
+        {
+          "info": {
+            "name": "/oauth2/token - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/security/v1/oauth2/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "client_id",
+                  "value": ""
+                },
+                {
+                  "name": "client_secret",
+                  "value": ""
+                },
+                {
+                  "name": "grant_type",
+                  "value": ""
+                },
+                {
+                  "name": "organization",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Gets an auth token for the provided client id, secret, and grant type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Transfers",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountAccess",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AccountAccess/{accountId}/enabled - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountAccess/:accountId/enabled",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AccountAccess/{accountId}/enabled - GET"
+        },
+        {
+          "info": {
+            "name": "/AccountAccess/enabled - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountAccess/enabled",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AccountAccess/enabled - GET"
+        },
+        {
+          "info": {
+            "name": "/AccountAccess - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountAccess"
+          },
+          "docs": "/AccountAccess - GET"
+        },
+        {
+          "info": {
+            "name": "/AccountAccess/enabled/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountAccess/enabled/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AccountAccess/enabled/download - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AccountEntitlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AccountEntitlements - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountEntitlements"
+          },
+          "docs": "/AccountEntitlements - GET"
+        },
+        {
+          "info": {
+            "name": "/AccountEntitlements/{userId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountEntitlements/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AccountEntitlements/{userId} - GET"
+        },
+        {
+          "info": {
+            "name": "/AccountEntitlements/{userId} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AccountEntitlements/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/AccountEntitlements/{userId} - PUT"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AddressBook",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/AddressBook/entries - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries",
+            "params": [
+              {
+                "name": "partnerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "671f4b1e-b1e8-4147-9971-14e0d4ba335a"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/AddressBook/entries - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "9498d5c9-83c0-45bd-a7dd-29b486a761d4"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/{id}/approve - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "0acdd9dd-a3c0-4e1f-9694-e4a8fa44d442"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/{id}/decline - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/{id}/cancel - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/:id/cancel",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "cb13a779-2ccb-44ba-8251-ae52e1df9e6c"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/{id}/cancel - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the address book entry to be retrieved"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/{id} - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the address book entry to be removed"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/{id} - DELETE"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/requests - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/requests",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/requests - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/requests - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/requests",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/requests - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/requests/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/requests/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "17dde094-8b09-4dc6-8836-4ce482404b44"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/requests/{id}/approve - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/requests/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/requests/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "8a4761e8-b4d8-4337-be6f-07dab142d694"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/requests/{id}/decline - POST"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/download",
+            "params": [
+              {
+                "name": "partnerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/download - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/entries/requests/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/entries/requests/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/entries/requests/download - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/availableAccounts?partnerName={partnerName} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/availableAccounts",
+            "params": [
+              {
+                "name": "partnerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludeAccountId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/availableAccounts?partnerName={partnerName} - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/availableAccounts/download?partnerName={partnerName} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/availableAccounts/download",
+            "params": [
+              {
+                "name": "partnerName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "excludeAccountId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/availableAccounts/download?partnerName={partnerName} - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/requests/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/requests/download",
+            "params": [
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/AddressBook/requests/download - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/accountlinksettings/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/accountlinksettings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/AddressBook/accountlinksettings/{id} - GET"
+        },
+        {
+          "info": {
+            "name": "/AddressBook/accountlinksettings/{id} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/AddressBook/accountlinksettings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/AddressBook/accountlinksettings/{id} - PUT"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "BookTransfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/?id={id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/",
+            "params": [
+              {
+                "name": "id",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The account id to search transactions for"
+              },
+              {
+                "name": "fromDate",
+                "value": "1980-01-01T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "1980-01-02T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional end date for which to search"
+              },
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "Optional list of transfer statuses to filter on"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/?id={id} - GET"
+        },
+        {
+          "info": {
+            "name": "/ - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "d13e5a3f-2ddb-40b7-88b0-b3b0901aa76e"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/ - POST"
+        },
+        {
+          "info": {
+            "name": "/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the book transfer"
+              }
+            ]
+          },
+          "docs": "/{id} - GET"
+        },
+        {
+          "info": {
+            "name": "/{id}/approve - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/:id/approve",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "6eb4cec4-4a1d-45a9-ae58-3196bd1049f8"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the book transfer entry to be approved"
+              }
+            ]
+          },
+          "docs": "/{id}/approve - POST"
+        },
+        {
+          "info": {
+            "name": "/{id}/decline - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/:id/decline",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "e04a5f1f-9c51-4778-8e50-df20f9d5412e"
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the book transfer entry to be declined"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/{id}/decline - POST"
+        },
+        {
+          "info": {
+            "name": "/purposeCodes - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/purposeCodes"
+          },
+          "docs": "/purposeCodes - GET"
+        },
+        {
+          "info": {
+            "name": "/download?id={id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The account id to search transactions for"
+              },
+              {
+                "name": "fromDate",
+                "value": "1980-01-01T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "1980-01-02T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional end date for which to search"
+              },
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "Optional list of transfer statuses to filter on"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/download?id={id} - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "BookTransferSearch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/search?id={id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/search",
+            "params": [
+              {
+                "name": "id",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The account id to search transactions for"
+              },
+              {
+                "name": "fromDate",
+                "value": "1980-01-01T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "1980-01-02T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional end date for which to search"
+              },
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "Optional list of transfer statuses to filter on"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The counterparty name, amount or status for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/search?id={id} - GET"
+        },
+        {
+          "info": {
+            "name": "/search/download?id={id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/transfers/v1/search/download",
+            "params": [
+              {
+                "name": "id",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "query",
+                "description": "The account id to search transactions for"
+              },
+              {
+                "name": "fromDate",
+                "value": "1980-01-01T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional start date from which to search"
+              },
+              {
+                "name": "toDate",
+                "value": "1980-01-02T12:00:00+00:00",
+                "type": "query",
+                "description": "Optional end date for which to search"
+              },
+              {
+                "name": "inStatus",
+                "value": "",
+                "type": "query",
+                "description": "Optional list of transfer statuses to filter on"
+              },
+              {
+                "name": "searchText",
+                "value": "",
+                "type": "query",
+                "description": "The counterparty name, amount or status for which to search"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/search/download?id={id} - GET"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

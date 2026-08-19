@@ -1,0 +1,765 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Partners",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NonAdmin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/apiAccess - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/apiAccess"
+          },
+          "docs": "/apiAccess - GET"
+        },
+        {
+          "info": {
+            "name": "/users/me - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/users/me"
+          },
+          "docs": "/users/me - GET"
+        },
+        {
+          "info": {
+            "name": "/users/me/logout - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/users/me/logout",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "c2d59aa3-02f0-4983-a275-95d9626a33e5"
+              }
+            ]
+          },
+          "docs": "/users/me/logout - POST"
+        },
+        {
+          "info": {
+            "name": "/users/login - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/users/login",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "4ce3df65-f67c-4544-8786-7ca811b47abf"
+              }
+            ]
+          },
+          "docs": "/users/login - POST"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Messages - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Messages",
+            "params": [
+              {
+                "name": "activeOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Messages - GET"
+        },
+        {
+          "info": {
+            "name": "/Messages/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Messages/download",
+            "params": [
+              {
+                "name": "activeOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Messages/download - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Partners",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/ - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/"
+          },
+          "docs": "/ - GET"
+        },
+        {
+          "info": {
+            "name": "/credentials - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/credentials"
+          },
+          "docs": "/credentials - GET"
+        },
+        {
+          "info": {
+            "name": "/credentials - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/credentials",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "d5812a08-a251-4bc3-98e2-3d5d54dd468c"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/credentials - POST"
+        },
+        {
+          "info": {
+            "name": "/credentials/{id} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/credentials/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/credentials/{id} - DELETE"
+        },
+        {
+          "info": {
+            "name": "/auth-settings - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/auth-settings"
+          },
+          "docs": "/auth-settings - GET"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/Users - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users",
+            "params": [
+              {
+                "name": "userName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Users - GET"
+        },
+        {
+          "info": {
+            "name": "/Users - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "df05bcae-1658-432f-9857-65749b707122"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/Users - POST"
+        },
+        {
+          "info": {
+            "name": "/Users - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/Users - PUT"
+        },
+        {
+          "info": {
+            "name": "/Users/{userId} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/Users/{userId} - DELETE"
+        },
+        {
+          "info": {
+            "name": "/Users/download - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users/download",
+            "params": [
+              {
+                "name": "userName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paginateResults",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortOn",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sortAscending",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Users/download - GET"
+        },
+        {
+          "info": {
+            "name": "/Users/{id} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includeLastLoggedInAt",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Users/{id} - GET"
+        },
+        {
+          "info": {
+            "name": "/Users/email - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users/email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/Users/email - GET"
+        },
+        {
+          "info": {
+            "name": "/Users/me/access/check - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/Users/me/access/check",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "6b89e8f4-7a6f-430a-aba0-c4ab5a0a1e49"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/Users/me/access/check - POST"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "UserSettings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/user-settings/{settingName} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/user-settings/:settingName",
+            "params": [
+              {
+                "name": "settingName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "/user-settings/{settingName} - GET"
+        },
+        {
+          "info": {
+            "name": "/user-settings/{settingName} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/user-settings/:settingName",
+            "params": [
+              {
+                "name": "settingName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/user-settings/{settingName} - PUT"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NotificationEmail",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/notification-email/verify - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/notification-email/verify",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "0204acf9-9a26-41cc-9723-15eed2d24299"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/notification-email/verify - POST"
+        },
+        {
+          "info": {
+            "name": "/notification-email/send-code - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/notification-email/send-code",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "49c93d4d-de92-4a94-b38a-331b254a56ab"
+              }
+            ]
+          },
+          "docs": "/notification-email/send-code - POST"
+        },
+        {
+          "info": {
+            "name": "/notification-email - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/notification-email"
+          },
+          "docs": "/notification-email - GET"
+        },
+        {
+          "info": {
+            "name": "/notification-email - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/notification-email",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/notification-email - PUT"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ClientCredentials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/client-credentials - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials"
+          },
+          "docs": "Gets all client credentials for the partner."
+        },
+        {
+          "info": {
+            "name": "/client-credentials - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "7784eb6f-c1b2-4c76-a53a-b81227de0669"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new client credential for the partner."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/me - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/me"
+          },
+          "docs": "Gets the client credential for the calling M2M application (from JWT)."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/{clientId} - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a specific client credential by client ID."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/{clientId} - PUT",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the roles for a specific client credential."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/{clientId} - DELETE",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/:clientId",
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a specific client credential. Self-delete is not allowed."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/me/rotate - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/me/rotate",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "2eb136f8-e422-456a-8f7d-f05a11a9a3e7"
+              }
+            ]
+          },
+          "docs": "Rotates the client secret for the calling M2M application (from JWT)."
+        },
+        {
+          "info": {
+            "name": "/client-credentials/{clientId}/rotate - POST",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/client-credentials/:clientId/rotate",
+            "headers": [
+              {
+                "name": "x-idempotency-key",
+                "value": "fba64993-2eca-480d-a02a-f0ce5785d3f9"
+              }
+            ],
+            "params": [
+              {
+                "name": "clientId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rotates the client secret for a specific client credential."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "HomeRealmDiscovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "/auth-provider - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/auth-provider",
+            "params": [
+              {
+                "name": "userEmail",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "/auth-provider - GET"
+        },
+        {
+          "info": {
+            "name": "/homerealmdiscovery - GET",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://cubi-sandbox-api.customersbank.com/partners/v1/homerealmdiscovery"
+          },
+          "docs": "/homerealmdiscovery - GET"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
