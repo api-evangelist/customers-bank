@@ -27,6 +27,14 @@ deliveryModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
+- Financial-Services
+- Banking
+- United States
+- Banking as a Service
+- Embedded Finance
+- Payments
+- Commercial Banking
+tags_raw:
 - Financial Services
 - Banking
 - United States
@@ -46,6 +54,10 @@ apis:
   humanURL: https://cubiapi.readme.io/docs/accounts-3
   baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
   tags:
+  - Account
+  - Subaccounts
+  - Transaction
+  tags_raw:
   - Accounts
   - Subaccounts
   - Transactions
@@ -141,6 +153,10 @@ apis:
   baseURL: https://cubi-sandbox-api.customersbank.com/partners/v1
   tags:
   - Partners
+  - User
+  - Credentials
+  tags_raw:
+  - Partners
   - Users
   - Credentials
   properties:
@@ -160,6 +176,9 @@ apis:
   humanURL: https://cubiapi.readme.io/docs/authenticate-1
   baseURL: https://cubi-sandbox-api.customersbank.com/security/v1
   tags:
+  - Security
+  - Authentication
+  tags_raw:
   - Security
   - OAuth2
   - Authentication
@@ -200,6 +219,9 @@ apis:
   humanURL: https://cubiapi.readme.io/docs/webhooks-1
   baseURL: https://cubi-sandbox-api.customersbank.com/webhooks/v1
   tags:
+  - Webhook
+  - Event
+  tags_raw:
   - Webhooks
   - Events
   properties:
