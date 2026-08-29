@@ -3,7 +3,7 @@ provider: Customers Bank
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Banking & Capital Markets
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,47 +11,157 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 15
 edges:
+- tag: LoanApplication
+  spec_file: customers-bank-loanapplication-api-openapi.yml
+  capability_id: BC-1320.10
+  capability_id_l1: BC-1320
+  capability_name: Credit Origination Management
+  confidence: 0.9
+  evidence: POST /application with CreateLoanApplicationDto, LoanApplicationBorrowerDto, LoanApplicationCosignerDto,
+    ApplicationRejectionReasonResponseDto
+  reason: Intake and retrieval of consumer loan applications with borrower/cosigner data and rejection
+    reasons — credit application origination.
+- tag: OutgoingPayments
+  spec_file: customers-bank-outgoingpayments-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.9
+  evidence: POST /outgoing/rtp, POST /outgoing/fednow, Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiateFedNowDto
+  reason: Initiation and cancellation of RTP and FedNow instant payments — explicitly real-time payment
+    rails.
+- tag: IncomingPayments
+  spec_file: customers-bank-incomingpayments-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.85
+  evidence: GET /incoming/fednow/{id}, GET /incoming/rtp, schemas IncomingFedNowDto, IncomingRtpDto, PaymentRailDto
+    (InstantPayments)
+  reason: Receipt and querying of FedNow and RTP payments — the instant/real-time payment rails — so Real-Time
+    Payment Management is a direct fit.
+- tag: Loan
+  spec_file: customers-bank-loan-api-openapi.yml
+  capability_id: BC-1320
+  capability_id_l1: BC-1320
+  capability_name: Credit & Lending Management
+  confidence: 0.85
+  evidence: POST /loan/{id}/funding, POST /loan/{id}/complete, POST /loan/{id}/cancel, schemas LoanFundingResponseDto,
+    LoanStatus (ConsumerLending)
+  reason: Clearly consumer loan lifecycle operations — funding instructions, completion and cancellation
+    of loans. Evidence does not cleanly separate origination closing from ongoing loan servicing, so only
+    the L1 credit & lending capability is asserted.
+- tag: BookTransfers
+  spec_file: customers-bank-booktransfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /{id}/approve, POST /{id}/decline, Cubi.Transfers.WebApi.Dto.BookTransfers.InitiateBookTransferDto,
+    PurposeCodeDto
+  reason: InitiateBookTransfer with approve/decline and purpose codes is capture, validation and authorisation
+    of intra-bank payment instructions at a chartered bank.
+- tag: Customers
+  spec_file: customers-bank-customers-api-openapi.yml
+  capability_id: BC-1300.40
+  capability_id_l1: BC-1300
+  capability_name: Customer Information Management
+  confidence: 0.8
+  evidence: POST /Customers, PUT /Customers/{id}, schemas CreateCustomerDto, UpdateCustomerDto, AddressDto,
+    Cubi.Accounts.Contracts.Messages.CustomerType
+  reason: CRUD over bank customer records including addresses and customer type within the Accounts service
+    — maintenance of banking customer master data. Ambiguity is only whether it is customer information
+    vs servicing, so 0.8.
+- tag: OutgoingAch
+  spec_file: customers-bank-outgoingach-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: '"Allows for querying and management of outgoing ACH payments"; POST /outgoing/credit, POST
+    /outgoing/debit, POST /outgoing/{id}/approve, InitiateAchCreditDto'
+  reason: Initiation, authorisation (approve/decline), cancellation and reversal of outgoing ACH payment
+    instructions — payment initiation on the ACH rail. L2 could arguably be clearing/settlement, hence
+    some ambiguity.
+- tag: OutgoingWiresV
+  spec_file: customers-bank-outgoingwiresv-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto, POST /outgoing/{id}/approve, POST /outgoing/bulk-decline
+  reason: Capture, validation and approval/decline workflow for outgoing wire payment instructions — payment
+    initiation and authorisation.
 - tag: Webhooks
   spec_file: customers-bank-webhooks-api-openapi.yml
   capability_id: BC-4270.80
   capability_id_l1: BC-4270
   capability_name: Webhook & Event Subscription Management
-  confidence: 0.82
-  evidence: POST /{subscriptionId}/event-history/{id}/replay, Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto,
-    POST /{id}/disable / POST /{id}/enable
-  reason: Full lifecycle of outbound webhook subscriptions plus event delivery history and replay — this
-    is precisely Webhook & Event Subscription Management within the developer/API platform capability,
-    exposed by the vendor's BaaS platform to integrators.
-- tag: EventHistory
-  spec_file: customers-bank-eventhistory-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
-  confidence: 0.74
-  evidence: '''Webhooks Event History API''; POST /EventHistory/{id}/replay; ''Cubi.Webhooks.WebApi.Dtos.EventRunDto'''
-  reason: Delivery history and replay of outbound webhook events — webhook delivery reliability within
-    Webhook & Event Subscription Management. Arguably pure plumbing, but the capability explicitly covers
-    webhook delivery reliability.
-- tag: ClientCredentials
-  spec_file: customers-bank-clientcredentials-api-openapi.yml
-  capability_id: BC-4270.40
-  capability_id_l1: BC-4270
-  capability_name: Developer Identity & Credential Management
-  confidence: 0.72
-  evidence: POST /client-credentials, 'ClientCredentialCreatedDto', 'POST /client-credentials/{clientId}/rotate'
-    — 'Partners Client Credentials API'
-  reason: Issuance, update, deletion and rotation of API client credentials for partner developers integrating
-    with the platform — matches Developer Identity & Credential Management. Some overlap with generic
-    IAM, hence moderate confidence.
-- tag: EventTypes
-  spec_file: customers-bank-eventtypes-api-openapi.yml
-  capability_id: BC-4270.80
-  capability_id_l1: BC-4270
-  capability_name: Webhook & Event Subscription Management
+  confidence: 0.8
+  evidence: '''WebhookSubscriptionDto'', ''GET /{id}/event-history'', ''POST /{subscriptionId}/event-history/{id}/replay'',
+    ''POST /{id}/disable'''
+  reason: Full lifecycle of outbound webhook subscriptions including enable/disable and event delivery
+    history with replay — Webhook & Event Subscription Management, regardless of the vendor being a bank.
+- tag: IncomingAch
+  spec_file: customers-bank-incomingach-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.75
+  evidence: '"Allow for querying and management of incoming ACH payments"; schema Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+  reason: Explicitly incoming ACH payment transactions at a bank, i.e. the domestic ACH clearing/settlement
+    flow. L2 chosen because the capability names ACH clearing directly; some chance it is better read
+    as generic payment processing.
+- tag: Accounts
+  spec_file: customers-bank-accounts-api-openapi.yml
+  capability_id: BC-1330.10
+  capability_id_l1: BC-1330
+  capability_name: Deposit Account Management
   confidence: 0.7
-  evidence: '''Webhooks Event Types API''; schema names ''wires.outgoing-approval-denied'', ''transfers.book-received'''
-  reason: Catalogue of subscribable outbound event schemas for webhook consumers, matching event schema
-    management under Webhook & Event Subscription Management. Read-only reference surface, so moderate
-    confidence.
+  evidence: GET /{accountId}/transactions, Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto, Cubi.Accounts.Contracts.Messages.BalanceMode,
+    Cubi.Accounts.WebApi.Dto.AccountState
+  reason: Retrieve/update bank accounts with balances, state and transaction history for a chartered bank's
+    BaaS platform — demand deposit account management. Cannot fully exclude broader account-lifecycle
+    servicing, so 0.7.
+- tag: InterestPayments
+  spec_file: customers-bank-interestpayments-api-openapi.yml
+  capability_id: BC-1330.50
+  capability_id_l1: BC-1330
+  capability_name: Deposit Pricing & Interest Management
+  confidence: 0.7
+  evidence: POST /{accountId}/InterestPayments, schema Cubi.Accounts.WebApi.Dto.InterestPaymentDto with
+    TransactionDto
+  reason: Posting and retrieving interest payments against a deposit account in the Accounts service —
+    deposit interest crediting. Some chance it is better classed as generic deposit account operations,
+    so 0.7.
+- tag: SearchIncomingWiresV
+  spec_file: customers-bank-searchincomingwiresv-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: GET /incoming/search, Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto, IncomingCreditorDto
+  reason: Query surface over incoming wire payments; clearly within payments management but the single
+    search operation does not pin a specific sub-capability.
+- tag: SearchOutgoingWiresV
+  spec_file: customers-bank-searchoutgoingwiresv-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: GET /outgoing/search, Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto, OutgoingWireTransactionStatusDto
+  reason: Query surface over outgoing wire payments and their transaction status; payments domain, but
+    a search-only operation is too thin for a specific sub-capability.
+- tag: Subaccounts
+  spec_file: customers-bank-subaccounts-api-openapi.yml
+  capability_id: BC-1330.40
+  capability_id_l1: BC-1330
+  capability_name: Account Lifecycle Operations Management
+  confidence: 0.7
+  evidence: POST /Subaccounts, DELETE /Subaccounts/{id}, POST /Subaccounts/{id}/freeze, Cubi.Accounts.Contracts.Messages.SubaccountStatus,
+    BalanceMode
+  reason: Creation, update, closure and freeze/unfreeze of deposit subaccounts in the bank's Accounts
+    API — deposit account lifecycle operations; ambiguity between account lifecycle and deposit account
+    management.
