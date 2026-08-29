@@ -1576,6 +1576,9 @@ apis:
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
 common:
+- type: CapabilityMap
+  url: capabilities/customers-bank-capability-edges.yml
+  name: Customers Bank Business Capability Map
 - type: Overlay
   url: overlays/customers-bank-accounts-overlay.yaml
 - type: Overlay

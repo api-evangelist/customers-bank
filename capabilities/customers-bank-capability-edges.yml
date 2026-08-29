@@ -1,0 +1,57 @@
+slug: customers-bank
+provider: Customers Bank
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Webhooks
+  spec_file: customers-bank-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.82
+  evidence: POST /{subscriptionId}/event-history/{id}/replay, Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto,
+    POST /{id}/disable / POST /{id}/enable
+  reason: Full lifecycle of outbound webhook subscriptions plus event delivery history and replay — this
+    is precisely Webhook & Event Subscription Management within the developer/API platform capability,
+    exposed by the vendor's BaaS platform to integrators.
+- tag: EventHistory
+  spec_file: customers-bank-eventhistory-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.74
+  evidence: '''Webhooks Event History API''; POST /EventHistory/{id}/replay; ''Cubi.Webhooks.WebApi.Dtos.EventRunDto'''
+  reason: Delivery history and replay of outbound webhook events — webhook delivery reliability within
+    Webhook & Event Subscription Management. Arguably pure plumbing, but the capability explicitly covers
+    webhook delivery reliability.
+- tag: ClientCredentials
+  spec_file: customers-bank-clientcredentials-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.72
+  evidence: POST /client-credentials, 'ClientCredentialCreatedDto', 'POST /client-credentials/{clientId}/rotate'
+    — 'Partners Client Credentials API'
+  reason: Issuance, update, deletion and rotation of API client credentials for partner developers integrating
+    with the platform — matches Developer Identity & Credential Management. Some overlap with generic
+    IAM, hence moderate confidence.
+- tag: EventTypes
+  spec_file: customers-bank-eventtypes-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: '''Webhooks Event Types API''; schema names ''wires.outgoing-approval-denied'', ''transfers.book-received'''
+  reason: Catalogue of subscribable outbound event schemas for webhook consumers, matching event schema
+    management under Webhook & Event Subscription Management. Read-only reference surface, so moderate
+    confidence.
