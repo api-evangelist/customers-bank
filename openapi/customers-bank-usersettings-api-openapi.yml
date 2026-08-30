@@ -1,0 +1,248 @@
+openapi: 3.2.0
+info:
+  title: Partners User Settings API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/partners/v1
+tags:
+- name: UserSettings
+paths:
+  /user-settings/{settingName}:
+    get:
+      tags:
+      - UserSettings
+      summary: /user-settings/{settingName} - GET
+      operationId: get-user-settings-settingname
+      parameters:
+      - name: settingName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - UserSettings
+      summary: /user-settings/{settingName} - PUT
+      operationId: put-user-settings-settingname
+      parameters:
+      - name: settingName
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserSettingDto'
+            example:
+              settingName: string
+              settingValue: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserSettingDto'
+            example:
+              settingName: string
+              settingValue: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserSettingDto'
+            example:
+              settingName: string
+              settingValue: string
+      responses:
+        '201':
+          description: Created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: string
+                format: uuid
+              example: string
+            text/json:
+              schema:
+                type: string
+                format: uuid
+              example: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.UserSettingDto:
+      type: object
+      properties:
+        settingName:
+          type:
+          - string
+          - 'null'
+        settingValue:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

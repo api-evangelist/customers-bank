@@ -1,0 +1,1275 @@
+openapi: 3.2.0
+info:
+  title: Partners Users API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/partners/v1
+tags:
+- name: Users
+paths:
+  /Users:
+    post:
+      tags:
+      - Users
+      summary: /Users - POST
+      operationId: post-users
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: df05bcae-1658-432f-9857-65749b707122
+      requestBody:
+        description: User to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserCreationDto'
+            example:
+              name: string
+              firstName: string
+              lastName: string
+              email: string
+              isAdmin: true
+              isAddressBookAdmin: true
+              showApi: true
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserCreationDto'
+            example:
+              name: string
+              firstName: string
+              lastName: string
+              email: string
+              isAdmin: true
+              isAddressBookAdmin: true
+              showApi: true
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserCreationDto'
+            example:
+              name: string
+              firstName: string
+              lastName: string
+              email: string
+              isAdmin: true
+              isAddressBookAdmin: true
+              showApi: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - Users
+      summary: /Users - GET
+      operationId: get-users
+      parameters:
+      - name: userName
+        in: query
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  name: string
+                  firstName: string
+                  lastName: string
+                  isAdmin: true
+                  isPrimaryAdmin: true
+                  isAddressBookAdmin: true
+                  accountEnabled: true
+                  email: string
+                  lastLoggedInAt: string
+                  roles:
+                  - string
+                  showApi: true
+                  isFrozen: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  name: string
+                  firstName: string
+                  lastName: string
+                  isAdmin: true
+                  isPrimaryAdmin: true
+                  isAddressBookAdmin: true
+                  accountEnabled: true
+                  email: string
+                  lastLoggedInAt: string
+                  roles:
+                  - string
+                  showApi: true
+                  isFrozen: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - Users
+      summary: /Users - PUT
+      operationId: put-users
+      requestBody:
+        description: User to be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserUpdateDto'
+            example:
+              id: string
+              name: string
+              firstName: string
+              lastName: string
+              isAdmin: true
+              isFrozen: true
+              roles:
+              - string
+              isAddressBookAdmin: true
+              showApi: true
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserUpdateDto'
+            example:
+              id: string
+              name: string
+              firstName: string
+              lastName: string
+              isAdmin: true
+              isFrozen: true
+              roles:
+              - string
+              isAddressBookAdmin: true
+              showApi: true
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserUpdateDto'
+            example:
+              id: string
+              name: string
+              firstName: string
+              lastName: string
+              isAdmin: true
+              isFrozen: true
+              roles:
+              - string
+              isAddressBookAdmin: true
+              showApi: true
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Users/{userId}:
+    delete:
+      tags:
+      - Users
+      summary: /Users/{userId} - DELETE
+      operationId: delete-users-userid
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Users/download:
+    get:
+      tags:
+      - Users
+      summary: /Users/download - GET
+      operationId: get-users-download
+      parameters:
+      - name: userName
+        in: query
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  name: string
+                  firstName: string
+                  lastName: string
+                  isAdmin: true
+                  isPrimaryAdmin: true
+                  isAddressBookAdmin: true
+                  accountEnabled: true
+                  email: string
+                  lastLoggedInAt: string
+                  roles:
+                  - string
+                  showApi: true
+                  isFrozen: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  name: string
+                  firstName: string
+                  lastName: string
+                  isAdmin: true
+                  isPrimaryAdmin: true
+                  isAddressBookAdmin: true
+                  accountEnabled: true
+                  email: string
+                  lastLoggedInAt: string
+                  roles:
+                  - string
+                  showApi: true
+                  isFrozen: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Users/{id}:
+    get:
+      tags:
+      - Users
+      summary: /Users/{id} - GET
+      operationId: get-users-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: includeLastLoggedInAt
+        in: query
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                id: string
+                partnerId: string
+                name: string
+                firstName: string
+                lastName: string
+                isAdmin: true
+                isPrimaryAdmin: true
+                isAddressBookAdmin: true
+                accountEnabled: true
+                email: string
+                lastLoggedInAt: string
+                roles:
+                - string
+                showApi: true
+                isFrozen: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                id: string
+                partnerId: string
+                name: string
+                firstName: string
+                lastName: string
+                isAdmin: true
+                isPrimaryAdmin: true
+                isAddressBookAdmin: true
+                accountEnabled: true
+                email: string
+                lastLoggedInAt: string
+                roles:
+                - string
+                showApi: true
+                isFrozen: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Users/email:
+    get:
+      tags:
+      - Users
+      summary: /Users/email - GET
+      operationId: get-users-email
+      parameters:
+      - name: email
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                id: string
+                partnerId: string
+                name: string
+                firstName: string
+                lastName: string
+                isAdmin: true
+                isPrimaryAdmin: true
+                isAddressBookAdmin: true
+                accountEnabled: true
+                email: string
+                lastLoggedInAt: string
+                roles:
+                - string
+                showApi: true
+                isFrozen: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+              example:
+                id: string
+                partnerId: string
+                name: string
+                firstName: string
+                lastName: string
+                isAdmin: true
+                isPrimaryAdmin: true
+                isAddressBookAdmin: true
+                accountEnabled: true
+                email: string
+                lastLoggedInAt: string
+                roles:
+                - string
+                showApi: true
+                isFrozen: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Users/me/access/check:
+    post:
+      tags:
+      - Users
+      summary: /Users/me/access/check - POST
+      operationId: post-users-me-access-check
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        schema:
+          type: string
+          format: uuid
+        example: 6b89e8f4-7a6f-430a-aba0-c4ab5a0a1e49
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto'
+            example:
+              resource: resource:user
+              action: reader
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto'
+            example:
+              resource: resource:user
+              action: reader
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto'
+            example:
+              resource: resource:user
+              action: reader
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto'
+              example:
+                hasAccess: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto'
+              example:
+                hasAccess: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Partners.WebApi.Dtos.UserUpdateDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        isAdmin:
+          type:
+          - boolean
+          - 'null'
+        isFrozen:
+          type:
+          - boolean
+          - 'null'
+        roles:
+          type: array
+          items:
+            type: string
+        isAddressBookAdmin:
+          type:
+          - boolean
+          - 'null'
+        showApi:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.UserCreationDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        isAdmin:
+          type:
+          - boolean
+          - 'null'
+        isAddressBookAdmin:
+          type:
+          - boolean
+          - 'null'
+        showApi:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto:
+      type: object
+      properties:
+        hasAccess:
+          type: boolean
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto:
+      type: object
+      properties:
+        resource:
+          type:
+          - string
+          - 'null'
+          description: Resource to check access for.
+          example: resource:user
+        action:
+          type:
+          - string
+          - 'null'
+          description: Action to check access for.
+          example: reader
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.UserDto:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        partnerId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The user's name
+          deprecated: true
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        isAdmin:
+          type:
+          - boolean
+          - 'null'
+        isPrimaryAdmin:
+          type:
+          - boolean
+          - 'null'
+        isAddressBookAdmin:
+          type:
+          - boolean
+          - 'null'
+        accountEnabled:
+          type:
+          - boolean
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        lastLoggedInAt:
+          type: string
+          format: date-time
+        roles:
+          type: array
+          items:
+            type: string
+        showApi:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+        isFrozen:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

@@ -1,0 +1,148 @@
+openapi: 3.2.0
+info:
+  title: Customers Bank Web Pub Sub API
+  version: v1
+  description: 'Operations tagged WebPubSub across 2 of this provider''s published API definitions: customers-bank-itoperations-openapi.json, customers-bank-security-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/itoperations/v1
+- url: https://cubi-sandbox-api.customersbank.com/security/v1
+tags:
+- name: WebPubSub
+paths:
+  /WebPubSub/client-access-uri:
+    get:
+      tags:
+      - WebPubSub
+      summary: /WebPubSub/client-access-uri - GET
+      operationId: get-webpubsub-client-access-uri
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uri
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: string
+                format: uri
+              example: string
+            text/json:
+              schema:
+                type: string
+                format: uri
+              example: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/itoperations/v1
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+x-refined-from:
+- customers-bank-itoperations-openapi.json
+- customers-bank-security-openapi.json
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

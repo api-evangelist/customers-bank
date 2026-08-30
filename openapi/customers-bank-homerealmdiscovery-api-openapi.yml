@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  title: Partners Home Realm Discovery API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/partners/v1
+tags:
+- name: HomeRealmDiscovery
+paths:
+  /auth-provider:
+    get:
+      tags:
+      - HomeRealmDiscovery
+      summary: /auth-provider - GET
+      operationId: get-auth-provider
+      parameters:
+      - name: userEmail
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto'
+              example:
+                isSyncEnabled: true
+                authProvider: string
+                isAuth0ClientCredentialsEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto'
+              example:
+                isSyncEnabled: true
+                authProvider: string
+                isAuth0ClientCredentialsEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /homerealmdiscovery:
+    get:
+      tags:
+      - HomeRealmDiscovery
+      summary: /homerealmdiscovery - GET
+      operationId: get-homerealmdiscovery
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.FeatureFlagsDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.FeatureFlagsDto'
+              example:
+                isHomeRealmDiscoveryEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.FeatureFlagsDto'
+              example:
+                isHomeRealmDiscoveryEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.FeatureFlagsDto:
+      type: object
+      properties:
+        isHomeRealmDiscoveryEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:
+      type: object
+      properties:
+        isSyncEnabled:
+          type: boolean
+        authProvider:
+          type:
+          - string
+          - 'null'
+        isAuth0ClientCredentialsEnabled:
+          type: boolean
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

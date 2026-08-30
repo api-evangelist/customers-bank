@@ -1,0 +1,553 @@
+openapi: 3.2.0
+info:
+  title: Customers Bank Account Control Type API
+  version: '1.0'
+  description: 'Operations tagged AccountControlType across 3 of this provider''s published API definitions: customers-bank-ach-openapi.json, customers-bank-instantpayments-openapi.json, customers-bank-wires-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/ach/v1
+- url: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
+- url: https://cubi-sandbox-api.customersbank.com/Wires/v2
+tags:
+- name: AccountControlType
+  description: Allows for querying and managing of the Control Type (Dual or Single) on various accounts within the system
+paths:
+  /ControlType:
+    get:
+      tags:
+      - AccountControlType
+      summary: /ControlType - GET
+      description: Gets the specific control type for all accounts
+      operationId: get-controltype
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  controlType: Single
+                  accountNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  controlType: Single
+                  accountNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+  /ControlType/{id}:
+    get:
+      tags:
+      - AccountControlType
+      summary: /ControlType/{id} - GET
+      description: Gets the control type for a given account
+      operationId: get-controltype-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the account
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                id: string
+                controlType: Single
+                accountNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                id: string
+                controlType: Single
+                accountNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - AccountControlType
+      summary: /ControlType/{id} - PUT
+      description: Saves the control type for a given account
+      operationId: put-controltype-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the account to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The updated control type to save
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto'
+            example:
+              controlType: Single
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto'
+            example:
+              controlType: Single
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto'
+            example:
+              controlType: Single
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type: string
+          description: The account number
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Ach.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountControlTypeDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.Wires.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type: string
+          description: The account number
+      additionalProperties: false
+x-refined-from:
+- customers-bank-ach-openapi.json
+- customers-bank-instantpayments-openapi.json
+- customers-bank-wires-openapi.json
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

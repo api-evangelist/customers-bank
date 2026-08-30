@@ -1,0 +1,685 @@
+openapi: 3.2.0
+info:
+  title: Incoming Ach API
+  version: v1
+  description: Allow for querying and management of incoming ACH payments
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/ach/v1
+tags:
+- name: IncomingAch
+  description: Allow for querying and management of incoming ACH payments
+paths:
+  /incoming/{id}:
+    get:
+      tags:
+      - IncomingAch
+      summary: /incoming/{id} - GET
+      description: Gets a sent ACH transaction
+      operationId: get-incoming-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the ach transaction to GET
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+                id: string
+                accountHolder: string
+                accountNumber: string
+                routingNumber: string
+                amount: 0
+                accountType: Checking
+                createdAt: string
+                traceNumber: string
+                lineItemReferenceId: string
+                isDebit: true
+                returnCode: string
+                originalTransactionId: string
+                batchNumber: string
+                companyId: string
+                secCode: PPD
+                direction: Credit
+                batchDescription: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+                id: string
+                accountHolder: string
+                accountNumber: string
+                routingNumber: string
+                amount: 0
+                accountType: Checking
+                createdAt: string
+                traceNumber: string
+                lineItemReferenceId: string
+                isDebit: true
+                returnCode: string
+                originalTransactionId: string
+                batchNumber: string
+                companyId: string
+                secCode: PPD
+                direction: Credit
+                batchDescription: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming:
+    get:
+      tags:
+      - IncomingAch
+      summary: /incoming - GET
+      description: Searches all received ACH transactions
+      operationId: get-incoming
+      parameters:
+      - name: FromDate
+        in: query
+        description: The date from which to search for incoming payments
+        schema:
+          type: string
+          format: date-time
+      - name: ToDate
+        in: query
+        description: The date to search until for incoming payments
+        schema:
+          type: string
+          format: date-time
+      - name: AccountId
+        in: query
+        description: The ID of the account for which the payments were applied
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  accountHolder: string
+                  accountNumber: string
+                  routingNumber: string
+                  amount: 0
+                  accountType: Checking
+                  createdAt: string
+                  traceNumber: string
+                  lineItemReferenceId: string
+                  isDebit: true
+                  returnCode: string
+                  originalTransactionId: string
+                  batchNumber: string
+                  companyId: string
+                  secCode: PPD
+                  direction: Credit
+                  batchDescription: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  accountHolder: string
+                  accountNumber: string
+                  routingNumber: string
+                  amount: 0
+                  accountType: Checking
+                  createdAt: string
+                  traceNumber: string
+                  lineItemReferenceId: string
+                  isDebit: true
+                  returnCode: string
+                  originalTransactionId: string
+                  batchNumber: string
+                  companyId: string
+                  secCode: PPD
+                  direction: Credit
+                  batchDescription: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/download:
+    get:
+      tags:
+      - IncomingAch
+      summary: /incoming/download - GET
+      description: Downloads all received ACH transactions
+      operationId: get-incoming-download
+      parameters:
+      - name: FromDate
+        in: query
+        description: The date from which to search for incoming payments
+        schema:
+          type: string
+          format: date-time
+      - name: ToDate
+        in: query
+        description: The date to search until for incoming payments
+        schema:
+          type: string
+          format: date-time
+      - name: AccountId
+        in: query
+        description: The ID of the account for which the payments were applied
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+              - id: string
+                accountHolder: string
+                accountNumber: string
+                routingNumber: string
+                amount: 0
+                accountType: Checking
+                createdAt: string
+                traceNumber: string
+                lineItemReferenceId: string
+                isDebit: true
+                returnCode: string
+                originalTransactionId: string
+                batchNumber: string
+                companyId: string
+                secCode: PPD
+                direction: Credit
+                batchDescription: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+              example:
+              - id: string
+                accountHolder: string
+                accountNumber: string
+                routingNumber: string
+                amount: 0
+                accountType: Checking
+                createdAt: string
+                traceNumber: string
+                lineItemReferenceId: string
+                isDebit: true
+                returnCode: string
+                originalTransactionId: string
+                batchNumber: string
+                companyId: string
+                secCode: PPD
+                direction: Credit
+                batchDescription: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Ach.Contracts.Messages.Direction:
+      enum:
+      - Credit
+      - Debit
+      type: string
+    Cubi.Ach.Contracts.Messages.AchPaymentType:
+      enum:
+      - PPD
+      - CCD
+      - CTX
+      - TEL
+      - WEB
+      - ACK
+      - ADV
+      - ARC
+      - ATX
+      - BOC
+      - CIE
+      - COR
+      - DNE
+      - ENR
+      - IAT
+      - POP
+      - POS
+      - SHR
+      - MTE
+      - RCK
+      - TRX
+      - XCK
+      type: string
+    Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the incoming ach payment
+          format: uuid
+        accountHolder:
+          type:
+          - string
+          - 'null'
+          description: The name on the account to which the ACH payment was applied
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The number of the account to which the ACH payment was applied
+        routingNumber:
+          type:
+          - string
+          - 'null'
+          description: The routing number to which the ACH payment was applied.
+        amount:
+          type: number
+          description: The amount of the ACH payment
+          format: double
+        accountType:
+          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.AccountType'
+        createdAt:
+          type: string
+          description: The datetime at which the payment was created/received
+          format: date-time
+        traceNumber:
+          type:
+          - string
+          - 'null'
+          description: The trace number of the payment
+        lineItemReferenceId:
+          type:
+          - string
+          - 'null'
+          description: The line item reference id of the payment record (this is derived from the 6 record in the NACHA spec)
+        isDebit:
+          type: boolean
+          description: Indicates if this payment was a demand debit (true) or a credit (false)
+          deprecated: true
+        returnCode:
+          type:
+          - string
+          - 'null'
+          description: The return code on the payment, if the payment was a return of an outgoing ACH payment
+        originalTransactionId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the original payment, if this incoming payment is a return of an outgoing ACH payment
+          format: uuid
+        batchNumber:
+          type:
+          - string
+          - 'null'
+          description: The batch number in which the payment was received
+        companyId:
+          type: string
+          description: Company Identification for the payment
+        secCode:
+          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.AchPaymentType'
+        direction:
+          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.Direction'
+        batchDescription:
+          maxLength: 10
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Company Entry Description from the NACHA file batch header, a description of the entry batch description.
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+      additionalProperties: false
+    Cubi.Ach.Contracts.Messages.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

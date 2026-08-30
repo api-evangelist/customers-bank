@@ -1,0 +1,1509 @@
+openapi: 3.2.0
+info:
+  title: Webhooks API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/webhooks/v1
+tags:
+- name: Webhooks
+paths:
+  /:
+    get:
+      tags:
+      - Webhooks
+      summary: / - GET
+      operationId: get
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    post:
+      tags:
+      - Webhooks
+      summary: / - POST
+      operationId: post
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 938ba792-c9be-455e-af3c-7f00f93e5584
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+            example:
+              eventTypeName: string
+              callbackUrl: string
+              secretText: string
+              description: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+            example:
+              eventTypeName: string
+              callbackUrl: string
+              secretText: string
+              description: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+            example:
+              eventTypeName: string
+              callbackUrl: string
+              secretText: string
+              description: string
+      responses:
+        '201':
+          description: Created
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{id}/event-history:
+    get:
+      tags:
+      - Webhooks
+      summary: /{id}/event-history - GET
+      operationId: get-id-event-history
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              example:
+                id: string
+                accountId: string
+                eventTypeName: string
+                callbackUrl: string
+                statusText: string
+                jsonPayloadText: string
+                attemptDate: string
+                subscriptionId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              example:
+                id: string
+                accountId: string
+                eventTypeName: string
+                callbackUrl: string
+                statusText: string
+                jsonPayloadText: string
+                attemptDate: string
+                subscriptionId: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{subscriptionId}/event-history/{id}/replay:
+    post:
+      tags:
+      - Webhooks
+      summary: /{subscriptionId}/event-history/{id}/replay - POST
+      operationId: post-subscriptionid-event-history-id-replay
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 3b0e53f7-8c4d-46b4-a70d-00c3eece1521
+      responses:
+        '201':
+          description: Created
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{id}:
+    get:
+      tags:
+      - Webhooks
+      summary: /{id} - GET
+      operationId: get-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - Webhooks
+      summary: /{id} - PUT
+      operationId: put-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto'
+            example:
+              accountId: string
+              callbackUrl: string
+              description: string
+              secretText: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto'
+            example:
+              accountId: string
+              callbackUrl: string
+              description: string
+              secretText: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto'
+            example:
+              accountId: string
+              callbackUrl: string
+              description: string
+              secretText: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto'
+              example:
+                eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    delete:
+      tags:
+      - Webhooks
+      summary: /{id} - DELETE
+      operationId: delete-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{id}/disable:
+    post:
+      tags:
+      - Webhooks
+      summary: /{id}/disable - POST
+      operationId: post-id-disable
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: f48896b7-6820-47b3-9eb0-893ad09033da
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{id}/enable:
+    post:
+      tags:
+      - Webhooks
+      summary: /{id}/enable - POST
+      operationId: post-id-enable
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 3a5a8448-e4f0-418e-b04d-c32469360cde
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /download:
+    get:
+      tags:
+      - Webhooks
+      summary: /download - GET
+      operationId: get-download
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+              - eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.WebhookDto'
+              example:
+              - eventTypeName: string
+                callbackUrl: string
+                secretText: string
+                description: string
+                id: string
+                modificationDate: string
+                creationDate: string
+                isActive: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{id}/event-history/download:
+    get:
+      tags:
+      - Webhooks
+      summary: /{id}/event-history/download - GET
+      operationId: get-id-event-history-download
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              example:
+              - id: string
+                accountId: string
+                eventTypeName: string
+                callbackUrl: string
+                statusText: string
+                jsonPayloadText: string
+                attemptDate: string
+                subscriptionId: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Webhooks.WebApi.Dtos.EventHistoryDto'
+              example:
+              - id: string
+                accountId: string
+                eventTypeName: string
+                callbackUrl: string
+                statusText: string
+                jsonPayloadText: string
+                attemptDate: string
+                subscriptionId: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: Account id
+          format: uuid
+          deprecated: true
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Callback url
+          format: uri
+        description:
+          maxLength: 65535
+          type:
+          - string
+          - 'null'
+          description: Description
+        secretText:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+          description: Secret text
+      additionalProperties: false
+      description: A webhook update DTO abstraction.
+    Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id
+          format: uuid
+        accountId:
+          type: string
+          description: Account id
+          format: uuid
+          deprecated: true
+        eventTypeName:
+          type: string
+          description: Event type name
+        callbackUrl:
+          type: string
+          description: Callback url
+          format: uri
+        statusText:
+          type: string
+          description: Status text
+        jsonPayloadText:
+          type: string
+          description: Json payload text
+        attemptDate:
+          type: string
+          description: Attempt date
+          format: date-time
+        subscriptionId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the subscription on which this event was sent
+          format: uuid
+      additionalProperties: false
+      description: A event history DTO abstraction.
+    Cubi.Webhooks.WebApi.Dtos.WebhookDto:
+      required:
+      - callbackUrl
+      - creationDate
+      - description
+      - eventTypeName
+      - id
+      - isActive
+      - modificationDate
+      - secretText
+      type: object
+      properties:
+        eventTypeName:
+          minLength: 1
+          type: string
+          description: Event type name
+        callbackUrl:
+          type: string
+          description: Callback url
+          format: uri
+        secretText:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          description: Secret text
+        description:
+          maxLength: 65535
+          minLength: 1
+          type: string
+          description: Description
+        id:
+          type: string
+          description: Id
+          format: uuid
+        modificationDate:
+          type: string
+          description: Modification date
+          format: date-time
+        creationDate:
+          type: string
+          description: Creation date
+          format: date-time
+        isActive:
+          type: boolean
+          description: Is active
+      additionalProperties: false
+      description: A webhook DTO abstraction.
+    Cubi.Webhooks.WebApi.Dtos.WebhookSubscriptionDto:
+      required:
+      - callbackUrl
+      - description
+      - eventTypeName
+      - secretText
+      type: object
+      properties:
+        eventTypeName:
+          minLength: 1
+          type: string
+          description: Event type name
+        callbackUrl:
+          type: string
+          description: Callback url
+          format: uri
+        secretText:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          description: Secret text
+        description:
+          maxLength: 65535
+          minLength: 1
+          type: string
+          description: Description
+      additionalProperties: false
+      description: A webhook subscription DTO abstraction.
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

@@ -1,0 +1,878 @@
+openapi: 3.2.0
+info:
+  title: Transfers Book Transfer Search API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+tags:
+- name: BookTransferSearch
+paths:
+  /search:
+    get:
+      tags:
+      - BookTransferSearch
+      summary: /search?id={id} - GET
+      operationId: get-search-id-id
+      parameters:
+      - name: id
+        in: query
+        description: The account id to search transactions for
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-0000-0000-000000000000
+      - name: fromDate
+        in: query
+        description: Optional start date from which to search
+        schema:
+          type: string
+          format: date-time
+          example: '1980-01-01T12:00:00+00:00'
+        example: '1980-01-01T12:00:00+00:00'
+      - name: toDate
+        in: query
+        description: Optional end date for which to search
+        schema:
+          type: string
+          format: date-time
+          example: '1980-01-02T12:00:00+00:00'
+        example: '1980-01-02T12:00:00+00:00'
+      - name: inStatus
+        in: query
+        description: Optional list of transfer statuses to filter on
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus'
+      - name: searchText
+        in: query
+        description: The counterparty name, amount or status for which to search
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      - name: filters
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Common.Models.Filter'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: 00000000-0000-0000-0000-000000000000
+                  counterPartyPartnerName: string
+                  counterPartyAccountName: string
+                  sendingPartnerName: string
+                  sendingAccountName: string
+                  counterPartyAccountNumberLast4Digits: string
+                  receivingPartnerName: string
+                  receivingAccountName: string
+                  sendingAccountNumberLast4Digits: string
+                  receivingAccountNumberLast4Digits: string
+                  amount: 0
+                  transactionType: Send
+                  internalMemo: string
+                  publicMemo: string
+                  coreMemo: string
+                  purposeCode: string
+                  purposeDescription: string
+                  processDate: string
+                  status: ApprovalRequired
+                  declineReason: string
+                  initiatingUserName: string
+                  initiatingUserEmail: string
+                  initiatingUserId: string
+                  approvalUserName: string
+                  approvalUserEmail: string
+                  approvedAt: string
+                  createdAt: string
+                  sourceType: Api
+                  lastModifiedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: 00000000-0000-0000-0000-000000000000
+                  counterPartyPartnerName: string
+                  counterPartyAccountName: string
+                  sendingPartnerName: string
+                  sendingAccountName: string
+                  counterPartyAccountNumberLast4Digits: string
+                  receivingPartnerName: string
+                  receivingAccountName: string
+                  sendingAccountNumberLast4Digits: string
+                  receivingAccountNumberLast4Digits: string
+                  amount: 0
+                  transactionType: Send
+                  internalMemo: string
+                  publicMemo: string
+                  coreMemo: string
+                  purposeCode: string
+                  purposeDescription: string
+                  processDate: string
+                  status: ApprovalRequired
+                  declineReason: string
+                  initiatingUserName: string
+                  initiatingUserEmail: string
+                  initiatingUserId: string
+                  approvalUserName: string
+                  approvalUserEmail: string
+                  approvedAt: string
+                  createdAt: string
+                  sourceType: Api
+                  lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /search/download:
+    get:
+      tags:
+      - BookTransferSearch
+      summary: /search/download?id={id} - GET
+      operationId: get-search-download-id-id
+      parameters:
+      - name: id
+        in: query
+        description: The account id to search transactions for
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-0000-0000-000000000000
+      - name: fromDate
+        in: query
+        description: Optional start date from which to search
+        schema:
+          type: string
+          format: date-time
+          example: '1980-01-01T12:00:00+00:00'
+        example: '1980-01-01T12:00:00+00:00'
+      - name: toDate
+        in: query
+        description: Optional end date for which to search
+        schema:
+          type: string
+          format: date-time
+          example: '1980-01-02T12:00:00+00:00'
+        example: '1980-01-02T12:00:00+00:00'
+      - name: inStatus
+        in: query
+        description: Optional list of transfer statuses to filter on
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus'
+      - name: searchText
+        in: query
+        description: The counterparty name, amount or status for which to search
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      - name: filters
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Common.Models.Filter'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
+              example:
+              - id: 00000000-0000-0000-0000-000000000000
+                accountId: 00000000-0000-0000-0000-000000000000
+                accountName: string
+                counterParty: string
+                counterPartyAccountId: 00000000-0000-0000-0000-000000000000
+                counterPartyAccountName: string
+                sendingPartner: string
+                sendingAccount: string
+                sendingAccountNumberLast4Digits: string
+                receivingPartner: string
+                receivingAccount: string
+                receivingAccountNumberLast4Digits: string
+                amount: 0
+                transactionType: Send
+                internalMemo: string
+                publicMemo: string
+                coreMemo: string
+                purposeCode: string
+                purposeDescription: string
+                processDate: string
+                status: ApprovalRequired
+                declineReason: string
+                initiatingUserId: string
+                initiatingUserName: string
+                initiatingUserEmail: string
+                approvalUserId: string
+                approvalUserName: string
+                approvalUserEmail: string
+                approvedAt: string
+                completedAt: string
+                sourceType: Api
+                createdAt: string
+                lastModifiedAt: string
+                confirmationNumber: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
+              example:
+              - id: 00000000-0000-0000-0000-000000000000
+                accountId: 00000000-0000-0000-0000-000000000000
+                accountName: string
+                counterParty: string
+                counterPartyAccountId: 00000000-0000-0000-0000-000000000000
+                counterPartyAccountName: string
+                sendingPartner: string
+                sendingAccount: string
+                sendingAccountNumberLast4Digits: string
+                receivingPartner: string
+                receivingAccount: string
+                receivingAccountNumberLast4Digits: string
+                amount: 0
+                transactionType: Send
+                internalMemo: string
+                publicMemo: string
+                coreMemo: string
+                purposeCode: string
+                purposeDescription: string
+                processDate: string
+                status: ApprovalRequired
+                declineReason: string
+                initiatingUserId: string
+                initiatingUserName: string
+                initiatingUserEmail: string
+                approvalUserId: string
+                approvalUserName: string
+                approvalUserEmail: string
+                approvedAt: string
+                completedAt: string
+                sourceType: Api
+                createdAt: string
+                lastModifiedAt: string
+                confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
+      enum:
+      - Api
+      - Ui
+      - Pain001
+      type: string
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto:
+      required:
+      - accountId
+      - accountName
+      - amount
+      - counterParty
+      - counterPartyAccountId
+      - counterPartyAccountName
+      - id
+      - status
+      - transactionType
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the book transfer
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        accountId:
+          type: string
+          description: "1. If you are requesting transfers for a specific account Id, this is the account id of the account requested.\n2. If you are requesting a book transfer by the book transfer Id then:\n     a. If you originated the transfer, this will be your accountId the funds were transferred from.\n     b. If a third party originated the transfer, this will be your account Id the funds were transferred to.\n     c. If a transfer is between your own accounts, this be your accountId the funds were transferred from."
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        accountName:
+          type: string
+          description: "1. If you are requesting transfers for a specific account Id, this is the name of the account requested.\n2. If you are requesting a book transfer by the book transfer Id then:\n     a. If you originated the transfer, this will be the name of your account the funds were transferred from.\n     b. If a third party originated the transfer, this will be the name of your account the funds were transferred to.\n     c. If a transfer is between your own accounts, this is the name of the account the funds were transferred from."
+        counterParty:
+          type: string
+          description: 'The name of the counter party participating in the transfer
+
+            If it a transfer between your own accounts, this will be your own client name'
+        counterPartyAccountId:
+          type: string
+          description: "The counter party account Id participating in the transfer.\n1. If you are requesting transfers for a specific account Id then this will be the Id of the account opposite the requested account.  i.e. If the request is for the sending account, this value will be of the receiving account\n2. If you are requesting a book transfer by the book transfer Id then:\n    a. If the transfer involves a third party, this will be the third parties account Id.\n    b. If the tranfer is between your own accounts this will the account Id the funds were transferred to."
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        counterPartyAccountName:
+          type: string
+          description: "The counter party account name participating in the transfer.\n1. If you are requesting transfers for a specific account Id then this will be the name of the account opposite the requested account.  i.e. If the request is for the sending account, this value will be of the receiving account\n2. If you are requesting a book transfer by the book transfer Id then:\n    a. If the transfer involves a third party, this will be the third parties account name.\n    b. If the tranfer is between your own accounts this will the account name the funds were transferred to."
+        sendingPartner:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        sendingAccount:
+          type:
+          - string
+          - 'null'
+          description: 'Optional. Will be populated only when you''re the originator of the transfer.
+
+            The name of the account the funds were transfered from'
+        sendingAccountNumberLast4Digits:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        receivingPartner:
+          type:
+          - string
+          - 'null'
+          description: 'Optional. Will be populated only when you''re the originator of the transfer.
+
+            The name of the partner the funds were transfered to'
+        receivingAccount:
+          type:
+          - string
+          - 'null'
+          description: 'Optional. Will be populated only when you''re the originator of the transfer.
+
+            The name of the account the funds were transfered to'
+        receivingAccountNumberLast4Digits:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        amount:
+          type: number
+          description: The amount of the book transfer
+          format: double
+        transactionType:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType'
+        internalMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        publicMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional, will be populated if the sender provided a public memo
+        coreMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional. Memo visible on core and OLB statements.
+        purposeCode:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        purposeDescription:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: DateTime in UTC at which the Transfer will be or was scheduled to be posted.
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus'
+        declineReason:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        initiatingUserId:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+          format: uuid
+        initiatingUserName:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        initiatingUserEmail:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        approvalUserId:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.  Will not be populated for transfers from single control accounts.
+          format: uuid
+        approvalUserName:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.  Will not be populated for transfers from single control accounts.
+        approvalUserEmail:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.  Will not be populated for transfers from single control accounts.
+        approvedAt:
+          type:
+          - string
+          - 'null'
+          description: 'Optional. Will be populated only when you''re the originator of the transfer.  Will not be populated for transfers from single control accounts.
+
+            Uses UTC date time.'
+          format: date-time
+        completedAt:
+          type:
+          - string
+          - 'null'
+          description: "Optional.  Date time in UTC the transfer was processed successfully.\n   1. If you are NOT the originator of the transfer, then this will always be populated\n   2. If you originated the transfer this will only be populated when and if the transfer is processsed successfully"
+          format: date-time
+        sourceType:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType'
+        createdAt:
+          type:
+          - string
+          - 'null'
+          description: "Optional. Will be populated only when you're the originator of the transfer.    \nDate and time in UTC when the transfer was submitted"
+          format: date-time
+        lastModifiedAt:
+          type:
+          - string
+          - 'null'
+          description: "Optional. Will be populated only when you're the originator of the transfer.    \nDate and time in UTC of the current status of the transfer."
+          format: date-time
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the book transfer entry.  This can be used for reconciliation during the BAI2 process.
+      additionalProperties: false
+    Cubi.Common.Models.Filter:
+      required:
+      - field
+      - operator
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+      enum:
+      - ApprovalRequired
+      - Scheduled
+      - Pending
+      - Posted
+      - Rejected
+      - Declined
+      type: string
+    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
+      enum:
+      - Send
+      - Receive
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto:
+      required:
+      - counterPartyAccountName
+      - counterPartyAccountNumberLast4Digits
+      - counterPartyPartnerName
+      - purposeCode
+      - receivingAccountName
+      - receivingAccountNumberLast4Digits
+      - receivingPartnerName
+      - sendingAccountName
+      - sendingAccountNumberLast4Digits
+      - sendingPartnerName
+      - status
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the book transfer
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        counterPartyPartnerName:
+          type: string
+          description: 'The name of the counter party participating in the transfer
+
+            If it a transfer between your own accounts, this will be your own client name'
+        counterPartyAccountName:
+          type: string
+          description: "The counter party account name participating in the transfer.\n1. If you are requesting transfers for a specific account Id then this will be the name of the account opposite the requested account.  i.e. If the request is for the sending account, this value will be of the receiving account\n2. If you are requesting a book transfer by the book transfer Id then:\n    a. If the transfer involves a third party, this will be the third parties account name.\n    b. If the tranfer is between your own accounts this will the account name the funds were transferred to."
+        sendingPartnerName:
+          type: string
+          description: The name of the partner the funds were transfered from
+        sendingAccountName:
+          type: string
+          description: The name of the account the funds were transfered from
+        counterPartyAccountNumberLast4Digits:
+          type: string
+          description: The last 4 digits of the counter party account number
+        receivingPartnerName:
+          type: string
+          description: The name of the partner the funds were transfered to
+        receivingAccountName:
+          type: string
+          description: The name of the account the funds were transfered to
+        sendingAccountNumberLast4Digits:
+          type: string
+          description: The last 4 digits of the account the funds were sent from
+        receivingAccountNumberLast4Digits:
+          type: string
+          description: The last 4 digits of the account the funds were sent to
+        amount:
+          type: number
+          description: The amount of the book transfer
+          format: double
+        transactionType:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType'
+        internalMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        publicMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional, will be populated if the sender provided a public memo
+        coreMemo:
+          type:
+          - string
+          - 'null'
+          description: Optional. Memo visible on core and OLB statements.
+        purposeCode:
+          type: string
+          description: The PurposeCode of the book transfer
+        purposeDescription:
+          type:
+          - string
+          - 'null'
+          description: Optional, will be populated if the sender provided a purpose description
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: DateTime in UTC at which the Transfer will be or was scheduled to be posted.
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus'
+        declineReason:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.
+        initiatingUserName:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when your partner is the originator of the transfer.
+        initiatingUserEmail:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when your partner is the originator of the transfer.
+        initiatingUserId:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when your partner is the originator of the transfer.
+          format: uuid
+        approvalUserName:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.  Will not be populated for transfers from single control accounts.
+        approvalUserEmail:
+          type:
+          - string
+          - 'null'
+          description: Optional. Will be populated only when you're the originator of the transfer.  Will not be populated for transfers from single control accounts.
+        approvedAt:
+          type:
+          - string
+          - 'null'
+          description: 'Optional. Will be populated only when you''re the originator of the transfer.  Will not be populated for transfers from single control accounts.
+
+            Uses UTC date time.'
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        sourceType:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType'
+        lastModifiedAt:
+          type:
+          - string
+          - 'null'
+          description: Date and time in UTC of the current status of the transfer.
+          format: date-time
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

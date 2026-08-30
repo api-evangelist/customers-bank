@@ -1,0 +1,1917 @@
+openapi: 3.2.0
+info:
+  title: Outgoing Wires V API
+  version: v2
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/Wires/v2
+tags:
+- name: OutgoingWiresV
+paths:
+  /outgoing:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing - POST
+      description: Initiates a new outgoing wire payment
+      operationId: post-outgoing
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: d3eb1333-0071-49c3-901a-708dd2b6b3ef
+      requestBody:
+        description: The wire payment to initiate
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto'
+            example:
+              amount: 0
+              processDate: string
+              debtorAccountNumber: string
+              instructedAgent:
+                memberId: string
+                name: string
+              intermediaryAgent1:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditorAgent:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditor:
+                accountNumber: string
+                name: string
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+              remittanceInformation: string
+              endToEndIdentification: string
+              creditorAgentAccount:
+                accountNumber: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto'
+            example:
+              amount: 0
+              processDate: string
+              debtorAccountNumber: string
+              instructedAgent:
+                memberId: string
+                name: string
+              intermediaryAgent1:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditorAgent:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditor:
+                accountNumber: string
+                name: string
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+              remittanceInformation: string
+              endToEndIdentification: string
+              creditorAgentAccount:
+                accountNumber: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto'
+            example:
+              amount: 0
+              processDate: string
+              debtorAccountNumber: string
+              instructedAgent:
+                memberId: string
+                name: string
+              intermediaryAgent1:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditorAgent:
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+                name: string
+                memberId: string
+                bic: string
+              creditor:
+                accountNumber: string
+                name: string
+                address:
+                  streetName: string
+                  floor: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+              remittanceInformation: string
+              endToEndIdentification: string
+              creditorAgentAccount:
+                accountNumber: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing - GET
+      description: Searches for existing outgoing wire payments
+      operationId: get-outgoing
+      parameters:
+      - name: inStatus
+        in: query
+        description: The statuses for which to search
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus'
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: searchText
+        in: query
+        description: The omad, imad, beneficiary name, originator name, amount or status for which to search
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  processDate: string
+                  debtor:
+                    accountId: string
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  creditorAgentAccount:
+                    accountNumber: string
+                  instructedAgent:
+                    memberId: string
+                    name: string
+                  intermediaryAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditor:
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  remittanceInformation: string
+                  endToEndIdentification: string
+                  status: Initiated
+                  submittedAt: string
+                  completedAt: string
+                  cancelledAt: string
+                  cancelledReason: string
+                  imad: string
+                  omad: string
+                  confirmationNumber: string
+                  originatingUser: string
+                  originatingUserId: string
+                  channel: MANUAL
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  processDate: string
+                  debtor:
+                    accountId: string
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  creditorAgentAccount:
+                    accountNumber: string
+                  instructedAgent:
+                    memberId: string
+                    name: string
+                  intermediaryAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditor:
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  remittanceInformation: string
+                  endToEndIdentification: string
+                  status: Initiated
+                  submittedAt: string
+                  completedAt: string
+                  cancelledAt: string
+                  cancelledReason: string
+                  imad: string
+                  omad: string
+                  confirmationNumber: string
+                  originatingUser: string
+                  originatingUserId: string
+                  channel: MANUAL
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/{id}:
+    get:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/{id} - GET
+      description: Retrieves an existing outgoing wire payment
+      operationId: get-outgoing-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID (uuid) of the payment to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              example:
+                id: string
+                amount: 0
+                processDate: string
+                debtor:
+                  accountId: string
+                  accountNumber: string
+                  name: string
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                creditorAgentAccount:
+                  accountNumber: string
+                instructedAgent:
+                  memberId: string
+                  name: string
+                intermediaryAgent1:
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                  name: string
+                  memberId: string
+                  bic: string
+                creditorAgent:
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                  name: string
+                  memberId: string
+                  bic: string
+                creditor:
+                  accountNumber: string
+                  name: string
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                remittanceInformation: string
+                endToEndIdentification: string
+                status: Initiated
+                submittedAt: string
+                completedAt: string
+                cancelledAt: string
+                cancelledReason: string
+                imad: string
+                omad: string
+                confirmationNumber: string
+                originatingUser: string
+                originatingUserId: string
+                channel: MANUAL
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+              example:
+                id: string
+                amount: 0
+                processDate: string
+                debtor:
+                  accountId: string
+                  accountNumber: string
+                  name: string
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                creditorAgentAccount:
+                  accountNumber: string
+                instructedAgent:
+                  memberId: string
+                  name: string
+                intermediaryAgent1:
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                  name: string
+                  memberId: string
+                  bic: string
+                creditorAgent:
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                  name: string
+                  memberId: string
+                  bic: string
+                creditor:
+                  accountNumber: string
+                  name: string
+                  address:
+                    streetName: string
+                    floor: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+                    addressLines:
+                    - string
+                remittanceInformation: string
+                endToEndIdentification: string
+                status: Initiated
+                submittedAt: string
+                completedAt: string
+                cancelledAt: string
+                cancelledReason: string
+                imad: string
+                omad: string
+                confirmationNumber: string
+                originatingUser: string
+                originatingUserId: string
+                channel: MANUAL
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/{id}/cancel:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/{id}/cancel - POST
+      description: 'Requests cancellation of an existing wire payment.
+
+        Wires may only be cancelled if they are in an Initiated status.'
+      operationId: post-outgoing-id-cancel
+      parameters:
+      - name: id
+        in: path
+        description: The ID (uuid) of the wire payment to cancel
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 6d6eecbb-c560-43f3-8882-49d3661c190a
+      requestBody:
+        description: Details for the cancellation request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.CancelWireDto'
+            example:
+              reason: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.CancelWireDto'
+            example:
+              reason: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.CancelWireDto'
+            example:
+              reason: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/{id}/approve:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/{id}/approve - POST
+      description: Approves a pending outgoing wire
+      operationId: post-outgoing-id-approve
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the wire to approve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 67bc79da-31e3-4573-9ec4-2acde27c6a63
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/{id}/decline:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/{id}/decline - POST
+      description: Declines a wire which is pending approval
+      operationId: post-outgoing-id-decline
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the wire to decline
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: aaaf26b7-891c-4170-97aa-7eae34dc86a8
+      requestBody:
+        description: Details on the decline operation, such as reason
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto'
+            example:
+              reason: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto'
+            example:
+              reason: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto'
+            example:
+              reason: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/bulk-approve:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/bulk-approve - POST
+      description: Approves multiple pending outgoing wires
+      operationId: post-outgoing-bulk-approve
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: fbd6c524-be7a-4ad8-b0f1-7acefafd2b0d
+      requestBody:
+        description: The IDs of the wires to approve
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /outgoing/bulk-decline:
+    post:
+      tags:
+      - OutgoingWiresV
+      summary: /outgoing/bulk-decline - POST
+      description: Declines multiple pending outgoing wires
+      operationId: post-outgoing-bulk-decline
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 1c79f2fd-b97f-4ec4-8338-9e8e69bcf22f
+      requestBody:
+        description: The IDs of the wires to decline, and the reason for the decline
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+              reason: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+              reason: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto'
+            example:
+              wireIds:
+              - string
+              reason: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Wires.Contracts.Dto.WireChannel:
+      enum:
+      - MANUAL
+      - API
+      - FTP
+      - Q2
+      - WHL
+      type: string
+    Cubi.Wires.WebApi.Dto.v2.InitiateAgentDto:
+      required:
+      - name
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto'
+        name:
+          maxLength: 35
+          minLength: 0
+          type: string
+          description: The name of the financial institution
+        memberId:
+          maxLength: 9
+          minLength: 9
+          type:
+          - string
+          - 'null'
+          description: The ABA of the financial institution
+        bic:
+          maxLength: 11
+          minLength: 8
+          type:
+          - string
+          - 'null'
+          description: The BIC of the financial institution
+      additionalProperties: false
+      description: Bank participating in the payment chain
+    Cubi.Wires.WebApi.Dto.v2.InitiateAgentAccountDto:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        accountNumber:
+          maxLength: 34
+          minLength: 0
+          type: string
+          description: The settlement account number for the entity
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.AgentDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+        name:
+          type: string
+          description: The name of the entity
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The clearing system member id (typically an ABA) of the entity
+        bic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the entity
+      additionalProperties: false
+      description: A bank or financial institution participating in a wire payment
+    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The settlement account number for the entity
+      additionalProperties: false
+      description: Settlement account for creditor agent account
+    Cubi.Wires.WebApi.Dto.v2.InitiateIntermediateAgentDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto'
+        name:
+          maxLength: 35
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The name of the financial institution
+        memberId:
+          maxLength: 9
+          minLength: 9
+          type:
+          - string
+          - 'null'
+          description: The ABA of the financial institution
+        bic:
+          maxLength: 11
+          minLength: 8
+          type:
+          - string
+          - 'null'
+          description: The BIC of the financial institution
+      additionalProperties: false
+      description: Intermediate bank for a wire payment
+    Cubi.Wires.WebApi.Dto.v2.OutgoingDebtorDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: The CUBIX ID (UUID) of the account
+          format: uuid
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the originator
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the originator
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The originating party of a wire payment
+    Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto:
+      type: object
+      properties:
+        wireIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The IDs of the wires to be declined
+        reason:
+          type: string
+          description: The reason the wire are being declined
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.AddressDto:
+      type: object
+      properties:
+        streetName:
+          type: string
+          description: Street or address line 1
+        floor:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type: string
+          description: Country Code
+        addressLines:
+          type: array
+          items:
+            type: string
+          description: Unstructured Address lines.  Typically used if a structured address was not provided.
+      additionalProperties: false
+      description: An address object, which may be structured or unstructured
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto:
+      required:
+      - amount
+      - creditor
+      - creditorAgent
+      - debtorAccountNumber
+      - instructedAgent
+      type: object
+      properties:
+        amount:
+          maximum: 999999999.99
+          minimum: 0.01
+          type: number
+          description: Amount of wire transaction, in dollars and cents
+          format: double
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: The date on which the wire will be processed.Must be today's date or a future date. If not provided, the next available processing date will be applied.
+          format: date-time
+        debtorAccountNumber:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: The account number from which to originate the payment
+        instructedAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateInstructedAgentDto'
+        intermediaryAgent1:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateIntermediateAgentDto'
+        creditorAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAgentDto'
+        creditor:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateCreditorDto'
+        remittanceInformation:
+          maxLength: 140
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Originator to beneficiary notes on the wire. Length of notes is not limited, but only the first 140 characters will be sent within the wire to the corresponding bank.
+        endToEndIdentification:
+          maxLength: 16
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The end to end tracing id for the payment.  Will be sent to the correspondent bank
+        creditorAgentAccount:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAgentAccountDto'
+      additionalProperties: false
+      description: Initiates an outgoing wire payment
+    Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Rejected
+      - Returned
+      - ApprovalRequired
+      - Declined
+      type: string
+    Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Rejected
+      - Returned
+      - ApprovalRequired
+      - Declined
+      type: string
+    Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto:
+      type: object
+      properties:
+        wireIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The IDs of the wires to be approved
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
+      type: object
+      properties:
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
+      additionalProperties: false
+      description: The bank that received the Fedwire message (instructed agent / receiver)
+    Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: The account number of the beneficiary
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The beneficiary (the person or company receiving funds)
+    Cubi.Wires.WebApi.Dto.v2.InitiateInstructedAgentDto:
+      required:
+      - memberId
+      type: object
+      properties:
+        memberId:
+          maxLength: 9
+          minLength: 9
+          type: string
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
+          maxLength: 35
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason the wire is being declined
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the wire payment
+          format: uuid
+        amount:
+          type: number
+          description: Amount of wire transaction, in dollars and cents
+          format: double
+        processDate:
+          type: string
+          description: The intended processing date of the wire. The actual date of completion may vary based on if the wire was originally intended after hours, holiday, weekend etc.
+          format: date-time
+        debtor:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingDebtorDto'
+        creditorAgentAccount:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentAccountDto'
+        instructedAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto'
+        intermediaryAgent1:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        creditorAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        creditor:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto'
+        remittanceInformation:
+          type:
+          - string
+          - 'null'
+          description: Originator to beneficiary notes for the wire.
+        endToEndIdentification:
+          type:
+          - string
+          - 'null'
+          description: End to end identifier for the payment
+        status:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto'
+        submittedAt:
+          type: string
+          description: The time at which the wire payment was submitted
+          format: date-time
+        completedAt:
+          type:
+          - string
+          - 'null'
+          description: The time at which the wire was completed
+          format: date-time
+        cancelledAt:
+          type:
+          - string
+          - 'null'
+          description: The time at which the wire was cancelled
+          format: date-time
+        cancelledReason:
+          type:
+          - string
+          - 'null'
+          description: The reason for cancellation, only applicable if the wire is in a cancelled status
+        imad:
+          type:
+          - string
+          - 'null'
+          description: The IMAD for the completed wire payment
+        omad:
+          type:
+          - string
+          - 'null'
+          description: The OMAD for the completed wire payment
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: The confirmation number for the posted payment. If present, this can be used to reconcile/match the payment to an underlying transaction
+        originatingUser:
+          type:
+          - string
+          - 'null'
+          description: The name of the user originating the wire
+        originatingUserId:
+          type: string
+          description: The ID of the user originating the wire
+          format: uuid
+        channel:
+          $ref: '#/components/schemas/Cubi.Wires.Contracts.Dto.WireChannel'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.CancelWireDto:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason for the cancellation request
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.InitiateCreditorDto:
+      required:
+      - accountNumber
+      - address
+      - name
+      type: object
+      properties:
+        accountNumber:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: The beneficiary account number where the payment will be credited
+        name:
+          maxLength: 140
+          minLength: 1
+          type: string
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto'
+      additionalProperties: false
+      description: The beneficiary for the payment
+    Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto:
+      required:
+      - city
+      - countryCode
+      - streetName
+      type: object
+      properties:
+        streetName:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Address line 1. Typically street number and name
+        floor:
+          maxLength: 35
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Address line 2. Typically suite or floor
+        city:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: The city or town of the address
+        state:
+          maxLength: 35
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: State or province
+        postalCode:
+          maxLength: 10
+          minLength: 1
+          pattern: ^[A-Za-z0-9 ]{3,10}$
+          type:
+          - string
+          - 'null'
+          description: Postal Code. Alphanumeric, optional spaces, 3-10 characters. Country-specific formats vary.
+        countryCode:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: Country code (2 Character).  Should follow the ISO 3166-1 alpha-2 standard
+      additionalProperties: false
+      description: Bank Address
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

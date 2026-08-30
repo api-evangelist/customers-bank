@@ -1,0 +1,1306 @@
+openapi: 3.2.0
+info:
+  title: ConsumerLending Loan API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
+tags:
+- name: Loan
+paths:
+  /loan/{id}:
+    get:
+      tags:
+      - Loan
+      summary: /loan/{id} - GET
+      description: Retrieve the details of a specific loan using its Id value.
+      operationId: get-loan-id
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              example:
+                id: string
+                applicationId: string
+                programId: string
+                approvedAmount: 0
+                amountFunded: 0
+                originationFeeAmount: 0
+                promotionExpiryDate: string
+                merchantDiscountRateAmount: 0
+                disbursementDate: string
+                maturityDate: string
+                status: Open
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              example:
+                id: string
+                applicationId: string
+                programId: string
+                approvedAmount: 0
+                amountFunded: 0
+                originationFeeAmount: 0
+                promotionExpiryDate: string
+                merchantDiscountRateAmount: 0
+                disbursementDate: string
+                maturityDate: string
+                status: Open
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /loan/{id}/funding:
+    post:
+      tags:
+      - Loan
+      summary: /loan/{id}/funding - POST
+      description: Submit a funding instruction to initiate a disbursement for the specified loan.
+      operationId: post-loan-id-funding
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 951dc66d-aaee-4591-8ee7-7ca0d2648e77
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto'
+            example:
+            - amountToFund: 0
+              routingNumber: string
+              accountNumber: string
+              accountName: string
+              accountType: Checking
+              platformReferenceNumber: string
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto'
+            example:
+            - amountToFund: 0
+              routingNumber: string
+              accountNumber: string
+              accountName: string
+              accountType: Checking
+              platformReferenceNumber: string
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto'
+            example:
+            - amountToFund: 0
+              routingNumber: string
+              accountNumber: string
+              accountName: string
+              accountType: Checking
+              platformReferenceNumber: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto'
+              example:
+                id: string
+                fundingInstructions:
+                - platformReferenceNumber: string
+                  fundingInstructionId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto'
+              example:
+                id: string
+                fundingInstructions:
+                - platformReferenceNumber: string
+                  fundingInstructionId: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - Loan
+      summary: /loan/{id}/funding - GET
+      description: Retrieve a list of funding instruction details that have been submitted on the specified loan.
+      operationId: get-loan-id-funding
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: submissionId
+        in: query
+        description: The funding submission id to search loan funding instructions for
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-0000-0000-000000000000
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  submissionId: string
+                  loanId: string
+                  applicationId: string
+                  accountNumber: string
+                  accountName: string
+                  accountType: Checking
+                  routingNumber: string
+                  amountToFund: 0
+                  fundingType: OnDemand
+                  fundingState: Unfunded
+                  receivedDate: string
+                  sentToRailDate: string
+                  platformReferenceNumber: string
+                  rejectionReason: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  submissionId: string
+                  loanId: string
+                  applicationId: string
+                  accountNumber: string
+                  accountName: string
+                  accountType: Checking
+                  routingNumber: string
+                  amountToFund: 0
+                  fundingType: OnDemand
+                  fundingState: Unfunded
+                  receivedDate: string
+                  sentToRailDate: string
+                  platformReferenceNumber: string
+                  rejectionReason: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /loan/{id}/funding/{fundingInstructionId}:
+    get:
+      tags:
+      - Loan
+      summary: /loan/{id}/funding/{fundingInstructionId} - GET
+      description: Retrieve the details of a specific funding instruction, using its Id, for the specified loan.
+      operationId: get-loan-id-funding-fundinginstructionid
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: fundingInstructionId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              example:
+                id: string
+                submissionId: string
+                loanId: string
+                applicationId: string
+                accountNumber: string
+                accountName: string
+                accountType: Checking
+                routingNumber: string
+                amountToFund: 0
+                fundingType: OnDemand
+                fundingState: Unfunded
+                receivedDate: string
+                sentToRailDate: string
+                platformReferenceNumber: string
+                rejectionReason: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+              example:
+                id: string
+                submissionId: string
+                loanId: string
+                applicationId: string
+                accountNumber: string
+                accountName: string
+                accountType: Checking
+                routingNumber: string
+                amountToFund: 0
+                fundingType: OnDemand
+                fundingState: Unfunded
+                receivedDate: string
+                sentToRailDate: string
+                platformReferenceNumber: string
+                rejectionReason: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /loan:
+    get:
+      tags:
+      - Loan
+      summary: /loan - GET
+      description: Retrieve a paginated list of loans filtered by the search options provided.
+      operationId: get-loan
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  applicationId: string
+                  programId: string
+                  approvedAmount: 0
+                  amountFunded: 0
+                  originationFeeAmount: 0
+                  promotionExpiryDate: string
+                  merchantDiscountRateAmount: 0
+                  disbursementDate: string
+                  maturityDate: string
+                  status: Open
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  applicationId: string
+                  programId: string
+                  approvedAmount: 0
+                  amountFunded: 0
+                  originationFeeAmount: 0
+                  promotionExpiryDate: string
+                  merchantDiscountRateAmount: 0
+                  disbursementDate: string
+                  maturityDate: string
+                  status: Open
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /loan/{id}/complete:
+    post:
+      tags:
+      - Loan
+      summary: /loan/{id}/complete - POST
+      description: Declare that the process to complete a loan is being initiated. A loan can immediately be completed if there are no outstanding fundings being processed. If there are outstanding fundings being processed the loan well be marked as pending completion until those fundings have been successfully processed which will trigger completing the loan. Once completed the loan can no longer be funded.
+      operationId: post-loan-id-complete
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: d288e766-b5ca-4f97-b5e6-751a143a4621
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto'
+            example:
+              completionReason: string
+              isEarlyCompletion: true
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto'
+            example:
+              completionReason: string
+              isEarlyCompletion: true
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto'
+            example:
+              completionReason: string
+              isEarlyCompletion: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /loan/{id}/cancel:
+    post:
+      tags:
+      - Loan
+      summary: /loan/{id}/cancel - POST
+      description: Declare that a loan's status is being changed to cancelled. Once cancelled the loan can no longer be funded.
+      operationId: post-loan-id-cancel
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 2ad7c34d-7841-433d-986a-64269a9b7d05
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto'
+            example:
+              cancellationReason: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto'
+            example:
+              cancellationReason: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto'
+            example:
+              cancellationReason: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.FundingState:
+      enum:
+      - Unfunded
+      - Rejected
+      - SentToRail
+      - Failed
+      - Funded
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Loan Cancellation Id
+          format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - amountToFund
+      - platformReferenceNumber
+      - routingNumber
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan. Must be greater than 0.00
+          format: double
+        routingNumber:
+          minLength: 1
+          type: string
+          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
+        accountNumber:
+          minLength: 1
+          type: string
+          description: Account number that the funds are disbursing to. Must be 255 characters long or less
+        accountName:
+          minLength: 1
+          type: string
+          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        platformReferenceNumber:
+          minLength: 1
+          type: string
+          description: Reference number provided by the API caller. Must be 255 characters long or less
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto:
+      required:
+      - completionReason
+      - isEarlyCompletion
+      type: object
+      properties:
+        completionReason:
+          minLength: 1
+          type: string
+          description: A text description of why this loan is being completed
+        isEarlyCompletion:
+          type: boolean
+          description: Indicates that the loan is being completed before all funding stages have been disbursed
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Loan Completion Id
+          format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Funding Instruction Id
+          format: uuid
+        submissionId:
+          type: string
+          description: The id of the funding submission that this funding instruction was a part of
+          format: uuid
+        loanId:
+          type: string
+          description: The id of the loan that this funding is associated wtih
+          format: uuid
+        applicationId:
+          type: string
+          description: The id of the application that this funding's loan was created from
+          format: uuid
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number that funds are disbursing to
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: The name on the account that funds are disbursing to
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        routingNumber:
+          type:
+          - string
+          - 'null'
+          description: the routing number for the account that funds are disbursing to
+        amountToFund:
+          type: number
+          description: The amount of money to be disbursed in this funding instruction
+          format: double
+        fundingType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingType'
+        fundingState:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingState'
+        receivedDate:
+          type: string
+          description: The date that the funding instruction was received. This will UTC
+          format: date-time
+        sentToRailDate:
+          type:
+          - string
+          - 'null'
+          description: The date that the funding instruction was sent to a payment rail. If the funding instruction failed or was rejected before being sent to the payment rail this value will be null. When not null, this value will be UTC
+          format: date-time
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The platform reference number that was included on the submitted funding instruction
+        rejectionReason:
+          type:
+          - string
+          - 'null'
+          description: If the funding instruction was rejected, or if the funding failed, this will contain the reason. Otherwise this will be null.
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto:
+      required:
+      - cancellationReason
+      type: object
+      properties:
+        cancellationReason:
+          minLength: 1
+          type: string
+          description: A text description of why this loan is being cancelled
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Loan Id
+          format: uuid
+        applicationId:
+          type: string
+          description: Application Id of the application that the loan was created from
+          format: uuid
+        programId:
+          type: string
+          description: Program Id of the program that the loan is associated with
+          format: uuid
+        approvedAmount:
+          type: number
+          description: The amount that the loan was approved for
+          format: double
+        amountFunded:
+          type: number
+          description: The amount that has been funded on this loan. This will include all funding instructions that have been successfully processed by payment rails and all funding instructions that have been sent to the payment rail but have not been returned, cancelled or successfully processed
+          format: double
+        originationFeeAmount:
+          type:
+          - number
+          - 'null'
+          description: The origination fee amount for the loan. The total fundable amount on the loan will be the ApprovedAmount less the OriginationFeeAmount
+          format: double
+        promotionExpiryDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated expiry date for the loan. If no Promotion Months value was provided with the application this will be null. If a Promotion Months value was provided this date is calculated by adding Promotion Months to the date the first funding instruction to be set to either the Funded or SentToRail state was sent to the payment rail. If no funding has been set to the Funded or SentToRail state then this value will be null.
+          format: date-time
+        merchantDiscountRateAmount:
+          type:
+          - number
+          - 'null'
+          description: Merchant discount rate (MRD) amount (in dollars) provided on the application. This amount is subtracted from the ApprovedLoanAmount to determine the maximum amount of funds that can be disbursed on an application. If there was no MDR this will return 0.00
+          format: double
+        disbursementDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated disbursement date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
+          format: date-time
+        maturityDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated maturity date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanStatus'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingType:
+      enum:
+      - OnDemand
+      - Immediate
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.LoanStatus:
+      enum:
+      - Open
+      - Completed
+      - PendingCompletion
+      - Cancelled
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Funding Submission Id that represents all funding instructions within this submission
+          format: uuid
+        fundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
+          description: List of all the funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
+      type: object
+      properties:
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The Platform Reference Number that was provided when the funding instruction was submitted
+        fundingInstructionId:
+          type: string
+          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          format: uuid
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

@@ -1,0 +1,2370 @@
+openapi: 3.2.0
+info:
+  title: Transfers Address Book API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+tags:
+- name: AddressBook
+paths:
+  /AddressBook/entries:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries - POST
+      operationId: post-addressbook-entries
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 671f4b1e-b1e8-4147-9971-14e0d4ba335a
+      requestBody:
+        description: AddressBook entry payload
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto'
+            example:
+              requesterAccountId: string
+              targetAccountId: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto'
+            example:
+              requesterAccountId: string
+              targetAccountId: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto'
+            example:
+              requesterAccountId: string
+              targetAccountId: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries - GET
+      operationId: get-addressbook-entries
+      parameters:
+      - name: partnerName
+        in: query
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/{id}/approve:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/{id}/approve - POST
+      operationId: post-addressbook-entries-id-approve
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 9498d5c9-83c0-45bd-a7dd-29b486a761d4
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/{id}/decline:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/{id}/decline - POST
+      operationId: post-addressbook-entries-id-decline
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 0acdd9dd-a3c0-4e1f-9694-e4a8fa44d442
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/{id}/cancel:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/{id}/cancel - POST
+      operationId: post-addressbook-entries-id-cancel
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: cb13a779-2ccb-44ba-8251-ae52e1df9e6c
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/{id}:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/{id} - GET
+      operationId: get-addressbook-entries-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the address book entry to be retrieved
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                id: string
+                requesterPartnerId: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                requestedByUserId: string
+                requestedByUserName: string
+                requestedByUserEmail: string
+                requestedAt: string
+                requestApprovedByUserName: string
+                requestApprovedByUserEmail: string
+                requestApprovedAt: string
+                targetPartnerId: string
+                targetPartnerName: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                accountLinkApprovedByUserName: string
+                accountLinkApprovedByUserEmail: string
+                accountLinkApprovedAt: string
+                status: Initiated
+                lastModifiedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                id: string
+                requesterPartnerId: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                requestedByUserId: string
+                requestedByUserName: string
+                requestedByUserEmail: string
+                requestedAt: string
+                requestApprovedByUserName: string
+                requestApprovedByUserEmail: string
+                requestApprovedAt: string
+                targetPartnerId: string
+                targetPartnerName: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                accountLinkApprovedByUserName: string
+                accountLinkApprovedByUserEmail: string
+                accountLinkApprovedAt: string
+                status: Initiated
+                lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    delete:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/{id} - DELETE
+      operationId: delete-addressbook-entries-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the address book entry to be removed
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/requests:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/requests - GET
+      operationId: get-addressbook-entries-requests
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/requests:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/requests - GET
+      operationId: get-addressbook-requests
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  requestedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  requestedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/requests/{id}/approve:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/requests/{id}/approve - POST
+      operationId: post-addressbook-requests-id-approve
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 17dde094-8b09-4dc6-8836-4ce482404b44
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/requests/{id}/decline:
+    post:
+      tags:
+      - AddressBook
+      summary: /AddressBook/requests/{id}/decline - POST
+      operationId: post-addressbook-requests-id-decline
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 8a4761e8-b4d8-4337-be6f-07dab142d694
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/download:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/download - GET
+      operationId: get-addressbook-entries-download
+      parameters:
+      - name: partnerName
+        in: query
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+              - id: string
+                requesterPartnerId: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                requestedByUserId: string
+                requestedByUserName: string
+                requestedByUserEmail: string
+                requestedAt: string
+                requestApprovedByUserName: string
+                requestApprovedByUserEmail: string
+                requestApprovedAt: string
+                targetPartnerId: string
+                targetPartnerName: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                accountLinkApprovedByUserName: string
+                accountLinkApprovedByUserEmail: string
+                accountLinkApprovedAt: string
+                status: Initiated
+                lastModifiedAt: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+              - id: string
+                requesterPartnerId: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                requestedByUserId: string
+                requestedByUserName: string
+                requestedByUserEmail: string
+                requestedAt: string
+                requestApprovedByUserName: string
+                requestApprovedByUserEmail: string
+                requestApprovedAt: string
+                targetPartnerId: string
+                targetPartnerName: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                accountLinkApprovedByUserName: string
+                accountLinkApprovedByUserEmail: string
+                accountLinkApprovedAt: string
+                status: Initiated
+                lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/entries/requests/download:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/entries/requests/download - GET
+      operationId: get-addressbook-entries-requests-download
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  requesterPartnerId: string
+                  requesterPartnerName: string
+                  requesterAccountId: string
+                  requesterAccountName: string
+                  requesterAccountNumberLast4Digits: string
+                  requestedByUserId: string
+                  requestedByUserName: string
+                  requestedByUserEmail: string
+                  requestedAt: string
+                  requestApprovedByUserName: string
+                  requestApprovedByUserEmail: string
+                  requestApprovedAt: string
+                  targetPartnerId: string
+                  targetPartnerName: string
+                  targetAccountId: string
+                  targetAccountName: string
+                  targetAccountNumberLast4Digits: string
+                  accountLinkApprovedByUserName: string
+                  accountLinkApprovedByUserEmail: string
+                  accountLinkApprovedAt: string
+                  status: Initiated
+                  lastModifiedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/availableAccounts:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/availableAccounts?partnerName={partnerName} - GET
+      operationId: get-addressbook-availableaccounts-partnername-partnername
+      parameters:
+      - name: partnerName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: excludeAccountId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - accountId: string
+                  partnerId: string
+                  accountNumberLast4Digits: string
+                  accountName: string
+                  partnerName: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - accountId: string
+                  partnerId: string
+                  accountNumberLast4Digits: string
+                  accountName: string
+                  partnerName: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/availableAccounts/download:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/availableAccounts/download?partnerName={partnerName} - GET
+      operationId: get-addressbook-availableaccounts-download-partnername-partnername
+      parameters:
+      - name: partnerName
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: excludeAccountId
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              example:
+              - accountId: string
+                partnerId: string
+                accountNumberLast4Digits: string
+                accountName: string
+                partnerName: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+              example:
+              - accountId: string
+                partnerId: string
+                accountNumberLast4Digits: string
+                accountName: string
+                partnerName: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/requests/download:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/requests/download - GET
+      operationId: get-addressbook-requests-download
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              example:
+              - id: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                requestedAt: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+              example:
+              - id: string
+                requesterPartnerName: string
+                requesterAccountId: string
+                requesterAccountName: string
+                requesterAccountNumberLast4Digits: string
+                targetAccountId: string
+                targetAccountName: string
+                targetAccountNumberLast4Digits: string
+                requestedAt: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /AddressBook/accountlinksettings/{id}:
+    get:
+      tags:
+      - AddressBook
+      summary: /AddressBook/accountlinksettings/{id} - GET
+      operationId: get-addressbook-accountlinksettings-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto'
+              example:
+                accountLinkId: string
+                partnerId: string
+                defaultPublicMemo: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto'
+              example:
+                accountLinkId: string
+                partnerId: string
+                defaultPublicMemo: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - AddressBook
+      summary: /AddressBook/accountlinksettings/{id} - PUT
+      operationId: put-addressbook-accountlinksettings-id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto'
+            example:
+              defaultPublicMemo: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto'
+            example:
+              defaultPublicMemo: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto'
+            example:
+              defaultPublicMemo: string
+      responses:
+        '202':
+          description: Accepted
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
+      required:
+      - accountName
+      - accountNumberLast4Digits
+      - partnerName
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        accountNumberLast4Digits:
+          type: string
+        accountName:
+          type: string
+        partnerName:
+          type: string
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus:
+      enum:
+      - Initiated
+      - ApprovalRequired
+      - Declined
+      - Requested
+      - RequestDeclined
+      - Linked
+      - Deleted
+      - Locked
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
+      required:
+      - requesterAccountName
+      - requesterAccountNumberLast4Digits
+      - requesterPartnerName
+      - targetAccountName
+      - targetAccountNumberLast4Digits
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        requesterPartnerName:
+          type: string
+        requesterAccountId:
+          type: string
+          format: uuid
+        requesterAccountName:
+          type: string
+        requesterAccountNumberLast4Digits:
+          type: string
+        targetAccountId:
+          type: string
+          format: uuid
+        targetAccountName:
+          type: string
+        targetAccountNumberLast4Digits:
+          type: string
+        requestedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
+      required:
+      - requesterAccountName
+      - requesterAccountNumberLast4Digits
+      - requesterPartnerName
+      - targetAccountName
+      - targetAccountNumberLast4Digits
+      - targetPartnerName
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        requesterPartnerId:
+          type: string
+          format: uuid
+        requesterPartnerName:
+          type: string
+        requesterAccountId:
+          type: string
+          format: uuid
+        requesterAccountName:
+          type: string
+        requesterAccountNumberLast4Digits:
+          type: string
+        requestedByUserId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        requestedByUserName:
+          type:
+          - string
+          - 'null'
+        requestedByUserEmail:
+          type:
+          - string
+          - 'null'
+        requestedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        requestApprovedByUserName:
+          type:
+          - string
+          - 'null'
+        requestApprovedByUserEmail:
+          type:
+          - string
+          - 'null'
+        requestApprovedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        targetPartnerId:
+          type: string
+          format: uuid
+        targetPartnerName:
+          type: string
+        targetAccountId:
+          type: string
+          format: uuid
+        targetAccountName:
+          type: string
+        targetAccountNumberLast4Digits:
+          type: string
+        accountLinkApprovedByUserName:
+          type:
+          - string
+          - 'null'
+        accountLinkApprovedByUserEmail:
+          type:
+          - string
+          - 'null'
+        accountLinkApprovedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus'
+        lastModifiedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto:
+      type: object
+      properties:
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto:
+      type: object
+      properties:
+        requesterAccountId:
+          type: string
+          format: uuid
+        targetAccountId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto:
+      type: object
+      properties:
+        accountLinkId:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

@@ -1,0 +1,887 @@
+openapi: 3.2.0
+info:
+  title: Customers Bank Partner Program API
+  version: v1
+  description: 'Operations tagged PartnerProgram across 2 of this provider''s published API definitions: customers-bank-ach-openapi.json, customers-bank-consumerlending-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/ach/v1
+- url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
+tags:
+- name: PartnerProgram
+  description: Allows for the querying of ACH partner programs available for use within the system.  Partner programs are used when sending a payment in order to specify pre-built configurations under which the payment will be processed, such as SEC code and ACH batch headers
+paths:
+  /programs/{id}:
+    get:
+      tags:
+      - PartnerProgram
+      summary: /programs/{id} - GET
+      description: Gets a partner program
+      operationId: get-programs-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the partner program to get
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+                id: string
+                partnerId: string
+                achCompanyId: string
+                secCode: PPD
+                batchHeader: string
+                writeUnbalancedFiles: true
+                writeBatchPerTransaction: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+                id: string
+                partnerId: string
+                achCompanyId: string
+                secCode: PPD
+                batchHeader: string
+                writeUnbalancedFiles: true
+                writeBatchPerTransaction: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+  /programs:
+    get:
+      tags:
+      - PartnerProgram
+      summary: /programs - GET
+      description: Searches the available partner programs
+      operationId: get-programs
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  achCompanyId: string
+                  secCode: PPD
+                  batchHeader: string
+                  writeUnbalancedFiles: true
+                  writeBatchPerTransaction: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  partnerId: string
+                  achCompanyId: string
+                  secCode: PPD
+                  batchHeader: string
+                  writeUnbalancedFiles: true
+                  writeBatchPerTransaction: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+  /programs/download:
+    get:
+      tags:
+      - PartnerProgram
+      summary: /programs/download - GET
+      description: Downloads all partner programs
+      operationId: get-programs-download
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+              - id: string
+                partnerId: string
+                achCompanyId: string
+                secCode: PPD
+                batchHeader: string
+                writeUnbalancedFiles: true
+                writeBatchPerTransaction: true
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+              example:
+              - id: string
+                partnerId: string
+                achCompanyId: string
+                secCode: PPD
+                batchHeader: string
+                writeUnbalancedFiles: true
+                writeBatchPerTransaction: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+  /program/{id}:
+    get:
+      tags:
+      - PartnerProgram
+      summary: /program/{id} - GET
+      description: Retrieve the details of a specific program (policy) using its Id.
+      operationId: get-program-id
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              example:
+                id: string
+                name: string
+                programType: Other
+                feeType: None
+                approvalRules:
+                - effectiveDate: string
+                  creditPolicyVersion: string
+                  maximumNumberOfBorrowers: 0
+                  maximumNumberOfCosigners: 0
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              example:
+                id: string
+                name: string
+                programType: Other
+                feeType: None
+                approvalRules:
+                - effectiveDate: string
+                  creditPolicyVersion: string
+                  maximumNumberOfBorrowers: 0
+                  maximumNumberOfCosigners: 0
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
+  /program:
+    get:
+      tags:
+      - PartnerProgram
+      summary: /program - GET
+      description: Retrieve a paginated list of program (policy) details filtered by the search options provided.
+      operationId: get-program
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  name: string
+                  programType: Other
+                  feeType: None
+                  approvalRules:
+                  - effectiveDate: string
+                    creditPolicyVersion: string
+                    maximumNumberOfBorrowers: 0
+                    maximumNumberOfCosigners: 0
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  name: string
+                  programType: Other
+                  feeType: None
+                  approvalRules:
+                  - effectiveDate: string
+                    creditPolicyVersion: string
+                    maximumNumberOfBorrowers: 0
+                    maximumNumberOfCosigners: 0
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Ach.Contracts.Messages.AchPaymentType:
+      enum:
+      - PPD
+      - CCD
+      - CTX
+      - TEL
+      - WEB
+      - ACK
+      - ADV
+      - ARC
+      - ATX
+      - BOC
+      - CIE
+      - COR
+      - DNE
+      - ENR
+      - IAT
+      - POP
+      - POS
+      - SHR
+      - MTE
+      - RCK
+      - TRX
+      - XCK
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+      required:
+      - achCompanyId
+      - batchHeader
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the partner program
+          format: uuid
+        partnerId:
+          type: string
+          description: The ID of the partner
+          format: uuid
+        achCompanyId:
+          minLength: 1
+          type: string
+          description: The configured ACH company ID under which to submit payments associated with this program
+        secCode:
+          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.AchPaymentType'
+        batchHeader:
+          minLength: 1
+          type: string
+          description: The configured batch header to use for submitted payments associated with this program
+        writeUnbalancedFiles:
+          type:
+          - boolean
+          - 'null'
+          description: Configures the contents of the ACH file
+        writeBatchPerTransaction:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates whether a batch should be created for each payment
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto:
+      type: object
+      properties:
+        effectiveDate:
+          type: string
+          description: The date and time that this ruleset is effective on. The ApplicationDate on the loan application is compared to this value when selecting the appropriate ruleset to apply to the loan application.
+          format: date-time
+        creditPolicyVersion:
+          type:
+          - string
+          - 'null'
+          description: The version number of the credit policy that was used to create the approval rules in this ruleset
+        maximumNumberOfBorrowers:
+          type: integer
+          description: The maximum number of borrowers that will be accepted on a loan application which is verified by this ruleset
+          format: int32
+        maximumNumberOfCosigners:
+          type: integer
+          description: The maximum number of cosigners that will be accepted on a loan application which is verified by this ruleset
+          format: int32
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType:
+      enum:
+      - None
+      - Mdr
+      - Origination
+      - MdrAndOrigination
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.ProgramType:
+      enum:
+      - Other
+      - HomeImprovement
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the Program
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the Program
+        programType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ProgramType'
+        feeType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType'
+        approvalRules:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto'
+          description: List of the approval (credit policy) rules associated with this program
+      additionalProperties: false
+x-refined-from:
+- customers-bank-ach-openapi.json
+- customers-bank-consumerlending-openapi.json
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

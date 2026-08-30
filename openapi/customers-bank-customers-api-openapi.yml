@@ -1,0 +1,881 @@
+openapi: 3.2.0
+info:
+  title: Accounts Customers API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/accounts/v1
+tags:
+- name: Customers
+paths:
+  /Customers:
+    get:
+      tags:
+      - Customers
+      summary: /Customers - GET
+      description: Get a list of customers for the caller's partner
+      operationId: get-customers
+      parameters:
+      - name: name
+        in: query
+        description: Optional name fragment to filter customers by
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  name: string
+                  customerType: Personal
+                  address:
+                    id: string
+                    addressLine1: string
+                    addressLine2: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  name: string
+                  customerType: Personal
+                  address:
+                    id: string
+                    addressLine1: string
+                    addressLine2: string
+                    city: string
+                    state: string
+                    postalCode: string
+                    countryCode: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    post:
+      tags:
+      - Customers
+      summary: /Customers - POST
+      description: Creates a new customer
+      operationId: post-customers
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: f02e3d30-71a8-4d05-8ec5-bbda1cf75da1
+      requestBody:
+        description: The customer to create
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /Customers/{id}:
+    get:
+      tags:
+      - Customers
+      summary: /Customers/{id} - GET
+      description: Get a customer by id
+      operationId: get-customers-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the customer to retrieve
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+              example:
+                id: string
+                name: string
+                customerType: Personal
+                address:
+                  id: string
+                  addressLine1: string
+                  addressLine2: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+              example:
+                id: string
+                name: string
+                customerType: Personal
+                address:
+                  id: string
+                  addressLine1: string
+                  addressLine2: string
+                  city: string
+                  state: string
+                  postalCode: string
+                  countryCode: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    put:
+      tags:
+      - Customers
+      summary: /Customers/{id} - PUT
+      description: Updates an existing customer
+      operationId: put-customers-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the customer to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The updated details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.UpdateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.UpdateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.UpdateCustomerDto'
+            example:
+              name: string
+              customerType: Personal
+              address:
+                addressLine1: string
+                addressLine2: string
+                city: string
+                state: string
+                postalCode: string
+                countryCode: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    delete:
+      tags:
+      - Customers
+      summary: /Customers/{id} - DELETE
+      description: Deletes an existing customer
+      operationId: delete-customers-id
+      parameters:
+      - name: id
+        in: path
+        description: The id of the customer to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
+      required:
+      - address
+      - customerType
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Accounts.WebApi.Dto.AddressDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the customer
+          format: uuid
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 1
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type:
+          - string
+          - 'null'
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Country Code
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.CreateCustomerDto:
+      required:
+      - address
+      - customerType
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.CustomerDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the customer
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.CreateAddressDto:
+      required:
+      - addressLine1
+      - city
+      - countryCode
+      type: object
+      properties:
+        addressLine1:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: Street or address line 1
+        addressLine2:
+          maxLength: 35
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: City
+        state:
+          maxLength: 35
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          maxLength: 10
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: Country Code
+      additionalProperties: false
+    Cubi.Accounts.Contracts.Messages.CustomerType:
+      enum:
+      - Personal
+      - Business
+      type: string
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

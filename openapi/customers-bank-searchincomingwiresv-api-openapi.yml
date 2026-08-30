@@ -1,0 +1,650 @@
+openapi: 3.2.0
+info:
+  title: Search Incoming Wires V API
+  version: v2
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/Wires/v2
+tags:
+- name: SearchIncomingWiresV
+paths:
+  /incoming/search:
+    get:
+      tags:
+      - SearchIncomingWiresV
+      summary: /incoming/search - GET
+      description: Searches incoming wire payments
+      operationId: get-incoming-search
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: searchText
+        in: query
+        description: The omad, imad, beneficiary name, originator name, amount or status, for which to search
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      - name: filters
+        in: query
+        description: Search filter values
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Common.Models.Filter'
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  isReturn: true
+                  originalWireId: string
+                  debtor:
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  debtorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgentAccount:
+                    accountNumber: string
+                  debtorAgentAccount:
+                    accountNumber: string
+                  instructingAgent:
+                    memberId: string
+                    name: string
+                  instructedAgent:
+                    memberId: string
+                    name: string
+                  intermediaryAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  previousInstructingAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditor:
+                    accountId: string
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  remittanceInformation: string
+                  endToEndIdentification: string
+                  imad: string
+                  omad: string
+                  confirmationNumber: string
+                  completedAt: string
+                  processDate: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  isReturn: true
+                  originalWireId: string
+                  debtor:
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  debtorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgentAccount:
+                    accountNumber: string
+                  debtorAgentAccount:
+                    accountNumber: string
+                  instructingAgent:
+                    memberId: string
+                    name: string
+                  instructedAgent:
+                    memberId: string
+                    name: string
+                  intermediaryAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  previousInstructingAgent1:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditorAgent:
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                    name: string
+                    memberId: string
+                    bic: string
+                  creditor:
+                    accountId: string
+                    accountNumber: string
+                    name: string
+                    address:
+                      streetName: string
+                      floor: string
+                      city: string
+                      state: string
+                      postalCode: string
+                      countryCode: string
+                      addressLines:
+                      - string
+                  remittanceInformation: string
+                  endToEndIdentification: string
+                  imad: string
+                  omad: string
+                  confirmationNumber: string
+                  completedAt: string
+                  processDate: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The settlement account number for the entity
+      additionalProperties: false
+      description: Settlement account for creditor agent account
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
+      type: object
+      properties:
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
+      additionalProperties: false
+      description: The bank that received the Fedwire message (instructed agent / receiver)
+    Cubi.Common.Models.Filter:
+      required:
+      - field
+      - operator
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.IncomingDebtorDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the originator
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the originator
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The originating party of a wire payment
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.AddressDto:
+      type: object
+      properties:
+        streetName:
+          type: string
+          description: Street or address line 1
+        floor:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type: string
+          description: Country Code
+        addressLines:
+          type: array
+          items:
+            type: string
+          description: Unstructured Address lines.  Typically used if a structured address was not provided.
+      additionalProperties: false
+      description: An address object, which may be structured or unstructured
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Wires.WebApi.Dto.v2.InstructingAgentDto:
+      type: object
+      properties:
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sending institution
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the sending institution
+      additionalProperties: false
+      description: The bank that sent the Fedwire message (instructing agent / sender)
+    Cubi.Wires.WebApi.Dto.v2.IncomingCreditorDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: The CUBIX ID (UUID) of the account
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number of the beneficiary
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The beneficiary (the person or company receiving funds)
+    Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the wire payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the wire payment
+          format: double
+        isReturn:
+          type: boolean
+          description: Indicates if the wire payment is a return payment
+        originalWireId:
+          type:
+          - string
+          - 'null'
+          description: Original ID of the outgoing wire payment, only applicable if the wire is a return
+          format: uuid
+        debtor:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.IncomingDebtorDto'
+        debtorAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        creditorAgentAccount:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentAccountDto'
+        debtorAgentAccount:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentAccountDto'
+        instructingAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InstructingAgentDto'
+        instructedAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto'
+        intermediaryAgent1:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        previousInstructingAgent1:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        creditorAgent:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AgentDto'
+        creditor:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.IncomingCreditorDto'
+        remittanceInformation:
+          type:
+          - string
+          - 'null'
+          description: Originator to beneficiary notes for the wire
+        endToEndIdentification:
+          type:
+          - string
+          - 'null'
+          description: End to end identifier for the payment
+        imad:
+          type:
+          - string
+          - 'null'
+          description: The IMAD for the incoming wire payment
+        omad:
+          type:
+          - string
+          - 'null'
+          description: The OMAD for the incoming wire payment
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: The confirmation number for the posted payment. If present, this can be used to reconcile/match the payment to an underlying transaction
+        completedAt:
+          type: string
+          description: The datetime when the wire payment was completed
+          format: date-time
+        processDate:
+          type: string
+          description: The intended processing date of the wire. The actual date of completion may vary based on if the wire was originally intended after hours, holiday, weekend etc.
+          format: date-time
+      additionalProperties: false
+      description: Represents an incoming (received) wire payment
+    Cubi.Wires.WebApi.Dto.v2.AgentDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+        name:
+          type: string
+          description: The name of the entity
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The clearing system member id (typically an ABA) of the entity
+        bic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the entity
+      additionalProperties: false
+      description: A bank or financial institution participating in a wire payment
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

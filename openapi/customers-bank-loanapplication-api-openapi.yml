@@ -1,0 +1,2803 @@
+openapi: 3.2.0
+info:
+  title: ConsumerLending Loan Application API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
+tags:
+- name: LoanApplication
+paths:
+  /application:
+    post:
+      tags:
+      - LoanApplication
+      summary: /application - POST
+      description: Creates a new loan application in the system. Creating an application will initiate the approval process. If that process is successful the application will be converted to a loan.
+      operationId: post-application
+      parameters:
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 3169e68b-93ce-49a7-aec5-907f52099868
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationDto'
+            example:
+              platformReferenceNumber: string
+              applicationDate: string
+              requestedLoanAmount: 0
+              maximumApprovedLoanAmount: 0
+              loanAmount: 0
+              netFundingAmount: 0
+              partnerLoanApprovalDate: string
+              apr: 0
+              noteRate: 0
+              collateralCategory: string
+              loanPurpose: string
+              defaultProbability: 0
+              customRiskScore: string
+              customGrade: string
+              isMlaLoan: true
+              mlaChecked: true
+              ofacChecked: true
+              promotionDetails:
+                promotionMonths: 0
+              borrowers:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              cosigners:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              programId: string
+              loanAccountNumber: string
+              fundImmediatelyOnApproval: true
+              immediateFundingInstructions:
+              - amountToFund: 0
+                routingNumber: string
+                accountNumber: string
+                accountName: string
+                accountType: Checking
+                platformReferenceNumber: string
+              aanReasons:
+              - string
+              propertyDetails:
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                cltv: 0
+                propertyType: Other
+                unitCount: 0
+                automatedValuationModel: 0
+                manualValuationModel: 0
+                avmConfidenceScore: 0
+                outstandingMortgageBalance: 0
+              contractors:
+              - name: string
+                ein: string
+              resultOfCounterOfferProcess: true
+              monthlyPayment: 0
+              termLength: 0
+              merchantDiscountRatePercentage: 0
+              merchantDiscountRateAmount: 0
+              originationFeePercentage: 0
+              originationFeeAmount: 0
+              paymentFactor: 0
+              partnerStatus: Signed
+              partnerStatusReason: string
+              acquisitionChannelName: string
+              stagedFundingDetails:
+                expectedNumberOfStages: 0
+                expectedFundingLevels:
+                - fundingStageNumber: 0
+                  expectedFundingPercentage: 0
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationDto'
+            example:
+              platformReferenceNumber: string
+              applicationDate: string
+              requestedLoanAmount: 0
+              maximumApprovedLoanAmount: 0
+              loanAmount: 0
+              netFundingAmount: 0
+              partnerLoanApprovalDate: string
+              apr: 0
+              noteRate: 0
+              collateralCategory: string
+              loanPurpose: string
+              defaultProbability: 0
+              customRiskScore: string
+              customGrade: string
+              isMlaLoan: true
+              mlaChecked: true
+              ofacChecked: true
+              promotionDetails:
+                promotionMonths: 0
+              borrowers:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              cosigners:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              programId: string
+              loanAccountNumber: string
+              fundImmediatelyOnApproval: true
+              immediateFundingInstructions:
+              - amountToFund: 0
+                routingNumber: string
+                accountNumber: string
+                accountName: string
+                accountType: Checking
+                platformReferenceNumber: string
+              aanReasons:
+              - string
+              propertyDetails:
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                cltv: 0
+                propertyType: Other
+                unitCount: 0
+                automatedValuationModel: 0
+                manualValuationModel: 0
+                avmConfidenceScore: 0
+                outstandingMortgageBalance: 0
+              contractors:
+              - name: string
+                ein: string
+              resultOfCounterOfferProcess: true
+              monthlyPayment: 0
+              termLength: 0
+              merchantDiscountRatePercentage: 0
+              merchantDiscountRateAmount: 0
+              originationFeePercentage: 0
+              originationFeeAmount: 0
+              paymentFactor: 0
+              partnerStatus: Signed
+              partnerStatusReason: string
+              acquisitionChannelName: string
+              stagedFundingDetails:
+                expectedNumberOfStages: 0
+                expectedFundingLevels:
+                - fundingStageNumber: 0
+                  expectedFundingPercentage: 0
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationDto'
+            example:
+              platformReferenceNumber: string
+              applicationDate: string
+              requestedLoanAmount: 0
+              maximumApprovedLoanAmount: 0
+              loanAmount: 0
+              netFundingAmount: 0
+              partnerLoanApprovalDate: string
+              apr: 0
+              noteRate: 0
+              collateralCategory: string
+              loanPurpose: string
+              defaultProbability: 0
+              customRiskScore: string
+              customGrade: string
+              isMlaLoan: true
+              mlaChecked: true
+              ofacChecked: true
+              promotionDetails:
+                promotionMonths: 0
+              borrowers:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              cosigners:
+              - ssn: string
+                fullName: string
+                dateOfBirth: string
+                annualIncome: 0
+                employerName: string
+                emailAddress: string
+                schoolName: string
+                schoolOpeCode: string
+                schoolGraduationYear: 0
+                degreeType: string
+                areaOfStudy: string
+                deceased: true
+                housingStatus: Own
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                homePhoneNumber: string
+                workPhoneNumber: string
+                cellPhoneNumber: string
+                ficoScore: 0
+                debtToIncomeRatio: 0
+                debt: 0
+                creditInquiryCount: 0
+                sixtyDayLatePaymentCount: 0
+                tradeDelinquencyCount: 0
+                chargeOffCount: 0
+                nonTraditionalInquiryCount: 0
+                mortgageDelinquencyCount: 0
+                thirtyDayLatePaymentCount: 0
+                numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                derogatoryRemarkCount: 0
+                hasFiledForBankruptcy: true
+                monthsSinceBankruptcyFiled: 0
+                monthsSinceBankruptcyDismissed: 0
+                monthsSinceBankruptcyStatusDate: 0
+              programId: string
+              loanAccountNumber: string
+              fundImmediatelyOnApproval: true
+              immediateFundingInstructions:
+              - amountToFund: 0
+                routingNumber: string
+                accountNumber: string
+                accountName: string
+                accountType: Checking
+                platformReferenceNumber: string
+              aanReasons:
+              - string
+              propertyDetails:
+                streetAddress: string
+                city: string
+                state: string
+                zipCode: string
+                cltv: 0
+                propertyType: Other
+                unitCount: 0
+                automatedValuationModel: 0
+                manualValuationModel: 0
+                avmConfidenceScore: 0
+                outstandingMortgageBalance: 0
+              contractors:
+              - name: string
+                ein: string
+              resultOfCounterOfferProcess: true
+              monthlyPayment: 0
+              termLength: 0
+              merchantDiscountRatePercentage: 0
+              merchantDiscountRateAmount: 0
+              originationFeePercentage: 0
+              originationFeeAmount: 0
+              paymentFactor: 0
+              partnerStatus: Signed
+              partnerStatusReason: string
+              acquisitionChannelName: string
+              stagedFundingDetails:
+                expectedNumberOfStages: 0
+                expectedFundingLevels:
+                - fundingStageNumber: 0
+                  expectedFundingPercentage: 0
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationAcceptedDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationAcceptedDto'
+              example:
+                id: string
+                immediateFundingInstructions:
+                - platformReferenceNumber: string
+                  fundingInstructionId: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationAcceptedDto'
+              example:
+                id: string
+                immediateFundingInstructions:
+                - platformReferenceNumber: string
+                  fundingInstructionId: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - LoanApplication
+      summary: /application - GET
+      description: Retrieve a paginated list of loan applications filtered by the search options provided.
+      operationId: get-application
+      parameters:
+      - name: programId
+        in: query
+        description: The partner program id to search applications for
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        example: 00000000-0000-0000-0000-000000000000
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  platformReferenceNumber: string
+                  applicationDate: string
+                  requestedLoanAmount: 0
+                  maximumApprovedLoanAmount: 0
+                  loanAmount: 0
+                  netFundingAmount: 0
+                  partnerLoanApprovalDate: string
+                  apr: 0
+                  noteRate: 0
+                  loanAccountNumber: string
+                  collateralCategory: string
+                  loanPurpose: string
+                  defaultProbability: 0
+                  customRiskScore: string
+                  customGrade: string
+                  mlaLoan: true
+                  mlaChecked: true
+                  ofacChecked: true
+                  promotionDetails:
+                    promotionMonths: 0
+                  propertyDetails:
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    cltv: 0
+                    propertyType: Other
+                    unitCount: 0
+                    automatedValuationModel: 0
+                    manualValuationModel: 0
+                    avmConfidenceScore: 0
+                    outstandingMortgageBalance: 0
+                  programId: string
+                  applicationStatus: string
+                  borrowers:
+                  - id: string
+                    ssn: string
+                    fullName: string
+                    dateOfBirth: string
+                    annualIncome: 0
+                    employerName: string
+                    emailAddress: string
+                    schoolName: string
+                    schoolOpeCode: string
+                    schoolGraduationYear: 0
+                    degreeType: string
+                    areaOfStudy: string
+                    deceased: true
+                    housingStatus: Own
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    homePhoneNumber: string
+                    workPhoneNumber: string
+                    cellPhoneNumber: string
+                    ficoScore: 0
+                    debtToIncomeRatio: 0
+                    creditInquiryCount: 0
+                    chargeOffCount: 0
+                    tradeDelinquencyCount: 0
+                    sixtyDayLatePaymentCount: 0
+                    nonTraditionalInquiryCount: 0
+                    mortgageDelinquencyCount: 0
+                    thirtyDayLatePaymentCount: 0
+                    numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                    derogatoryRemarkCount: 0
+                    hasFiledForBankruptcy: true
+                    debt: 0
+                    monthsSinceBankruptcyFiled: 0
+                    monthsSinceBankruptcyDismissed: 0
+                    monthsSinceBankruptcyStatusDate: 0
+                  cosigners:
+                  - id: string
+                    ssn: string
+                    fullName: string
+                    dateOfBirth: string
+                    annualIncome: 0
+                    employerName: string
+                    emailAddress: string
+                    schoolName: string
+                    schoolOpeCode: string
+                    schoolGraduationYear: 0
+                    degreeType: string
+                    areaOfStudy: string
+                    deceased: true
+                    housingStatus: Own
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    homePhoneNumber: string
+                    workPhoneNumber: string
+                    cellPhoneNumber: string
+                    ficoScore: 0
+                    debtToIncomeRatio: 0
+                    creditInquiryCount: 0
+                    nonTraditionalInquiryCount: 0
+                    chargeOffCount: 0
+                    tradeDelinquencyCount: 0
+                    sixtyDayLatePaymentCount: 0
+                    mortgageDelinquencyCount: 0
+                    thirtyDayLatePaymentCount: 0
+                    numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                    derogatoryRemarkCount: 0
+                    hasFiledForBankruptcy: true
+                    debt: 0
+                    monthsSinceBankruptcyFiled: 0
+                    monthsSinceBankruptcyDismissed: 0
+                    monthsSinceBankruptcyStatusDate: 0
+                  rejectionReasons:
+                  - processingDate: string
+                    ruleName: string
+                    errorMessage: string
+                  fundImmediatelyOnApproval: true
+                  immediateFundingInstructions:
+                  - amountToFund: 0
+                    routingNumber: string
+                    accountNumber: string
+                    accountName: string
+                    accountType: Checking
+                    receivedDate: string
+                    platformReferenceNumber: string
+                  loanId: string
+                  aanReasons:
+                  - string
+                  contractors:
+                  - name: string
+                    ein: string
+                  resultOfCounterOfferProcess: true
+                  monthlyPayment: 0
+                  termLength: 0
+                  merchantDiscountRatePercentage: 0
+                  merchantDiscountRateAmount: 0
+                  originationFeePercentage: 0
+                  originationFeeAmount: 0
+                  paymentFactor: 0
+                  partnerStatus: Signed
+                  partnerStatusReason: string
+                  acquisitionChannelName: string
+                  stagedFundingDetails:
+                    expectedNumberOfStages: 0
+                    expectedFundingLevels:
+                    - fundingStageNumber: 0
+                      expectedFundingPercentage: 0
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  platformReferenceNumber: string
+                  applicationDate: string
+                  requestedLoanAmount: 0
+                  maximumApprovedLoanAmount: 0
+                  loanAmount: 0
+                  netFundingAmount: 0
+                  partnerLoanApprovalDate: string
+                  apr: 0
+                  noteRate: 0
+                  loanAccountNumber: string
+                  collateralCategory: string
+                  loanPurpose: string
+                  defaultProbability: 0
+                  customRiskScore: string
+                  customGrade: string
+                  mlaLoan: true
+                  mlaChecked: true
+                  ofacChecked: true
+                  promotionDetails:
+                    promotionMonths: 0
+                  propertyDetails:
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    cltv: 0
+                    propertyType: Other
+                    unitCount: 0
+                    automatedValuationModel: 0
+                    manualValuationModel: 0
+                    avmConfidenceScore: 0
+                    outstandingMortgageBalance: 0
+                  programId: string
+                  applicationStatus: string
+                  borrowers:
+                  - id: string
+                    ssn: string
+                    fullName: string
+                    dateOfBirth: string
+                    annualIncome: 0
+                    employerName: string
+                    emailAddress: string
+                    schoolName: string
+                    schoolOpeCode: string
+                    schoolGraduationYear: 0
+                    degreeType: string
+                    areaOfStudy: string
+                    deceased: true
+                    housingStatus: Own
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    homePhoneNumber: string
+                    workPhoneNumber: string
+                    cellPhoneNumber: string
+                    ficoScore: 0
+                    debtToIncomeRatio: 0
+                    creditInquiryCount: 0
+                    chargeOffCount: 0
+                    tradeDelinquencyCount: 0
+                    sixtyDayLatePaymentCount: 0
+                    nonTraditionalInquiryCount: 0
+                    mortgageDelinquencyCount: 0
+                    thirtyDayLatePaymentCount: 0
+                    numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                    derogatoryRemarkCount: 0
+                    hasFiledForBankruptcy: true
+                    debt: 0
+                    monthsSinceBankruptcyFiled: 0
+                    monthsSinceBankruptcyDismissed: 0
+                    monthsSinceBankruptcyStatusDate: 0
+                  cosigners:
+                  - id: string
+                    ssn: string
+                    fullName: string
+                    dateOfBirth: string
+                    annualIncome: 0
+                    employerName: string
+                    emailAddress: string
+                    schoolName: string
+                    schoolOpeCode: string
+                    schoolGraduationYear: 0
+                    degreeType: string
+                    areaOfStudy: string
+                    deceased: true
+                    housingStatus: Own
+                    streetAddress: string
+                    city: string
+                    state: string
+                    zipCode: string
+                    homePhoneNumber: string
+                    workPhoneNumber: string
+                    cellPhoneNumber: string
+                    ficoScore: 0
+                    debtToIncomeRatio: 0
+                    creditInquiryCount: 0
+                    nonTraditionalInquiryCount: 0
+                    chargeOffCount: 0
+                    tradeDelinquencyCount: 0
+                    sixtyDayLatePaymentCount: 0
+                    mortgageDelinquencyCount: 0
+                    thirtyDayLatePaymentCount: 0
+                    numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                    derogatoryRemarkCount: 0
+                    hasFiledForBankruptcy: true
+                    debt: 0
+                    monthsSinceBankruptcyFiled: 0
+                    monthsSinceBankruptcyDismissed: 0
+                    monthsSinceBankruptcyStatusDate: 0
+                  rejectionReasons:
+                  - processingDate: string
+                    ruleName: string
+                    errorMessage: string
+                  fundImmediatelyOnApproval: true
+                  immediateFundingInstructions:
+                  - amountToFund: 0
+                    routingNumber: string
+                    accountNumber: string
+                    accountName: string
+                    accountType: Checking
+                    receivedDate: string
+                    platformReferenceNumber: string
+                  loanId: string
+                  aanReasons:
+                  - string
+                  contractors:
+                  - name: string
+                    ein: string
+                  resultOfCounterOfferProcess: true
+                  monthlyPayment: 0
+                  termLength: 0
+                  merchantDiscountRatePercentage: 0
+                  merchantDiscountRateAmount: 0
+                  originationFeePercentage: 0
+                  originationFeeAmount: 0
+                  paymentFactor: 0
+                  partnerStatus: Signed
+                  partnerStatusReason: string
+                  acquisitionChannelName: string
+                  stagedFundingDetails:
+                    expectedNumberOfStages: 0
+                    expectedFundingLevels:
+                    - fundingStageNumber: 0
+                      expectedFundingPercentage: 0
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /application/{id}:
+    get:
+      tags:
+      - LoanApplication
+      summary: /application/{id} - GET
+      description: Retrieve a specific loan application using its Id value.
+      operationId: get-application-id
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              example:
+                id: string
+                platformReferenceNumber: string
+                applicationDate: string
+                requestedLoanAmount: 0
+                maximumApprovedLoanAmount: 0
+                loanAmount: 0
+                netFundingAmount: 0
+                partnerLoanApprovalDate: string
+                apr: 0
+                noteRate: 0
+                loanAccountNumber: string
+                collateralCategory: string
+                loanPurpose: string
+                defaultProbability: 0
+                customRiskScore: string
+                customGrade: string
+                mlaLoan: true
+                mlaChecked: true
+                ofacChecked: true
+                promotionDetails:
+                  promotionMonths: 0
+                propertyDetails:
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  cltv: 0
+                  propertyType: Other
+                  unitCount: 0
+                  automatedValuationModel: 0
+                  manualValuationModel: 0
+                  avmConfidenceScore: 0
+                  outstandingMortgageBalance: 0
+                programId: string
+                applicationStatus: string
+                borrowers:
+                - id: string
+                  ssn: string
+                  fullName: string
+                  dateOfBirth: string
+                  annualIncome: 0
+                  employerName: string
+                  emailAddress: string
+                  schoolName: string
+                  schoolOpeCode: string
+                  schoolGraduationYear: 0
+                  degreeType: string
+                  areaOfStudy: string
+                  deceased: true
+                  housingStatus: Own
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  homePhoneNumber: string
+                  workPhoneNumber: string
+                  cellPhoneNumber: string
+                  ficoScore: 0
+                  debtToIncomeRatio: 0
+                  creditInquiryCount: 0
+                  chargeOffCount: 0
+                  tradeDelinquencyCount: 0
+                  sixtyDayLatePaymentCount: 0
+                  nonTraditionalInquiryCount: 0
+                  mortgageDelinquencyCount: 0
+                  thirtyDayLatePaymentCount: 0
+                  numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                  derogatoryRemarkCount: 0
+                  hasFiledForBankruptcy: true
+                  debt: 0
+                  monthsSinceBankruptcyFiled: 0
+                  monthsSinceBankruptcyDismissed: 0
+                  monthsSinceBankruptcyStatusDate: 0
+                cosigners:
+                - id: string
+                  ssn: string
+                  fullName: string
+                  dateOfBirth: string
+                  annualIncome: 0
+                  employerName: string
+                  emailAddress: string
+                  schoolName: string
+                  schoolOpeCode: string
+                  schoolGraduationYear: 0
+                  degreeType: string
+                  areaOfStudy: string
+                  deceased: true
+                  housingStatus: Own
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  homePhoneNumber: string
+                  workPhoneNumber: string
+                  cellPhoneNumber: string
+                  ficoScore: 0
+                  debtToIncomeRatio: 0
+                  creditInquiryCount: 0
+                  nonTraditionalInquiryCount: 0
+                  chargeOffCount: 0
+                  tradeDelinquencyCount: 0
+                  sixtyDayLatePaymentCount: 0
+                  mortgageDelinquencyCount: 0
+                  thirtyDayLatePaymentCount: 0
+                  numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                  derogatoryRemarkCount: 0
+                  hasFiledForBankruptcy: true
+                  debt: 0
+                  monthsSinceBankruptcyFiled: 0
+                  monthsSinceBankruptcyDismissed: 0
+                  monthsSinceBankruptcyStatusDate: 0
+                rejectionReasons:
+                - processingDate: string
+                  ruleName: string
+                  errorMessage: string
+                fundImmediatelyOnApproval: true
+                immediateFundingInstructions:
+                - amountToFund: 0
+                  routingNumber: string
+                  accountNumber: string
+                  accountName: string
+                  accountType: Checking
+                  receivedDate: string
+                  platformReferenceNumber: string
+                loanId: string
+                aanReasons:
+                - string
+                contractors:
+                - name: string
+                  ein: string
+                resultOfCounterOfferProcess: true
+                monthlyPayment: 0
+                termLength: 0
+                merchantDiscountRatePercentage: 0
+                merchantDiscountRateAmount: 0
+                originationFeePercentage: 0
+                originationFeeAmount: 0
+                paymentFactor: 0
+                partnerStatus: Signed
+                partnerStatusReason: string
+                acquisitionChannelName: string
+                stagedFundingDetails:
+                  expectedNumberOfStages: 0
+                  expectedFundingLevels:
+                  - fundingStageNumber: 0
+                    expectedFundingPercentage: 0
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+              example:
+                id: string
+                platformReferenceNumber: string
+                applicationDate: string
+                requestedLoanAmount: 0
+                maximumApprovedLoanAmount: 0
+                loanAmount: 0
+                netFundingAmount: 0
+                partnerLoanApprovalDate: string
+                apr: 0
+                noteRate: 0
+                loanAccountNumber: string
+                collateralCategory: string
+                loanPurpose: string
+                defaultProbability: 0
+                customRiskScore: string
+                customGrade: string
+                mlaLoan: true
+                mlaChecked: true
+                ofacChecked: true
+                promotionDetails:
+                  promotionMonths: 0
+                propertyDetails:
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  cltv: 0
+                  propertyType: Other
+                  unitCount: 0
+                  automatedValuationModel: 0
+                  manualValuationModel: 0
+                  avmConfidenceScore: 0
+                  outstandingMortgageBalance: 0
+                programId: string
+                applicationStatus: string
+                borrowers:
+                - id: string
+                  ssn: string
+                  fullName: string
+                  dateOfBirth: string
+                  annualIncome: 0
+                  employerName: string
+                  emailAddress: string
+                  schoolName: string
+                  schoolOpeCode: string
+                  schoolGraduationYear: 0
+                  degreeType: string
+                  areaOfStudy: string
+                  deceased: true
+                  housingStatus: Own
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  homePhoneNumber: string
+                  workPhoneNumber: string
+                  cellPhoneNumber: string
+                  ficoScore: 0
+                  debtToIncomeRatio: 0
+                  creditInquiryCount: 0
+                  chargeOffCount: 0
+                  tradeDelinquencyCount: 0
+                  sixtyDayLatePaymentCount: 0
+                  nonTraditionalInquiryCount: 0
+                  mortgageDelinquencyCount: 0
+                  thirtyDayLatePaymentCount: 0
+                  numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                  derogatoryRemarkCount: 0
+                  hasFiledForBankruptcy: true
+                  debt: 0
+                  monthsSinceBankruptcyFiled: 0
+                  monthsSinceBankruptcyDismissed: 0
+                  monthsSinceBankruptcyStatusDate: 0
+                cosigners:
+                - id: string
+                  ssn: string
+                  fullName: string
+                  dateOfBirth: string
+                  annualIncome: 0
+                  employerName: string
+                  emailAddress: string
+                  schoolName: string
+                  schoolOpeCode: string
+                  schoolGraduationYear: 0
+                  degreeType: string
+                  areaOfStudy: string
+                  deceased: true
+                  housingStatus: Own
+                  streetAddress: string
+                  city: string
+                  state: string
+                  zipCode: string
+                  homePhoneNumber: string
+                  workPhoneNumber: string
+                  cellPhoneNumber: string
+                  ficoScore: 0
+                  debtToIncomeRatio: 0
+                  creditInquiryCount: 0
+                  nonTraditionalInquiryCount: 0
+                  chargeOffCount: 0
+                  tradeDelinquencyCount: 0
+                  sixtyDayLatePaymentCount: 0
+                  mortgageDelinquencyCount: 0
+                  thirtyDayLatePaymentCount: 0
+                  numberOfMonthsSinceAnyThirtyDayLatePayments: 0
+                  derogatoryRemarkCount: 0
+                  hasFiledForBankruptcy: true
+                  debt: 0
+                  monthsSinceBankruptcyFiled: 0
+                  monthsSinceBankruptcyDismissed: 0
+                  monthsSinceBankruptcyStatusDate: 0
+                rejectionReasons:
+                - processingDate: string
+                  ruleName: string
+                  errorMessage: string
+                fundImmediatelyOnApproval: true
+                immediateFundingInstructions:
+                - amountToFund: 0
+                  routingNumber: string
+                  accountNumber: string
+                  accountName: string
+                  accountType: Checking
+                  receivedDate: string
+                  platformReferenceNumber: string
+                loanId: string
+                aanReasons:
+                - string
+                contractors:
+                - name: string
+                  ein: string
+                resultOfCounterOfferProcess: true
+                monthlyPayment: 0
+                termLength: 0
+                merchantDiscountRatePercentage: 0
+                merchantDiscountRateAmount: 0
+                originationFeePercentage: 0
+                originationFeeAmount: 0
+                paymentFactor: 0
+                partnerStatus: Signed
+                partnerStatusReason: string
+                acquisitionChannelName: string
+                stagedFundingDetails:
+                  expectedNumberOfStages: 0
+                  expectedFundingLevels:
+                  - fundingStageNumber: 0
+                    expectedFundingPercentage: 0
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerDto:
+      required:
+      - annualIncome
+      - city
+      - dateOfBirth
+      - debt
+      - debtToIncomeRatio
+      - ficoScore
+      - fullName
+      - ssn
+      - state
+      - streetAddress
+      - zipCode
+      type: object
+      properties:
+        ssn:
+          minLength: 1
+          type: string
+          description: Cosigner's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
+        fullName:
+          minLength: 1
+          type: string
+          description: Full name of the cosigner. Must be 255 characters long or less
+        dateOfBirth:
+          type: string
+          description: Cosigner's date of birth. All cosigners must be between 18 and 120 years old on the loan application date
+          format: date-time
+        annualIncome:
+          type: number
+          description: Annual income of the cosigner.
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's employer name
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's email address
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: Name of the post secondary school the cosigner attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: Year that the cosigner graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: Type of degree the cosigner received when graduating from post secondary school
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: Area of study for the degree the cosigner received
+        deceased:
+          type: boolean
+          description: Indicates that the cosigner is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          minLength: 1
+          type: string
+          description: Street portion of the cosigner's primary residence address. Must be 255 characters long or less
+        city:
+          minLength: 1
+          type: string
+          description: City portion of the cosigner's primary residence address. Must be 255 characters long or less
+        state:
+          minLength: 1
+          type: string
+          description: State portion of the cosigner's primary residence address. Must be 2 characters long
+        zipCode:
+          minLength: 1
+          type: string
+          description: Zip Code portion of the cosigner's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's home phone number
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's work phone number
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's cell phone number
+        ficoScore:
+          type: integer
+          description: Cosigner's FICO score. Must be between 0 and 1000
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: Cosigner's Debt to Income ratio. Must be between 0.00 and 100.00
+          format: double
+        debt:
+          type: number
+          description: Cosigner's amount of Debt. Must be greater than 0.00
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationDto:
+      required:
+      - applicationDate
+      - apr
+      - borrowers
+      - isMlaLoan
+      - loanAccountNumber
+      - loanAmount
+      - loanPurpose
+      - maximumApprovedLoanAmount
+      - mlaChecked
+      - ofacChecked
+      - partnerStatus
+      - platformReferenceNumber
+      - programId
+      - requestedLoanAmount
+      - termLength
+      type: object
+      properties:
+        platformReferenceNumber:
+          minLength: 1
+          type: string
+          description: Provided by the API caller. The value must be unique within the Program that the application is submitted. The value should be between 1 and 36 characters in length
+        applicationDate:
+          type: string
+          description: The date the loan application was completed. It may differ from the submission date if the application was submitted later
+          format: date-time
+        requestedLoanAmount:
+          type: number
+          description: The dollar amount the customer requested at the time of initial application.
+          format: double
+        maximumApprovedLoanAmount:
+          type: number
+          description: The highest dollar amount this application qualifies for
+          format: double
+        loanAmount:
+          type: number
+          description: The dollar amount that will appear on the loan agreement
+          format: double
+        netFundingAmount:
+          type:
+          - number
+          - 'null'
+          description: The amount expected to be disbursed to the borrower after deductions
+          format: double
+        partnerLoanApprovalDate:
+          type:
+          - string
+          - 'null'
+          description: The UTC date-time when the partner approved the application in their system/process
+          format: date-time
+        apr:
+          type: number
+          description: The APR in a decimal format. Must be greater than 0. An 18.5% APR should be submitted as 18.5
+          format: double
+        noteRate:
+          type: number
+          description: The rate that exists on the note. An 18.5% rate should be submitted as 18.5
+          format: double
+        collateralCategory:
+          type:
+          - string
+          - 'null'
+          description: The description of the category for any collateral tied to the application
+        loanPurpose:
+          minLength: 1
+          type: string
+          description: A description of the purpose of the loan
+        defaultProbability:
+          type: number
+          description: The probability (in percentage), as determined by the API caller, that the loan will default to. 18.5% should be submitted as 18.5
+          format: double
+        customRiskScore:
+          type:
+          - string
+          - 'null'
+          description: A risk score that the API caller has established for the application/borrower(s). This is a text field and can be in any form the API caller desires
+        customGrade:
+          type:
+          - string
+          - 'null'
+          description: A grade that the API caller has assigned to this loan application. This is a text field and can be in any form the API caller desires
+        isMlaLoan:
+          type: boolean
+          description: Indicates if the loan application is governed by the Military Lending Act (MLA)
+        mlaChecked:
+          type: boolean
+          description: Indicates that the application has be verified against the Military Lending Act (MLA)
+        ofacChecked:
+          type: boolean
+          description: Indicates that the borrowers and cosigners have been OFAC checked by the API caller
+        promotionDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPromotionDto'
+        borrowers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerDto'
+          description: The list of all the borrowers
+        cosigners:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerDto'
+          description: The list of all the cosigners
+        programId:
+          type: string
+          description: The id of the program that this application is being submitted under. A list of programs available for the Partner is available by calling the GET /program API
+          format: uuid
+        loanAccountNumber:
+          minLength: 1
+          type: string
+          description: Assigned to this application by the caller. This value must be unique within the Program that the application is submitted under. The value needs to be more than 0 characters and up to 20 characters included
+        fundImmediatelyOnApproval:
+          type: boolean
+          description: Indicates that this application should be immediately funded using the ImmediateFundingInstructions when it is approved and converted from an application to a loan
+        immediateFundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto'
+          description: The list of funding instructions to be executed if the application is approved. The FundImmediatelyOnApproval flag is set to true
+        aanReasons:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: The list of Adverse Action Notice (AAN) Reasons collected for this application. Maximum length for each AAN Reason is 255 characters included. Anything longer than that will be trimmed. This field is required if PartnerStatus is set to Declined
+        propertyDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPropertyDto'
+        contractors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorDto'
+          description: The list of Contractors associated with this application. This is required if the application program is a Home Improvement Loan
+        resultOfCounterOfferProcess:
+          type:
+          - boolean
+          - 'null'
+          description: Indicates that the application is a result of a counteroffer process being engaged
+        monthlyPayment:
+          type: number
+          description: The monthly payment for the application. Must be greater than 0
+          format: double
+        termLength:
+          type: integer
+          description: The loan term for the application inputed as months. Must be greater than 0
+          format: int32
+        merchantDiscountRatePercentage:
+          type:
+          - number
+          - 'null'
+          description: The merchant discount rate (MDR) percentage for the application. If the value is 6.5%, provide 6.5. If the program assigned to this application is configured with a fee type of Mdr or MdrAndOrigination, this value cannot be null and should be 0.00 if no MDR is present
+          format: double
+        merchantDiscountRateAmount:
+          type:
+          - number
+          - 'null'
+          description: The merchant discount rate (MDR) amount (in dollars) for the application. This amount is subtracted from the ApprovedLoanAmount to determine the maximum amount of funds that can be disbursed on an application. If the program assigned to this application is configured with a fee type of Mdr or MdrAndOrigination, this value cannot be null and should be 0.00 if no MDR is present
+          format: double
+        originationFeePercentage:
+          type:
+          - number
+          - 'null'
+          description: The origination fee percentage for the application. If the value is six point five percent, provide 6.5. If the program assigned to this application is configured with a fee type of Origination or MdrAndOrigination, this value cannot be null and should be 0.00 if no origination fee is present
+          format: double
+        originationFeeAmount:
+          type:
+          - number
+          - 'null'
+          description: The origination fee amount (in dollars) for the application. This amount is subtracted from the ApprovedLoanAmount to determine the maximum amount of funds that can be disbursed on an application. If the program assigned to this application is configured with a fee type of Origination or MdrAndOrigination, this value cannot be null and should be 0.00 if no origination fee is present
+          format: double
+        paymentFactor:
+          type:
+          - number
+          - 'null'
+          description: The factor used to calculate the monthly payment
+          format: double
+        partnerStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApplicationPartnerStatus'
+        partnerStatusReason:
+          type:
+          - string
+          - 'null'
+          description: The reason for the partner setting the indicated PartnerStatus state
+        acquisitionChannelName:
+          type:
+          - string
+          - 'null'
+          description: The channel that the API caller acquired this application from. This can be any value as determined by the API caller, but the values provided should be consistently used
+        stagedFundingDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailDto'
+      additionalProperties: false
+      description: Details about a loan application that is to be created
+    Cubi.ConsumerLending.WebApi.Dto.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPropertyDto:
+      required:
+      - city
+      - cltv
+      - propertyType
+      - state
+      - streetAddress
+      - unitCount
+      - zipCode
+      type: object
+      properties:
+        streetAddress:
+          minLength: 1
+          type: string
+          description: Street Address of the property associated with the application. Must be 255 characters long or less
+        city:
+          minLength: 1
+          type: string
+          description: City of the property associated with the application. Must be 255 characters long or less
+        state:
+          minLength: 1
+          type: string
+          description: State of the property associated with the application. Must be 2 characters long
+        zipCode:
+          minLength: 1
+          type: string
+          description: Zip Code of the property associated with the application
+        cltv:
+          type: number
+          description: Combined loan-to-value (CLTV) ratio for the property
+          format: double
+        propertyType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PropertyType'
+        unitCount:
+          type: integer
+          description: Total number of units at this property
+          format: int32
+        automatedValuationModel:
+          type:
+          - number
+          - 'null'
+          description: Property valuation determined by an automated valuation model
+          format: double
+        manualValuationModel:
+          type:
+          - number
+          - 'null'
+          description: Property valuation determined by a manual modeling process
+          format: double
+        avmConfidenceScore:
+          type:
+          - number
+          - 'null'
+          description: Confidence score for the property valuation determined by the automated valuation model
+          format: double
+        outstandingMortgageBalance:
+          type:
+          - number
+          - 'null'
+          description: Balance outstanding on this property's mortgage
+          format: double
+      additionalProperties: false
+      description: Details about the property associated with the loan application. This is required if the program assigned to the loan application is for Home Improvement Loans
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorDto:
+      required:
+      - ein
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Contractor's name. Maximum length of 255 characters
+        ein:
+          minLength: 1
+          type: string
+          description: 'Contractor''s EIN or SSN. This must follow the ##-####### pattern (for EIN), or ###-##-#### (for SSN). Additional validation checking for invalid values will be applied'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ApplicationRejectionReasonResponseDto:
+      type: object
+      properties:
+        processingDate:
+          type: string
+          description: The date that the application processing occurred on. This value will in UTC
+          format: date-time
+        ruleName:
+          type:
+          - string
+          - 'null'
+          description: The rule name that caused the failure
+        errorMessage:
+          type:
+          - string
+          - 'null'
+          description: The error message associated with the failing rule
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelDto:
+      required:
+      - expectedFundingPercentage
+      - fundingStageNumber
+      type: object
+      properties:
+        fundingStageNumber:
+          type: integer
+          description: The order in the funding sequence that this funding stage is expected to be executed
+          format: int32
+        expectedFundingPercentage:
+          type: number
+          description: The percentage of the overall loan that is expected to be funded in this stage of the funding
+          format: double
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerDto:
+      required:
+      - annualIncome
+      - city
+      - dateOfBirth
+      - debt
+      - debtToIncomeRatio
+      - ficoScore
+      - fullName
+      - ssn
+      - state
+      - streetAddress
+      - zipCode
+      type: object
+      properties:
+        ssn:
+          minLength: 1
+          type: string
+          description: Borrower's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
+        fullName:
+          minLength: 1
+          type: string
+          description: Full name of the borrower. Must be 255 characters long or less
+        dateOfBirth:
+          type: string
+          description: Borrower's date of birth. All borrowers must be between 18 and 120 years old on the loan application date
+          format: date-time
+        annualIncome:
+          type: number
+          description: Annual income of the borrower.
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: Borrower's employer name
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: Borrower's email address
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: Name of the post secondary school the borrower attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: Year that the borrower graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: Type of degree the borrower received when graduating from post secondary school
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: Area of study for the degree the borrower received
+        deceased:
+          type: boolean
+          description: Indicates that the borrower is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          minLength: 1
+          type: string
+          description: Street portion of the borrower's primary residence address. Must be 255 characters long or less
+        city:
+          minLength: 1
+          type: string
+          description: City portion of the borrower's primary residence address. Must be 255 characters long or less
+        state:
+          minLength: 1
+          type: string
+          description: State portion of the borrower's primary residence address. Must be 2 characters long
+        zipCode:
+          minLength: 1
+          type: string
+          description: Zip Code portion of the borrower's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's home phone number
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's work phone number
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's cell phone number
+        ficoScore:
+          type: integer
+          description: Borrower's FICO score. Must be between 0 and 1000
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: Borrower's Debt to Income ratio. Must be between 0.00 and 100.00
+          format: double
+        debt:
+          type: number
+          description: Borrower's amount of Debt. Must be greater than 0.00
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPromotionDto:
+      required:
+      - promotionMonths
+      type: object
+      properties:
+        promotionMonths:
+          type: integer
+          description: The number of months that any promotion assigned to the application is valid for
+          format: int32
+      additionalProperties: false
+      description: Details about the promotion associated with a loan application
+    Cubi.ConsumerLending.WebApi.Dto.ApplicationPartnerStatus:
+      enum:
+      - Signed
+      - Canceled
+      - Declined
+      - Rejected
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailResponseDto:
+      type: object
+      properties:
+        expectedNumberOfStages:
+          type: integer
+          description: The number of funding stages that are expected to be used to fully fund the loan
+          format: int32
+        expectedFundingLevels:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto'
+          description: List of the expected funding levels that will be used to fully fund the loan
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto:
+      type: object
+      properties:
+        fundingStageNumber:
+          type: integer
+          description: The order in the funding sequence that this funding stage is expected to be executed
+          format: int32
+        expectedFundingPercentage:
+          type: number
+          description: The percentage of the overall loan that is expected to be funded in this stage of the funding
+          format: double
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationAcceptedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id assigned to the application
+          format: uuid
+        immediateFundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
+          description: List of all the immediate funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorResponseDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Contractor's name
+        ein:
+          type:
+          - string
+          - 'null'
+          description: Contractor's EIN
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The application's Id
+          format: uuid
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: Platform Reference Number
+        applicationDate:
+          type: string
+          description: Loan Application Date.
+          format: date-time
+        requestedLoanAmount:
+          type: number
+          description: The amount of money that was requested by the customer when they first applied
+          format: double
+        maximumApprovedLoanAmount:
+          type: number
+          description: The maximum amount of money that this application qualifies for
+          format: double
+        loanAmount:
+          type: number
+          description: The loan amount that will appear on the loan agreement
+          format: double
+        netFundingAmount:
+          type:
+          - number
+          - 'null'
+          description: The expected proceeds to be disbursed
+          format: double
+        partnerLoanApprovalDate:
+          type:
+          - string
+          - 'null'
+          description: A UTC datetime representing when the partner approved this application in their system/process
+          format: date-time
+        apr:
+          type: number
+          description: The APR on the application
+          format: double
+        noteRate:
+          type: number
+          description: The rate on the application
+          format: double
+        loanAccountNumber:
+          type:
+          - string
+          - 'null'
+          description: The loan account number on the application
+        collateralCategory:
+          type:
+          - string
+          - 'null'
+          description: The category that any collateral belongs to
+        loanPurpose:
+          type:
+          - string
+          - 'null'
+          description: A description of the purpose of the loan
+        defaultProbability:
+          type: number
+          description: The probability of default that was provided on the application
+          format: double
+        customRiskScore:
+          type:
+          - string
+          - 'null'
+          description: The custom risk score provided on the application
+        customGrade:
+          type:
+          - string
+          - 'null'
+          description: The custom grade provided on the application
+        mlaLoan:
+          type: boolean
+          description: The Military Lending Act (MLA) status provided on the application
+        mlaChecked:
+          type: boolean
+          description: The Mla check status provided on the application
+        ofacChecked:
+          type: boolean
+          description: The OFAC check status provided on the application
+        promotionDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPromotionDto'
+        propertyDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPropertyDto'
+        programId:
+          type: string
+          description: The Combined loan-to-value (CLTV) ration provided on the application
+          format: uuid
+        applicationStatus:
+          type:
+          - string
+          - 'null'
+          description: The current status of the application in the ingestion and approval process
+        borrowers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerResponseDto'
+          description: List of all borrowers submitted on the application
+        cosigners:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerResponseDto'
+          description: List of all cosigners submitted on the application
+        rejectionReasons:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApplicationRejectionReasonResponseDto'
+          description: List of any rejection reasons if the application was rejected and is in the Rejected Application Status state
+        fundImmediatelyOnApproval:
+          type: boolean
+          description: Indicates that immediate funding was requested when the application was submitted
+        immediateFundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ImmediateFundingInstructionResponseDto'
+          description: List of funding instructions, that were submitted with the application, indicating what disbursements to perform if the Fund Immediately On Approval flag was set to true
+        loanId:
+          type:
+          - string
+          - 'null'
+          description: The loan id that this application is associated with. This value will be null if the application has not been processed or has been rejected
+          format: uuid
+        aanReasons:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of AanReasons submitted for this application.
+        contractors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorResponseDto'
+          description: List of Contractors submitted for this application
+        resultOfCounterOfferProcess:
+          type:
+          - boolean
+          - 'null'
+          description: Flag indicating that the application is a result of a counteroffer process being engaged
+        monthlyPayment:
+          type: number
+          description: Monthly payment for the application
+          format: double
+        termLength:
+          type: integer
+          description: Loan term for the application input as months
+          format: int32
+        merchantDiscountRatePercentage:
+          type:
+          - number
+          - 'null'
+          description: Merchant discount rate percentage for the application
+          format: double
+        merchantDiscountRateAmount:
+          type:
+          - number
+          - 'null'
+          description: Merchant discount rate amount (in dollars) for the application
+          format: double
+        originationFeePercentage:
+          type:
+          - number
+          - 'null'
+          description: Origination fee percentage for the application
+          format: double
+        originationFeeAmount:
+          type:
+          - number
+          - 'null'
+          description: Origination fee amount (in dollars) for the application
+          format: double
+        paymentFactor:
+          type:
+          - number
+          - 'null'
+          description: The factor used to calculate the monthly payment
+          format: double
+        partnerStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApplicationPartnerStatus'
+        partnerStatusReason:
+          type:
+          - string
+          - 'null'
+          description: Optional reason for the partner setting the indicated PartnerStatus state
+        acquisitionChannelName:
+          type:
+          - string
+          - 'null'
+          description: The channel that the API caller acquired this application from.
+        stagedFundingDetails:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the borrower that was included on the application. This is unique to this application. If the same borrower is included on many different applications, each of those borrower entries will have a different id value
+          format: uuid
+        ssn:
+          type:
+          - string
+          - 'null'
+          description: The SSN of the borrower
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the borrower
+        dateOfBirth:
+          type: string
+          description: The date of birth of the borrower.
+          format: date-time
+        annualIncome:
+          type: number
+          description: The annual income of the borrower
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: The name of the borrower's employer
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: The email address of the borrower
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: The post secondary school the borrower attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: The year that the borrower graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: The type of degree that the borrower received
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: The borrower's area of study in post secondary school
+        deceased:
+          type: boolean
+          description: Indicates that the borrower is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          type:
+          - string
+          - 'null'
+          description: The street portion of the borrower's primary residence address
+        city:
+          type:
+          - string
+          - 'null'
+          description: The city portion of the borrower's primary residence address
+        state:
+          type:
+          - string
+          - 'null'
+          description: The state portion of the borrower's primary residence address
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: The Zip Code portion of the borrower's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The home phone number of the borrower
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The work phone number of the borrower
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The cell phone number of the borrower
+        ficoScore:
+          type: integer
+          description: The borrower's FICO score
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: The borrower's debt to income ratio
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of charge off for this person.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of trade delinquencies for this person.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of months since any sixty day late payments have been recorded.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy.
+        debt:
+          type:
+          - number
+          - 'null'
+          description: Borrower's amount of Debt.
+          format: double
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
+      type: object
+      properties:
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The Platform Reference Number that was provided when the funding instruction was submitted
+        fundingInstructionId:
+          type: string
+          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailDto:
+      required:
+      - expectedFundingLevels
+      - expectedNumberOfStages
+      type: object
+      properties:
+        expectedNumberOfStages:
+          type: integer
+          description: The number of funding stages that are expected to be used to fully fund the loan
+          format: int32
+        expectedFundingLevels:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelDto'
+          description: List of the expected funding levels that will be used to fully fund the loan
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.HousingStatus:
+      enum:
+      - Own
+      - Rent
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.PropertyType:
+      enum:
+      - Other
+      - SingleFamily
+      - Duplex
+      - Triplex
+      - Apartment
+      - Condominium
+      - Undeveloped
+      - Agriculture
+      - Commercial
+      - MobileHome
+      - ManufacturedHome
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.ImmediateFundingInstructionResponseDto:
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan
+          format: double
+        routingNumber:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the account the funds are disbursing to
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: Account number that the funds are disbursing to
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: The name on the account that the funds are disbursing to
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        receivedDate:
+          type: string
+          description: The date that the funding instruction was received on. This value will be in UTC
+          format: date-time
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The reference number provided by the API caller
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - amountToFund
+      - platformReferenceNumber
+      - routingNumber
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan. Must be greater than 0.00
+          format: double
+        routingNumber:
+          minLength: 1
+          type: string
+          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
+        accountNumber:
+          minLength: 1
+          type: string
+          description: Account number that the funds are disbursing to. Must be 255 characters long or less
+        accountName:
+          minLength: 1
+          type: string
+          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        platformReferenceNumber:
+          minLength: 1
+          type: string
+          description: Reference number provided by the API caller. Must be 255 characters long or less
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the cosigner that was included on the application. This is unique to this application. If the same cosigner is included on many different applications, each of those cosigner entries will have a different id value
+          format: uuid
+        ssn:
+          type:
+          - string
+          - 'null'
+          description: The SSN of the cosigner
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the cosigner
+        dateOfBirth:
+          type: string
+          description: The date of birth of the cosigner
+          format: date-time
+        annualIncome:
+          type: number
+          description: The annual income of the cosigner
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: The name of the cosigner's employer
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: The email of the cosigner
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: The post secondary school that the cosigner attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: The year that the cosigner graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: The type of degree that the cosigner received
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: The cosigner's area of study in post secondary school
+        deceased:
+          type: boolean
+          description: Indicates if the cosigner id deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          type:
+          - string
+          - 'null'
+          description: The street portion of the cosigner's primary residence address
+        city:
+          type:
+          - string
+          - 'null'
+          description: The city portion of the cosigner's primary residence address
+        state:
+          type:
+          - string
+          - 'null'
+          description: The state portion of the cosigner's primary residence address
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: the Zip Code portion of the cosigner's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The home phone number of the cosigner
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The work phone number of the cosigner
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The cell phone number of the cosigner
+        ficoScore:
+          type: integer
+          description: The cosigner's FICO score
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: The cosigner's debt to income ratio
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of charge off for this person.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of trade delinquencies for this person.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of months since any sixty day late payments have been recorded.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy.
+        debt:
+          type:
+          - number
+          - 'null'
+          description: Cosigner's amount of Debt.
+          format: double
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

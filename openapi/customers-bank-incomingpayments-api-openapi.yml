@@ -1,0 +1,1980 @@
+openapi: 3.2.0
+info:
+  title: InstantPayments Incoming Payments API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
+tags:
+- name: IncomingPayments
+paths:
+  /incoming/{id}:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/{id} - GET
+      description: Retrieves an existing incoming instant payment
+      operationId: get-incoming-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the FEDNOW payment to get
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+                rail: FedNow
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+                rail: FedNow
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/fednow/{id}:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/fednow/{id} - GET
+      description: Retrieves an existing incoming FEDNOW payment
+      operationId: get-incoming-fednow-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the FEDNOW payment to get
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/rtp/{id}:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/rtp/{id} - GET
+      description: Retrieves an existing incoming RTP
+      operationId: get-incoming-rtp-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the RTP to get
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+                id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming - GET
+      description: Searches for incoming instant payments
+      operationId: get-incoming
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+                  rail: FedNow
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+                  rail: FedNow
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/rtp:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/rtp - GET
+      description: Searches for incoming RTPs
+      operationId: get-incoming-rtp
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/fednow:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/fednow - GET
+      description: Searches for incoming FedNow payments
+      operationId: get-incoming-fednow
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - id: string
+                  amount: 0
+                  accountNumber: string
+                  description: string
+                  referenceId: string
+                  isMemoPosted: true
+                  createdAt: string
+                  status: Initiated
+                  paymentDate: string
+                  deliveryDate: string
+                  notes: string
+                  senderName: string
+                  senderAccountNumber: string
+                  senderRoutingNumber: string
+                  senderAddress1: string
+                  senderAddress2: string
+                  senderCity: string
+                  senderState: string
+                  senderZip: string
+                  senderCountry: string
+                  senderBankName: string
+                  senderBankAddress1: string
+                  senderBankAddress2: string
+                  senderBankCity: string
+                  senderBankState: string
+                  senderBankZip: string
+                  confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/fednow/download:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/fednow/download - GET
+      description: Downloads all received FedNow transactions
+      operationId: get-incoming-fednow-download
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+              - id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+              example:
+              - id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /incoming/rtp/download:
+    get:
+      tags:
+      - IncomingPayments
+      summary: /incoming/rtp/download - GET
+      description: Downloads all received Rtp transactions
+      operationId: get-incoming-rtp-download
+      parameters:
+      - name: fromDate
+        in: query
+        description: The start date from which to search
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The end date for which to search
+        schema:
+          type: string
+          format: date-time
+      - name: accountId
+        in: query
+        description: The account ID for which to search
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+              - id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+              example:
+              - id: string
+                amount: 0
+                accountNumber: string
+                description: string
+                referenceId: string
+                isMemoPosted: true
+                createdAt: string
+                status: Initiated
+                paymentDate: string
+                deliveryDate: string
+                notes: string
+                senderName: string
+                senderAccountNumber: string
+                senderRoutingNumber: string
+                senderAddress1: string
+                senderAddress2: string
+                senderCity: string
+                senderState: string
+                senderZip: string
+                senderCountry: string
+                senderBankName: string
+                senderBankAddress1: string
+                senderBankAddress2: string
+                senderBankCity: string
+                senderBankState: string
+                senderBankZip: string
+                confirmationNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
+      enum:
+      - FedNow
+      - Rtp
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        accountNumber:
+          type: string
+          description: The account number for which the payment was received
+        description:
+          type:
+          - string
+          - 'null'
+          description: The payment description
+        referenceId:
+          type:
+          - string
+          - 'null'
+          description: The referenceID of the payment, sent by the originator
+        isMemoPosted:
+          type: boolean
+          description: Indicates if the payment is memo or hard posted
+        createdAt:
+          type: string
+          description: The datetime at which the payment was received
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto'
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was intended to be delivered
+          format: date-time
+        deliveryDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was actually delivered
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes on the payment, from the sender
+        senderName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the sender
+        senderAccountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the sender
+        senderRoutingNumber:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sender
+        senderAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the sender
+        senderAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the sender
+        senderCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the sender
+        senderState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the sender
+        senderZip:
+          type:
+          - string
+          - 'null'
+          description: The zipcode of the sender
+        senderCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the sender
+        senderBankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the senders' bank
+        senderBankAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the senders' bank
+        senderBankAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the senders' bank
+        senderBankCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the senders' bank
+        senderBankState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the senders' bank
+        senderBankZip:
+          type:
+          - string
+          - 'null'
+          description: The zip code of the senders' bank
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
+        rail:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Returned
+      - Reversed
+      type: string
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        accountNumber:
+          type: string
+          description: The account number for which the payment was received
+        description:
+          type:
+          - string
+          - 'null'
+          description: The payment description
+        referenceId:
+          type:
+          - string
+          - 'null'
+          description: The referenceID of the payment, sent by the originator
+        isMemoPosted:
+          type: boolean
+          description: Indicates if the payment is memo or hard posted
+        createdAt:
+          type: string
+          description: The datetime at which the payment was received
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto'
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was intended to be delivered
+          format: date-time
+        deliveryDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was actually delivered
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes on the payment, from the sender
+        senderName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the sender
+        senderAccountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the sender
+        senderRoutingNumber:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sender
+        senderAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the sender
+        senderAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the sender
+        senderCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the sender
+        senderState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the sender
+        senderZip:
+          type:
+          - string
+          - 'null'
+          description: The zipcode of the sender
+        senderCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the sender
+        senderBankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the senders' bank
+        senderBankAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the senders' bank
+        senderBankAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the senders' bank
+        senderBankCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the senders' bank
+        senderBankState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the senders' bank
+        senderBankZip:
+          type:
+          - string
+          - 'null'
+          description: The zip code of the senders' bank
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        accountNumber:
+          type: string
+          description: The account number for which the payment was received
+        description:
+          type:
+          - string
+          - 'null'
+          description: The payment description
+        referenceId:
+          type:
+          - string
+          - 'null'
+          description: The referenceID of the payment, sent by the originator
+        isMemoPosted:
+          type: boolean
+          description: Indicates if the payment is memo or hard posted
+        createdAt:
+          type: string
+          description: The datetime at which the payment was received
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto'
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was intended to be delivered
+          format: date-time
+        deliveryDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was actually delivered
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes on the payment, from the sender
+        senderName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the sender
+        senderAccountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the sender
+        senderRoutingNumber:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sender
+        senderAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the sender
+        senderAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the sender
+        senderCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the sender
+        senderState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the sender
+        senderZip:
+          type:
+          - string
+          - 'null'
+          description: The zipcode of the sender
+        senderCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the sender
+        senderBankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the senders' bank
+        senderBankAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the senders' bank
+        senderBankAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the senders' bank
+        senderBankCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the senders' bank
+        senderBankState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the senders' bank
+        senderBankZip:
+          type:
+          - string
+          - 'null'
+          description: The zip code of the senders' bank
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

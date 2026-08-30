@@ -1,0 +1,601 @@
+openapi: 3.2.0
+info:
+  title: Accounts Interest Payments API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/accounts/v1
+tags:
+- name: InterestPayments
+paths:
+  /{accountId}/InterestPayments:
+    post:
+      tags:
+      - InterestPayments
+      summary: /{accountId}/InterestPayments - POST
+      operationId: post-accountid-interestpayments
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: x-idempotency-key
+        in: header
+        description: Unique request idenitfier for idempotency.
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 6a788875-be89-43ce-b6b1-580183430897
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.InterestPaymentDto'
+            example:
+              amount: 0
+              description: string
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.InterestPaymentDto'
+            example:
+              amount: 0
+              description: string
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.InterestPaymentDto'
+            example:
+              amount: 0
+              description: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid'
+              example:
+                id: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    get:
+      tags:
+      - InterestPayments
+      summary: /{accountId}/InterestPayments - GET
+      operationId: get-accountid-interestpayments
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TransactionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TransactionDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - description: string
+                  transactionCode: string
+                  transactionCodeDescription: string
+                  effectiveDate: string
+                  postingDate: string
+                  amount: 0
+                  serialNumber: string
+                  controlNumber: string
+                  confirmationNumber: string
+                  transactionType: string
+                  rail: BookTransfer
+                  id: string
+                  coreTransactionId: string
+                  processedAt: string
+                  checkNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TransactionDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - description: string
+                  transactionCode: string
+                  transactionCodeDescription: string
+                  effectiveDate: string
+                  postingDate: string
+                  amount: 0
+                  serialNumber: string
+                  controlNumber: string
+                  confirmationNumber: string
+                  transactionType: string
+                  rail: BookTransfer
+                  id: string
+                  coreTransactionId: string
+                  processedAt: string
+                  checkNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /{accountId}/InterestPayments/{interestPaymentId}:
+    get:
+      tags:
+      - InterestPayments
+      summary: /{accountId}/InterestPayments/{interestPaymentId} - GET
+      operationId: get-accountid-interestpayments-interestpaymentid
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: interestPaymentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionDto'
+              example:
+                description: string
+                transactionCode: string
+                transactionCodeDescription: string
+                effectiveDate: string
+                postingDate: string
+                amount: 0
+                serialNumber: string
+                controlNumber: string
+                confirmationNumber: string
+                transactionType: string
+                rail: BookTransfer
+                id: string
+                coreTransactionId: string
+                processedAt: string
+                checkNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionDto'
+              example:
+                description: string
+                transactionCode: string
+                transactionCodeDescription: string
+                effectiveDate: string
+                postingDate: string
+                amount: 0
+                serialNumber: string
+                controlNumber: string
+                confirmationNumber: string
+                transactionType: string
+                rail: BookTransfer
+                id: string
+                coreTransactionId: string
+                processedAt: string
+                checkNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Accounts.Contracts.Commands.TransactionCore.TransactionRail:
+      enum:
+      - BookTransfer
+      - Wire
+      - Ach
+      - Rtp
+      - FedNow
+      - InterestPayment
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.TransactionDto:
+      required:
+      - description
+      - transactionCode
+      - transactionType
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the transaction
+        transactionCode:
+          type: string
+          description: The transaction code of the transaction
+        transactionCodeDescription:
+          type:
+          - string
+          - 'null'
+          description: The description of transaction code
+        effectiveDate:
+          type:
+          - string
+          - 'null'
+          description: The effective date of the transaction
+          format: date-time
+        postingDate:
+          type:
+          - string
+          - 'null'
+          description: The date the transaction was posted
+          format: date-time
+        amount:
+          type: number
+          description: The amount of the transaction
+          format: double
+        serialNumber:
+          type:
+          - string
+          - 'null'
+          description: 'This property is deprecated. Use ConfirmationNumber instead.
+
+            The serial number of the payment.  Typically, this is the check number, if available'
+          deprecated: true
+        controlNumber:
+          type:
+          - string
+          - 'null'
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+        transactionType:
+          type: string
+          description: 'The type of transaction.
+
+            D = Debit
+
+            C = Credit
+
+            F = Float
+
+            M = Miscellaneous Service Charge
+
+            X = Reversed'
+        rail:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Commands.TransactionCore.TransactionRail'
+        id:
+          type:
+          - string
+          - 'null'
+          description: The CUBIX ID of the payment associated with this transaction.  This will be null if the payment was not originated or received within the CUBIX platform
+          format: uuid
+        coreTransactionId:
+          type:
+          - string
+          - 'null'
+          description: The transaction id within the banking core.  This value will be null for intraday transactions
+        processedAt:
+          type:
+          - string
+          - 'null'
+          description: The date the transaction was processed
+          format: date-time
+        checkNumber:
+          type:
+          - string
+          - 'null'
+          description: Check number which is Serial Number
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.InterestPaymentDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TransactionDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionDto'
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

@@ -1,0 +1,543 @@
+openapi: 3.2.0
+info:
+  title: IT Operations Correspondent Instructions API
+  version: v1
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/itoperations/v1
+tags:
+- name: CorrespondentInstructions
+paths:
+  /CorrespondentInstructions:
+    get:
+      tags:
+      - CorrespondentInstructions
+      summary: /CorrespondentInstructions - GET
+      description: 'Searches for known correspondence instructions (ssi) for various payment rails, given a target beneficiary bank (either ABA or BIC).
+
+        Will only return results for USD.
+
+        Banks may have multiple or zero results, and instructions should be validated with beneficiary banks prior to production usage'
+      operationId: get-correspondentinstructions
+      parameters:
+      - name: rail
+        in: query
+        description: The payment rail to search for.  Most typically 'fedwire' or 'ach', but may also be used to search itnernational settlement systems such as TISS, ZECH, etc.
+        schema:
+          type: string
+      - name: abaNumber
+        in: query
+        description: The ABA of the desired beneficiary bank, if the bank is US based
+        schema:
+          type: string
+      - name: bic
+        in: query
+        description: The BIC of the desired beneficiary bank
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - receiverAba: string
+                  receiverName: string
+                  isPreferredSsi: true
+                  clearingSystem: string
+                  intermediateLocationId: 0
+                  intermediateName: string
+                  intermediateAddress: string
+                  intermediateCity: string
+                  intermediateStateOrProvince: string
+                  intermediatePostalCode: string
+                  intermediateCountry: string
+                  intermediateBic: string
+                  intermediateAba: string
+                  beneficiaryLocationId: 0
+                  beneficiaryName: string
+                  beneficiaryAddress: string
+                  beneficiaryCity: string
+                  beneficiaryStateOrProvince: string
+                  beneficiaryPostalCode: string
+                  beneficiaryCountry: string
+                  beneficiaryBic: string
+                  alternateBeneficiaryBic: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              example:
+                pageSize: 0
+                pageOffset: 0
+                totalPages: 0
+                totalItemCount: 0
+                items:
+                - receiverAba: string
+                  receiverName: string
+                  isPreferredSsi: true
+                  clearingSystem: string
+                  intermediateLocationId: 0
+                  intermediateName: string
+                  intermediateAddress: string
+                  intermediateCity: string
+                  intermediateStateOrProvince: string
+                  intermediatePostalCode: string
+                  intermediateCountry: string
+                  intermediateBic: string
+                  intermediateAba: string
+                  beneficiaryLocationId: 0
+                  beneficiaryName: string
+                  beneficiaryAddress: string
+                  beneficiaryCity: string
+                  beneficiaryStateOrProvince: string
+                  beneficiaryPostalCode: string
+                  beneficiaryCountry: string
+                  beneficiaryBic: string
+                  alternateBeneficiaryBic: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+  /CorrespondentInstructions/download:
+    get:
+      tags:
+      - CorrespondentInstructions
+      summary: /CorrespondentInstructions/download?rail={rail} - GET
+      operationId: get-correspondentinstructions-download-rail-rail
+      parameters:
+      - name: rail
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: abaNumber
+        in: query
+        schema:
+          type: string
+      - name: bic
+        in: query
+        schema:
+          type: string
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              example:
+              - receiverAba: string
+                receiverName: string
+                isPreferredSsi: true
+                clearingSystem: string
+                intermediateLocationId: 0
+                intermediateName: string
+                intermediateAddress: string
+                intermediateCity: string
+                intermediateStateOrProvince: string
+                intermediatePostalCode: string
+                intermediateCountry: string
+                intermediateBic: string
+                intermediateAba: string
+                beneficiaryLocationId: 0
+                beneficiaryName: string
+                beneficiaryAddress: string
+                beneficiaryCity: string
+                beneficiaryStateOrProvince: string
+                beneficiaryPostalCode: string
+                beneficiaryCountry: string
+                beneficiaryBic: string
+                alternateBeneficiaryBic: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+              example:
+              - receiverAba: string
+                receiverName: string
+                isPreferredSsi: true
+                clearingSystem: string
+                intermediateLocationId: 0
+                intermediateName: string
+                intermediateAddress: string
+                intermediateCity: string
+                intermediateStateOrProvince: string
+                intermediatePostalCode: string
+                intermediateCountry: string
+                intermediateBic: string
+                intermediateAba: string
+                beneficiaryLocationId: 0
+                beneficiaryName: string
+                beneficiaryAddress: string
+                beneficiaryCity: string
+                beneficiaryStateOrProvince: string
+                beneficiaryPostalCode: string
+                beneficiaryCountry: string
+                beneficiaryBic: string
+                alternateBeneficiaryBic: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto:
+      type: object
+      properties:
+        receiverAba:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this will be the ABA number of the beneficiary bank
+        receiverName:
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this will be the name of the beneficiary bank
+        isPreferredSsi:
+          type: boolean
+          description: Whether or not this is the preferred SSI for this bank.  If multiple results are found, then those marked as preferred should be favored
+        clearingSystem:
+          type:
+          - string
+          - 'null'
+          description: The clearing system for the correspondent instructions (SSI).  Typically fedwire or ach, but could also be any foreign clearing system
+        intermediateLocationId:
+          type:
+          - integer
+          - 'null'
+          description: The location id of the intermediate bank location, if one exists
+          format: int64
+        intermediateName:
+          type:
+          - string
+          - 'null'
+          description: The name of the intermediary bank, if one exists
+        intermediateAddress:
+          type:
+          - string
+          - 'null'
+          description: The street address of the intermediary bank, if one exists
+        intermediateCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the intermediary bank, if one exists
+        intermediateStateOrProvince:
+          type:
+          - string
+          - 'null'
+          description: The state/province of the intermediary bank, if one exists
+        intermediatePostalCode:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the intermediary bank, if one exists
+        intermediateCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the intermediary bank, if one exists
+        intermediateBic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the intermediary bank, if one exists
+        intermediateAba:
+          type:
+          - string
+          - 'null'
+          description: The ABA of the intermediary bank, if one exists
+        beneficiaryLocationId:
+          type: integer
+          description: The location id of the beneficiary bank
+          format: int64
+        beneficiaryName:
+          type:
+          - string
+          - 'null'
+          description: The name of the benficiary bank
+        beneficiaryAddress:
+          type:
+          - string
+          - 'null'
+          description: The street address of the beneficiary bank
+        beneficiaryCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the beneficiary bank
+        beneficiaryStateOrProvince:
+          type:
+          - string
+          - 'null'
+          description: The state/province of the beneficiary bank
+        beneficiaryPostalCode:
+          type:
+          - string
+          - 'null'
+          description: The postal code of the beneficiary bank
+        beneficiaryCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the beneficiary bank
+        beneficiaryBic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the beneficiary bank
+        alternateBeneficiaryBic:
+          type:
+          - string
+          - 'null'
+          description: The Alternate BIC of the beneficiary bank (BIC-8)
+      additionalProperties: false
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true

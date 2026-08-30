@@ -1,0 +1,985 @@
+openapi: 3.2.0
+info:
+  title: Customers Bank Account Access API
+  version: '1.0'
+  description: 'Operations tagged AccountAccess across 4 of this provider''s published API definitions: customers-bank-ach-openapi.json, customers-bank-instantpayments-openapi.json, customers-bank-transfers-openapi.json, customers-bank-wires-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://cubi-sandbox-api.customersbank.com/ach/v1
+- url: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
+- url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+- url: https://cubi-sandbox-api.customersbank.com/Wires/v2
+tags:
+- name: AccountAccess
+paths:
+  /AccountAccess/{id}:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess/{id} - GET
+      description: Gets the enablement type for a given account
+      operationId: get-accountaccess-id
+      parameters:
+      - name: id
+        in: path
+        description: "T\n            he ID of the account"
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                id: string
+                controlType: Single
+                accountNumber: string
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
+              example:
+                id: string
+                controlType: Single
+                accountNumber: string
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/ach/v1
+  /accountaccess/fednow/{accountId}:
+    get:
+      tags:
+      - AccountAccess
+      summary: /accountaccess/fednow/{accountId} - GET
+      description: Get account enabled for FedNow by account id
+      operationId: get-accountaccess-fednow-accountid
+      parameters:
+      - name: accountId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.FedNowAccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.FedNowAccountAccessDto'
+              example:
+                accountId: string
+                isFedNowEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.FedNowAccountAccessDto'
+              example:
+                accountId: string
+                isFedNowEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
+  /accountaccess/rtp/{accountId}:
+    get:
+      tags:
+      - AccountAccess
+      summary: /accountaccess/rtp/{accountId} - GET
+      description: Get account enabled for RTP by account id
+      operationId: get-accountaccess-rtp-accountid
+      parameters:
+      - name: accountId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto'
+              example:
+                accountId: string
+                isRtpEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto'
+              example:
+                accountId: string
+                isRtpEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/InstantPayments/v1
+  /AccountAccess/{accountId}/enabled:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess/{accountId}/enabled - GET
+      operationId: get-accountaccess-accountid-enabled
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+                accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+                accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+  /AccountAccess/enabled:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess/enabled - GET
+      operationId: get-accountaccess-enabled
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+              - accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+              - accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+  /AccountAccess:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess - GET
+      operationId: get-accountaccess
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+                accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+                accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+  /AccountAccess/enabled/download:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess/enabled/download - GET
+      operationId: get-accountaccess-enabled-download
+      parameters:
+      - name: paginateResults
+        in: query
+        schema:
+          type: boolean
+      - name: page
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: perPage
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: sortOn
+        in: query
+        schema:
+          type: string
+      - name: sortAscending
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+              - accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto'
+              example:
+              - accountId: string
+                accountName: string
+                accountNumberLast4Digits: string
+                isTransfersEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
+  /AccountAccess/{accountId}:
+    get:
+      tags:
+      - AccountAccess
+      summary: /AccountAccess/{accountId} - GET
+      description: Returns the api wires settings for a given account
+      operationId: get-accountaccess-accountid
+      parameters:
+      - name: accountId
+        in: path
+        description: The id of the account
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountAccessDto'
+              examples:
+                default:
+                  value: null
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountAccessDto'
+              example:
+                accountId: string
+                isWiresEnabled: true
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountAccessDto'
+              example:
+                accountId: string
+                isWiresEnabled: true
+        '400':
+          description: BadRequest
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.1
+                title: One or more validation errors occurred.
+                status: 400
+                traceId: string
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.2
+                title: Unauthorized
+                status: 401
+                traceId: string
+        '403':
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.4
+                title: Forbidden
+                status: 403
+                traceId: string
+        '404':
+          description: NotFound
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.5.5
+                title: Not Found
+                status: 404
+                traceId: string
+        '422':
+          description: UnprocessableEntity
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ValidationProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc4918#section-11.2
+                title: Unprocessable Entity
+                status: 422
+                traceId: string
+        '500':
+          description: InternalServerError
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails'
+              example:
+                type: https://tools.ietf.org/html/rfc9110#section-15.6.1
+                title: An error occurred while processing your request.
+                status: 500
+                traceId: string
+    servers:
+    - url: https://cubi-sandbox-api.customersbank.com/Wires/v2
+components:
+  schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type: string
+          description: The account number
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto:
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        isRtpEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.AccountAccess.FedNowAccountAccessDto:
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        isFedNowEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto:
+      required:
+      - accountName
+      - accountNumberLast4Digits
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        accountName:
+          type: string
+        accountNumberLast4Digits:
+          type: string
+        isTransfersEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.AccountAccessDto:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: The Id (uuid) of the account
+          format: uuid
+        isWiresEnabled:
+          type: boolean
+          description: Whether or not outbound wires are enabled for the account
+      additionalProperties: false
+x-refined-from:
+- customers-bank-ach-openapi.json
+- customers-bank-instantpayments-openapi.json
+- customers-bank-transfers-openapi.json
+- customers-bank-wires-openapi.json
+x-readme:
+  explorer-enabled: false
+  proxy-enabled: true
