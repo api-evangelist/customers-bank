@@ -60,48 +60,6 @@ created: '2026-07-23'
 modified: '2026-07-23'
 specificationVersion: '0.23'
 apis:
-- aid: customers-bank:customers-bank-accountaccess-api
-  name: Customers Bank Account Access API
-  description: The AccountAccess API from Customers Bank — 8 operation(s) for accountaccess.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Account Access
-  tags_raw:
-  - AccountAccess
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-accountaccess-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
 - aid: customers-bank:customers-bank-accountcontroltype-api
   name: Customers Bank Account Control Type API
   description: >-
@@ -227,48 +185,6 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-addressbook-api
-  name: Customers Bank Address Book API
-  description: The AddressBook API from Customers Bank — 15 operation(s) for addressbook.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Address Book
-  tags_raw:
-  - AddressBook
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-addressbook-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
 - aid: customers-bank:customers-bank-authenticate-api
   name: Customers Bank Authenticate API
   description: Provides endpoints to enable authentication to the Cubi api's
@@ -349,48 +265,6 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-booktransfers-api
-  name: Customers Bank Book Transfers API
-  description: The BookTransfers API from Customers Bank — 6 operation(s) for booktransfers.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Book Transfers
-  tags_raw:
-  - BookTransfers
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-booktransfers-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
 - aid: customers-bank:customers-bank-booktransfersearch-api
   name: Customers Bank Book Transfer Search API
   description: The BookTransferSearch API from Customers Bank — 2 operation(s) for booktransfersearch.
@@ -401,48 +275,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/customers-bank-booktransfersearch-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-clientcredentials-api
-  name: Customers Bank Client Credentials API
-  description: The ClientCredentials API from Customers Bank — 5 operation(s) for clientcredentials.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Client Credentials
-  tags_raw:
-  - ClientCredentials
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-clientcredentials-api-openapi.yml
   - type: Documentation
     url: https://cubiapi.readme.io/docs/accounts-3
   - type: APIReference
@@ -564,48 +396,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/customers-bank-eventhistory-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-eventtypes-api
-  name: Customers Bank Event Types API
-  description: The EventTypes API from Customers Bank — 2 operation(s) for eventtypes.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Event Types
-  tags_raw:
-  - EventTypes
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-eventtypes-api-openapi.yml
   - type: Documentation
     url: https://cubiapi.readme.io/docs/accounts-3
   - type: APIReference
@@ -1245,48 +1035,6 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-referencedata-api
-  name: Customers Bank Reference Data API
-  description: Returns accounts related codes and definitions
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - Reference Data
-  tags_raw:
-  - ReferenceData
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-referencedata-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
 - aid: customers-bank:customers-bank-searchincomingwiresv-api
   name: Customers Bank Search Incoming Wires V API
   description: >-
@@ -1491,48 +1239,6 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-usersettings-api
-  name: Customers Bank User Settings API
-  description: The UserSettings API from Customers Bank — 1 operation(s) for usersettings.
-  humanURL: https://cubiapi.readme.io/docs/accounts-3
-  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
-  tags:
-  - User Settings
-  tags_raw:
-  - UserSettings
-  properties:
-  - type: OpenAPI
-    url: openapi/customers-bank-usersettings-api-openapi.yml
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/accounts-3
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/getting-started
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/loan-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-application
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-banks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/partners-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-customers
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/authenticate-1
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/post-oauth2-token
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/book-transfers
-  - type: APIReference
-    url: https://cubiapi.readme.io/reference/get-addressbook-entries
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/webhooks-1
-  - type: Documentation
-    url: https://cubiapi.readme.io/docs/outgoing-wires
 - aid: customers-bank:customers-bank-webhooks-api
   name: Customers Bank Webhooks API
   description: The Webhooks API from Customers Bank — 8 operation(s) for webhooks.
@@ -1575,18 +1281,296 @@ apis:
     url: https://cubiapi.readme.io/docs/webhooks-1
   - type: Documentation
     url: https://cubiapi.readme.io/docs/outgoing-wires
-- aid: customers-bank:customers-bank-webpubsub-api
-  name: Customers Bank Web Pub Sub API
-  description: The WebPubSub API from Customers Bank — 1 operation(s) for webpubsub.
+- aid: customers-bank:customers-bank-account-access-api
+  name: Customers Bank Account Access API
+  description: The Account Access API from Customers Bank — 8 operation(s) for account access.
   humanURL: https://cubiapi.readme.io/docs/accounts-3
   baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
   tags:
-  - Web PubSub
-  tags_raw:
-  - WebPubSub
+  - Account Access
   properties:
   - type: OpenAPI
-    url: openapi/customers-bank-webpubsub-api-openapi.yml
+    url: openapi/customers-bank-account-access-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-address-book-api
+  name: Customers Bank Address Book API
+  description: The Address Book API from Customers Bank — 15 operation(s) for address book.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Address Book
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-address-book-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-book-transfers-api
+  name: Customers Bank Book Transfers API
+  description: The Book Transfers API from Customers Bank — 6 operation(s) for book transfers.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Book Transfers
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-book-transfers-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-client-credentials-api
+  name: Customers Bank Client Credentials API
+  description: The Client Credentials API from Customers Bank — 5 operation(s) for client credentials.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Client Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-client-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-event-types-api
+  name: Customers Bank Event Types API
+  description: The Event Types API from Customers Bank — 2 operation(s) for event types.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Event Types
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-event-types-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-reference-data-api
+  name: Customers Bank Reference Data API
+  description: Returns accounts related codes and definitions
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-user-settings-api
+  name: Customers Bank User Settings API
+  description: The User Settings API from Customers Bank — 1 operation(s) for user settings.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - User Settings
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-user-settings-api-openapi.yml
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/accounts-3
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/getting-started
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/loan-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-application
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-banks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/partners-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-customers
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/authenticate-1
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/post-oauth2-token
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/book-transfers
+  - type: APIReference
+    url: https://cubiapi.readme.io/reference/get-addressbook-entries
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/webhooks-1
+  - type: Documentation
+    url: https://cubiapi.readme.io/docs/outgoing-wires
+- aid: customers-bank:customers-bank-web-pub-sub-api
+  name: Customers Bank Web Pub Sub API
+  description: The Web Pub Sub API from Customers Bank — 1 operation(s) for web pub sub.
+  humanURL: https://cubiapi.readme.io/docs/accounts-3
+  baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
+  tags:
+  - Web Pub Sub
+  properties:
+  - type: OpenAPI
+    url: openapi/customers-bank-web-pub-sub-api-openapi.yml
   - type: Documentation
     url: https://cubiapi.readme.io/docs/accounts-3
   - type: APIReference
