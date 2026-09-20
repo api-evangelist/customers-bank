@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 15
+edge_count: 18
 edges:
 - tag: LoanApplication
   spec_file: customers-bank-loanapplication-api-openapi.yml
@@ -115,6 +115,30 @@ edges:
   reason: Explicitly incoming ACH payment transactions at a bank, i.e. the domestic ACH clearing/settlement
     flow. L2 chosen because the capability names ACH clearing directly; some chance it is better read
     as generic payment processing.
+- tag: EventHistory
+  spec_file: customers-bank-eventhistory-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.74
+  evidence: '''Webhooks Event History API''; POST /EventHistory/{id}/replay; ''Cubi.Webhooks.WebApi.Dtos.EventRunDto'''
+  reason: Delivery history and replay of outbound webhook events — webhook delivery reliability within
+    Webhook & Event Subscription Management. Arguably pure plumbing, but the capability explicitly covers
+    webhook delivery reliability.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: ClientCredentials
+  spec_file: customers-bank-client-credentials-api-openapi.yml
+  capability_id: BC-4270.40
+  capability_id_l1: BC-4270
+  capability_name: Developer Identity & Credential Management
+  confidence: 0.72
+  evidence: POST /client-credentials, 'ClientCredentialCreatedDto', 'POST /client-credentials/{clientId}/rotate'
+    — 'Partners Client Credentials API'
+  reason: Issuance, update, deletion and rotation of API client credentials for partner developers integrating
+    with the platform — matches Developer Identity & Credential Management. Some overlap with generic
+    IAM, hence moderate confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
+  reanchored_from: customers-bank-clientcredentials-api-openapi.yml
 - tag: Accounts
   spec_file: customers-bank-accounts-api-openapi.yml
   capability_id: BC-1330.10
@@ -126,6 +150,18 @@ edges:
   reason: Retrieve/update bank accounts with balances, state and transaction history for a chartered bank's
     BaaS platform — demand deposit account management. Cannot fully exclude broader account-lifecycle
     servicing, so 0.7.
+- tag: EventTypes
+  spec_file: customers-bank-event-types-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: '''Webhooks Event Types API''; schema names ''wires.outgoing-approval-denied'', ''transfers.book-received'''
+  reason: Catalogue of subscribable outbound event schemas for webhook consumers, matching event schema
+    management under Webhook & Event Subscription Management. Read-only reference surface, so moderate
+    confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
+  reanchored_from: customers-bank-eventtypes-api-openapi.yml
 - tag: InterestPayments
   spec_file: customers-bank-interestpayments-api-openapi.yml
   capability_id: BC-1330.50
