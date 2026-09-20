@@ -54,7 +54,8 @@ edges:
     of loans. Evidence does not cleanly separate origination closing from ongoing loan servicing, so only
     the L1 credit & lending capability is asserted.
 - tag: BookTransfers
-  spec_file: customers-bank-booktransfers-api-openapi.yml
+  spec_file: customers-bank-book-transfers-api-openapi.yml
+  reanchored_from: customers-bank-booktransfers-api-openapi.yml
   capability_id: BC-1340.10
   capability_id_l1: BC-1340
   capability_name: Payment Initiation Management
