@@ -789,6 +789,100 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.ITOperations.WebApi.Dto.BicDto:
+      type: object
+      properties:
+        locationId:
+          type: integer
+          description: The location id for the bank
+          format: int32
+        bankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the bank
+        bic:
+          type:
+          - string
+          - 'null'
+          description: The BIC for the bank
+        alternateBic:
+          type:
+          - string
+          - 'null'
+          description: The alternate BIC (BIC-8)
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.BicDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.BicDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.BankDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.BankDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -814,26 +908,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.BankDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.BankDto'
-      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.AbaDto:
       type: object
       properties:
@@ -892,57 +966,6 @@ components:
           - boolean
           - 'null'
           description: True if this ABA supports RTP; false otherwise
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.BicDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.BicDto'
       additionalProperties: false
     Cubi.ITOperations.WebApi.Dto.BankDto:
       type: object
@@ -1006,29 +1029,6 @@ components:
           - string
           - 'null'
           description: The city for the bank location
-      additionalProperties: false
-    Cubi.ITOperations.WebApi.Dto.BicDto:
-      type: object
-      properties:
-        locationId:
-          type: integer
-          description: The location id for the bank
-          format: int32
-        bankName:
-          type:
-          - string
-          - 'null'
-          description: The name of the bank
-        bic:
-          type:
-          - string
-          - 'null'
-          description: The BIC for the bank
-        alternateBic:
-          type:
-          - string
-          - 'null'
-          description: The alternate BIC (BIC-8)
       additionalProperties: false
 x-readme:
   explorer-enabled: false

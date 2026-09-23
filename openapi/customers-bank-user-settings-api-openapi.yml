@@ -5,12 +5,12 @@ info:
 servers:
 - url: https://cubi-sandbox-api.customersbank.com/partners/v1
 tags:
-- name: UserSettings
+- name: User Settings
 paths:
   /user-settings/{settingName}:
     get:
       tags:
-      - UserSettings
+      - User Settings
       summary: /user-settings/{settingName} - GET
       operationId: get-user-settings-settingname
       parameters:
@@ -68,7 +68,7 @@ paths:
                 traceId: string
     put:
       tags:
-      - UserSettings
+      - User Settings
       summary: /user-settings/{settingName} - PUT
       operationId: put-user-settings-settingname
       parameters:
@@ -175,6 +175,18 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Partners.WebApi.Dtos.UserSettingDto:
+      type: object
+      properties:
+        settingName:
+          type:
+          - string
+          - 'null'
+        settingValue:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -231,18 +243,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Partners.WebApi.Dtos.UserSettingDto:
-      type: object
-      properties:
-        settingName:
-          type:
-          - string
-          - 'null'
-        settingValue:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

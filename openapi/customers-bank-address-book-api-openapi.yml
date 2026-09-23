@@ -5,12 +5,12 @@ info:
 servers:
 - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
 tags:
-- name: AddressBook
+- name: Address Book
 paths:
   /AddressBook/entries:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries - POST
       operationId: post-addressbook-entries
       parameters:
@@ -120,7 +120,7 @@ paths:
                 traceId: string
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries - GET
       operationId: get-addressbook-entries
       parameters:
@@ -282,7 +282,7 @@ paths:
   /AddressBook/entries/{id}/approve:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/{id}/approve - POST
       operationId: post-addressbook-entries-id-approve
       parameters:
@@ -361,7 +361,7 @@ paths:
   /AddressBook/entries/{id}/decline:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/{id}/decline - POST
       operationId: post-addressbook-entries-id-decline
       parameters:
@@ -440,7 +440,7 @@ paths:
   /AddressBook/entries/{id}/cancel:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/{id}/cancel - POST
       operationId: post-addressbook-entries-id-cancel
       parameters:
@@ -519,7 +519,7 @@ paths:
   /AddressBook/entries/{id}:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/{id} - GET
       operationId: get-addressbook-entries-id
       parameters:
@@ -662,7 +662,7 @@ paths:
                 traceId: string
     delete:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/{id} - DELETE
       operationId: delete-addressbook-entries-id
       parameters:
@@ -745,7 +745,7 @@ paths:
   /AddressBook/entries/requests:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/requests - GET
       operationId: get-addressbook-entries-requests
       parameters:
@@ -892,7 +892,7 @@ paths:
   /AddressBook/requests:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/requests - GET
       operationId: get-addressbook-requests
       parameters:
@@ -1011,7 +1011,7 @@ paths:
   /AddressBook/requests/{id}/approve:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/requests/{id}/approve - POST
       operationId: post-addressbook-requests-id-approve
       parameters:
@@ -1090,7 +1090,7 @@ paths:
   /AddressBook/requests/{id}/decline:
     post:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/requests/{id}/decline - POST
       operationId: post-addressbook-requests-id-decline
       parameters:
@@ -1169,7 +1169,7 @@ paths:
   /AddressBook/entries/download:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/download - GET
       operationId: get-addressbook-entries-download
       parameters:
@@ -1327,7 +1327,7 @@ paths:
   /AddressBook/entries/requests/download:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/entries/requests/download - GET
       operationId: get-addressbook-entries-requests-download
       parameters:
@@ -1474,7 +1474,7 @@ paths:
   /AddressBook/availableAccounts:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/availableAccounts?partnerName={partnerName} - GET
       operationId: get-addressbook-availableaccounts-partnername-partnername
       parameters:
@@ -1617,7 +1617,7 @@ paths:
   /AddressBook/availableAccounts/download:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/availableAccounts/download?partnerName={partnerName} - GET
       operationId: get-addressbook-availableaccounts-download-partnername-partnername
       parameters:
@@ -1756,7 +1756,7 @@ paths:
   /AddressBook/requests/download:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/requests/download - GET
       operationId: get-addressbook-requests-download
       parameters:
@@ -1871,7 +1871,7 @@ paths:
   /AddressBook/accountlinksettings/{id}:
     get:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/accountlinksettings/{id} - GET
       operationId: get-addressbook-accountlinksettings-id
       parameters:
@@ -1962,7 +1962,7 @@ paths:
                 traceId: string
     put:
       tags:
-      - AddressBook
+      - Address Book
       summary: /AddressBook/accountlinksettings/{id} - PUT
       operationId: put-addressbook-accountlinksettings-id
       parameters:
@@ -2060,82 +2060,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
-      required:
-      - accountName
-      - accountNumberLast4Digits
-      - partnerName
-      type: object
-      properties:
-        accountId:
-          type: string
-          format: uuid
-        partnerId:
-          type: string
-          format: uuid
-        accountNumberLast4Digits:
-          type: string
-        accountName:
-          type: string
-        partnerName:
-          type: string
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus:
-      enum:
-      - Initiated
-      - ApprovalRequired
-      - Declined
-      - Requested
-      - RequestDeclined
-      - Linked
-      - Deleted
-      - Locked
-      type: string
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
-      additionalProperties: false
     Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
       required:
       - requesterAccountName
@@ -2167,6 +2091,95 @@ components:
         requestedAt:
           type: string
           format: date-time
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto:
+      type: object
+      properties:
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto:
+      type: object
+      properties:
+        requesterAccountId:
+          type: string
+          format: uuid
+        targetAccountId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
+      required:
+      - accountName
+      - accountNumberLast4Digits
+      - partnerName
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        accountNumberLast4Digits:
+          type: string
+        accountName:
+          type: string
+        partnerName:
+          type: string
       additionalProperties: false
     Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
       required:
@@ -2255,35 +2268,18 @@ components:
           type: string
           format: date-time
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto:
-      type: object
-      properties:
-        defaultPublicMemo:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus:
+      enum:
+      - Initiated
+      - ApprovalRequired
+      - Declined
+      - Requested
+      - RequestDeclined
+      - Linked
+      - Deleted
+      - Locked
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
         type:
@@ -2307,19 +2303,40 @@ components:
           type:
           - string
           - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
       type: object
       properties:
-        id:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto:
+      type: object
+      properties:
+        accountLinkId:
           type: string
           format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
       type: object
@@ -2341,29 +2358,12 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
       additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto:
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
       type: object
       properties:
-        requesterAccountId:
+        id:
           type: string
           format: uuid
-        targetAccountId:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto:
-      type: object
-      properties:
-        accountLinkId:
-          type: string
-          format: uuid
-        partnerId:
-          type: string
-          format: uuid
-        defaultPublicMemo:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
 x-readme:
   explorer-enabled: false

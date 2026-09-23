@@ -5,12 +5,12 @@ info:
 servers:
 - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
 tags:
-- name: BookTransfers
+- name: Book Transfers
 paths:
   /:
     post:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: / - POST
       operationId: post
       parameters:
@@ -152,7 +152,7 @@ paths:
                 traceId: string
     get:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /?id={id} - GET
       operationId: get-id-id
       parameters:
@@ -364,7 +364,7 @@ paths:
   /{id}:
     get:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /{id} - GET
       operationId: get-id
       parameters:
@@ -530,7 +530,7 @@ paths:
   /{id}/approve:
     post:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /{id}/approve - POST
       operationId: post-id-approve
       parameters:
@@ -638,7 +638,7 @@ paths:
   /{id}/decline:
     post:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /{id}/decline - POST
       operationId: post-id-decline
       parameters:
@@ -764,7 +764,7 @@ paths:
   /purposeCodes:
     get:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /purposeCodes - GET
       operationId: get-purposecodes
       responses:
@@ -840,7 +840,7 @@ paths:
   /download:
     get:
       tags:
-      - BookTransfers
+      - Book Transfers
       summary: /download?id={id} - GET
       operationId: get-download-id-id
       parameters:
@@ -1047,6 +1047,127 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodesDto:
+      type: object
+      properties:
+        purposeCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto:
+      type: object
+      properties:
+        purpose:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.InitiateBookTransferDto:
+      required:
+      - amount
+      - fromAccountId
+      - toAccountId
+      type: object
+      properties:
+        fromAccountId:
+          type: string
+          description: The AccountId of the Account sending the Instant Transfer
+          format: uuid
+        toAccountId:
+          type: string
+          description: The AccountId of the Account receiving the Instant Transfer
+          format: uuid
+        amount:
+          type: number
+          description: Dollar amount to be transferred
+          format: double
+        internalMemo:
+          type:
+          - string
+          - 'null'
+          description: Free text field, only visible internally
+        publicMemo:
+          type:
+          - string
+          - 'null'
+          description: Free text field, visible to both the Sender and Receiver of the Instant Transfer
+        coreMemo:
+          type:
+          - string
+          - 'null'
+          description: Free text field that will appear on core and OLB statements
+        purposeCode:
+          type:
+          - string
+          - 'null'
+          description: Indicates the reason for the transfer - select one of six preset codes (see Guides for details)
+        purposeDescription:
+          type:
+          - string
+          - 'null'
+          description: Free text field to provide additional context for the selected purpose code
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: Future DateTime in UTC for Transfer to be posted
+          format: date-time
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
+      enum:
+      - Send
+      - Receive
+      type: string
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+      enum:
+      - ApprovalRequired
+      - Scheduled
+      - Pending
+      - Posted
+      - Rejected
+      - Declined
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -1072,12 +1193,26 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
-      enum:
-      - Api
-      - Ui
-      - Pain001
-      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
+      additionalProperties: false
     Cubi.Transfers.WebApi.Dto.BookTransfers.DeclineBookTransferDto:
       type: object
       properties:
@@ -1271,147 +1406,12 @@ components:
           - 'null'
           description: Confirmation Number for the book transfer entry.  This can be used for reconciliation during the BAI2 process.
       additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.InitiateBookTransferDto:
-      required:
-      - amount
-      - fromAccountId
-      - toAccountId
-      type: object
-      properties:
-        fromAccountId:
-          type: string
-          description: The AccountId of the Account sending the Instant Transfer
-          format: uuid
-        toAccountId:
-          type: string
-          description: The AccountId of the Account receiving the Instant Transfer
-          format: uuid
-        amount:
-          type: number
-          description: Dollar amount to be transferred
-          format: double
-        internalMemo:
-          type:
-          - string
-          - 'null'
-          description: Free text field, only visible internally
-        publicMemo:
-          type:
-          - string
-          - 'null'
-          description: Free text field, visible to both the Sender and Receiver of the Instant Transfer
-        coreMemo:
-          type:
-          - string
-          - 'null'
-          description: Free text field that will appear on core and OLB statements
-        purposeCode:
-          type:
-          - string
-          - 'null'
-          description: Indicates the reason for the transfer - select one of six preset codes (see Guides for details)
-        purposeDescription:
-          type:
-          - string
-          - 'null'
-          description: Free text field to provide additional context for the selected purpose code
-        processDate:
-          type:
-          - string
-          - 'null'
-          description: Future DateTime in UTC for Transfer to be posted
-          format: date-time
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
       enum:
-      - ApprovalRequired
-      - Scheduled
-      - Pending
-      - Posted
-      - Rejected
-      - Declined
+      - Api
+      - Ui
+      - Pain001
       type: string
-    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto:
-      type: object
-      properties:
-        purpose:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
-      enum:
-      - Send
-      - Receive
-      type: string
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodesDto:
-      type: object
-      properties:
-        purposeCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto'
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
-      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

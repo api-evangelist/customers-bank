@@ -1117,6 +1117,54 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.SubaccountDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.SubaccountDto'
+      additionalProperties: false
+    Cubi.Accounts.Contracts.Messages.SubaccountStatus:
+      enum:
+      - Active
+      - Closed
+      type: string
+    Cubi.Accounts.Contracts.Messages.BalanceMode:
+      enum:
+      - Reserved
+      - Shared
+      type: string
+    Cubi.Accounts.WebApi.Dto.TagDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the tag
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the tag
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of the tag
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -1142,41 +1190,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Accounts.WebApi.Dto.UpdateSubaccountDto:
-      type: object
-      properties:
-        description:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Optional description of the subaccount
-        externalReferenceId:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: The external reference id, linking the subaccount back to your system
-      additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.SubaccountStatus:
-      enum:
-      - Active
-      - Closed
-      type: string
-    Cubi.Accounts.Contracts.Messages.BalanceMode:
-      enum:
-      - Reserved
-      - Shared
-      type: string
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -1208,23 +1221,41 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Accounts.WebApi.Dto.TagDto:
+    Cubi.Accounts.WebApi.Dto.CreateSubaccountDto:
+      required:
+      - name
+      - parentAccountId
       type: object
       properties:
-        id:
-          type: string
-          description: The ID (UUID) for the tag
-          format: uuid
         name:
-          type:
-          - string
-          - 'null'
-          description: The name of the tag
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: The name of the subaccount
         description:
+          maxLength: 255
+          minLength: 0
           type:
           - string
           - 'null'
-          description: Optional description of the tag
+          description: Optional description of the subaccount
+        externalReferenceId:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The external reference id, linking the subaccount back to your system
+        customerId:
+          type:
+          - string
+          - 'null'
+          description: The customer this subaccount belongs to, if any
+          format: uuid
+        parentAccountId:
+          type: string
+          description: The Id (UUID) of the parent account
+          format: uuid
       additionalProperties: false
     Cubi.Accounts.WebApi.Dto.SubaccountDto:
       required:
@@ -1297,37 +1328,9 @@ components:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TagDto'
           description: Tags currently attached to this subaccount
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.SubaccountDto:
+    Cubi.Accounts.WebApi.Dto.UpdateSubaccountDto:
       type: object
       properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.SubaccountDto'
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.CreateSubaccountDto:
-      required:
-      - name
-      - parentAccountId
-      type: object
-      properties:
-        name:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: The name of the subaccount
         description:
           maxLength: 255
           minLength: 0
@@ -1342,15 +1345,12 @@ components:
           - string
           - 'null'
           description: The external reference id, linking the subaccount back to your system
-        customerId:
-          type:
-          - string
-          - 'null'
-          description: The customer this subaccount belongs to, if any
-          format: uuid
-        parentAccountId:
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
           type: string
-          description: The Id (UUID) of the parent account
           format: uuid
       additionalProperties: false
 x-readme:

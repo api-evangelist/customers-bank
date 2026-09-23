@@ -12,7 +12,9 @@ paths:
       tags:
       - OutgoingPayments
       summary: /outgoing - POST
-      description: "Initiates a new instant payment that will be delivered on either the FedNow or RTP rails.   The rail will be determined \nbased on the receiver bank's rail eligibilty among other factors."
+      description: 'Initiates a new instant payment that will be delivered on either the FedNow or RTP rails. The rail will be determined
+
+        based on the receiver bank''s rail eligibilty among other factors.'
       operationId: post-outgoing
       parameters:
       - name: x-idempotency-key
@@ -362,7 +364,7 @@ paths:
       tags:
       - OutgoingPayments
       summary: /outgoing/rtp - POST
-      description: 'Initiates a payment on the RTP rail.  This method exists to allow for direct RTP initiation, however,
+      description: 'Initiates a payment on the RTP rail. This method exists to allow for direct RTP initiation, however,
 
         in most cases it''s prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity
 
@@ -712,7 +714,7 @@ paths:
       tags:
       - OutgoingPayments
       summary: /outgoing/fednow - POST
-      description: 'Initiates a payment on the FedNow rail.  This method exists to allow for direct FedNow initiation, however,
+      description: 'Initiates a payment on the FedNow rail. This method exists to allow for direct FedNow initiation, however,
 
         in most cases it''s prefferable to use the rail agonistic POST /outgoing api to allow for rail flexibity
 
@@ -2711,442 +2713,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingPaymentDto:
-      required:
-      - receiverAccountNumber
-      - receiverName
-      - receiverRoutingNumber
-      - senderAccountNumber
-      - submittedAt
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the Payment
-          format: uuid
-        amount:
-          type: number
-          description: The amount of the Payment
-          format: double
-        processDate:
-          type: string
-          description: 'Process date, either specified at the time the payment request was submitted or if not specified,
-
-            the request was processed at submission.'
-          format: date-time
-        senderAccountNumber:
-          type: string
-          description: The account number for which the payment was sent from
-        paymentDate:
-          type:
-          - string
-          - 'null'
-          description: The date the payment was intended to be delivered
-          format: date-time
-        deliveryDate:
-          type:
-          - string
-          - 'null'
-          description: The date the payment was actually delivered
-          format: date-time
-        receiverRoutingNumber:
-          type: string
-          description: The routing number of the receiver
-        receiverAccountNumber:
-          type: string
-          description: The account number of the receiver
-        receiverName:
-          type: string
-          description: The full name of the receiver
-        receiverAddress1:
-          type:
-          - string
-          - 'null'
-          description: The address of the receiver
-        receiverAddress2:
-          type:
-          - string
-          - 'null'
-          description: The address (continued) of the receiver
-        receiverCity:
-          type:
-          - string
-          - 'null'
-          description: The city of the receiver
-        receiverState:
-          type:
-          - string
-          - 'null'
-          description: The state of the receiver
-        receiverZip:
-          type:
-          - string
-          - 'null'
-          description: The zipcode of the receiver
-        receiverCountry:
-          type:
-          - string
-          - 'null'
-          description: The country of the receiver
-        receiverBankName:
-          type:
-          - string
-          - 'null'
-          description: The name of the receiver's bank
-        receiverBankAddress1:
-          type:
-          - string
-          - 'null'
-          description: The address of the receiver's bank
-        receiverBankAddress2:
-          type:
-          - string
-          - 'null'
-          description: The address (continued) of the receiver's bank
-        receiverBankCity:
-          type:
-          - string
-          - 'null'
-          description: The city of the receiver's bank
-        receiverBankState:
-          type:
-          - string
-          - 'null'
-          description: The state of the receiver's bank
-        receiverBankZip:
-          type:
-          - string
-          - 'null'
-          description: The zip code of the receiver's bank
-        description:
-          type:
-          - string
-          - 'null'
-          description: The payment description
-        status:
-          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingTransactionStatusDto'
-        submittedAt:
-          type: string
-          description: The datetime at which the payment was submitted
-          format: date-time
-        cancelledAt:
-          type:
-          - string
-          - 'null'
-          description: The datetime at which the payment was cancelled
-          format: date-time
-        cancelledReason:
-          type:
-          - string
-          - 'null'
-          description: The reason the payment was cancelled
-        completedAt:
-          type:
-          - string
-          - 'null'
-          description: The datetime at which the payment was completed
-          format: date-time
-        confirmationNumber:
-          type:
-          - string
-          - 'null'
-          description: Confirmation Number for the Payment. This can be used for reconciliation during the BAI2 process.
-        rail:
-          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiateRtpDto:
-      required:
-      - amount
-      - receiverAccountNumber
-      - receiverAddress1
-      - receiverCity
-      - receiverCountry
-      - receiverName
-      - receiverRoutingNumber
-      - receiverState
-      - receiverZip
-      - senderAccountNumber
-      type: object
-      properties:
-        amount:
-          minimum: 0.01
-          type: number
-          description: Amount of Payment, in dollars and cents
-          format: double
-        processDate:
-          type:
-          - string
-          - 'null'
-          description: 'Optional date and time on which to process the payment, if not specified, it will be sent immediately.  If specified, it must be today''s date or a future date.
-
-            If specified, then submission as a full datetime plus timezone offset is HIGHLY recommended over submission as a simple date string, as omission of time will default to midnight and omission of timezone offset will default to UTC.
-
-            Format: yyyy-MM-ddTHH:mm:ss.ffZ'
-          format: date-time
-          example: '2025-04-02T05:00:00+00:00'
-        senderAccountNumber:
-          maxLength: 35
-          minLength: 1
-          type: string
-          description: The account number from which to send the payment
-        receiverRoutingNumber:
-          minLength: 1
-          pattern: ^\d{9}$
-          type: string
-          description: Routing number of the receiving bank.  This must be a federal ABA number, must be exactly 9 digits.
-        receiverAccountNumber:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The account number of the receiver.
-        receiverName:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The name of the receiving party
-        receiverAddress1:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The primary address line of the receiving party
-        receiverAddress2:
-          maxLength: 35
-          minLength: 0
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type:
-          - string
-          - 'null'
-          description: The secondary address line of the receiving party (optional). Maximum length is 35 characters.
-        receiverCity:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The city of the receiving party
-        receiverState:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The state or region of the receiving party
-        receiverZip:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The postal/zip code of the receiving party
-        receiverCountry:
-          maxLength: 2
-          minLength: 2
-          pattern: ^[A-Za-z]+$
-          type: string
-          description: The country code of the receiving party (ISO 3166-1 alpha-2 format)
-          example: US
-        description:
-          maxLength: 140
-          minLength: 0
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type:
-          - string
-          - 'null'
-          description: Description to be passed in the payment. Maximum length is 140 characters.
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.DeclineOutgoingFedNowDto:
-      type: object
-      properties:
-        reason:
-          type:
-          - string
-          - 'null'
-          description: The reason the payment is being declined
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelRtpDto:
-      required:
-      - reason
-      type: object
-      properties:
-        reason:
-          type: string
-          description: The reason for the cancellation request
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiateFedNowDto:
-      required:
-      - amount
-      - receiverAccountNumber
-      - receiverAddress1
-      - receiverCity
-      - receiverCountry
-      - receiverName
-      - receiverRoutingNumber
-      - receiverState
-      - receiverZip
-      - senderAccountNumber
-      type: object
-      properties:
-        amount:
-          minimum: 0.01
-          type: number
-          description: Amount of Payment, in dollars and cents
-          format: double
-        processDate:
-          type:
-          - string
-          - 'null'
-          description: 'Optional date and time on which to process the payment, if not specified, it will be sent immediately.  If specified, it must be today''s date or a future date.
-
-            If specified, then submission as a full datetime plus timezone offset is HIGHLY recommended over submission as a simple date string, as omission of time will default to midnight and omission of timezone offset will default to UTC.
-
-            Format: yyyy-MM-ddTHH:mm:ss.ffZ'
-          format: date-time
-          example: '2025-04-02T05:00:00+00:00'
-        senderAccountNumber:
-          maxLength: 35
-          minLength: 1
-          type: string
-          description: The account number from which to send the payment
-        receiverRoutingNumber:
-          minLength: 1
-          pattern: ^\d{9}$
-          type: string
-          description: Routing number of the receiving bank.  This must be a federal ABA number, must be exactly 9 digits.
-        receiverAccountNumber:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The account number of the receiver.
-        receiverName:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The name of the receiving party
-        receiverAddress1:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The primary address line of the receiving party
-        receiverAddress2:
-          maxLength: 35
-          minLength: 0
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type:
-          - string
-          - 'null'
-          description: The secondary address line of the receiving party (optional). Maximum length is 35 characters.
-        receiverCity:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The city of the receiving party
-        receiverState:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The state or region of the receiving party
-        receiverZip:
-          maxLength: 35
-          minLength: 1
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type: string
-          description: The postal/zip code of the receiving party
-        receiverCountry:
-          maxLength: 2
-          minLength: 2
-          pattern: ^[A-Za-z]+$
-          type: string
-          description: The country code of the receiving party (ISO 3166-1 alpha-2 format)
-          example: US
-        description:
-          maxLength: 140
-          minLength: 0
-          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
-          type:
-          - string
-          - 'null'
-          description: Description to be passed in the payment. Maximum length is 140 characters.
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingFedNowDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingFedNowDto'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.PaymentInitiatedDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the initiated payment.
-          format: uuid
-        rail:
-          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelFedNowDto:
-      required:
-      - reason
-      type: object
-      properties:
-        reason:
-          type: string
-          description: The reason for the cancellation request
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
-      enum:
-      - FedNow
-      - Rtp
-      type: string
     Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingTransactionStatusDto:
       enum:
       - Initiated
@@ -3318,31 +2884,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingRtpDto'
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingPaymentDto:
       type: object
       properties:
@@ -3362,6 +2903,239 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingPaymentDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiateRtpDto:
+      required:
+      - amount
+      - receiverAccountNumber
+      - receiverAddress1
+      - receiverCity
+      - receiverCountry
+      - receiverName
+      - receiverRoutingNumber
+      - receiverState
+      - receiverZip
+      - senderAccountNumber
+      type: object
+      properties:
+        amount:
+          minimum: 0.01
+          type: number
+          description: Amount of Payment, in dollars and cents
+          format: double
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: 'Optional date and time on which to process the payment, if not specified, it will be sent immediately.  If specified, it must be today''s date or a future date.
+
+            If specified, then submission as a full datetime plus timezone offset is HIGHLY recommended over submission as a simple date string, as omission of time will default to midnight and omission of timezone offset will default to UTC.
+
+            Format: yyyy-MM-ddTHH:mm:ss.ffZ'
+          format: date-time
+          example: '2025-04-02T05:00:00+00:00'
+        senderAccountNumber:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: The account number from which to send the payment
+        receiverRoutingNumber:
+          minLength: 1
+          pattern: ^\d{9}$
+          type: string
+          description: Routing number of the receiving bank.  This must be a federal ABA number, must be exactly 9 digits.
+        receiverAccountNumber:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The account number of the receiver.
+        receiverName:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The name of the receiving party
+        receiverAddress1:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The primary address line of the receiving party
+        receiverAddress2:
+          maxLength: 35
+          minLength: 0
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type:
+          - string
+          - 'null'
+          description: The secondary address line of the receiving party (optional). Maximum length is 35 characters.
+        receiverCity:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The city of the receiving party
+        receiverState:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The state or region of the receiving party
+        receiverZip:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The postal/zip code of the receiving party
+        receiverCountry:
+          maxLength: 2
+          minLength: 2
+          pattern: ^[A-Za-z]+$
+          type: string
+          description: The country code of the receiving party (ISO 3166-1 alpha-2 format)
+          example: US
+        description:
+          maxLength: 140
+          minLength: 0
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type:
+          - string
+          - 'null'
+          description: Description to be passed in the payment. Maximum length is 140 characters.
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelPaymentDto:
+      required:
+      - reason
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason for the cancellation request
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.PaymentInitiatedDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the initiated payment.
+          format: uuid
+        rail:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.DeclineOutgoingRtpDto:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason the payment is being declined
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
+      enum:
+      - FedNow
+      - Rtp
+      type: string
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiateFedNowDto:
+      required:
+      - amount
+      - receiverAccountNumber
+      - receiverAddress1
+      - receiverCity
+      - receiverCountry
+      - receiverName
+      - receiverRoutingNumber
+      - receiverState
+      - receiverZip
+      - senderAccountNumber
+      type: object
+      properties:
+        amount:
+          minimum: 0.01
+          type: number
+          description: Amount of Payment, in dollars and cents
+          format: double
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: 'Optional date and time on which to process the payment, if not specified, it will be sent immediately.  If specified, it must be today''s date or a future date.
+
+            If specified, then submission as a full datetime plus timezone offset is HIGHLY recommended over submission as a simple date string, as omission of time will default to midnight and omission of timezone offset will default to UTC.
+
+            Format: yyyy-MM-ddTHH:mm:ss.ffZ'
+          format: date-time
+          example: '2025-04-02T05:00:00+00:00'
+        senderAccountNumber:
+          maxLength: 35
+          minLength: 1
+          type: string
+          description: The account number from which to send the payment
+        receiverRoutingNumber:
+          minLength: 1
+          pattern: ^\d{9}$
+          type: string
+          description: Routing number of the receiving bank.  This must be a federal ABA number, must be exactly 9 digits.
+        receiverAccountNumber:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The account number of the receiver.
+        receiverName:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The name of the receiving party
+        receiverAddress1:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The primary address line of the receiving party
+        receiverAddress2:
+          maxLength: 35
+          minLength: 0
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type:
+          - string
+          - 'null'
+          description: The secondary address line of the receiving party (optional). Maximum length is 35 characters.
+        receiverCity:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The city of the receiving party
+        receiverState:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The state or region of the receiving party
+        receiverZip:
+          maxLength: 35
+          minLength: 1
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type: string
+          description: The postal/zip code of the receiving party
+        receiverCountry:
+          maxLength: 2
+          minLength: 2
+          pattern: ^[A-Za-z]+$
+          type: string
+          description: The country code of the receiving party (ISO 3166-1 alpha-2 format)
+          example: US
+        description:
+          maxLength: 140
+          minLength: 0
+          pattern: ^[A-Za-z0-9 .()/'+=:?_#@%,&-]+$
+          type:
+          - string
+          - 'null'
+          description: Description to be passed in the payment. Maximum length is 140 characters.
       additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingFedNowDto:
       required:
@@ -3504,21 +3278,14 @@ components:
           - 'null'
           description: Confirmation Number for the Payment. This can be used for reconciliation during the BAI2 process.
       additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.DeclineOutgoingRtpDto:
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelFedNowDto:
+      required:
+      - reason
       type: object
       properties:
         reason:
-          type:
-          - string
-          - 'null'
-          description: The reason the payment is being declined
+          type: string
+          description: The reason for the cancellation request
       additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.Outgoing.Initiate.InitiatePaymentDto:
       required:
@@ -3620,7 +3387,242 @@ components:
           - 'null'
           description: Description to be passed in the payment. Maximum length is 140 characters.
       additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelPaymentDto:
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingFedNowDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingFedNowDto'
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingPaymentDto:
+      required:
+      - receiverAccountNumber
+      - receiverName
+      - receiverRoutingNumber
+      - senderAccountNumber
+      - submittedAt
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the Payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the Payment
+          format: double
+        processDate:
+          type: string
+          description: 'Process date, either specified at the time the payment request was submitted or if not specified,
+
+            the request was processed at submission.'
+          format: date-time
+        senderAccountNumber:
+          type: string
+          description: The account number for which the payment was sent from
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was intended to be delivered
+          format: date-time
+        deliveryDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was actually delivered
+          format: date-time
+        receiverRoutingNumber:
+          type: string
+          description: The routing number of the receiver
+        receiverAccountNumber:
+          type: string
+          description: The account number of the receiver
+        receiverName:
+          type: string
+          description: The full name of the receiver
+        receiverAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the receiver
+        receiverAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the receiver
+        receiverCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the receiver
+        receiverState:
+          type:
+          - string
+          - 'null'
+          description: The state of the receiver
+        receiverZip:
+          type:
+          - string
+          - 'null'
+          description: The zipcode of the receiver
+        receiverCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the receiver
+        receiverBankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the receiver's bank
+        receiverBankAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the receiver's bank
+        receiverBankAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the receiver's bank
+        receiverBankCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the receiver's bank
+        receiverBankState:
+          type:
+          - string
+          - 'null'
+          description: The state of the receiver's bank
+        receiverBankZip:
+          type:
+          - string
+          - 'null'
+          description: The zip code of the receiver's bank
+        description:
+          type:
+          - string
+          - 'null'
+          description: The payment description
+        status:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Outgoing.OutgoingTransactionStatusDto'
+        submittedAt:
+          type: string
+          description: The datetime at which the payment was submitted
+          format: date-time
+        cancelledAt:
+          type:
+          - string
+          - 'null'
+          description: The datetime at which the payment was cancelled
+          format: date-time
+        cancelledReason:
+          type:
+          - string
+          - 'null'
+          description: The reason the payment was cancelled
+        completedAt:
+          type:
+          - string
+          - 'null'
+          description: The datetime at which the payment was completed
+          format: date-time
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the Payment. This can be used for reconciliation during the BAI2 process.
+        rail:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.DeclineOutgoingFedNowDto:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason the payment is being declined
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.InstantPayments.WebApi.Dto.Outgoing.Cancel.CancelRtpDto:
       required:
       - reason
       type: object

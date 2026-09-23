@@ -492,61 +492,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Ach.Contracts.Messages.Direction:
-      enum:
-      - Credit
-      - Debit
-      type: string
-    Cubi.Ach.Contracts.Messages.AchPaymentType:
-      enum:
-      - PPD
-      - CCD
-      - CTX
-      - TEL
-      - WEB
-      - ACK
-      - ADV
-      - ARC
-      - ATX
-      - BOC
-      - CIE
-      - COR
-      - DNE
-      - ENR
-      - IAT
-      - POP
-      - POS
-      - SHR
-      - MTE
-      - RCK
-      - TRX
-      - XCK
-      type: string
     Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
       type: object
       properties:
@@ -624,6 +569,41 @@ components:
           - 'null'
           description: Company Entry Description from the NACHA file batch header, a description of the entry batch description.
       additionalProperties: false
+    Cubi.Ach.Contracts.Messages.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Cubi.Ach.Contracts.Messages.Direction:
+      enum:
+      - Credit
+      - Debit
+      type: string
+    Cubi.Ach.Contracts.Messages.AchPaymentType:
+      enum:
+      - PPD
+      - CCD
+      - CTX
+      - TEL
+      - WEB
+      - ACK
+      - ADV
+      - ARC
+      - ATX
+      - BOC
+      - CIE
+      - COR
+      - DNE
+      - ENR
+      - IAT
+      - POP
+      - POS
+      - SHR
+      - MTE
+      - RCK
+      - TRX
+      - XCK
+      type: string
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -655,6 +635,31 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
       type: object
       properties:
@@ -675,11 +680,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
       additionalProperties: false
-    Cubi.Ach.Contracts.Messages.AccountType:
-      enum:
-      - Checking
-      - Savings
-      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

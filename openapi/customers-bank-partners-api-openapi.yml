@@ -486,6 +486,27 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Partners.WebApi.Dtos.PartnerDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        isFrozen:
+          type: boolean
+        apiProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.PartnerApiProductDto'
+        isApiCredentialsEnabled:
+          type: boolean
+        isAddressBookEnabled:
+          type: boolean
+      additionalProperties: false
     Cubi.Partners.WebApi.Dtos.AddPartnerCredentialDto:
       type: object
       properties:
@@ -529,31 +550,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -585,6 +581,31 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.Partners.WebApi.Dtos.PartnerApiProductDto:
       type: object
       properties:
@@ -596,27 +617,6 @@ components:
           - string
           - 'null'
         isEnabled:
-          type: boolean
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.PartnerDto:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        isFrozen:
-          type: boolean
-        apiProducts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.PartnerApiProductDto'
-        isApiCredentialsEnabled:
-          type: boolean
-        isAddressBookEnabled:
           type: boolean
       additionalProperties: false
     Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:

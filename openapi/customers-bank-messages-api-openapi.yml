@@ -269,41 +269,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Partners.WebApi.Dtos.MessageDto:
-      type: object
-      properties:
-        messageText:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageType'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Partners.WebApi.Dtos.MessageType:
       enum:
       - Banner
@@ -360,6 +325,41 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.MessageDto:
+      type: object
+      properties:
+        messageText:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageType'
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

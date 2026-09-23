@@ -581,6 +581,24 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Accounts.WebApi.Dto.TagDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the tag
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the tag
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of the tag
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -606,31 +624,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Accounts.WebApi.Dto.CreateTagDto:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: The name of the tag
-        description:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Optional description of the tag
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -682,19 +675,19 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TagDto'
       additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.TagDto:
+    Cubi.Accounts.WebApi.Dto.CreateTagDto:
+      required:
+      - name
       type: object
       properties:
-        id:
-          type: string
-          description: The ID (UUID) for the tag
-          format: uuid
         name:
-          type:
-          - string
-          - 'null'
+          maxLength: 100
+          minLength: 0
+          type: string
           description: The name of the tag
         description:
+          maxLength: 255
+          minLength: 0
           type:
           - string
           - 'null'
@@ -717,6 +710,13 @@ components:
           - string
           - 'null'
           description: Optional description of the tag
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
       additionalProperties: false
 x-readme:
   explorer-enabled: false

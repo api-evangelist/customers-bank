@@ -839,51 +839,12 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.AccountDto:
+    Cubi.Accounts.WebApi.Dto.UpdateAccountSearchableDto:
       type: object
       properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AccountDto'
+        searchable:
+          type: boolean
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Accounts.Contracts.Commands.TransactionCore.TransactionRail:
       enum:
       - BookTransfer
@@ -986,78 +947,48 @@ components:
           - 'null'
           description: The standardized BAI2 transaction code for this transaction; suitable for reconciliation
       additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.TransactionSearchResultsDto:
+    Cubi.Accounts.WebApi.Dto.AccountDto:
+      required:
+      - accountNumber
+      - name
       type: object
       properties:
-        transactions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionSearchResultDto'
-        hasMorePages:
+        id:
+          type: string
+          description: The ID (uuid) of the account.  Should be used, instead of account number, when accessing resources in GET urls
+          format: uuid
+        name:
+          type: string
+          description: The name of the account
+        accountNumber:
+          type: string
+          description: The account number.  This is considered PII and should be protected
+        isSearchable:
           type: boolean
-      additionalProperties: false
-    Cubi.Accounts.Common.Enums.AccountControlType:
-      enum:
-      - Single
-      - Dual
-      type: string
-    Cubi.Accounts.WebApi.Dto.AccountState:
-      enum:
-      - Closed
-      - Active
-      - Restricted
-      type: string
-    Cubi.Accounts.WebApi.Dto.UpdateAccountSearchableDto:
-      type: object
-      properties:
-        searchable:
+          description: Indicates if the account is searchable by other partners for address book linking
+        isFrozen:
           type: boolean
+          description: Indicates if the account is frozen or not
+        controlType:
+          $ref: '#/components/schemas/Cubi.Accounts.Common.Enums.AccountControlType'
+        availableBalance:
+          type: number
+          description: Amount available, which is typically total balance minus holds
+          format: double
+        balance:
+          type: number
+          description: Total balance, before holds
+          format: double
+        additionalBalances:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto'
+        balanceMode:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.BalanceMode'
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Cubi.Accounts.Contracts.Messages.BalanceMode:
       enum:
       - Reserved
       - Shared
       type: string
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
     Cubi.Accounts.WebApi.Dto.UpdateAccountDto:
       required:
       - name
@@ -1069,18 +1000,6 @@ components:
           type: boolean
         controlType:
           $ref: '#/components/schemas/Cubi.Accounts.Common.Enums.AccountControlType'
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto:
-      type: object
-      properties:
-        relatedAvailableBalance:
-          type: number
-          description: The total available balance of related accounts
-          format: double
-        totalAccessibleBalance:
-          type: number
-          description: The total accessible balance, which is calculated as available balance + related available balance
-          format: double
       additionalProperties: false
     Cubi.Accounts.WebApi.Dto.GetAccountDto:
       required:
@@ -1143,42 +1062,123 @@ components:
         additionalBalances:
           $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto'
       additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.AccountDto:
-      required:
-      - accountNumber
-      - name
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto:
+      type: object
+      properties:
+        relatedAvailableBalance:
+          type: number
+          description: The total available balance of related accounts
+          format: double
+        totalAccessibleBalance:
+          type: number
+          description: The total accessible balance, which is calculated as available balance + related available balance
+          format: double
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Accounts.WebApi.Dto.TransactionSearchResultsDto:
+      type: object
+      properties:
+        transactions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionSearchResultDto'
+        hasMorePages:
+          type: boolean
+      additionalProperties: false
+    Cubi.Accounts.Common.Enums.AccountControlType:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.Accounts.WebApi.Dto.AccountState:
+      enum:
+      - Closed
+      - Active
+      - Restricted
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.AccountDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AccountDto'
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
       type: object
       properties:
         id:
           type: string
-          description: The ID (uuid) of the account.  Should be used, instead of account number, when accessing resources in GET urls
           format: uuid
-        name:
-          type: string
-          description: The name of the account
-        accountNumber:
-          type: string
-          description: The account number.  This is considered PII and should be protected
-        isSearchable:
-          type: boolean
-          description: Indicates if the account is searchable by other partners for address book linking
-        isFrozen:
-          type: boolean
-          description: Indicates if the account is frozen or not
-        controlType:
-          $ref: '#/components/schemas/Cubi.Accounts.Common.Enums.AccountControlType'
-        availableBalance:
-          type: number
-          description: Amount available, which is typically total balance minus holds
-          format: double
-        balance:
-          type: number
-          description: Total balance, before holds
-          format: double
-        additionalBalances:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AdditionalBalancesDto'
-        balanceMode:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.BalanceMode'
       additionalProperties: false
 x-readme:
   explorer-enabled: false

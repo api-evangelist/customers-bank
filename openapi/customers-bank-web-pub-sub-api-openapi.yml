@@ -7,12 +7,12 @@ servers:
 - url: https://cubi-sandbox-api.customersbank.com/itoperations/v1
 - url: https://cubi-sandbox-api.customersbank.com/security/v1
 tags:
-- name: WebPubSub
+- name: Web Pub Sub
 paths:
   /WebPubSub/client-access-uri:
     get:
       tags:
-      - WebPubSub
+      - Web Pub Sub
       summary: /WebPubSub/client-access-uri - GET
       operationId: get-webpubsub-client-access-uri
       responses:

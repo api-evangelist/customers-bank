@@ -958,71 +958,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.ConsumerLending.WebApi.Dto.FundingState:
       enum:
       - Unfunded
@@ -1031,14 +966,21 @@ components:
       - Failed
       - Funded
       type: string
-    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto:
+    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto:
+      required:
+      - cancellationReason
       type: object
       properties:
-        id:
+        cancellationReason:
+          minLength: 1
           type: string
-          description: Loan Cancellation Id
-          format: uuid
+          description: A text description of why this loan is being cancelled
       additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingType:
+      enum:
+      - OnDemand
+      - Immediate
+      type: string
     Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
       required:
       - accountName
@@ -1077,6 +1019,62 @@ components:
       - Checking
       - Savings
       type: string
+    Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Loan Id
+          format: uuid
+        applicationId:
+          type: string
+          description: Application Id of the application that the loan was created from
+          format: uuid
+        programId:
+          type: string
+          description: Program Id of the program that the loan is associated with
+          format: uuid
+        approvedAmount:
+          type: number
+          description: The amount that the loan was approved for
+          format: double
+        amountFunded:
+          type: number
+          description: The amount that has been funded on this loan. This will include all funding instructions that have been successfully processed by payment rails and all funding instructions that have been sent to the payment rail but have not been returned, cancelled or successfully processed
+          format: double
+        originationFeeAmount:
+          type:
+          - number
+          - 'null'
+          description: The origination fee amount for the loan. The total fundable amount on the loan will be the ApprovedAmount less the OriginationFeeAmount
+          format: double
+        promotionExpiryDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated expiry date for the loan. If no Promotion Months value was provided with the application this will be null. If a Promotion Months value was provided this date is calculated by adding Promotion Months to the date the first funding instruction to be set to either the Funded or SentToRail state was sent to the payment rail. If no funding has been set to the Funded or SentToRail state then this value will be null.
+          format: date-time
+        merchantDiscountRateAmount:
+          type:
+          - number
+          - 'null'
+          description: Merchant discount rate (MRD) amount (in dollars) provided on the application. This amount is subtracted from the ApprovedLoanAmount to determine the maximum amount of funds that can be disbursed on an application. If there was no MDR this will return 0.00
+          format: double
+        disbursementDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated disbursement date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
+          format: date-time
+        maturityDate:
+          type:
+          - string
+          - 'null'
+          description: The calculated maturity date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanStatus'
+      additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto:
       required:
       - completionReason
@@ -1091,6 +1089,62 @@ components:
           type: boolean
           description: Indicates that the loan is being completed before all funding stages have been disbursed
       additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto:
       type: object
       properties:
@@ -1098,6 +1152,81 @@ components:
           type: string
           description: Loan Completion Id
           format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
+      type: object
+      properties:
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The Platform Reference Number that was provided when the funding instruction was submitted
+        fundingInstructionId:
+          type: string
+          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Funding Submission Id that represents all funding instructions within this submission
+          format: uuid
+        fundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
+          description: List of all the funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanStatus:
+      enum:
+      - Open
+      - Completed
+      - PendingCompletion
+      - Cancelled
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
       additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
       type: object
@@ -1164,141 +1293,12 @@ components:
           - 'null'
           description: If the funding instruction was rejected, or if the funding failed, this will contain the reason. Otherwise this will be null.
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto:
-      required:
-      - cancellationReason
-      type: object
-      properties:
-        cancellationReason:
-          minLength: 1
-          type: string
-          description: A text description of why this loan is being cancelled
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto:
       type: object
       properties:
         id:
           type: string
-          description: Loan Id
-          format: uuid
-        applicationId:
-          type: string
-          description: Application Id of the application that the loan was created from
-          format: uuid
-        programId:
-          type: string
-          description: Program Id of the program that the loan is associated with
-          format: uuid
-        approvedAmount:
-          type: number
-          description: The amount that the loan was approved for
-          format: double
-        amountFunded:
-          type: number
-          description: The amount that has been funded on this loan. This will include all funding instructions that have been successfully processed by payment rails and all funding instructions that have been sent to the payment rail but have not been returned, cancelled or successfully processed
-          format: double
-        originationFeeAmount:
-          type:
-          - number
-          - 'null'
-          description: The origination fee amount for the loan. The total fundable amount on the loan will be the ApprovedAmount less the OriginationFeeAmount
-          format: double
-        promotionExpiryDate:
-          type:
-          - string
-          - 'null'
-          description: The calculated expiry date for the loan. If no Promotion Months value was provided with the application this will be null. If a Promotion Months value was provided this date is calculated by adding Promotion Months to the date the first funding instruction to be set to either the Funded or SentToRail state was sent to the payment rail. If no funding has been set to the Funded or SentToRail state then this value will be null.
-          format: date-time
-        merchantDiscountRateAmount:
-          type:
-          - number
-          - 'null'
-          description: Merchant discount rate (MRD) amount (in dollars) provided on the application. This amount is subtracted from the ApprovedLoanAmount to determine the maximum amount of funds that can be disbursed on an application. If there was no MDR this will return 0.00
-          format: double
-        disbursementDate:
-          type:
-          - string
-          - 'null'
-          description: The calculated disbursement date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
-          format: date-time
-        maturityDate:
-          type:
-          - string
-          - 'null'
-          description: The calculated maturity date for the loan. This will be a non-null value if at least one funding instruction has been sent to a payment rail for the loan. The value of this property will be the datetime that the funding instruction was sent to the payment rail in UTC. This value will only be set for the first funding instruction that was sent to the payment rail for the loan. Any subsequent funding instructions sent to a payment rail will _NOT_ modify this value.
-          format: date-time
-        status:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanStatus'
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingType:
-      enum:
-      - OnDemand
-      - Immediate
-      type: string
-    Cubi.ConsumerLending.WebApi.Dto.LoanStatus:
-      enum:
-      - Open
-      - Completed
-      - PendingCompletion
-      - Cancelled
-      type: string
-    Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Funding Submission Id that represents all funding instructions within this submission
-          format: uuid
-        fundingInstructions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
-          description: List of all the funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
-      type: object
-      properties:
-        platformReferenceNumber:
-          type:
-          - string
-          - 'null'
-          description: The Platform Reference Number that was provided when the funding instruction was submitted
-        fundingInstructionId:
-          type: string
-          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          description: Loan Cancellation Id
           format: uuid
       additionalProperties: false
 x-readme:

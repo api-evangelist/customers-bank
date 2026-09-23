@@ -125,6 +125,12 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Partners.WebApi.Dtos.FeatureFlagsDto:
+      type: object
+      properties:
+        isHomeRealmDiscoveryEnabled:
+          type: boolean
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -156,6 +162,18 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:
+      type: object
+      properties:
+        isSyncEnabled:
+          type: boolean
+        authProvider:
+          type:
+          - string
+          - 'null'
+        isAuth0ClientCredentialsEnabled:
+          type: boolean
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -181,24 +199,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Partners.WebApi.Dtos.FeatureFlagsDto:
-      type: object
-      properties:
-        isHomeRealmDiscoveryEnabled:
-          type: boolean
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:
-      type: object
-      properties:
-        isSyncEnabled:
-          type: boolean
-        authProvider:
-          type:
-          - string
-          - 'null'
-        isAuth0ClientCredentialsEnabled:
-          type: boolean
-      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

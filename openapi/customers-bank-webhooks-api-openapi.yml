@@ -1299,31 +1299,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
       type: object
       properties:
@@ -1331,67 +1306,6 @@ components:
           type: string
           format: uuid
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto:
-      type: object
-      properties:
-        accountId:
-          type:
-          - string
-          - 'null'
-          description: Account id
-          format: uuid
-          deprecated: true
-        callbackUrl:
-          type:
-          - string
-          - 'null'
-          description: Callback url
-          format: uri
-        description:
-          maxLength: 65535
-          type:
-          - string
-          - 'null'
-          description: Description
-        secretText:
-          maxLength: 1024
-          type:
-          - string
-          - 'null'
-          description: Secret text
-      additionalProperties: false
-      description: A webhook update DTO abstraction.
     Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
       type: object
       properties:
@@ -1429,6 +1343,92 @@ components:
           format: uuid
       additionalProperties: false
       description: A event history DTO abstraction.
+    Cubi.Webhooks.WebApi.Dtos.WebhookUpdateDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: Account id
+          format: uuid
+          deprecated: true
+        callbackUrl:
+          type:
+          - string
+          - 'null'
+          description: Callback url
+          format: uri
+        description:
+          maxLength: 65535
+          type:
+          - string
+          - 'null'
+          description: Description
+        secretText:
+          maxLength: 1024
+          type:
+          - string
+          - 'null'
+          description: Secret text
+      additionalProperties: false
+      description: A webhook update DTO abstraction.
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.Webhooks.WebApi.Dtos.WebhookDto:
       required:
       - callbackUrl

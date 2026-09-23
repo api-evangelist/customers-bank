@@ -1026,6 +1026,40 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Partners.WebApi.Dtos.UserCreationDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+        firstName:
+          type:
+          - string
+          - 'null'
+        lastName:
+          type:
+          - string
+          - 'null'
+        email:
+          type:
+          - string
+          - 'null'
+        isAdmin:
+          type:
+          - boolean
+          - 'null'
+        isAddressBookAdmin:
+          type:
+          - boolean
+          - 'null'
+        showApi:
+          type:
+          - boolean
+          - 'null'
+          deprecated: true
+      additionalProperties: false
     Cubi.Partners.WebApi.Dtos.UserUpdateDto:
       type: object
       properties:
@@ -1067,85 +1101,6 @@ components:
           - 'null'
           deprecated: true
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Partners.WebApi.Dtos.UserCreationDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          deprecated: true
-        firstName:
-          type:
-          - string
-          - 'null'
-        lastName:
-          type:
-          - string
-          - 'null'
-        email:
-          type:
-          - string
-          - 'null'
-        isAdmin:
-          type:
-          - boolean
-          - 'null'
-        isAddressBookAdmin:
-          type:
-          - boolean
-          - 'null'
-        showApi:
-          type:
-          - boolean
-          - 'null'
-          deprecated: true
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -1177,35 +1132,31 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        hasAccess:
-          type: boolean
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto:
-      type: object
-      properties:
-        resource:
+        type:
           type:
           - string
           - 'null'
-          description: Resource to check access for.
-          example: resource:user
-        action:
+        title:
           type:
           - string
           - 'null'
-          description: Action to check access for.
-          example: reader
-      additionalProperties: false
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.Partners.WebApi.Dtos.UserDto:
       type: object
       properties:
@@ -1269,6 +1220,55 @@ components:
           type:
           - boolean
           - 'null'
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessCheckDto:
+      type: object
+      properties:
+        resource:
+          type:
+          - string
+          - 'null'
+          description: Resource to check access for.
+          example: resource:user
+        action:
+          type:
+          - string
+          - 'null'
+          description: Action to check access for.
+          example: reader
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.UserDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.UserDto'
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.UserAccessCheck.AccessDto:
+      type: object
+      properties:
+        hasAccess:
+          type: boolean
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
       additionalProperties: false
 x-readme:
   explorer-enabled: false

@@ -5,12 +5,12 @@ info:
 servers:
 - url: https://cubi-sandbox-api.customersbank.com/webhooks/v1
 tags:
-- name: EventTypes
+- name: Event Types
 paths:
   /EventTypes:
     get:
       tags:
-      - EventTypes
+      - Event Types
       summary: /EventTypes - GET
       operationId: get-eventtypes
       parameters:
@@ -1288,7 +1288,7 @@ paths:
   /EventTypes/download:
     get:
       tags:
-      - EventTypes
+      - Event Types
       summary: /EventTypes/download - GET
       operationId: get-eventtypes-download
       parameters:
@@ -1408,130 +1408,137 @@ paths:
                 traceId: string
 components:
   schemas:
-    wires.outgoing-approval-denied:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    ach.outgoing-approval-required:
-      required:
-      - creditAccountNumber
-      - creditRoutingNumber
-      - debitAccountNumber
-      - debitRoutingNumber
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-        creditAccountNumber:
-          type: string
-          description: The account number which was credited
-        creditRoutingNumber:
-          type: string
-          description: The routing number of the FI which was credited
-        debitAccountNumber:
-          type: string
-          description: The account number which was debited
-        debitRoutingNumber:
-          type: string
-          description: The routing number of the FI which was debited
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-reversal:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing fednow transaction that was reversed
-          format: uuid
-        originalTransactionId:
-          type: string
-          description: Id of outgoing fednow transaction that was reversed
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        receiverAccountNumber:
-          type: string
-          description: Reciever account number for transcation
-        senderAccountNumber:
-          type: string
-          description: Sender account number for transcation
-      additionalProperties: false
-      description: ''
-    transfers.book-received:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Book Transfer
-          format: uuid
-        amount:
-          type: number
-          description: Amount of the Book Transfer
-          format: double
-        sendingAccountName:
-          type: string
-          description: Account from which the Book Transfer was sent
-        receivingAccountName:
-          type: string
-          description: Account to which the Book Transfer was sent
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-partnercanceledcreated:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the partner canceled application that was created
-          format: uuid
-      additionalProperties: false
-      description: ''
-    rtp.outgoing-approval-denied:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-pendingcompletion:
+    consumerlending.loan-created:
       type: object
       properties:
         loanId:
           type: string
-          description: The id of the loan that was put in a PendingCompletion status
+          description: The id of the loan that was created
           format: uuid
+        applicationId:
+          type: string
+          description: The id of the application that was converted into a loan
+          format: uuid
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-approved:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    wires.outgoing-cancelled:
+      required:
+      - accountNumber
+      - beneficiary
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        beneficiary:
+          type: string
+          description: The intended beneficiary for the payment
+        processDate:
+          type: string
+          description: The intended process date for the payment
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes (OBI) on the payment
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason for cancellation
+        cancelledAt:
+          type: string
+          description: The timestamp at which cancellation occured
+          format: date-time
+      additionalProperties: false
+      description: ''
+    consumerlending.loanfunding-railreturned:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was requested
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The id of the funding instruction that was returned
+          format: uuid
+        returnCode:
+          type: string
+          description: The return code provided by the payment rail
+        returnDescription:
+          type: string
+          description: The return description provided by the payment rail
+      additionalProperties: false
+      description: ''
+    consumerlending.loanfunding-railcompleted:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was requested
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The id of the funding instruction that was completed
+          format: uuid
+        completedAt:
+          type: string
+          description: The datetime that the funding transaction was completed at
+          format: date-time
+      additionalProperties: false
+      description: ''
+    ach.incoming-received:
+      required:
+      - creditAccountNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the ACH Payment
+          format: uuid
+        amount:
+          type: number
+          description: The Amount of the ACH Payment
+          format: double
+        creditAccountNumber:
+          type: string
+          description: The account number which was credited
       additionalProperties: false
       description: ''
     ach.outgoing-returned:
@@ -1575,21 +1582,403 @@ components:
           format: date-time
       additionalProperties: false
       description: ''
-    transfers.book-rejected:
+    consumerlending.loanapplication-approved:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the application that was approved
+          format: uuid
+      additionalProperties: false
+      description: ''
+    wires.outgoing-approval-denied:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    partner.supportcasecreated:
+      required:
+      - caseId
+      - caseNumber
+      - emailAddress
+      type: object
+      properties:
+        caseId:
+          type: string
+          description: The caseId of the Support Case created
+        caseNumber:
+          type: string
+          description: The caseNumber of the Support Case created
+        emailAddress:
+          type: string
+          description: The emailAddress of the Support Case created
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-completed:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing fednow transaction that was completed
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+        confirmationNumber:
+          type: string
+          description: Confirmation number of the completed transaction
+        completedAt:
+          type: string
+          description: Date and time the transaction was completed at in UTC
+          format: date-time
+      additionalProperties: false
+      description: ''
+    consumerlending.loan-disbursementdateset:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the disbursement date was set on
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The funding instruction id that triggered the setting of the disbursement date on the loan
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The funding submission that the funding instruction was included in
+          format: uuid
+        loanDisbursementDate:
+          type: string
+          description: The disbursement date that was set for the loan. This value is in UTC.
+          format: date-time
+      additionalProperties: false
+      description: ''
+    consumerlending.loanapplication-partnercanceledcreated:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the partner canceled application that was created
+          format: uuid
+      additionalProperties: false
+      description: ''
+    ach.outgoing-completed:
+      required:
+      - creditAccountNumber
+      - creditRoutingNumber
+      - debitAccountNumber
+      - debitRoutingNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        creditAccountNumber:
+          type: string
+          description: The account number which was credited
+        creditRoutingNumber:
+          type: string
+          description: The routing number of the FI which was credited
+        debitAccountNumber:
+          type: string
+          description: The account number which was debited
+        debitRoutingNumber:
+          type: string
+          description: The routing number of the FI which was debited
+        completedAt:
+          type: string
+          description: The timestamp (UTC) at which the payment was completed
+          format: date-time
+      additionalProperties: false
+      description: ''
+    ach.outgoing-approval-denied:
+      required:
+      - creditAccountNumber
+      - creditRoutingNumber
+      - debitAccountNumber
+      - debitRoutingNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        creditAccountNumber:
+          type: string
+          description: The account number which was credited
+        creditRoutingNumber:
+          type: string
+          description: The routing number of the FI which was credited
+        debitAccountNumber:
+          type: string
+          description: The account number which was debited
+        debitRoutingNumber:
+          type: string
+          description: The routing number of the FI which was debited
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-approval-required:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    ach.outgoing-pending:
+      required:
+      - creditAccountNumber
+      - creditRoutingNumber
+      - debitAccountNumber
+      - debitRoutingNumber
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        creditAccountNumber:
+          type: string
+          description: The account number which was credited
+        creditRoutingNumber:
+          type: string
+          description: The routing number of the FI which was credited
+        debitAccountNumber:
+          type: string
+          description: The account number which was debited
+        debitRoutingNumber:
+          type: string
+          description: The routing number of the FI which was debited
+        processDate:
+          type: string
+          description: The intended date on which the payment will be procesed
+          format: date-time
+      additionalProperties: false
+      description: ''
+    consumerlending.loan-reopened:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that was completed
+          format: uuid
+        reasons:
+          type: array
+          items:
+            type: string
+          description: A list of reasons that outline why a loan was reopened
+      additionalProperties: false
+      description: ''
+    transfers.book-completed:
       type: object
       properties:
         id:
           type: string
           description: ID of the Book Transfer
           format: uuid
+        amount:
+          type: number
+          description: Amount of the Book Transfer
+          format: double
+        sendingAccountName:
+          type: string
+          description: Account from which the Book Transfer was sent
+        receivingAccountName:
+          type: string
+          description: Account to which the Book Transfer was sent
       additionalProperties: false
       description: ''
-    fednow.outgoing-initiated:
+    rtp.outgoing-pending:
       type: object
       properties:
         id:
           type: string
-          description: Id of outgoing fed now transaction that was initiated
+          description: Id of outgoing rtp transaction that is pending
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+      additionalProperties: false
+      description: ''
+    transfers.account-link-removed:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of Account Link that was removed
+          format: uuid
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-reversal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing rtp transaction that was reversed
+          format: uuid
+        originalTransactionId:
+          type: string
+          description: Id of outgoing rtp transaction that was reversed
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        receiverAccountNumber:
+          type: string
+          description: Reciever account number for transcation
+        senderAccountNumber:
+          type: string
+          description: Sender account number for transcation
+      additionalProperties: false
+      description: ''
+    consumerlending.loanfunding-fundingsenttorail:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was requested
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The id of the funding instruction that was sent to the payment rail
+          format: uuid
+        rail:
+          type: string
+          description: The rail that the funding instruction was sent to
+      additionalProperties: false
+      description: ''
+    consumerlending.loan-maturitydateset:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the maturity date was set on
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The funding instruction id that triggered the setting of the disbursement date on the loan
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The funding submission that the funding instruction was included in
+          format: uuid
+        loanMaturityDate:
+          type: string
+          description: The maturity date that was set for the loan. This value is in UTC.  This is the date the first funding is sent + loan term length;
+          format: date-time
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-approval-denied:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    consumerlending.loanapplication-rejected:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the application that was rejected
+          format: uuid
+        rejectionReasons:
+          type: array
+          items:
+            type: string
+          description: A list of the reasons that the application was rejected
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-reversal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing fednow transaction that was reversed
+          format: uuid
+        originalTransactionId:
+          type: string
+          description: Id of outgoing fednow transaction that was reversed
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        receiverAccountNumber:
+          type: string
+          description: Reciever account number for transcation
+        senderAccountNumber:
+          type: string
+          description: Sender account number for transcation
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-accepted:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing fednow transaction that is accepted
           format: uuid
         amount:
           type: number
@@ -1640,38 +2029,76 @@ components:
           description: The reason for cancellation, if the payment is in a cancelled status
       additionalProperties: false
       description: ''
-    ach.outgoing-completed:
-      required:
-      - creditAccountNumber
-      - creditRoutingNumber
-      - debitAccountNumber
-      - debitRoutingNumber
+    consumerlending.loan-cancelled:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that was cancelled
+          format: uuid
+        cancellationRequestId:
+          type: string
+          description: The id of the cancellation request that initiated the cancellation
+          format: uuid
+      additionalProperties: false
+      description: ''
+    transfers.book-initiated:
       type: object
       properties:
         id:
           type: string
+          description: ID of the Book Transfer
+          format: uuid
+      additionalProperties: false
+      description: ''
+    transfers.book-rejected:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Book Transfer
+          format: uuid
+      additionalProperties: false
+      description: ''
+    consumerlending.loanapplication-creditpolicycheckfailed:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the application that failed the credit policy checks
+          format: uuid
+        failureReasons:
+          type: array
+          items:
+            type: string
+          description: A list of the reasons that the application failed the credit policy checks
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-approval-denied:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
           description: The ID of the payment
           format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
         amount:
           type: number
           description: The amount of the payment
           format: double
-        creditAccountNumber:
+      additionalProperties: false
+      description: ''
+    consumerlending.loanapplication-received:
+      type: object
+      properties:
+        applicationId:
           type: string
-          description: The account number which was credited
-        creditRoutingNumber:
-          type: string
-          description: The routing number of the FI which was credited
-        debitAccountNumber:
-          type: string
-          description: The account number which was debited
-        debitRoutingNumber:
-          type: string
-          description: The routing number of the FI which was debited
-        completedAt:
-          type: string
-          description: The timestamp (UTC) at which the payment was completed
-          format: date-time
+          description: The id assigned to the received application
+          format: uuid
       additionalProperties: false
       description: ''
     wires.incoming-received:
@@ -1712,686 +2139,6 @@ components:
           description: The originator name for the payment
       additionalProperties: false
       description: ''
-    transfers.account-link-removed:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of Account Link that was removed
-          format: uuid
-      additionalProperties: false
-      description: ''
-    rtp.outgoing-cancelled:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing rtp transaction that was cancelled
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-        cancelledAt:
-          type: string
-          description: Date and time the transaction was cancelled at in UTC
-          format: date-time
-        cancelledReason:
-          type: string
-          description: Reason the transaction was cancelled
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-created:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the application that was created
-          format: uuid
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-approval-denied:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-partnerdeclinedcreated:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the partner declined application that was created
-          format: uuid
-      additionalProperties: false
-      description: ''
-    wires.outgoing-cancelled:
-      required:
-      - accountNumber
-      - beneficiary
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-        beneficiary:
-          type: string
-          description: The intended beneficiary for the payment
-        processDate:
-          type: string
-          description: The intended process date for the payment
-          format: date-time
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes (OBI) on the payment
-        reason:
-          type:
-          - string
-          - 'null'
-          description: The reason for cancellation
-        cancelledAt:
-          type: string
-          description: The timestamp at which cancellation occured
-          format: date-time
-      additionalProperties: false
-      description: ''
-    wires.outgoing-accepted:
-      required:
-      - accountNumber
-      - beneficiary
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-        beneficiary:
-          type: string
-          description: The intended beneficiary for the payment
-        processDate:
-          type: string
-          description: The intended process date for the payment
-          format: date-time
-        notes:
-          type:
-          - string
-          - 'null'
-          description: The notes (OBI) on the payment
-      additionalProperties: false
-      description: ''
-    rtp.incoming-received:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of incoming rtp transaction that was initiated
-          format: uuid
-        amount:
-          type: number
-          description: Amount of incoming transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-        senderName:
-          type: string
-          description: Sender name
-        senderBankName:
-          type: string
-          description: Sender account name
-      additionalProperties: false
-      description: ''
-    transfers.book-requires-approval:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Book Transfer
-          format: uuid
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-cancelled:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that was cancelled
-          format: uuid
-        cancellationRequestId:
-          type: string
-          description: The id of the cancellation request that initiated the cancellation
-          format: uuid
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-reopened:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that was completed
-          format: uuid
-        reasons:
-          type: array
-          items:
-            type: string
-          description: A list of reasons that outline why a loan was reopened
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-validationpassed:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was submitted
-          format: uuid
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-railpending:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was requested
-          format: uuid
-        fundingInstructionId:
-          type: string
-          description: The id of the funding instruction that is pending
-          format: uuid
-      additionalProperties: false
-      description: ''
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    fednow.outgoing-approval-required:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-completed:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that was completed
-          format: uuid
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-approved:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-disbursementdateset:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the disbursement date was set on
-          format: uuid
-        fundingInstructionId:
-          type: string
-          description: The funding instruction id that triggered the setting of the disbursement date on the loan
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The funding submission that the funding instruction was included in
-          format: uuid
-        loanDisbursementDate:
-          type: string
-          description: The disbursement date that was set for the loan. This value is in UTC.
-          format: date-time
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-failed:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was rejected
-          format: uuid
-        failureReason:
-          type: string
-          description: The reason that the funding submission failed
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-received:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the received application
-          format: uuid
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-railcompleted:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was requested
-          format: uuid
-        fundingInstructionId:
-          type: string
-          description: The id of the funding instruction that was completed
-          format: uuid
-        completedAt:
-          type: string
-          description: The datetime that the funding transaction was completed at
-          format: date-time
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-railreturned:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was requested
-          format: uuid
-        fundingInstructionId:
-          type: string
-          description: The id of the funding instruction that was returned
-          format: uuid
-        returnCode:
-          type: string
-          description: The return code provided by the payment rail
-        returnDescription:
-          type: string
-          description: The return description provided by the payment rail
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-created:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that was created
-          format: uuid
-        applicationId:
-          type: string
-          description: The id of the application that was converted into a loan
-          format: uuid
-      additionalProperties: false
-      description: ''
-    transfers.book-initiated:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Book Transfer
-          format: uuid
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-rejected:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the application that was rejected
-          format: uuid
-        rejectionReasons:
-          type: array
-          items:
-            type: string
-          description: A list of the reasons that the application was rejected
-      additionalProperties: false
-      description: ''
-    transfers.book-completed:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Book Transfer
-          format: uuid
-        amount:
-          type: number
-          description: Amount of the Book Transfer
-          format: double
-        sendingAccountName:
-          type: string
-          description: Account from which the Book Transfer was sent
-        receivingAccountName:
-          type: string
-          description: Account to which the Book Transfer was sent
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-approved:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the application that was approved
-          format: uuid
-      additionalProperties: false
-      description: ''
-    fednow.incoming-received:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of incoming fed now transaction that was initiated
-          format: uuid
-        amount:
-          type: number
-          description: Amount of incoming transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-        senderName:
-          type: string
-          description: Sender name
-        senderBankName:
-          type: string
-          description: Sender account name
-      additionalProperties: false
-      description: ''
-    ach.outgoing-pending:
-      required:
-      - creditAccountNumber
-      - creditRoutingNumber
-      - debitAccountNumber
-      - debitRoutingNumber
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-        creditAccountNumber:
-          type: string
-          description: The account number which was credited
-        creditRoutingNumber:
-          type: string
-          description: The routing number of the FI which was credited
-        debitAccountNumber:
-          type: string
-          description: The account number which was debited
-        debitRoutingNumber:
-          type: string
-          description: The routing number of the FI which was debited
-        processDate:
-          type: string
-          description: The intended date on which the payment will be procesed
-          format: date-time
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-rejected:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was rejected
-          format: uuid
-        rejectionReason:
-          type: string
-          description: The reason that the funding submission was rejected
-      additionalProperties: false
-      description: ''
-    consumerlending.loanapplication-creditpolicycheckfailed:
-      type: object
-      properties:
-        applicationId:
-          type: string
-          description: The id assigned to the application that failed the credit policy checks
-          format: uuid
-        failureReasons:
-          type: array
-          items:
-            type: string
-          description: A list of the reasons that the application failed the credit policy checks
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-rollingwindowlimitwarning:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        programId:
-          type: string
-          description: The program that the loan was assigned to
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was submitted
-          format: uuid
-        programRollingWindowFundingLimitAmount:
-          type: number
-          description: The maximum rolling window funding limit for the program
-          format: double
-        programRollingWindowCurrentFunding:
-          type: number
-          description: The current rolling window funding disbursed in the current window for the program
-          format: double
-      additionalProperties: false
-      description: ''
-    consumerlending.loan-maturitydateset:
-      type: object
-      properties:
-        loanId:
-          type: string
-          description: The id of the loan that the maturity date was set on
-          format: uuid
-        fundingInstructionId:
-          type: string
-          description: The funding instruction id that triggered the setting of the disbursement date on the loan
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The funding submission that the funding instruction was included in
-          format: uuid
-        loanMaturityDate:
-          type: string
-          description: The maturity date that was set for the loan. This value is in UTC.  This is the date the first funding is sent + loan term length;
-          format: date-time
-      additionalProperties: false
-      description: ''
-    transfers.account-link-approved:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Account Link
-          format: uuid
-      additionalProperties: false
-      description: ''
-    transfers.account-link-declined:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the Account Link
-          format: uuid
-      additionalProperties: false
-      description: ''
-    rtp.outgoing-approved:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        transactionId:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-pending:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing fednow transaction that is pending
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-accepted:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing fednow transaction that is accepted
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-      additionalProperties: false
-      description: ''
-    fednow.outgoing-cancelled:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing fednow transaction that was cancelled
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
-        cancelledAt:
-          type: string
-          description: Date and time the transaction was cancelled at in UTC
-          format: date-time
-        cancelledReason:
-          type: string
-          description: Reason the transaction was cancelled
-      additionalProperties: false
-      description: ''
     ach.outgoing-initiated:
       required:
       - creditAccountNumber
@@ -2426,33 +2173,20 @@ components:
           format: date-time
       additionalProperties: false
       description: ''
-    Cubi.Common.Abstractions.Paginated_System.String:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-    transfers.book-approved:
+    fednow.outgoing-initiated:
       type: object
       properties:
         id:
           type: string
-          description: ID of the Book Transfer
+          description: Id of outgoing fed now transaction that was initiated
           format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
       additionalProperties: false
       description: ''
     consumerlending.loanapplication-partnerrejectedcreated:
@@ -2464,12 +2198,29 @@ components:
           format: uuid
       additionalProperties: false
       description: ''
-    fednow.outgoing-completed:
+    consumerlending.loanfunding-railpending:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was requested
+          format: uuid
+        fundingInstructionId:
+          type: string
+          description: The id of the funding instruction that is pending
+          format: uuid
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-cancelled:
       type: object
       properties:
         id:
           type: string
-          description: Id of outgoing fednow transaction that was completed
+          description: Id of outgoing fednow transaction that was cancelled
           format: uuid
         amount:
           type: number
@@ -2478,58 +2229,57 @@ components:
         accountNumber:
           type: string
           description: Account number for transcation
-        confirmationNumber:
+        cancelledAt:
           type: string
-          description: Confirmation number of the completed transaction
-        completedAt:
-          type: string
-          description: Date and time the transaction was completed at in UTC
+          description: Date and time the transaction was cancelled at in UTC
           format: date-time
+        cancelledReason:
+          type: string
+          description: Reason the transaction was cancelled
       additionalProperties: false
       description: ''
-    transfers.book-declined:
+    consumerlending.loan-completed:
       type: object
       properties:
-        id:
+        loanId:
           type: string
-          description: ID of the Book Transfer
+          description: The id of the loan that was completed
           format: uuid
       additionalProperties: false
       description: ''
-    transfers.addressbook-entry-incoming-request:
+    consumerlending.loanfunding-rollingwindowlimitexceeded:
       type: object
       properties:
-        id:
+        loanId:
           type: string
-          description: ID of the Account Link
+          description: The id of the loan that the funding was made for
+          format: uuid
+        programId:
+          type: string
+          description: The program that the loan was assigned to
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was submitted
+          format: uuid
+        note:
+          type: string
+          description: Note about the rolling window being exceeded
+      additionalProperties: false
+      description: ''
+    consumerlending.loanfunding-validationpassed:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was submitted
           format: uuid
       additionalProperties: false
       description: ''
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     rtp.outgoing-completed:
       type: object
       properties:
@@ -2553,104 +2303,50 @@ components:
           description: Confirmation number of the completed transaction
       additionalProperties: false
       description: ''
-    rtp.outgoing-pending:
+    consumerlending.loan-pendingcompletion:
       type: object
       properties:
-        id:
+        loanId:
           type: string
-          description: Id of outgoing rtp transaction that is pending
+          description: The id of the loan that was put in a PendingCompletion status
           format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
       additionalProperties: false
       description: ''
-    rtp.outgoing-reversal:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing rtp transaction that was reversed
-          format: uuid
-        originalTransactionId:
-          type: string
-          description: Id of outgoing rtp transaction that was reversed
-          format: uuid
-        amount:
-          type: number
-          description: Amount of outgoing transaction
-          format: double
-        receiverAccountNumber:
-          type: string
-          description: Reciever account number for transcation
-        senderAccountNumber:
-          type: string
-          description: Sender account number for transcation
-      additionalProperties: false
-      description: ''
-    consumerlending.loanfunding-fundingsenttorail:
+    consumerlending.loanfunding-rollingwindowlimitwarning:
       type: object
       properties:
         loanId:
           type: string
           description: The id of the loan that the funding was made for
           format: uuid
+        programId:
+          type: string
+          description: The program that the loan was assigned to
+          format: uuid
         fundingSubmissionId:
           type: string
-          description: The submission id of the funding batch that was requested
+          description: The submission id of the funding batch that was submitted
           format: uuid
-        fundingInstructionId:
-          type: string
-          description: The id of the funding instruction that was sent to the payment rail
-          format: uuid
-        rail:
-          type: string
-          description: The rail that the funding instruction was sent to
-      additionalProperties: false
-      description: ''
-    rtp.outgoing-accepted:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id of outgoing rtp that is accepted
-          format: uuid
-        amount:
+        programRollingWindowFundingLimitAmount:
           type: number
-          description: Amount of outgoing transaction
+          description: The maximum rolling window funding limit for the program
           format: double
-        accountNumber:
-          type: string
-          description: Account number for transcation
+        programRollingWindowCurrentFunding:
+          type: number
+          description: The current rolling window funding disbursed in the current window for the program
+          format: double
       additionalProperties: false
       description: ''
-    partner.supportcasecreated:
-      required:
-      - caseId
-      - caseNumber
-      - emailAddress
-      type: object
-      properties:
-        caseId:
-          type: string
-          description: The caseId of the Support Case created
-        caseNumber:
-          type: string
-          description: The caseNumber of the Support Case created
-        emailAddress:
-          type: string
-          description: The emailAddress of the Support Case created
-      additionalProperties: false
-      description: ''
-    wires.outgoing-fee-completed:
+    wires.outgoing-accepted:
       required:
       - accountNumber
+      - beneficiary
       type: object
       properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
         accountNumber:
           type: string
           description: The account number from which the payment originates
@@ -2658,25 +2354,62 @@ components:
           type: number
           description: The amount of the payment
           format: double
+        beneficiary:
+          type: string
+          description: The intended beneficiary for the payment
+        processDate:
+          type: string
+          description: The intended process date for the payment
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: The notes (OBI) on the payment
       additionalProperties: false
       description: ''
-    consumerlending.loan-cancellationfailed:
+    transfers.book-received:
       type: object
       properties:
-        loanId:
+        id:
           type: string
-          description: The id of the loan that cancellation failed for
+          description: ID of the Book Transfer
           format: uuid
-        cancellationRequestId:
+        amount:
+          type: number
+          description: Amount of the Book Transfer
+          format: double
+        sendingAccountName:
           type: string
-          description: The id of the cancellation request that failed
-          format: uuid
-        failureReason:
+          description: Account from which the Book Transfer was sent
+        receivingAccountName:
           type: string
-          description: The cancellation failure reason
+          description: Account to which the Book Transfer was sent
       additionalProperties: false
       description: ''
-    ach.outgoing-approval-denied:
+    rtp.incoming-received:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of incoming rtp transaction that was initiated
+          format: uuid
+        amount:
+          type: number
+          description: Amount of incoming transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+        senderName:
+          type: string
+          description: Sender name
+        senderBankName:
+          type: string
+          description: Sender account name
+      additionalProperties: false
+      description: ''
+    ach.outgoing-approval-required:
       required:
       - creditAccountNumber
       - creditRoutingNumber
@@ -2706,30 +2439,62 @@ components:
           description: The routing number of the FI which was debited
       additionalProperties: false
       description: ''
-    rtp.outgoing-approval-required:
-      required:
-      - accountNumber
+    consumerlending.loanfunding-rejected:
       type: object
       properties:
-        transactionId:
+        loanId:
           type: string
-          description: The ID of the payment
+          description: The id of the loan that the funding was made for
           format: uuid
-        accountNumber:
+        fundingSubmissionId:
           type: string
-          description: The account number from which the payment originates
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
+          description: The submission id of the funding batch that was rejected
+          format: uuid
+        rejectionReason:
+          type: string
+          description: The reason that the funding submission was rejected
       additionalProperties: false
       description: ''
-    rtp.outgoing-initiated:
+    consumerlending.loan-cancellationfailed:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that cancellation failed for
+          format: uuid
+        cancellationRequestId:
+          type: string
+          description: The id of the cancellation request that failed
+          format: uuid
+        failureReason:
+          type: string
+          description: The cancellation failure reason
+      additionalProperties: false
+      description: ''
+    transfers.addressbook-entry-incoming-request:
       type: object
       properties:
         id:
           type: string
-          description: Id of outgoing rtp now transaction that was initiated
+          description: ID of the Account Link
+          format: uuid
+      additionalProperties: false
+      description: ''
+    transfers.book-declined:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Book Transfer
+          format: uuid
+      additionalProperties: false
+      description: ''
+    fednow.outgoing-pending:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing fednow transaction that is pending
           format: uuid
         amount:
           type: number
@@ -2738,6 +2503,24 @@ components:
         accountNumber:
           type: string
           description: Account number for transcation
+      additionalProperties: false
+      description: ''
+    transfers.book-requires-approval:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Book Transfer
+          format: uuid
+      additionalProperties: false
+      description: ''
+    transfers.account-link-approved:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Account Link
+          format: uuid
       additionalProperties: false
       description: ''
     ach.outgoing-accepted:
@@ -2771,6 +2554,70 @@ components:
           description: The routing number of the FI which was debited
       additionalProperties: false
       description: ''
+    consumerlending.loanfunding-failed:
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: The id of the loan that the funding was made for
+          format: uuid
+        fundingSubmissionId:
+          type: string
+          description: The submission id of the funding batch that was rejected
+          format: uuid
+        failureReason:
+          type: string
+          description: The reason that the funding submission failed
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-cancelled:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing rtp transaction that was cancelled
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+        cancelledAt:
+          type: string
+          description: Date and time the transaction was cancelled at in UTC
+          format: date-time
+        cancelledReason:
+          type: string
+          description: Reason the transaction was cancelled
+      additionalProperties: false
+      description: ''
+    transfers.book-approved:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Book Transfer
+          format: uuid
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-accepted:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing rtp that is accepted
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+      additionalProperties: false
+      description: ''
     consumerlending.loanfunding-railcancelled:
       type: object
       properties:
@@ -2793,42 +2640,195 @@ components:
           description: A list of reasons that the funding was cancelled
       additionalProperties: false
       description: ''
-    consumerlending.loanfunding-rollingwindowlimitexceeded:
+    wires.outgoing-fee-completed:
+      required:
+      - accountNumber
       type: object
       properties:
-        loanId:
+        accountNumber:
           type: string
-          description: The id of the loan that the funding was made for
-          format: uuid
-        programId:
-          type: string
-          description: The program that the loan was assigned to
-          format: uuid
-        fundingSubmissionId:
-          type: string
-          description: The submission id of the funding batch that was submitted
-          format: uuid
-        note:
-          type: string
-          description: Note about the rolling window being exceeded
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
       additionalProperties: false
       description: ''
-    ach.incoming-received:
-      required:
-      - creditAccountNumber
+    consumerlending.loanapplication-partnerdeclinedcreated:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the partner declined application that was created
+          format: uuid
+      additionalProperties: false
+      description: ''
+    fednow.incoming-received:
       type: object
       properties:
         id:
           type: string
-          description: The ID of the ACH Payment
+          description: Id of incoming fed now transaction that was initiated
           format: uuid
         amount:
           type: number
-          description: The Amount of the ACH Payment
+          description: Amount of incoming transaction
           format: double
-        creditAccountNumber:
+        accountNumber:
           type: string
-          description: The account number which was credited
+          description: Account number for transcation
+        senderName:
+          type: string
+          description: Sender name
+        senderBankName:
+          type: string
+          description: Sender account name
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-initiated:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of outgoing rtp now transaction that was initiated
+          format: uuid
+        amount:
+          type: number
+          description: Amount of outgoing transaction
+          format: double
+        accountNumber:
+          type: string
+          description: Account number for transcation
+      additionalProperties: false
+      description: ''
+    rtp.outgoing-approval-required:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    consumerlending.loanapplication-created:
+      type: object
+      properties:
+        applicationId:
+          type: string
+          description: The id assigned to the application that was created
+          format: uuid
+      additionalProperties: false
+      description: ''
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    rtp.outgoing-approved:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number from which the payment originates
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+      additionalProperties: false
+      description: ''
+    Cubi.Common.Abstractions.Paginated_System.String:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    transfers.account-link-declined:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the Account Link
+          format: uuid
       additionalProperties: false
       description: ''
 x-readme:

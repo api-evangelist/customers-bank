@@ -964,56 +964,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
-      type: object
-      properties:
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: The settlement account number for the entity
-      additionalProperties: false
-      description: Settlement account for creditor agent account
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
-      type: object
-      properties:
-        memberId:
-          type:
-          - string
-          - 'null'
-          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
-      additionalProperties: false
-      description: The bank that received the Fedwire message (instructed agent / receiver)
     Cubi.Wires.WebApi.Dto.v2.IncomingDebtorDto:
       type: object
       properties:
@@ -1031,127 +981,6 @@ components:
           $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
       additionalProperties: false
       description: The originating party of a wire payment
-    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.v2.AddressDto:
-      type: object
-      properties:
-        streetName:
-          type: string
-          description: Street or address line 1
-        floor:
-          type:
-          - string
-          - 'null'
-          description: Street or address line 2
-        city:
-          type: string
-          description: City
-        state:
-          type:
-          - string
-          - 'null'
-          description: State or Province
-        postalCode:
-          type:
-          - string
-          - 'null'
-          description: Postal Code
-        countryCode:
-          type: string
-          description: Country Code
-        addressLines:
-          type: array
-          items:
-            type: string
-          description: Unstructured Address lines.  Typically used if a structured address was not provided.
-      additionalProperties: false
-      description: An address object, which may be structured or unstructured
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Wires.WebApi.Dto.v2.InstructingAgentDto:
-      type: object
-      properties:
-        memberId:
-          type:
-          - string
-          - 'null'
-          description: The routing number of the sending institution
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the sending institution
-      additionalProperties: false
-      description: The bank that sent the Fedwire message (instructing agent / sender)
-    Cubi.Wires.WebApi.Dto.v2.IncomingCreditorDto:
-      type: object
-      properties:
-        accountId:
-          type:
-          - string
-          - 'null'
-          description: The CUBIX ID (UUID) of the account
-          format: uuid
-        accountNumber:
-          type: string
-          description: The account number of the beneficiary
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the beneficiary party
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-      additionalProperties: false
-      description: The beneficiary (the person or company receiving funds)
     Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto:
       type: object
       properties:
@@ -1227,6 +1056,21 @@ components:
           format: date-time
       additionalProperties: false
       description: Represents an incoming (received) wire payment
+    Cubi.Wires.WebApi.Dto.v2.InstructingAgentDto:
+      type: object
+      properties:
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sending institution
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the sending institution
+      additionalProperties: false
+      description: The bank that sent the Fedwire message (instructing agent / sender)
     Cubi.Wires.WebApi.Dto.v2.AgentDto:
       type: object
       properties:
@@ -1247,6 +1091,162 @@ components:
           description: The BIC of the entity
       additionalProperties: false
       description: A bank or financial institution participating in a wire payment
+    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The settlement account number for the entity
+      additionalProperties: false
+      description: Settlement account for creditor agent account
+    Cubi.Wires.WebApi.Dto.v2.AddressDto:
+      type: object
+      properties:
+        streetName:
+          type: string
+          description: Street or address line 1
+        floor:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type: string
+          description: Country Code
+        addressLines:
+          type: array
+          items:
+            type: string
+          description: Unstructured Address lines.  Typically used if a structured address was not provided.
+      additionalProperties: false
+      description: An address object, which may be structured or unstructured
+    Cubi.Wires.WebApi.Dto.v2.IncomingCreditorDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: The CUBIX ID (UUID) of the account
+          format: uuid
+        accountNumber:
+          type: string
+          description: The account number of the beneficiary
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The beneficiary (the person or company receiving funds)
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.IncomingWirePaymentDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
+      type: object
+      properties:
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
+      additionalProperties: false
+      description: The bank that received the Fedwire message (instructed agent / receiver)
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

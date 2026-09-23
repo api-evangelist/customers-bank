@@ -303,41 +303,33 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+    Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto:
       type: object
       properties:
         accountNumber:
+          type: string
+          description: The account number of the beneficiary
+        name:
           type:
           - string
           - 'null'
-          description: The settlement account number for the entity
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
       additionalProperties: false
-      description: Settlement account for creditor agent account
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+      description: The beneficiary (the person or company receiving funds)
+    Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Rejected
+      - Returned
+      - ApprovalRequired
+      - Declined
+      type: string
     Cubi.Wires.WebApi.Dto.v2.OutgoingDebtorDto:
       type: object
       properties:
@@ -361,48 +353,6 @@ components:
           $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
       additionalProperties: false
       description: The originating party of a wire payment
-    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
-      type: object
-      properties:
-        memberId:
-          type:
-          - string
-          - 'null'
-          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
-        name:
-          type:
-          - string
-          - 'null'
-          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
-      additionalProperties: false
-      description: The bank that received the Fedwire message (instructed agent / receiver)
-    Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto:
-      enum:
-      - Initiated
-      - Pending
-      - Accepted
-      - Completed
-      - Cancelled
-      - Rejected
-      - Returned
-      - ApprovalRequired
-      - Declined
-      type: string
-    Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: The account number of the beneficiary
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the beneficiary party
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-      additionalProperties: false
-      description: The beneficiary (the person or company receiving funds)
     Cubi.Wires.Contracts.Dto.WireChannel:
       enum:
       - MANUAL
@@ -411,20 +361,36 @@ components:
       - Q2
       - WHL
       type: string
-    Cubi.Common.Models.Filter:
-      required:
-      - field
-      - operator
-      - value
+    Cubi.Wires.WebApi.Dto.v2.AgentDto:
       type: object
       properties:
-        value:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+        name:
           type: string
-        field:
-          type: string
-        operator:
-          type: string
+          description: The name of the entity
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The clearing system member id (typically an ABA) of the entity
+        bic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the entity
       additionalProperties: false
+      description: A bank or financial institution participating in a wire payment
+    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The settlement account number for the entity
+      additionalProperties: false
+      description: Settlement account for creditor agent account
     Cubi.Wires.WebApi.Dto.v2.AddressDto:
       type: object
       properties:
@@ -490,7 +456,66 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+      additionalProperties: false
+    Cubi.Common.Models.Filter:
+      required:
+      - field
+      - operator
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto:
       enum:
       - Initiated
       - Pending
@@ -589,46 +614,21 @@ components:
         channel:
           $ref: '#/components/schemas/Cubi.Wires.Contracts.Dto.WireChannel'
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
+    Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
       type: object
       properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.v2.AgentDto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-        name:
-          type: string
-          description: The name of the entity
         memberId:
           type:
           - string
           - 'null'
-          description: The clearing system member id (typically an ABA) of the entity
-        bic:
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
           type:
           - string
           - 'null'
-          description: The BIC of the entity
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
       additionalProperties: false
-      description: A bank or financial institution participating in a wire payment
+      description: The bank that received the Fedwire message (instructed agent / receiver)
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

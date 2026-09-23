@@ -1350,13 +1350,17 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Wires.Contracts.Dto.WireChannel:
+    Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus:
       enum:
-      - MANUAL
-      - API
-      - FTP
-      - Q2
-      - WHL
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Rejected
+      - Returned
+      - ApprovalRequired
+      - Declined
       type: string
     Cubi.Wires.WebApi.Dto.v2.InitiateAgentDto:
       required:
@@ -1386,196 +1390,6 @@ components:
           description: The BIC of the financial institution
       additionalProperties: false
       description: Bank participating in the payment chain
-    Cubi.Wires.WebApi.Dto.v2.InitiateAgentAccountDto:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        accountNumber:
-          maxLength: 34
-          minLength: 0
-          type: string
-          description: The settlement account number for the entity
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.v2.AgentDto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-        name:
-          type: string
-          description: The name of the entity
-        memberId:
-          type:
-          - string
-          - 'null'
-          description: The clearing system member id (typically an ABA) of the entity
-        bic:
-          type:
-          - string
-          - 'null'
-          description: The BIC of the entity
-      additionalProperties: false
-      description: A bank or financial institution participating in a wire payment
-    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
-      type: object
-      properties:
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: The settlement account number for the entity
-      additionalProperties: false
-      description: Settlement account for creditor agent account
-    Cubi.Wires.WebApi.Dto.v2.InitiateIntermediateAgentDto:
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto'
-        name:
-          maxLength: 35
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: The name of the financial institution
-        memberId:
-          maxLength: 9
-          minLength: 9
-          type:
-          - string
-          - 'null'
-          description: The ABA of the financial institution
-        bic:
-          maxLength: 11
-          minLength: 8
-          type:
-          - string
-          - 'null'
-          description: The BIC of the financial institution
-      additionalProperties: false
-      description: Intermediate bank for a wire payment
-    Cubi.Wires.WebApi.Dto.v2.OutgoingDebtorDto:
-      type: object
-      properties:
-        accountId:
-          type:
-          - string
-          - 'null'
-          description: The CUBIX ID (UUID) of the account
-          format: uuid
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: The account number of the originator
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the originator
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-      additionalProperties: false
-      description: The originating party of a wire payment
-    Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto:
-      type: object
-      properties:
-        wireIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The IDs of the wires to be declined
-        reason:
-          type: string
-          description: The reason the wire are being declined
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.v2.AddressDto:
-      type: object
-      properties:
-        streetName:
-          type: string
-          description: Street or address line 1
-        floor:
-          type:
-          - string
-          - 'null'
-          description: Street or address line 2
-        city:
-          type: string
-          description: City
-        state:
-          type:
-          - string
-          - 'null'
-          description: State or Province
-        postalCode:
-          type:
-          - string
-          - 'null'
-          description: Postal Code
-        countryCode:
-          type: string
-          description: Country Code
-        addressLines:
-          type: array
-          items:
-            type: string
-          description: Unstructured Address lines.  Typically used if a structured address was not provided.
-      additionalProperties: false
-      description: An address object, which may be structured or unstructured
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
-      additionalProperties: false
     Cubi.Wires.WebApi.Dto.v2.InitiateWirePaymentDto:
       required:
       - amount
@@ -1628,65 +1442,6 @@ components:
           $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAgentAccountDto'
       additionalProperties: false
       description: Initiates an outgoing wire payment
-    Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto:
-      enum:
-      - Initiated
-      - Pending
-      - Accepted
-      - Completed
-      - Cancelled
-      - Rejected
-      - Returned
-      - ApprovalRequired
-      - Declined
-      type: string
-    Cubi.Wires.Domain.Entities.OutgoingWireTransactionStatus:
-      enum:
-      - Initiated
-      - Pending
-      - Accepted
-      - Completed
-      - Cancelled
-      - Rejected
-      - Returned
-      - ApprovalRequired
-      - Declined
-      type: string
-    Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto:
-      type: object
-      properties:
-        wireIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: The IDs of the wires to be approved
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Wires.WebApi.Dto.v2.InstructedAgentDto:
       type: object
       properties:
@@ -1702,55 +1457,6 @@ components:
           description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
       additionalProperties: false
       description: The bank that received the Fedwire message (instructed agent / receiver)
-    Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto:
-      type: object
-      properties:
-        accountNumber:
-          type: string
-          description: The account number of the beneficiary
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the beneficiary party
-        address:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
-      additionalProperties: false
-      description: The beneficiary (the person or company receiving funds)
-    Cubi.Wires.WebApi.Dto.v2.InitiateInstructedAgentDto:
-      required:
-      - memberId
-      type: object
-      properties:
-        memberId:
-          maxLength: 9
-          minLength: 9
-          type: string
-          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
-        name:
-          maxLength: 35
-          minLength: 1
-          type:
-          - string
-          - 'null'
-          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto:
-      type: object
-      properties:
-        reason:
-          type:
-          - string
-          - 'null'
-          description: The reason the wire is being declined
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
     Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
       type: object
       properties:
@@ -1838,13 +1544,14 @@ components:
         channel:
           $ref: '#/components/schemas/Cubi.Wires.Contracts.Dto.WireChannel'
       additionalProperties: false
-    Cubi.Wires.WebApi.Dto.CancelWireDto:
-      type: object
-      properties:
-        reason:
-          type: string
-          description: The reason for the cancellation request
-      additionalProperties: false
+    Cubi.Wires.Contracts.Dto.WireChannel:
+      enum:
+      - MANUAL
+      - API
+      - FTP
+      - Q2
+      - WHL
+      type: string
     Cubi.Wires.WebApi.Dto.v2.InitiateCreditorDto:
       required:
       - accountNumber
@@ -1912,6 +1619,299 @@ components:
           description: Country code (2 Character).  Should follow the ISO 3166-1 alpha-2 standard
       additionalProperties: false
       description: Bank Address
+    Cubi.Wires.WebApi.Dto.v2.OutgoingCreditorDto:
+      type: object
+      properties:
+        accountNumber:
+          type: string
+          description: The account number of the beneficiary
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the beneficiary party
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The beneficiary (the person or company receiving funds)
+    Cubi.Wires.WebApi.Dto.v2.OutgoingDebtorDto:
+      type: object
+      properties:
+        accountId:
+          type:
+          - string
+          - 'null'
+          description: The CUBIX ID (UUID) of the account
+          format: uuid
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the originator
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the originator
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+      additionalProperties: false
+      description: The originating party of a wire payment
+    Cubi.Wires.WebApi.Dto.CancelWireDto:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason for the cancellation request
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.AddressDto:
+      type: object
+      properties:
+        streetName:
+          type: string
+          description: Street or address line 1
+        floor:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type: string
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type: string
+          description: Country Code
+        addressLines:
+          type: array
+          items:
+            type: string
+          description: Unstructured Address lines.  Typically used if a structured address was not provided.
+      additionalProperties: false
+      description: An address object, which may be structured or unstructured
+    Cubi.Wires.WebApi.Dto.v2.InitiateIntermediateAgentDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.InitiateAddressDto'
+        name:
+          maxLength: 35
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The name of the financial institution
+        memberId:
+          maxLength: 9
+          minLength: 9
+          type:
+          - string
+          - 'null'
+          description: The ABA of the financial institution
+        bic:
+          maxLength: 11
+          minLength: 8
+          type:
+          - string
+          - 'null'
+          description: The BIC of the financial institution
+      additionalProperties: false
+      description: Intermediate bank for a wire payment
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.DeclineOutgoingWiresDto:
+      type: object
+      properties:
+        wireIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The IDs of the wires to be declined
+        reason:
+          type: string
+          description: The reason the wire are being declined
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.InitiateInstructedAgentDto:
+      required:
+      - memberId
+      type: object
+      properties:
+        memberId:
+          maxLength: 9
+          minLength: 9
+          type: string
+          description: Routing number of the receiving bank.  This must be a federal ABA number.  If there is no intermediary bank, then this should be the ABA number of the beneficiary bank
+        name:
+          maxLength: 35
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: Name of receiving bank.  If there is no intermediary bank, then this should be the name of the beneficiary bank
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.DeclineOutgoingWireDto:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason the wire is being declined
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.AgentDto:
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.AddressDto'
+        name:
+          type: string
+          description: The name of the entity
+        memberId:
+          type:
+          - string
+          - 'null'
+          description: The clearing system member id (typically an ABA) of the entity
+        bic:
+          type:
+          - string
+          - 'null'
+          description: The BIC of the entity
+      additionalProperties: false
+      description: A bank or financial institution participating in a wire payment
+    Cubi.Wires.WebApi.Dto.v2.AgentAccountDto:
+      type: object
+      properties:
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: The settlement account number for the entity
+      additionalProperties: false
+      description: Settlement account for creditor agent account
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Wires.WebApi.Dto.ApproveOutgoingWiresDto:
+      type: object
+      properties:
+        wireIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: The IDs of the wires to be approved
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.OutgoingWireTransactionStatusDto:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Rejected
+      - Returned
+      - ApprovalRequired
+      - Declined
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.v2.OutgoingWirePaymentDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.v2.InitiateAgentAccountDto:
+      required:
+      - accountNumber
+      type: object
+      properties:
+        accountNumber:
+          maxLength: 34
+          minLength: 0
+          type: string
+          description: The settlement account number for the entity
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

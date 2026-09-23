@@ -1444,37 +1444,7 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
-      enum:
-      - FedNow
-      - Rtp
-      type: string
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
       type: object
       properties:
         pageSize:
@@ -1492,27 +1462,140 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+      required:
+      - accountNumber
       type: object
       properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+        id:
+          type: string
+          description: The ID of the payment
+          format: uuid
+        amount:
+          type: number
+          description: The amount of the payment
+          format: double
+        accountNumber:
+          type: string
+          description: The account number for which the payment was received
+        description:
+          type:
+          - string
+          - 'null'
+          description: The payment description
+        referenceId:
+          type:
+          - string
+          - 'null'
+          description: The referenceID of the payment, sent by the originator
+        isMemoPosted:
+          type: boolean
+          description: Indicates if the payment is memo or hard posted
+        createdAt:
+          type: string
+          description: The datetime at which the payment was received
+          format: date-time
+        status:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto'
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was intended to be delivered
+          format: date-time
+        deliveryDate:
+          type:
+          - string
+          - 'null'
+          description: The date the payment was actually delivered
+          format: date-time
+        notes:
+          type:
+          - string
+          - 'null'
+          description: Notes on the payment, from the sender
+        senderName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the sender
+        senderAccountNumber:
+          type:
+          - string
+          - 'null'
+          description: The account number of the sender
+        senderRoutingNumber:
+          type:
+          - string
+          - 'null'
+          description: The routing number of the sender
+        senderAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the sender
+        senderAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the sender
+        senderCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the sender
+        senderState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the sender
+        senderZip:
+          type:
+          - string
+          - 'null'
+          description: The zipcode of the sender
+        senderCountry:
+          type:
+          - string
+          - 'null'
+          description: The country of the sender
+        senderBankName:
+          type:
+          - string
+          - 'null'
+          description: The name of the senders' bank
+        senderBankAddress1:
+          type:
+          - string
+          - 'null'
+          description: The address of the senders' bank
+        senderBankAddress2:
+          type:
+          - string
+          - 'null'
+          description: The address (continued) of the senders' bank
+        senderBankCity:
+          type:
+          - string
+          - 'null'
+          description: The city of the senders' bank
+        senderBankState:
+          type:
+          - string
+          - 'null'
+          description: The state or province of the senders' bank
+        senderBankZip:
+          type:
+          - string
+          - 'null'
+          description: The zip code of the senders' bank
+        confirmationNumber:
+          type:
+          - string
+          - 'null'
+          description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
       additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
       required:
@@ -1658,139 +1741,6 @@ components:
       - Returned
       - Reversed
       type: string
-    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
-      required:
-      - accountNumber
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the payment
-          format: uuid
-        amount:
-          type: number
-          description: The amount of the payment
-          format: double
-        accountNumber:
-          type: string
-          description: The account number for which the payment was received
-        description:
-          type:
-          - string
-          - 'null'
-          description: The payment description
-        referenceId:
-          type:
-          - string
-          - 'null'
-          description: The referenceID of the payment, sent by the originator
-        isMemoPosted:
-          type: boolean
-          description: Indicates if the payment is memo or hard posted
-        createdAt:
-          type: string
-          description: The datetime at which the payment was received
-          format: date-time
-        status:
-          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto'
-        paymentDate:
-          type:
-          - string
-          - 'null'
-          description: The date the payment was intended to be delivered
-          format: date-time
-        deliveryDate:
-          type:
-          - string
-          - 'null'
-          description: The date the payment was actually delivered
-          format: date-time
-        notes:
-          type:
-          - string
-          - 'null'
-          description: Notes on the payment, from the sender
-        senderName:
-          type:
-          - string
-          - 'null'
-          description: The full name of the sender
-        senderAccountNumber:
-          type:
-          - string
-          - 'null'
-          description: The account number of the sender
-        senderRoutingNumber:
-          type:
-          - string
-          - 'null'
-          description: The routing number of the sender
-        senderAddress1:
-          type:
-          - string
-          - 'null'
-          description: The address of the sender
-        senderAddress2:
-          type:
-          - string
-          - 'null'
-          description: The address (continued) of the sender
-        senderCity:
-          type:
-          - string
-          - 'null'
-          description: The city of the sender
-        senderState:
-          type:
-          - string
-          - 'null'
-          description: The state or province of the sender
-        senderZip:
-          type:
-          - string
-          - 'null'
-          description: The zipcode of the sender
-        senderCountry:
-          type:
-          - string
-          - 'null'
-          description: The country of the sender
-        senderBankName:
-          type:
-          - string
-          - 'null'
-          description: The name of the senders' bank
-        senderBankAddress1:
-          type:
-          - string
-          - 'null'
-          description: The address of the senders' bank
-        senderBankAddress2:
-          type:
-          - string
-          - 'null'
-          description: The address (continued) of the senders' bank
-        senderBankCity:
-          type:
-          - string
-          - 'null'
-          description: The city of the senders' bank
-        senderBankState:
-          type:
-          - string
-          - 'null'
-          description: The state or province of the senders' bank
-        senderBankZip:
-          type:
-          - string
-          - 'null'
-          description: The zip code of the senders' bank
-        confirmationNumber:
-          type:
-          - string
-          - 'null'
-          description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -1822,26 +1772,31 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        pageSize:
-          type: integer
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
           format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
-      additionalProperties: false
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
       required:
       - accountNumber
@@ -1974,6 +1929,51 @@ components:
           - string
           - 'null'
           description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
+      enum:
+      - FedNow
+      - Rtp
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
       additionalProperties: false
 x-readme:
   explorer-enabled: false

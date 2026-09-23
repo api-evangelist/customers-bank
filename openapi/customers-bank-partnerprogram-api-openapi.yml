@@ -8,7 +8,7 @@ servers:
 - url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
 tags:
 - name: PartnerProgram
-  description: Allows for the querying of ACH partner programs available for use within the system.  Partner programs are used when sending a payment in order to specify pre-built configurations under which the payment will be processed, such as SEC code and ACH batch headers
+  description: Allows for the querying of ACH partner programs available for use within the system. Partner programs are used when sending a payment in order to specify pre-built configurations under which the payment will be processed, such as SEC code and ACH batch headers
 paths:
   /programs/{id}:
     get:
@@ -666,31 +666,61 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+      required:
+      - achCompanyId
+      - batchHeader
       type: object
       properties:
-        type:
+        id:
+          type: string
+          description: The ID of the partner program
+          format: uuid
+        partnerId:
+          type: string
+          description: The ID of the partner
+          format: uuid
+        achCompanyId:
+          minLength: 1
+          type: string
+          description: The configured ACH company ID under which to submit payments associated with this program
+        secCode:
+          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.AchPaymentType'
+        batchHeader:
+          minLength: 1
+          type: string
+          description: The configured batch header to use for submitted payments associated with this program
+        writeUnbalancedFiles:
           type:
-          - string
+          - boolean
           - 'null'
-        title:
+          description: Configures the contents of the ACH file
+        writeBatchPerTransaction:
           type:
-          - string
+          - boolean
           - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
+          description: Indicates whether a batch should be created for each payment
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+      additionalProperties: false
     Cubi.Ach.Contracts.Messages.AchPaymentType:
       enum:
       - PPD
@@ -747,61 +777,31 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
-      additionalProperties: false
-    Cubi.Ach.WebApi.Dto.PartnerProgramDto:
-      required:
-      - achCompanyId
-      - batchHeader
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the partner program
-          format: uuid
-        partnerId:
-          type: string
-          description: The ID of the partner
-          format: uuid
-        achCompanyId:
-          minLength: 1
-          type: string
-          description: The configured ACH company ID under which to submit payments associated with this program
-        secCode:
-          $ref: '#/components/schemas/Cubi.Ach.Contracts.Messages.AchPaymentType'
-        batchHeader:
-          minLength: 1
-          type: string
-          description: The configured batch header to use for submitted payments associated with this program
-        writeUnbalancedFiles:
+        type:
           type:
-          - boolean
+          - string
           - 'null'
-          description: Configures the contents of the ACH file
-        writeBatchPerTransaction:
+        title:
           type:
-          - boolean
+          - string
           - 'null'
-          description: Indicates whether a batch should be created for each payment
-      additionalProperties: false
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto:
       type: object
       properties:
@@ -823,33 +823,6 @@ components:
           description: The maximum number of cosigners that will be accepted on a loan application which is verified by this ruleset
           format: int32
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType:
-      enum:
-      - None
-      - Mdr
-      - Origination
-      - MdrAndOrigination
-      type: string
     Cubi.ConsumerLending.WebApi.Dto.ProgramType:
       enum:
       - Other
@@ -879,6 +852,33 @@ components:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto'
           description: List of the approval (credit policy) rules associated with this program
       additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType:
+      enum:
+      - None
+      - Mdr
+      - Origination
+      - MdrAndOrigination
+      type: string
 x-refined-from:
 - customers-bank-ach-openapi.json
 - customers-bank-consumerlending-openapi.json

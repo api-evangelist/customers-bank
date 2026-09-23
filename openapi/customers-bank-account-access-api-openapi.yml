@@ -9,12 +9,12 @@ servers:
 - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
 - url: https://cubi-sandbox-api.customersbank.com/Wires/v2
 tags:
-- name: AccountAccess
+- name: Account Access
 paths:
   /AccountAccess/{id}:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess/{id} - GET
       description: Gets the enablement type for a given account
       operationId: get-accountaccess-id
@@ -121,7 +121,7 @@ paths:
   /accountaccess/fednow/{accountId}:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /accountaccess/fednow/{accountId} - GET
       description: Get account enabled for FedNow by account id
       operationId: get-accountaccess-fednow-accountid
@@ -226,7 +226,7 @@ paths:
   /accountaccess/rtp/{accountId}:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /accountaccess/rtp/{accountId} - GET
       description: Get account enabled for RTP by account id
       operationId: get-accountaccess-rtp-accountid
@@ -331,7 +331,7 @@ paths:
   /AccountAccess/{accountId}/enabled:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess/{accountId}/enabled - GET
       operationId: get-accountaccess-accountid-enabled
       parameters:
@@ -438,7 +438,7 @@ paths:
   /AccountAccess/enabled:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess/enabled - GET
       operationId: get-accountaccess-enabled
       parameters:
@@ -545,7 +545,7 @@ paths:
   /AccountAccess:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess - GET
       operationId: get-accountaccess
       responses:
@@ -645,7 +645,7 @@ paths:
   /AccountAccess/enabled/download:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess/enabled/download - GET
       operationId: get-accountaccess-enabled-download
       parameters:
@@ -752,7 +752,7 @@ paths:
   /AccountAccess/{accountId}:
     get:
       tags:
-      - AccountAccess
+      - Account Access
       summary: /AccountAccess/{accountId} - GET
       description: Returns the api wires settings for a given account
       operationId: get-accountaccess-accountid
@@ -856,6 +856,24 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/Wires/v2
 components:
   schemas:
+    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type: string
+          description: The account number
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -912,24 +930,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the account
-          format: uuid
-        controlType:
-          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
-        accountNumber:
-          type: string
-          description: The account number
-      additionalProperties: false
-    Cubi.Ach.WebApi.Dto.ControlTypeDto:
-      enum:
-      - Single
-      - Dual
-      type: string
     Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto:
       type: object
       properties:

@@ -381,26 +381,6 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -537,6 +517,26 @@ components:
           - string
           - 'null'
           description: The Alternate BIC of the beneficiary bank (BIC-8)
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ITOperations.WebApi.Dto.CorrespondentInstructionsDto'
       additionalProperties: false
 x-readme:
   explorer-enabled: false

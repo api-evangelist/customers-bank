@@ -655,48 +655,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
-      required:
-      - address
-      - customerType
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-          description: The name of the customer
-        customerType:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
-        address:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Accounts.WebApi.Dto.AddressDto:
       type: object
       properties:
@@ -752,6 +710,23 @@ components:
         address:
           $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
       additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
+      required:
+      - address
+      - customerType
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
+      additionalProperties: false
     Cubi.Accounts.WebApi.Dto.CustomerDto:
       type: object
       properties:
@@ -769,64 +744,11 @@ components:
         address:
           $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
       additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
-      additionalProperties: false
+    Cubi.Accounts.Contracts.Messages.CustomerType:
+      enum:
+      - Personal
+      - Business
+      type: string
     Cubi.Accounts.WebApi.Dto.CreateAddressDto:
       required:
       - addressLine1
@@ -871,11 +793,89 @@ components:
           type: string
           description: Country Code
       additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.CustomerType:
-      enum:
-      - Personal
-      - Business
-      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true
