@@ -180,6 +180,26 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Security.WebApi.Dtos.AccessTokenDto:
+      type: object
+      properties:
+        tokenType:
+          type:
+          - string
+          - 'null'
+          description: This will always be Bearer
+          example: Bearer
+        accessToken:
+          type:
+          - string
+          - 'null'
+          description: The access token
+        expiresOn:
+          type: string
+          description: The time the token expires at
+          format: date-time
+      additionalProperties: false
+      description: The results of a successful authentication
     Cubi.Security.WebApi.Dtos.OAuthResponseDto:
       type: object
       properties:
@@ -199,6 +219,22 @@ components:
           example: 3598
       additionalProperties: false
       description: The result of a successful authentication
+    Cubi.Security.WebApi.Dtos.ClientCredentialsDto:
+      required:
+      - clientId
+      - clientSecret
+      type: object
+      properties:
+        clientId:
+          minLength: 1
+          type: string
+          description: The client id
+        clientSecret:
+          minLength: 1
+          type: string
+          description: The secret for the authentication call
+      additionalProperties: false
+      description: The credentials to use to authenticate
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -255,42 +291,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Security.WebApi.Dtos.AccessTokenDto:
-      type: object
-      properties:
-        tokenType:
-          type:
-          - string
-          - 'null'
-          description: This will always be Bearer
-          example: Bearer
-        accessToken:
-          type:
-          - string
-          - 'null'
-          description: The access token
-        expiresOn:
-          type: string
-          description: The time the token expires at
-          format: date-time
-      additionalProperties: false
-      description: The results of a successful authentication
-    Cubi.Security.WebApi.Dtos.ClientCredentialsDto:
-      required:
-      - clientId
-      - clientSecret
-      type: object
-      properties:
-        clientId:
-          minLength: 1
-          type: string
-          description: The client id
-        clientSecret:
-          minLength: 1
-          type: string
-          description: The secret for the authentication call
-      additionalProperties: false
-      description: The credentials to use to authenticate
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

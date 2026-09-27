@@ -405,6 +405,17 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Accounts.WebApi.Dto.InterestPaymentDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     Cubi.Accounts.WebApi.Dto.TransactionDto:
       required:
       - description
@@ -502,6 +513,13 @@ components:
       - FedNow
       - InterestPayment
       type: string
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TransactionDto:
       type: object
       properties:
@@ -521,17 +539,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TransactionDto'
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.InterestPaymentDto:
-      type: object
-      properties:
-        amount:
-          type: number
-          format: double
-        description:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
@@ -589,13 +596,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

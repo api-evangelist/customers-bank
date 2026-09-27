@@ -441,11 +441,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
-      enum:
-      - Send
-      - Receive
-      type: string
     Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto:
       required:
       - counterPartyAccountName
@@ -582,105 +577,6 @@ components:
           - 'null'
           description: Date and time in UTC of the current status of the transfer.
           format: date-time
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
-      enum:
-      - ApprovalRequired
-      - Scheduled
-      - Pending
-      - Posted
-      - Rejected
-      - Declined
-      type: string
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Common.Models.Filter:
-      required:
-      - field
-      - operator
-      - value
-      type: object
-      properties:
-        value:
-          type: string
-        field:
-          type: string
-        operator:
-          type: string
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
       additionalProperties: false
     Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto:
       required:
@@ -867,12 +763,116 @@ components:
           - 'null'
           description: Confirmation Number for the book transfer entry.  This can be used for reconciliation during the BAI2 process.
       additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSearchDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+      enum:
+      - ApprovalRequired
+      - Scheduled
+      - Pending
+      - Posted
+      - Rejected
+      - Declined
+      type: string
+    Cubi.Common.Models.Filter:
+      required:
+      - field
+      - operator
+      - value
+      type: object
+      properties:
+        value:
+          type: string
+        field:
+          type: string
+        operator:
+          type: string
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
+      enum:
+      - Send
+      - Receive
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
     Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
       enum:
       - Api
       - Ui
       - Pain001
       type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

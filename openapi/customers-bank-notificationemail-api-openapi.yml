@@ -360,6 +360,12 @@ paths:
                 traceId: string
 components:
   schemas:
+    Cubi.Partners.WebApi.Dtos.UpdateNotificationEmailDto:
+      type: object
+      properties:
+        notificationEmail:
+          type: string
+      additionalProperties: false
     Cubi.Partners.WebApi.Dtos.NotificationEmailSettingsDto:
       required:
       - notificationEmail
@@ -385,11 +391,12 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.UpdateNotificationEmailDto:
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
       type: object
       properties:
-        notificationEmail:
+        id:
           type: string
+          format: uuid
       additionalProperties: false
     Cubi.Partners.WebApi.Dtos.VerifyNotificationEmailDto:
       type: object
@@ -453,13 +460,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

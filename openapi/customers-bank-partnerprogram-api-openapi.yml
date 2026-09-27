@@ -701,26 +701,6 @@ components:
           - 'null'
           description: Indicates whether a batch should be created for each payment
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
-      additionalProperties: false
     Cubi.Ach.Contracts.Messages.AchPaymentType:
       enum:
       - PPD
@@ -746,6 +726,26 @@ components:
       - TRX
       - XCK
       type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.PartnerProgramDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -823,11 +823,6 @@ components:
           description: The maximum number of cosigners that will be accepted on a loan application which is verified by this ruleset
           format: int32
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ProgramType:
-      enum:
-      - Other
-      - HomeImprovement
-      type: string
     Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
       type: object
       properties:
@@ -852,6 +847,18 @@ components:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto'
           description: List of the approval (credit policy) rules associated with this program
       additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ProgramType:
+      enum:
+      - Other
+      - HomeImprovement
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType:
+      enum:
+      - None
+      - Mdr
+      - Origination
+      - MdrAndOrigination
+      type: string
     Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
       type: object
       properties:
@@ -872,13 +879,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto'
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ProgramFeeType:
-      enum:
-      - None
-      - Mdr
-      - Origination
-      - MdrAndOrigination
-      type: string
 x-refined-from:
 - customers-bank-ach-openapi.json
 - customers-bank-consumerlending-openapi.json

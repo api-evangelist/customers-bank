@@ -197,14 +197,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Ach.WebApi.Dto.NachaCodesDto:
-      type: object
-      properties:
-        returnCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
-      additionalProperties: false
     Cubi.Ach.WebApi.Dto.ReferenceDataDto:
       type: object
       properties:
@@ -220,6 +212,14 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.NachaCodesDto:
+      type: object
+      properties:
+        returnCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
       additionalProperties: false
 x-refined-from:
 - customers-bank-accounts-openapi.json

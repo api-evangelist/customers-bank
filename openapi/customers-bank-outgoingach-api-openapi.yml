@@ -1345,92 +1345,67 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Ach.Contracts.Messages.AccountType:
-      enum:
-      - Checking
-      - Savings
-      type: string
-    Cubi.Ach.Contracts.Messages.Direction:
-      enum:
-      - Credit
-      - Debit
-      type: string
-    Cubi.Ach.Contracts.Messages.ReversalReason:
-      enum:
-      - DuplicateEntry
-      - IncorrectAmount
-      - IncorrectReceiverAccount
-      - DebitEarlierThanIntended
-      - CreditLaterThanIntended
-      - NotProvided
-      type: string
-    Cubi.Ach.WebApi.Dto.RequestAchReversalDto:
+    Cubi.Ach.WebApi.Dto.InitiateAchDebitDto:
       required:
-      - reason
+      - amount
+      - creditAccountNumber
+      - debitAccountNumber
+      - debitAccountType
+      - debitName
+      - debitRoutingNumber
       type: object
       properties:
-        reason:
-          minLength: 1
+        debitName:
+          maxLength: 255
+          minLength: 0
           type: string
-          description: The reason for the requested ACH reversal
+          description: The name of the party debited by this payment
+        debitAccountNumber:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The account number debited by this payment
+        debitRoutingNumber:
+          maxLength: 9
+          minLength: 0
+          type: string
+          description: The routing number of the FI debited by this payment
+        debitAccountType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountTypeDto'
+        creditAccountNumber:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The account number credited by this payment
+        amount:
+          type: number
+          description: The amount of the payment, in dollars and cents
+          format: double
+        processDate:
+          type:
+          - string
+          - 'null'
+          description: The intended processing date of this payment.  If none is provided then the payment will be processed at the earliest available date and time
+          format: date-time
+        programId:
+          type:
+          - string
+          - 'null'
+          description: The ACH partner program under which this payment will be processed.  This will dictate the SEC code to use for the payment
+          format: uuid
         description:
           type:
           - string
           - 'null'
-          description: The detailed description for this reversal payment, as it will appear in the addenda record of the NACHA submission
+          description: The description of the payment, which will be placed into the payment in the 7 record of the NACHA file
+        batchDescription:
+          maxLength: 10
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The purpose of the payment, limited to 10 characters, maps to Company Entry Description in the NACHA file batch header
       additionalProperties: false
-    Cubi.Ach.WebApi.Dto.RequestCancelAchDto:
-      type: object
-      properties:
-        reason:
-          type:
-          - string
-          - 'null'
-          description: The reason for the cancellation request
-      additionalProperties: false
-    Cubi.Ach.WebApi.Dto.AccountTypeDto:
-      enum:
-      - Checking
-      - Savings
-      type: string
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Cubi.Ach.WebApi.Dto.AchTransactionDto:
       required:
       - creditAccountNumber
@@ -1574,7 +1549,93 @@ components:
           - 'null'
           description: The batch description for the payment, limited to 10 characters, maps to Company Entry Description in the NACHA file batch header
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+    Cubi.Ach.WebApi.Dto.DeclineOutgoingAchDto:
+      type: object
+      properties:
+        reason:
+          type:
+          - string
+          - 'null'
+          description: The reason the payment is being declined
+      additionalProperties: false
+    Cubi.Ach.Contracts.Messages.ReversalReason:
+      enum:
+      - DuplicateEntry
+      - IncorrectAmount
+      - IncorrectReceiverAccount
+      - DebitEarlierThanIntended
+      - CreditLaterThanIntended
+      - NotProvided
+      type: string
+    Cubi.Ach.WebApi.Dto.RequestAchReversalDto:
+      required:
+      - reason
+      type: object
+      properties:
+        reason:
+          minLength: 1
+          type: string
+          description: The reason for the requested ACH reversal
+        description:
+          type:
+          - string
+          - 'null'
+          description: The detailed description for this reversal payment, as it will appear in the addenda record of the NACHA submission
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Ach.Contracts.Messages.AchTransactionStatus:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Cancelled
+      - Returned
+      - ApprovalRequired
+      - Declined
+      type: string
+    Cubi.Ach.WebApi.Dto.AccountTypeDto:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Cubi.Ach.Contracts.Messages.Direction:
+      enum:
+      - Credit
+      - Debit
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AchTransactionDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AchTransactionDto'
+      additionalProperties: false
+    Cubi.Ach.Contracts.Messages.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
         type:
@@ -1598,68 +1659,13 @@ components:
           type:
           - string
           - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
       additionalProperties: {}
-    Cubi.Ach.WebApi.Dto.InitiateAchDebitDto:
-      required:
-      - amount
-      - creditAccountNumber
-      - debitAccountNumber
-      - debitAccountType
-      - debitName
-      - debitRoutingNumber
-      type: object
-      properties:
-        debitName:
-          maxLength: 255
-          minLength: 0
-          type: string
-          description: The name of the party debited by this payment
-        debitAccountNumber:
-          maxLength: 255
-          minLength: 0
-          type: string
-          description: The account number debited by this payment
-        debitRoutingNumber:
-          maxLength: 9
-          minLength: 0
-          type: string
-          description: The routing number of the FI debited by this payment
-        debitAccountType:
-          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountTypeDto'
-        creditAccountNumber:
-          maxLength: 255
-          minLength: 0
-          type: string
-          description: The account number credited by this payment
-        amount:
-          type: number
-          description: The amount of the payment, in dollars and cents
-          format: double
-        processDate:
-          type:
-          - string
-          - 'null'
-          description: The intended processing date of this payment.  If none is provided then the payment will be processed at the earliest available date and time
-          format: date-time
-        programId:
-          type:
-          - string
-          - 'null'
-          description: The ACH partner program under which this payment will be processed.  This will dictate the SEC code to use for the payment
-          format: uuid
-        description:
-          type:
-          - string
-          - 'null'
-          description: The description of the payment, which will be placed into the payment in the 7 record of the NACHA file
-        batchDescription:
-          maxLength: 10
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: The purpose of the payment, limited to 10 characters, maps to Company Entry Description in the NACHA file batch header
-      additionalProperties: false
     Cubi.Ach.WebApi.Dto.InitiateAchCreditDto:
       required:
       - amount
@@ -1721,46 +1727,40 @@ components:
           - 'null'
           description: The batch description for the payment, limited to 10 characters, maps to Company Entry Description in the NACHA file batch header
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AchTransactionDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        pageSize:
-          type: integer
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
           format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AchTransactionDto'
-      additionalProperties: false
-    Cubi.Ach.WebApi.Dto.DeclineOutgoingAchDto:
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.Ach.WebApi.Dto.RequestCancelAchDto:
       type: object
       properties:
         reason:
           type:
           - string
           - 'null'
-          description: The reason the payment is being declined
+          description: The reason for the cancellation request
       additionalProperties: false
-    Cubi.Ach.Contracts.Messages.AchTransactionStatus:
-      enum:
-      - Initiated
-      - Pending
-      - Accepted
-      - Completed
-      - Cancelled
-      - Returned
-      - ApprovalRequired
-      - Declined
-      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

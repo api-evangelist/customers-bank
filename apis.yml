@@ -40,8 +40,11 @@ accessModel:
   generated: '2026-09-02'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-25
 tags:
-- Financial-Services
+- Financial Services
 - Banking
 - United States
 - Banking as a Service
@@ -56,6 +59,7 @@ tags_raw:
 - Embedded Finance
 - Payments
 - Commercial Banking
+- Financial-Services
 created: '2026-07-23'
 modified: '2026-07-23'
 specificationVersion: '0.23'
@@ -1567,8 +1571,6 @@ apis:
   humanURL: https://cubiapi.readme.io/docs/accounts-3
   baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
   tags:
-  - Web PubSub
-  tags_raw:
   - Web Pub Sub
   properties:
   - type: OpenAPI

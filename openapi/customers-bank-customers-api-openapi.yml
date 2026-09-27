@@ -655,43 +655,22 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Accounts.WebApi.Dto.AddressDto:
+    Cubi.Accounts.WebApi.Dto.CustomerDto:
       type: object
       properties:
         id:
           type: string
           description: The ID (UUID) for the customer
           format: uuid
-        addressLine1:
+        name:
           type:
           - string
           - 'null'
-          description: Street or address line 1
-        addressLine2:
-          type:
-          - string
-          - 'null'
-          description: Street or address line 2
-        city:
-          type:
-          - string
-          - 'null'
-          description: City
-        state:
-          type:
-          - string
-          - 'null'
-          description: State or Province
-        postalCode:
-          type:
-          - string
-          - 'null'
-          description: Postal Code
-        countryCode:
-          type:
-          - string
-          - 'null'
-          description: Country Code
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
       additionalProperties: false
     Cubi.Accounts.WebApi.Dto.CreateCustomerDto:
       required:
@@ -710,45 +689,6 @@ components:
         address:
           $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
       additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
-      required:
-      - address
-      - customerType
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-          description: The name of the customer
-        customerType:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
-        address:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.CustomerDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID (UUID) for the customer
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the customer
-        customerType:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
-        address:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
-      additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.CustomerType:
-      enum:
-      - Personal
-      - Business
-      type: string
     Cubi.Accounts.WebApi.Dto.CreateAddressDto:
       required:
       - addressLine1
@@ -793,31 +733,11 @@ components:
           type: string
           description: Country Code
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+    Cubi.Accounts.Contracts.Messages.CustomerType:
+      enum:
+      - Personal
+      - Business
+      type: string
     Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto:
       type: object
       properties:
@@ -837,6 +757,68 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CustomerDto'
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.AddressDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the customer
+          format: uuid
+        addressLine1:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 1
+        addressLine2:
+          type:
+          - string
+          - 'null'
+          description: Street or address line 2
+        city:
+          type:
+          - string
+          - 'null'
+          description: City
+        state:
+          type:
+          - string
+          - 'null'
+          description: State or Province
+        postalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal Code
+        countryCode:
+          type:
+          - string
+          - 'null'
+          description: Country Code
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
+      required:
+      - address
+      - customerType
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
       additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
@@ -869,13 +851,31 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

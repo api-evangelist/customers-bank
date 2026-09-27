@@ -869,11 +869,6 @@ components:
           type: string
           description: The account number
       additionalProperties: false
-    Cubi.Ach.WebApi.Dto.ControlTypeDto:
-      enum:
-      - Single
-      - Dual
-      type: string
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -905,6 +900,11 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Ach.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -930,15 +930,6 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto:
-      type: object
-      properties:
-        accountId:
-          type: string
-          format: uuid
-        isRtpEnabled:
-          type: boolean
-      additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.AccountAccess.FedNowAccountAccessDto:
       type: object
       properties:
@@ -946,6 +937,15 @@ components:
           type: string
           format: uuid
         isFedNowEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.AccountAccess.RtpAccountAccessDto:
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        isRtpEnabled:
           type: boolean
       additionalProperties: false
     Cubi.Transfers.WebApi.Dto.Accounts.AccountAccessDto:

@@ -1444,26 +1444,15 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
-      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto:
+      enum:
+      - Initiated
+      - Pending
+      - Accepted
+      - Completed
+      - Returned
+      - Reversed
+      type: string
     Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
       required:
       - accountNumber
@@ -1596,6 +1585,31 @@ components:
           - string
           - 'null'
           description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
+      additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
+      enum:
+      - FedNow
+      - Rtp
+      type: string
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto'
       additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
       required:
@@ -1732,71 +1746,46 @@ components:
         rail:
           $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.PaymentRailDto'
       additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingTransactionStatusDto:
-      enum:
-      - Initiated
-      - Pending
-      - Accepted
-      - Completed
-      - Returned
-      - Reversed
-      type: string
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
       type: object
       properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
+        pageSize:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
       type: object
       properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
+        pageSize:
+          type: integer
           format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
+      additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingFedNowDto:
       required:
       - accountNumber
@@ -1930,51 +1919,62 @@ components:
           - 'null'
           description: Confirmation Number for the RTP. This can be used for reconciliation during the BAI2 process.
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
-        pageSize:
-          type: integer
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
           format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingPaymentDto'
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.PaymentRailDto:
-      enum:
-      - FedNow
-      - Rtp
-      type: string
-    Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto:
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        pageSize:
-          type: integer
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
           format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.Incoming.IncomingRtpDto'
-      additionalProperties: false
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

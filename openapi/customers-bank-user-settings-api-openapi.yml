@@ -175,18 +175,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Partners.WebApi.Dtos.UserSettingDto:
-      type: object
-      properties:
-        settingName:
-          type:
-          - string
-          - 'null'
-        settingValue:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -243,6 +231,18 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.UserSettingDto:
+      type: object
+      properties:
+        settingName:
+          type:
+          - string
+          - 'null'
+        settingValue:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

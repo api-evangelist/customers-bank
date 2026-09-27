@@ -335,17 +335,6 @@ components:
         entitlement:
           $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementType'
       additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementsDto:
-      type: object
-      properties:
-        entitlements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementDto'
-        showApi:
-          type: boolean
-          deprecated: true
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -377,6 +366,17 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementsDto:
+      type: object
+      properties:
+        entitlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementDto'
+        showApi:
+          type: boolean
+          deprecated: true
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -402,6 +402,15 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementsDto:
+      type: object
+      properties:
+        entitlements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementDto'
+          description: The entitlements for the account in question
+      additionalProperties: false
     Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementDto:
       type: object
       properties:
@@ -411,15 +420,6 @@ components:
           format: uuid
         entitlement:
           $ref: '#/components/schemas/Cubi.Wires.Contracts.Messages.AccountEntitlementType'
-      additionalProperties: false
-    Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementsDto:
-      type: object
-      properties:
-        entitlements:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementDto'
-          description: The entitlements for the account in question
       additionalProperties: false
     Cubi.Wires.Contracts.Messages.AccountEntitlementType:
       enum:
