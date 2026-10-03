@@ -486,62 +486,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Partners.WebApi.Dtos.PartnerCredentialDto:
-      type: object
-      properties:
-        keyId:
-          type: string
-          format: uuid
-        displayName:
-          type:
-          - string
-          - 'null'
-        startDateTime:
-          type: string
-          format: date-time
-        endDateTime:
-          type: string
-          format: date-time
-        hint:
-          type:
-          - string
-          - 'null'
-        secretText:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.PartnerApiProductDto:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        isEnabled:
-          type: boolean
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.AddPartnerCredentialDto:
-      type: object
-      properties:
-        displayName:
-          type:
-          - string
-          - 'null'
-        startDateTime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        endDateTime:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      additionalProperties: false
     Cubi.Partners.WebApi.Dtos.PartnerDto:
       type: object
       properties:
@@ -561,18 +505,6 @@ components:
         isApiCredentialsEnabled:
           type: boolean
         isAddressBookEnabled:
-          type: boolean
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:
-      type: object
-      properties:
-        isSyncEnabled:
-          type: boolean
-        authProvider:
-          type:
-          - string
-          - 'null'
-        isAuth0ClientCredentialsEnabled:
           type: boolean
       additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
@@ -606,6 +538,74 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.PartnerApiProductDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        isEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.PartnerAuthSettingsDto:
+      type: object
+      properties:
+        isSyncEnabled:
+          type: boolean
+        authProvider:
+          type:
+          - string
+          - 'null'
+        isAuth0ClientCredentialsEnabled:
+          type: boolean
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.AddPartnerCredentialDto:
+      type: object
+      properties:
+        displayName:
+          type:
+          - string
+          - 'null'
+        startDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        endDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.PartnerCredentialDto:
+      type: object
+      properties:
+        keyId:
+          type: string
+          format: uuid
+        displayName:
+          type:
+          - string
+          - 'null'
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+        hint:
+          type:
+          - string
+          - 'null'
+        secretText:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:

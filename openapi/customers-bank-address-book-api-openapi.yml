@@ -2060,17 +2060,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus:
-      enum:
-      - Initiated
-      - ApprovalRequired
-      - Declined
-      - Requested
-      - RequestDeclined
-      - Linked
-      - Deleted
-      - Locked
-      type: string
     Cubi.Transfers.WebApi.Dto.AddressBook.RequestAddressBookEntryDto:
       type: object
       properties:
@@ -2080,6 +2069,171 @@ components:
         targetAccountId:
           type: string
           format: uuid
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto:
+      type: object
+      properties:
+        accountLinkId:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
+      additionalProperties: false
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
+      required:
+      - requesterAccountName
+      - requesterAccountNumberLast4Digits
+      - requesterPartnerName
+      - targetAccountName
+      - targetAccountNumberLast4Digits
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        requesterPartnerName:
+          type: string
+        requesterAccountId:
+          type: string
+          format: uuid
+        requesterAccountName:
+          type: string
+        requesterAccountNumberLast4Digits:
+          type: string
+        targetAccountId:
+          type: string
+          format: uuid
+        targetAccountName:
+          type: string
+        targetAccountNumberLast4Digits:
+          type: string
+        requestedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto:
+      type: object
+      properties:
+        defaultPublicMemo:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
+      required:
+      - accountName
+      - accountNumberLast4Digits
+      - partnerName
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        accountNumberLast4Digits:
+          type: string
+        accountName:
+          type: string
+        partnerName:
+          type: string
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
       additionalProperties: false
     Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
       required:
@@ -2168,178 +2322,6 @@ components:
           type: string
           format: date-time
       additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AddressBookDto'
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto'
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
-      required:
-      - accountName
-      - accountNumberLast4Digits
-      - partnerName
-      type: object
-      properties:
-        accountId:
-          type: string
-          format: uuid
-        partnerId:
-          type: string
-          format: uuid
-        accountNumberLast4Digits:
-          type: string
-        accountName:
-          type: string
-        partnerName:
-          type: string
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkSettingsDto:
-      type: object
-      properties:
-        accountLinkId:
-          type: string
-          format: uuid
-        partnerId:
-          type: string
-          format: uuid
-        defaultPublicMemo:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AddressBook.AvailableAccountDto'
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.UpdateAccountLinkSettingsDto:
-      type: object
-      properties:
-        defaultPublicMemo:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkRequestDto:
-      required:
-      - requesterAccountName
-      - requesterAccountNumberLast4Digits
-      - requesterPartnerName
-      - targetAccountName
-      - targetAccountNumberLast4Digits
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        requesterPartnerName:
-          type: string
-        requesterAccountId:
-          type: string
-          format: uuid
-        requesterAccountName:
-          type: string
-        requesterAccountNumberLast4Digits:
-          type: string
-        targetAccountId:
-          type: string
-          format: uuid
-        targetAccountName:
-          type: string
-        targetAccountNumberLast4Digits:
-          type: string
-        requestedAt:
-          type: string
-          format: date-time
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -2365,6 +2347,24 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AddressBook.AccountLinkStatus:
+      enum:
+      - Initiated
+      - ApprovalRequired
+      - Declined
+      - Requested
+      - RequestDeclined
+      - Linked
+      - Deleted
+      - Locked
+      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

@@ -958,11 +958,104 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.ConsumerLending.WebApi.Dto.AccountType:
-      enum:
-      - Checking
-      - Savings
-      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto:
+      required:
+      - completionReason
+      - isEarlyCompletion
+      type: object
+      properties:
+        completionReason:
+          minLength: 1
+          type: string
+          description: A text description of why this loan is being completed
+        isEarlyCompletion:
+          type: boolean
+          description: Indicates that the loan is being completed before all funding stages have been disbursed
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - amountToFund
+      - platformReferenceNumber
+      - routingNumber
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan. Must be greater than 0.00
+          format: double
+        routingNumber:
+          minLength: 1
+          type: string
+          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
+        accountNumber:
+          minLength: 1
+          type: string
+          description: Account number that the funds are disbursing to. Must be 255 characters long or less
+        accountName:
+          minLength: 1
+          type: string
+          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        platformReferenceNumber:
+          minLength: 1
+          type: string
+          description: Reference number provided by the API caller. Must be 255 characters long or less
+      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
       type: object
       properties:
@@ -983,13 +1076,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto'
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanStatus:
-      enum:
-      - Open
-      - Completed
-      - PendingCompletion
-      - Cancelled
-      type: string
     Cubi.ConsumerLending.WebApi.Dto.LoanFundingResponseDto:
       type: object
       properties:
@@ -1055,6 +1141,69 @@ components:
           - 'null'
           description: If the funding instruction was rejected, or if the funding failed, this will contain the reason. Otherwise this will be null.
       additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Funding Submission Id that represents all funding instructions within this submission
+          format: uuid
+        fundingInstructions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
+          description: List of all the funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingState:
+      enum:
+      - Unfunded
+      - Rejected
+      - SentToRail
+      - Failed
+      - Funded
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto:
+      required:
+      - cancellationReason
+      type: object
+      properties:
+        cancellationReason:
+          minLength: 1
+          type: string
+          description: A text description of why this loan is being cancelled
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanStatus:
+      enum:
+      - Open
+      - Completed
+      - PendingCompletion
+      - Cancelled
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
+      type: object
+      properties:
+        platformReferenceNumber:
+          type:
+          - string
+          - 'null'
+          description: The Platform Reference Number that was provided when the funding instruction was submitted
+        fundingInstructionId:
+          type: string
+          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          format: uuid
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.FundingType:
+      enum:
+      - OnDemand
+      - Immediate
+      type: string
     Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
       type: object
       properties:
@@ -1111,86 +1260,6 @@ components:
         status:
           $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanStatus'
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingSubmissionResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Funding Submission Id that represents all funding instructions within this submission
-          format: uuid
-        fundingInstructions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
-          description: List of all the funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
-      type: object
-      properties:
-        platformReferenceNumber:
-          type:
-          - string
-          - 'null'
-          description: The Platform Reference Number that was provided when the funding instruction was submitted
-        fundingInstructionId:
-          type: string
-          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
-          format: uuid
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanResponseDto'
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Loan Completion Id
-          format: uuid
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionDetailsDto:
-      required:
-      - completionReason
-      - isEarlyCompletion
-      type: object
-      properties:
-        completionReason:
-          minLength: 1
-          type: string
-          description: A text description of why this loan is being completed
-        isEarlyCompletion:
-          type: boolean
-          description: Indicates that the loan is being completed before all funding stages have been disbursed
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanCancellationDetailsDto:
-      required:
-      - cancellationReason
-      type: object
-      properties:
-        cancellationReason:
-          minLength: 1
-          type: string
-          description: A text description of why this loan is being cancelled
-      additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.LoanCancellationResponseDto:
       type: object
       properties:
@@ -1199,83 +1268,6 @@ components:
           description: Loan Cancellation Id
           format: uuid
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingState:
-      enum:
-      - Unfunded
-      - Rejected
-      - SentToRail
-      - Failed
-      - Funded
-      type: string
-    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
-      required:
-      - accountName
-      - accountNumber
-      - accountType
-      - amountToFund
-      - platformReferenceNumber
-      - routingNumber
-      type: object
-      properties:
-        amountToFund:
-          type: number
-          description: Amount of money to disburse against the loan. Must be greater than 0.00
-          format: double
-        routingNumber:
-          minLength: 1
-          type: string
-          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
-        accountNumber:
-          minLength: 1
-          type: string
-          description: Account number that the funds are disbursing to. Must be 255 characters long or less
-        accountName:
-          minLength: 1
-          type: string
-          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
-        accountType:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
-        platformReferenceNumber:
-          minLength: 1
-          type: string
-          description: Reference number provided by the API caller. Must be 255 characters long or less
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingType:
-      enum:
-      - OnDemand
-      - Immediate
-      type: string
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -1301,6 +1293,14 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.LoanCompletionReponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Loan Completion Id
+          format: uuid
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

@@ -1330,50 +1330,6 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id
-          format: uuid
-        accountId:
-          type: string
-          description: Account id
-          format: uuid
-          deprecated: true
-        eventTypeName:
-          type: string
-          description: Event type name
-        callbackUrl:
-          type: string
-          description: Callback url
-          format: uri
-        statusText:
-          type: string
-          description: Status text
-        jsonPayloadText:
-          type: string
-          description: Json payload text
-        attemptDate:
-          type: string
-          description: Attempt date
-          format: date-time
-        subscriptionId:
-          type:
-          - string
-          - 'null'
-          description: The ID of the subscription on which this event was sent
-          format: uuid
-      additionalProperties: false
-      description: A event history DTO abstraction.
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
     Cubi.Webhooks.WebApi.Dtos.WebhookDto:
       required:
       - callbackUrl
@@ -1504,6 +1460,50 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id
+          format: uuid
+        accountId:
+          type: string
+          description: Account id
+          format: uuid
+          deprecated: true
+        eventTypeName:
+          type: string
+          description: Event type name
+        callbackUrl:
+          type: string
+          description: Callback url
+          format: uri
+        statusText:
+          type: string
+          description: Status text
+        jsonPayloadText:
+          type: string
+          description: Json payload text
+        attemptDate:
+          type: string
+          description: Attempt date
+          format: date-time
+        subscriptionId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the subscription on which this event was sent
+          format: uuid
+      additionalProperties: false
+      description: A event history DTO abstraction.
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

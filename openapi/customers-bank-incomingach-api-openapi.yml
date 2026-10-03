@@ -492,26 +492,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -543,11 +523,6 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Ach.Contracts.Messages.AccountType:
-      enum:
-      - Checking
-      - Savings
-      type: string
     Cubi.Ach.Contracts.Messages.Direction:
       enum:
       - Credit
@@ -655,6 +630,26 @@ components:
           - 'null'
           description: Company Entry Description from the NACHA file batch header, a description of the entry batch description.
       additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.IncomingAchTransactionDto'
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -680,6 +675,11 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Ach.Contracts.Messages.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

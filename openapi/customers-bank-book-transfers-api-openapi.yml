@@ -1047,6 +1047,52 @@ paths:
                 traceId: string
 components:
   schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
+      enum:
+      - Send
+      - Receive
+      type: string
+    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto:
+      type: object
+      properties:
+        purpose:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+      additionalProperties: false
     Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto:
       required:
       - accountId
@@ -1252,14 +1298,11 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferDto'
       additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
       enum:
-      - ApprovalRequired
-      - Scheduled
-      - Pending
-      - Posted
-      - Rejected
-      - Declined
+      - Api
+      - Ui
+      - Pain001
       type: string
     Cubi.Transfers.WebApi.Dto.BookTransfers.DeclineBookTransferDto:
       type: object
@@ -1320,73 +1363,6 @@ components:
           description: Future DateTime in UTC for Transfer to be posted
           format: date-time
       additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.TransactionType:
-      enum:
-      - Send
-      - Receive
-      type: string
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferSourceType:
-      enum:
-      - Api
-      - Ui
-      - Pain001
-      type: string
-    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodesDto:
-      type: object
-      properties:
-        purposeCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto'
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto:
-      type: object
-      properties:
-        purpose:
-          type: string
-        code:
-          type: string
-        description:
-          type: string
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -1412,6 +1388,30 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodesDto:
+      type: object
+      properties:
+        purposeCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.BookTransfers.PurposeCodeDto'
+      additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.BookTransfers.BookTransferStatus:
+      enum:
+      - ApprovalRequired
+      - Scheduled
+      - Pending
+      - Posted
+      - Rejected
+      - Declined
+      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

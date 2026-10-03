@@ -318,23 +318,6 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/transfers/v1
 components:
   schemas:
-    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementType:
-      enum:
-      - None
-      - View
-      - Initiate
-      - Approve
-      - Full
-      type: string
-    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementDto:
-      type: object
-      properties:
-        accountId:
-          type: string
-          format: uuid
-        entitlement:
-          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementType'
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -366,6 +349,15 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementDto:
+      type: object
+      properties:
+        accountId:
+          type: string
+          format: uuid
+        entitlement:
+          $ref: '#/components/schemas/Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementType'
+      additionalProperties: false
     Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementsDto:
       type: object
       properties:
@@ -377,6 +369,14 @@ components:
           type: boolean
           deprecated: true
       additionalProperties: false
+    Cubi.Transfers.WebApi.Dto.AccountEntitlements.AccountEntitlementType:
+      enum:
+      - None
+      - View
+      - Initiate
+      - Approve
+      - Full
+      type: string
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -411,6 +411,13 @@ components:
             $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementDto'
           description: The entitlements for the account in question
       additionalProperties: false
+    Cubi.Wires.Contracts.Messages.AccountEntitlementType:
+      enum:
+      - None
+      - View
+      - Full
+      - Approve
+      type: string
     Cubi.Wires.WebApi.Dto.AccountEntitlements.AccountEntitlementDto:
       type: object
       properties:
@@ -421,13 +428,6 @@ components:
         entitlement:
           $ref: '#/components/schemas/Cubi.Wires.Contracts.Messages.AccountEntitlementType'
       additionalProperties: false
-    Cubi.Wires.Contracts.Messages.AccountEntitlementType:
-      enum:
-      - None
-      - View
-      - Full
-      - Approve
-      type: string
 x-refined-from:
 - customers-bank-transfers-openapi.json
 - customers-bank-wires-openapi.json

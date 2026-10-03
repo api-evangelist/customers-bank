@@ -1343,11 +1343,86 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.ConsumerLending.WebApi.Dto.AccountType:
+    Cubi.ConsumerLending.WebApi.Dto.PropertyType:
       enum:
-      - Checking
-      - Savings
+      - Other
+      - SingleFamily
+      - Duplex
+      - Triplex
+      - Apartment
+      - Condominium
+      - Undeveloped
+      - Agriculture
+      - Commercial
+      - MobileHome
+      - ManufacturedHome
       type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailResponseDto:
+      type: object
+      properties:
+        expectedNumberOfStages:
+          type: integer
+          description: The number of funding stages that are expected to be used to fully fund the loan
+          format: int32
+        expectedFundingLevels:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto'
+          description: List of the expected funding levels that will be used to fully fund the loan
+      additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.LoanApplicationAcceptedDto:
       type: object
       properties:
@@ -1363,19 +1438,463 @@ components:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto'
           description: List of all the immediate funding instructions that were received as part of this request. This includes the Platform Reference Number that was submitted and the Funding Instruction Id to allow the caller to link any webhooks about the funding instruction to this request
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerDto:
+      required:
+      - annualIncome
+      - city
+      - dateOfBirth
+      - debt
+      - debtToIncomeRatio
+      - ficoScore
+      - fullName
+      - ssn
+      - state
+      - streetAddress
+      - zipCode
+      type: object
+      properties:
+        ssn:
+          minLength: 1
+          type: string
+          description: Borrower's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
+        fullName:
+          minLength: 1
+          type: string
+          description: Full name of the borrower. Must be 255 characters long or less
+        dateOfBirth:
+          type: string
+          description: Borrower's date of birth. All borrowers must be between 18 and 120 years old on the loan application date
+          format: date-time
+        annualIncome:
+          type: number
+          description: Annual income of the borrower.
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: Borrower's employer name
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: Borrower's email address
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: Name of the post secondary school the borrower attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: Year that the borrower graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: Type of degree the borrower received when graduating from post secondary school
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: Area of study for the degree the borrower received
+        deceased:
+          type: boolean
+          description: Indicates that the borrower is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          minLength: 1
+          type: string
+          description: Street portion of the borrower's primary residence address. Must be 255 characters long or less
+        city:
+          minLength: 1
+          type: string
+          description: City portion of the borrower's primary residence address. Must be 255 characters long or less
+        state:
+          minLength: 1
+          type: string
+          description: State portion of the borrower's primary residence address. Must be 2 characters long
+        zipCode:
+          minLength: 1
+          type: string
+          description: Zip Code portion of the borrower's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's home phone number
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's work phone number
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Borrower's cell phone number
+        ficoScore:
+          type: integer
+          description: Borrower's FICO score. Must be between 0 and 1000
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: Borrower's Debt to Income ratio. Must be between 0.00 and 100.00
+          format: double
+        debt:
+          type: number
+          description: Borrower's amount of Debt. Must be greater than 0.00
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - amountToFund
+      - platformReferenceNumber
+      - routingNumber
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan. Must be greater than 0.00
+          format: double
+        routingNumber:
+          minLength: 1
+          type: string
+          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
+        accountNumber:
+          minLength: 1
+          type: string
+          description: Account number that the funds are disbursing to. Must be 255 characters long or less
+        accountName:
+          minLength: 1
+          type: string
+          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        platformReferenceNumber:
+          minLength: 1
+          type: string
+          description: Reference number provided by the API caller. Must be 255 characters long or less
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.ImmediateFundingInstructionResponseDto:
+      type: object
+      properties:
+        amountToFund:
+          type: number
+          description: Amount of money to disburse against the loan
+          format: double
+        routingNumber:
+          type:
+          - string
+          - 'null'
+          description: Routing number of the account the funds are disbursing to
+        accountNumber:
+          type:
+          - string
+          - 'null'
+          description: Account number that the funds are disbursing to
+        accountName:
+          type:
+          - string
+          - 'null'
+          description: The name on the account that the funds are disbursing to
+        accountType:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
+        receivedDate:
+          type: string
+          description: The date that the funding instruction was received on. This value will be in UTC
+          format: date-time
         platformReferenceNumber:
           type:
           - string
           - 'null'
-          description: The Platform Reference Number that was provided when the funding instruction was submitted
-        fundingInstructionId:
-          type: string
-          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
-          format: uuid
+          description: The reference number provided by the API caller
       additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorDto:
+      required:
+      - ein
+      - name
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+          description: Contractor's name. Maximum length of 255 characters
+        ein:
+          minLength: 1
+          type: string
+          description: 'Contractor''s EIN or SSN. This must follow the ##-####### pattern (for EIN), or ###-##-#### (for SSN). Additional validation checking for invalid values will be applied'
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPromotionDto:
+      required:
+      - promotionMonths
+      type: object
+      properties:
+        promotionMonths:
+          type: integer
+          description: The number of months that any promotion assigned to the application is valid for
+          format: int32
+      additionalProperties: false
+      description: Details about the promotion associated with a loan application
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerDto:
+      required:
+      - annualIncome
+      - city
+      - dateOfBirth
+      - debt
+      - debtToIncomeRatio
+      - ficoScore
+      - fullName
+      - ssn
+      - state
+      - streetAddress
+      - zipCode
+      type: object
+      properties:
+        ssn:
+          minLength: 1
+          type: string
+          description: Cosigner's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
+        fullName:
+          minLength: 1
+          type: string
+          description: Full name of the cosigner. Must be 255 characters long or less
+        dateOfBirth:
+          type: string
+          description: Cosigner's date of birth. All cosigners must be between 18 and 120 years old on the loan application date
+          format: date-time
+        annualIncome:
+          type: number
+          description: Annual income of the cosigner.
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's employer name
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's email address
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: Name of the post secondary school the cosigner attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: Year that the cosigner graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: Type of degree the cosigner received when graduating from post secondary school
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: Area of study for the degree the cosigner received
+        deceased:
+          type: boolean
+          description: Indicates that the cosigner is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          minLength: 1
+          type: string
+          description: Street portion of the cosigner's primary residence address. Must be 255 characters long or less
+        city:
+          minLength: 1
+          type: string
+          description: City portion of the cosigner's primary residence address. Must be 255 characters long or less
+        state:
+          minLength: 1
+          type: string
+          description: State portion of the cosigner's primary residence address. Must be 2 characters long
+        zipCode:
+          minLength: 1
+          type: string
+          description: Zip Code portion of the cosigner's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's home phone number
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's work phone number
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: Cosigner's cell phone number
+        ficoScore:
+          type: integer
+          description: Cosigner's FICO score. Must be between 0 and 1000
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: Cosigner's Debt to Income ratio. Must be between 0.00 and 100.00
+          format: double
+        debt:
+          type: number
+          description: Cosigner's amount of Debt. Must be greater than 0.00
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.AccountType:
+      enum:
+      - Checking
+      - Savings
+      type: string
     Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPropertyDto:
       required:
       - city
@@ -1439,198 +1958,18 @@ components:
           format: double
       additionalProperties: false
       description: Details about the property associated with the loan application. This is required if the program assigned to the loan application is for Home Improvement Loans
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerResponseDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the cosigner that was included on the application. This is unique to this application. If the same cosigner is included on many different applications, each of those cosigner entries will have a different id value
-          format: uuid
-        ssn:
-          type:
-          - string
-          - 'null'
-          description: The SSN of the cosigner
-        fullName:
-          type:
-          - string
-          - 'null'
-          description: The full name of the cosigner
-        dateOfBirth:
-          type: string
-          description: The date of birth of the cosigner
-          format: date-time
-        annualIncome:
-          type: number
-          description: The annual income of the cosigner
-          format: double
-        employerName:
-          type:
-          - string
-          - 'null'
-          description: The name of the cosigner's employer
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          description: The email of the cosigner
-        schoolName:
-          type:
-          - string
-          - 'null'
-          description: The post secondary school that the cosigner attended
-        schoolOpeCode:
-          type:
-          - string
-          - 'null'
-          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
-        schoolGraduationYear:
-          type:
-          - integer
-          - 'null'
-          description: The year that the cosigner graduated from their post secondary school
-          format: int32
-        degreeType:
-          type:
-          - string
-          - 'null'
-          description: The type of degree that the cosigner received
-        areaOfStudy:
-          type:
-          - string
-          - 'null'
-          description: The cosigner's area of study in post secondary school
-        deceased:
-          type: boolean
-          description: Indicates if the cosigner id deceased
-        housingStatus:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
-        streetAddress:
-          type:
-          - string
-          - 'null'
-          description: The street portion of the cosigner's primary residence address
-        city:
-          type:
-          - string
-          - 'null'
-          description: The city portion of the cosigner's primary residence address
-        state:
-          type:
-          - string
-          - 'null'
-          description: The state portion of the cosigner's primary residence address
-        zipCode:
-          type:
-          - string
-          - 'null'
-          description: the Zip Code portion of the cosigner's primary residence address
-        homePhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: The home phone number of the cosigner
-        workPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: The work phone number of the cosigner
-        cellPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: The cell phone number of the cosigner
-        ficoScore:
-          type: integer
-          description: The cosigner's FICO score
-          format: int32
-        debtToIncomeRatio:
-          type: number
-          description: The cosigner's debt to income ratio
-          format: double
-        creditInquiryCount:
-          type: integer
-          description: Number of credit inquiries for this person.
-          format: int32
-        nonTraditionalInquiryCount:
-          type: integer
-          description: Number of non-traditional credit inquiries for this person.
-          format: int32
-        chargeOffCount:
-          type: integer
-          description: Number of charge off for this person.
-          format: int32
-        tradeDelinquencyCount:
-          type: integer
-          description: Number of trade delinquencies for this person.
-          format: int32
-        sixtyDayLatePaymentCount:
-          type: integer
-          description: Number of months since any sixty day late payments have been recorded.
-          format: int32
-        mortgageDelinquencyCount:
-          type: integer
-          description: Number of mortgage delinquencies for this person.
-          format: int32
-        thirtyDayLatePaymentCount:
-          type: integer
-          description: Number of payments later than 30 days for this person.
-          format: int32
-        numberOfMonthsSinceAnyThirtyDayLatePayments:
-          type: integer
-          description: Number of months since any thirty day late payments have been recorded.
-          format: int32
-        derogatoryRemarkCount:
-          type: integer
-          description: Number of derogatory remarks for this person.
-          format: int32
-        hasFiledForBankruptcy:
-          type: boolean
-          description: Has this person had a bankruptcy.
-        debt:
-          type:
-          - number
-          - 'null'
-          description: Cosigner's amount of Debt.
-          format: double
-        monthsSinceBankruptcyFiled:
-          type: integer
-          description: Number of months since this person last filed for bankruptcy.
-          format: int32
-        monthsSinceBankruptcyDismissed:
-          type: integer
-          description: Number of months since this person last had a bankruptcy dismissed.
-          format: int32
-        monthsSinceBankruptcyStatusDate:
-          type: integer
-          description: Number of months since the last bankruptcy status date.
-          format: int32
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.HousingStatus:
+      enum:
+      - Own
+      - Rent
+      type: string
+    Cubi.ConsumerLending.WebApi.Dto.ApplicationPartnerStatus:
+      enum:
+      - Signed
+      - Canceled
+      - Declined
+      - Rejected
+      type: string
     Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationDto:
       required:
       - applicationDate
@@ -1829,6 +2168,199 @@ components:
           $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailDto'
       additionalProperties: false
       description: Details about a loan application that is to be created
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto:
+      type: object
+      properties:
+        fundingStageNumber:
+          type: integer
+          description: The order in the funding sequence that this funding stage is expected to be executed
+          format: int32
+        expectedFundingPercentage:
+          type: number
+          description: The percentage of the overall loan that is expected to be funded in this stage of the funding
+          format: double
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorResponseDto:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+          description: Contractor's name
+        ein:
+          type:
+          - string
+          - 'null'
+          description: Contractor's EIN
+      additionalProperties: false
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the borrower that was included on the application. This is unique to this application. If the same borrower is included on many different applications, each of those borrower entries will have a different id value
+          format: uuid
+        ssn:
+          type:
+          - string
+          - 'null'
+          description: The SSN of the borrower
+        fullName:
+          type:
+          - string
+          - 'null'
+          description: The full name of the borrower
+        dateOfBirth:
+          type: string
+          description: The date of birth of the borrower.
+          format: date-time
+        annualIncome:
+          type: number
+          description: The annual income of the borrower
+          format: double
+        employerName:
+          type:
+          - string
+          - 'null'
+          description: The name of the borrower's employer
+        emailAddress:
+          type:
+          - string
+          - 'null'
+          description: The email address of the borrower
+        schoolName:
+          type:
+          - string
+          - 'null'
+          description: The post secondary school the borrower attended
+        schoolOpeCode:
+          type:
+          - string
+          - 'null'
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
+        schoolGraduationYear:
+          type:
+          - integer
+          - 'null'
+          description: The year that the borrower graduated from their post secondary school
+          format: int32
+        degreeType:
+          type:
+          - string
+          - 'null'
+          description: The type of degree that the borrower received
+        areaOfStudy:
+          type:
+          - string
+          - 'null'
+          description: The borrower's area of study in post secondary school
+        deceased:
+          type: boolean
+          description: Indicates that the borrower is deceased
+        housingStatus:
+          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
+        streetAddress:
+          type:
+          - string
+          - 'null'
+          description: The street portion of the borrower's primary residence address
+        city:
+          type:
+          - string
+          - 'null'
+          description: The city portion of the borrower's primary residence address
+        state:
+          type:
+          - string
+          - 'null'
+          description: The state portion of the borrower's primary residence address
+        zipCode:
+          type:
+          - string
+          - 'null'
+          description: The Zip Code portion of the borrower's primary residence address
+        homePhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The home phone number of the borrower
+        workPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The work phone number of the borrower
+        cellPhoneNumber:
+          type:
+          - string
+          - 'null'
+          description: The cell phone number of the borrower
+        ficoScore:
+          type: integer
+          description: The borrower's FICO score
+          format: int32
+        debtToIncomeRatio:
+          type: number
+          description: The borrower's debt to income ratio
+          format: double
+        creditInquiryCount:
+          type: integer
+          description: Number of credit inquiries for this person.
+          format: int32
+        chargeOffCount:
+          type: integer
+          description: Number of charge off for this person.
+          format: int32
+        tradeDelinquencyCount:
+          type: integer
+          description: Number of trade delinquencies for this person.
+          format: int32
+        sixtyDayLatePaymentCount:
+          type: integer
+          description: Number of months since any sixty day late payments have been recorded.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person.
+          format: int32
+        mortgageDelinquencyCount:
+          type: integer
+          description: Number of mortgage delinquencies for this person.
+          format: int32
+        thirtyDayLatePaymentCount:
+          type: integer
+          description: Number of payments later than 30 days for this person.
+          format: int32
+        numberOfMonthsSinceAnyThirtyDayLatePayments:
+          type: integer
+          description: Number of months since any thirty day late payments have been recorded.
+          format: int32
+        derogatoryRemarkCount:
+          type: integer
+          description: Number of derogatory remarks for this person.
+          format: int32
+        hasFiledForBankruptcy:
+          type: boolean
+          description: Has this person had a bankruptcy.
+        debt:
+          type:
+          - number
+          - 'null'
+          description: Borrower's amount of Debt.
+          format: double
+        monthsSinceBankruptcyFiled:
+          type: integer
+          description: Number of months since this person last filed for bankruptcy.
+          format: int32
+        monthsSinceBankruptcyDismissed:
+          type: integer
+          description: Number of months since this person last had a bankruptcy dismissed.
+          format: int32
+        monthsSinceBankruptcyStatusDate:
+          type: integer
+          description: Number of months since the last bankruptcy status date.
+          format: int32
+      additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto:
       type: object
       properties:
@@ -2037,316 +2569,122 @@ components:
         stagedFundingDetails:
           $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailResponseDto'
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailResponseDto:
-      type: object
-      properties:
-        expectedNumberOfStages:
-          type: integer
-          description: The number of funding stages that are expected to be used to fully fund the loan
-          format: int32
-        expectedFundingLevels:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto'
-          description: List of the expected funding levels that will be used to fully fund the loan
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerDto:
-      required:
-      - annualIncome
-      - city
-      - dateOfBirth
-      - debt
-      - debtToIncomeRatio
-      - ficoScore
-      - fullName
-      - ssn
-      - state
-      - streetAddress
-      - zipCode
-      type: object
-      properties:
-        ssn:
-          minLength: 1
-          type: string
-          description: Borrower's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
-        fullName:
-          minLength: 1
-          type: string
-          description: Full name of the borrower. Must be 255 characters long or less
-        dateOfBirth:
-          type: string
-          description: Borrower's date of birth. All borrowers must be between 18 and 120 years old on the loan application date
-          format: date-time
-        annualIncome:
-          type: number
-          description: Annual income of the borrower.
-          format: double
-        employerName:
-          type:
-          - string
-          - 'null'
-          description: Borrower's employer name
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          description: Borrower's email address
-        schoolName:
-          type:
-          - string
-          - 'null'
-          description: Name of the post secondary school the borrower attended
-        schoolOpeCode:
-          type:
-          - string
-          - 'null'
-          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
-        schoolGraduationYear:
-          type:
-          - integer
-          - 'null'
-          description: Year that the borrower graduated from their post secondary school
-          format: int32
-        degreeType:
-          type:
-          - string
-          - 'null'
-          description: Type of degree the borrower received when graduating from post secondary school
-        areaOfStudy:
-          type:
-          - string
-          - 'null'
-          description: Area of study for the degree the borrower received
-        deceased:
-          type: boolean
-          description: Indicates that the borrower is deceased
-        housingStatus:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
-        streetAddress:
-          minLength: 1
-          type: string
-          description: Street portion of the borrower's primary residence address. Must be 255 characters long or less
-        city:
-          minLength: 1
-          type: string
-          description: City portion of the borrower's primary residence address. Must be 255 characters long or less
-        state:
-          minLength: 1
-          type: string
-          description: State portion of the borrower's primary residence address. Must be 2 characters long
-        zipCode:
-          minLength: 1
-          type: string
-          description: Zip Code portion of the borrower's primary residence address
-        homePhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Borrower's home phone number
-        workPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Borrower's work phone number
-        cellPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Borrower's cell phone number
-        ficoScore:
-          type: integer
-          description: Borrower's FICO score. Must be between 0 and 1000
-          format: int32
-        debtToIncomeRatio:
-          type: number
-          description: Borrower's Debt to Income ratio. Must be between 0.00 and 100.00
-          format: double
-        debt:
-          type: number
-          description: Borrower's amount of Debt. Must be greater than 0.00
-          format: double
-        creditInquiryCount:
-          type: integer
-          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
-          format: int32
-        nonTraditionalInquiryCount:
-          type: integer
-          description: Number of non-traditional credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
-          format: int32
-        mortgageDelinquencyCount:
-          type: integer
-          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        thirtyDayLatePaymentCount:
-          type: integer
-          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        sixtyDayLatePaymentCount:
-          type: integer
-          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        tradeDelinquencyCount:
-          type: integer
-          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        chargeOffCount:
-          type: integer
-          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        numberOfMonthsSinceAnyThirtyDayLatePayments:
-          type: integer
-          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        derogatoryRemarkCount:
-          type: integer
-          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        hasFiledForBankruptcy:
-          type: boolean
-          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-        monthsSinceBankruptcyFiled:
-          type: integer
-          description: Number of months since this person last filed for bankruptcy.
-          format: int32
-        monthsSinceBankruptcyDismissed:
-          type: integer
-          description: Number of months since this person last had a bankruptcy dismissed.
-          format: int32
-        monthsSinceBankruptcyStatusDate:
-          type: integer
-          description: Number of months since the last bankruptcy status date.
-          format: int32
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailDto:
-      required:
-      - expectedFundingLevels
-      - expectedNumberOfStages
-      type: object
-      properties:
-        expectedNumberOfStages:
-          type: integer
-          description: The number of funding stages that are expected to be used to fully fund the loan
-          format: int32
-        expectedFundingLevels:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelDto'
-          description: List of the expected funding levels that will be used to fully fund the loan
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationBorrowerResponseDto:
+    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerResponseDto:
       type: object
       properties:
         id:
           type: string
-          description: The id of the borrower that was included on the application. This is unique to this application. If the same borrower is included on many different applications, each of those borrower entries will have a different id value
+          description: The id of the cosigner that was included on the application. This is unique to this application. If the same cosigner is included on many different applications, each of those cosigner entries will have a different id value
           format: uuid
         ssn:
           type:
           - string
           - 'null'
-          description: The SSN of the borrower
+          description: The SSN of the cosigner
         fullName:
           type:
           - string
           - 'null'
-          description: The full name of the borrower
+          description: The full name of the cosigner
         dateOfBirth:
           type: string
-          description: The date of birth of the borrower.
+          description: The date of birth of the cosigner
           format: date-time
         annualIncome:
           type: number
-          description: The annual income of the borrower
+          description: The annual income of the cosigner
           format: double
         employerName:
           type:
           - string
           - 'null'
-          description: The name of the borrower's employer
+          description: The name of the cosigner's employer
         emailAddress:
           type:
           - string
           - 'null'
-          description: The email address of the borrower
+          description: The email of the cosigner
         schoolName:
           type:
           - string
           - 'null'
-          description: The post secondary school the borrower attended
+          description: The post secondary school that the cosigner attended
         schoolOpeCode:
           type:
           - string
           - 'null'
-          description: The Office of Post Secondary Education (OPE) code for the post secondary school the borrower attended
+          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
         schoolGraduationYear:
           type:
           - integer
           - 'null'
-          description: The year that the borrower graduated from their post secondary school
+          description: The year that the cosigner graduated from their post secondary school
           format: int32
         degreeType:
           type:
           - string
           - 'null'
-          description: The type of degree that the borrower received
+          description: The type of degree that the cosigner received
         areaOfStudy:
           type:
           - string
           - 'null'
-          description: The borrower's area of study in post secondary school
+          description: The cosigner's area of study in post secondary school
         deceased:
           type: boolean
-          description: Indicates that the borrower is deceased
+          description: Indicates if the cosigner id deceased
         housingStatus:
           $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
         streetAddress:
           type:
           - string
           - 'null'
-          description: The street portion of the borrower's primary residence address
+          description: The street portion of the cosigner's primary residence address
         city:
           type:
           - string
           - 'null'
-          description: The city portion of the borrower's primary residence address
+          description: The city portion of the cosigner's primary residence address
         state:
           type:
           - string
           - 'null'
-          description: The state portion of the borrower's primary residence address
+          description: The state portion of the cosigner's primary residence address
         zipCode:
           type:
           - string
           - 'null'
-          description: The Zip Code portion of the borrower's primary residence address
+          description: the Zip Code portion of the cosigner's primary residence address
         homePhoneNumber:
           type:
           - string
           - 'null'
-          description: The home phone number of the borrower
+          description: The home phone number of the cosigner
         workPhoneNumber:
           type:
           - string
           - 'null'
-          description: The work phone number of the borrower
+          description: The work phone number of the cosigner
         cellPhoneNumber:
           type:
           - string
           - 'null'
-          description: The cell phone number of the borrower
+          description: The cell phone number of the cosigner
         ficoScore:
           type: integer
-          description: The borrower's FICO score
+          description: The cosigner's FICO score
           format: int32
         debtToIncomeRatio:
           type: number
-          description: The borrower's debt to income ratio
+          description: The cosigner's debt to income ratio
           format: double
         creditInquiryCount:
           type: integer
           description: Number of credit inquiries for this person.
+          format: int32
+        nonTraditionalInquiryCount:
+          type: integer
+          description: Number of non-traditional credit inquiries for this person.
           format: int32
         chargeOffCount:
           type: integer
@@ -2359,10 +2697,6 @@ components:
         sixtyDayLatePaymentCount:
           type: integer
           description: Number of months since any sixty day late payments have been recorded.
-          format: int32
-        nonTraditionalInquiryCount:
-          type: integer
-          description: Number of non-traditional credit inquiries for this person.
           format: int32
         mortgageDelinquencyCount:
           type: integer
@@ -2387,7 +2721,7 @@ components:
           type:
           - number
           - 'null'
-          description: Borrower's amount of Debt.
+          description: Cosigner's amount of Debt.
           format: double
         monthsSinceBankruptcyFiled:
           type: integer
@@ -2402,84 +2736,18 @@ components:
           description: Number of months since the last bankruptcy status date.
           format: int32
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ImmediateFundingInstructionResponseDto:
+    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionSubmissionResponseDto:
       type: object
       properties:
-        amountToFund:
-          type: number
-          description: Amount of money to disburse against the loan
-          format: double
-        routingNumber:
-          type:
-          - string
-          - 'null'
-          description: Routing number of the account the funds are disbursing to
-        accountNumber:
-          type:
-          - string
-          - 'null'
-          description: Account number that the funds are disbursing to
-        accountName:
-          type:
-          - string
-          - 'null'
-          description: The name on the account that the funds are disbursing to
-        accountType:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
-        receivedDate:
-          type: string
-          description: The date that the funding instruction was received on. This value will be in UTC
-          format: date-time
         platformReferenceNumber:
           type:
           - string
           - 'null'
-          description: The reference number provided by the API caller
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorResponseDto:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-          description: Contractor's name
-        ein:
-          type:
-          - string
-          - 'null'
-          description: Contractor's EIN
+          description: The Platform Reference Number that was provided when the funding instruction was submitted
+        fundingInstructionId:
+          type: string
+          description: The Funding Instruction Id that will be used in webhooks indicating changes in state to the funding instruction
+          format: uuid
       additionalProperties: false
     Cubi.ConsumerLending.WebApi.Dto.ApplicationRejectionReasonResponseDto:
       type: object
@@ -2499,88 +2767,22 @@ components:
           - 'null'
           description: The error message associated with the failing rule
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationContractorDto:
+    Cubi.ConsumerLending.WebApi.Dto.StagedFundingDetailDto:
       required:
-      - ein
-      - name
+      - expectedFundingLevels
+      - expectedNumberOfStages
       type: object
       properties:
-        name:
-          minLength: 1
-          type: string
-          description: Contractor's name. Maximum length of 255 characters
-        ein:
-          minLength: 1
-          type: string
-          description: 'Contractor''s EIN or SSN. This must follow the ##-####### pattern (for EIN), or ###-##-#### (for SSN). Additional validation checking for invalid values will be applied'
-      additionalProperties: false
-    Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto:
-      type: object
-      properties:
-        pageSize:
+        expectedNumberOfStages:
           type: integer
+          description: The number of funding stages that are expected to be used to fully fund the loan
           format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
+        expectedFundingLevels:
           type: array
           items:
-            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.LoanApplicationResponseDto'
+            $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelDto'
+          description: List of the expected funding levels that will be used to fully fund the loan
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.FundingInstructionDto:
-      required:
-      - accountName
-      - accountNumber
-      - accountType
-      - amountToFund
-      - platformReferenceNumber
-      - routingNumber
-      type: object
-      properties:
-        amountToFund:
-          type: number
-          description: Amount of money to disburse against the loan. Must be greater than 0.00
-          format: double
-        routingNumber:
-          minLength: 1
-          type: string
-          description: Routing number of the account the funds are disbursing to. Must be between 1 and 10 characters long
-        accountNumber:
-          minLength: 1
-          type: string
-          description: Account number that the funds are disbursing to. Must be 255 characters long or less
-        accountName:
-          minLength: 1
-          type: string
-          description: The name on the account that the funds are disbursing to. Must be 255 characters long or less
-        accountType:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.AccountType'
-        platformReferenceNumber:
-          minLength: 1
-          type: string
-          description: Reference number provided by the API caller. Must be 255 characters long or less
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.PropertyType:
-      enum:
-      - Other
-      - SingleFamily
-      - Duplex
-      - Triplex
-      - Apartment
-      - Condominium
-      - Undeveloped
-      - Agriculture
-      - Commercial
-      - MobileHome
-      - ManufacturedHome
-      type: string
     Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelDto:
       required:
       - expectedFundingPercentage
@@ -2596,208 +2798,6 @@ components:
           description: The percentage of the overall loan that is expected to be funded in this stage of the funding
           format: double
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.CreateLoanApplicationPromotionDto:
-      required:
-      - promotionMonths
-      type: object
-      properties:
-        promotionMonths:
-          type: integer
-          description: The number of months that any promotion assigned to the application is valid for
-          format: int32
-      additionalProperties: false
-      description: Details about the promotion associated with a loan application
-    Cubi.ConsumerLending.WebApi.Dto.ApplicationPartnerStatus:
-      enum:
-      - Signed
-      - Canceled
-      - Declined
-      - Rejected
-      type: string
-    Cubi.ConsumerLending.WebApi.Dto.LoanApplicationCosignerDto:
-      required:
-      - annualIncome
-      - city
-      - dateOfBirth
-      - debt
-      - debtToIncomeRatio
-      - ficoScore
-      - fullName
-      - ssn
-      - state
-      - streetAddress
-      - zipCode
-      type: object
-      properties:
-        ssn:
-          minLength: 1
-          type: string
-          description: Cosigner's SSN. This must be between 9 and 11 characters in length and in a valid SSN format
-        fullName:
-          minLength: 1
-          type: string
-          description: Full name of the cosigner. Must be 255 characters long or less
-        dateOfBirth:
-          type: string
-          description: Cosigner's date of birth. All cosigners must be between 18 and 120 years old on the loan application date
-          format: date-time
-        annualIncome:
-          type: number
-          description: Annual income of the cosigner.
-          format: double
-        employerName:
-          type:
-          - string
-          - 'null'
-          description: Cosigner's employer name
-        emailAddress:
-          type:
-          - string
-          - 'null'
-          description: Cosigner's email address
-        schoolName:
-          type:
-          - string
-          - 'null'
-          description: Name of the post secondary school the cosigner attended
-        schoolOpeCode:
-          type:
-          - string
-          - 'null'
-          description: The Office of Post Secondary Education (OPE) code for the post secondary school the cosigner attended
-        schoolGraduationYear:
-          type:
-          - integer
-          - 'null'
-          description: Year that the cosigner graduated from their post secondary school
-          format: int32
-        degreeType:
-          type:
-          - string
-          - 'null'
-          description: Type of degree the cosigner received when graduating from post secondary school
-        areaOfStudy:
-          type:
-          - string
-          - 'null'
-          description: Area of study for the degree the cosigner received
-        deceased:
-          type: boolean
-          description: Indicates that the cosigner is deceased
-        housingStatus:
-          $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.HousingStatus'
-        streetAddress:
-          minLength: 1
-          type: string
-          description: Street portion of the cosigner's primary residence address. Must be 255 characters long or less
-        city:
-          minLength: 1
-          type: string
-          description: City portion of the cosigner's primary residence address. Must be 255 characters long or less
-        state:
-          minLength: 1
-          type: string
-          description: State portion of the cosigner's primary residence address. Must be 2 characters long
-        zipCode:
-          minLength: 1
-          type: string
-          description: Zip Code portion of the cosigner's primary residence address
-        homePhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Cosigner's home phone number
-        workPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Cosigner's work phone number
-        cellPhoneNumber:
-          type:
-          - string
-          - 'null'
-          description: Cosigner's cell phone number
-        ficoScore:
-          type: integer
-          description: Cosigner's FICO score. Must be between 0 and 1000
-          format: int32
-        debtToIncomeRatio:
-          type: number
-          description: Cosigner's Debt to Income ratio. Must be between 0.00 and 100.00
-          format: double
-        debt:
-          type: number
-          description: Cosigner's amount of Debt. Must be greater than 0.00
-          format: double
-        creditInquiryCount:
-          type: integer
-          description: Number of credit inquiries for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/programs.
-          format: int32
-        sixtyDayLatePaymentCount:
-          type: integer
-          description: Number of payments later than 60 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        tradeDelinquencyCount:
-          type: integer
-          description: Number of Currently DQ Trades (any).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        chargeOffCount:
-          type: integer
-          description: Number of Chargeoff in months (excluding collections).  his count can be over any time period (i.e. over the last 24 months) If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        nonTraditionalInquiryCount:
-          type: integer
-          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        mortgageDelinquencyCount:
-          type: integer
-          description: Number of mortgage delinquencies for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        thirtyDayLatePaymentCount:
-          type: integer
-          description: Number of payments later than 30 days for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        numberOfMonthsSinceAnyThirtyDayLatePayments:
-          type: integer
-          description: Number of months since any thirty day late payments have been recorded. If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        derogatoryRemarkCount:
-          type: integer
-          description: Number of derogatory remarks for this person. This count can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-          format: int32
-        hasFiledForBankruptcy:
-          type: boolean
-          description: Has this person had a bankruptcy. This value can be over any time period (i.e. over the last 6 months). If this value is being used as part of a policy/program approval rule, then the inclusion of this data and the time period it represents needs to be consistent across all loan applications within that policy/program.
-        monthsSinceBankruptcyFiled:
-          type: integer
-          description: Number of months since this person last filed for bankruptcy.
-          format: int32
-        monthsSinceBankruptcyDismissed:
-          type: integer
-          description: Number of months since this person last had a bankruptcy dismissed.
-          format: int32
-        monthsSinceBankruptcyStatusDate:
-          type: integer
-          description: Number of months since the last bankruptcy status date.
-          format: int32
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.StagedFundingLevelResponseDto:
-      type: object
-      properties:
-        fundingStageNumber:
-          type: integer
-          description: The order in the funding sequence that this funding stage is expected to be executed
-          format: int32
-        expectedFundingPercentage:
-          type: number
-          description: The percentage of the overall loan that is expected to be funded in this stage of the funding
-          format: double
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.HousingStatus:
-      enum:
-      - Own
-      - Rent
-      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

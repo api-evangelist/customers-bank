@@ -360,50 +360,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Partners.WebApi.Dtos.UpdateNotificationEmailDto:
-      type: object
-      properties:
-        notificationEmail:
-          type: string
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.NotificationEmailSettingsDto:
-      required:
-      - notificationEmail
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        partnerId:
-          type: string
-          format: uuid
-        notificationEmail:
-          type: string
-        isVerified:
-          type: boolean
-        verificationCode:
-          type:
-          - string
-          - 'null'
-        expiresAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.VerifyNotificationEmailDto:
-      type: object
-      properties:
-        verificationCode:
-          type: string
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -435,6 +391,43 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.NotificationEmailSettingsDto:
+      required:
+      - notificationEmail
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        partnerId:
+          type: string
+          format: uuid
+        notificationEmail:
+          type: string
+        isVerified:
+          type: boolean
+        verificationCode:
+          type:
+          - string
+          - 'null'
+        expiresAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.UpdateNotificationEmailDto:
+      type: object
+      properties:
+        notificationEmail:
+          type: string
+      additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.VerifyNotificationEmailDto:
+      type: object
+      properties:
+        verificationCode:
+          type: string
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -460,6 +453,13 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

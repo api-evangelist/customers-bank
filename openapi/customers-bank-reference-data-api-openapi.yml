@@ -107,40 +107,6 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/accounts/v1
 components:
   schemas:
-    Cubi.Accounts.WebApi.Dto.ReferenceDataDto:
-      type: object
-      properties:
-        balanceModes:
-          type: array
-          items:
-            type: string
-          description: Allowed values for Cubi.Accounts.WebApi.Dto.SubaccountDto.BalanceMode.
-        customerTypes:
-          type: array
-          items:
-            type: string
-          description: Allowed values for Cubi.Accounts.WebApi.Dto.CustomerDto.CustomerType.
-        accountControlTypes:
-          type: array
-          items:
-            type: string
-          description: Allowed values for Cubi.Accounts.WebApi.Dto.AccountDto.ControlType.
-        accountStates:
-          type: array
-          items:
-            type: string
-          description: Possible values for Cubi.Accounts.WebApi.Dto.GetAccountDto.State.
-        transactionRails:
-          type: array
-          items:
-            type: string
-          description: Possible values for Cubi.Accounts.WebApi.Dto.TransactionDto.Rail.
-        subaccountStatuses:
-          type: array
-          items:
-            type: string
-          description: Possible values for Cubi.Accounts.WebApi.Dto.SubaccountDto.Status.
-      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -197,11 +163,47 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Ach.WebApi.Dto.ReferenceDataDto:
+    Cubi.Accounts.WebApi.Dto.ReferenceDataDto:
       type: object
       properties:
-        nachaCodes:
-          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.NachaCodesDto'
+        balanceModes:
+          type: array
+          items:
+            type: string
+          description: Allowed values for Cubi.Accounts.WebApi.Dto.SubaccountDto.BalanceMode.
+        customerTypes:
+          type: array
+          items:
+            type: string
+          description: Allowed values for Cubi.Accounts.WebApi.Dto.CustomerDto.CustomerType.
+        accountControlTypes:
+          type: array
+          items:
+            type: string
+          description: Allowed values for Cubi.Accounts.WebApi.Dto.AccountDto.ControlType.
+        accountStates:
+          type: array
+          items:
+            type: string
+          description: Possible values for Cubi.Accounts.WebApi.Dto.GetAccountDto.State.
+        transactionRails:
+          type: array
+          items:
+            type: string
+          description: Possible values for Cubi.Accounts.WebApi.Dto.TransactionDto.Rail.
+        subaccountStatuses:
+          type: array
+          items:
+            type: string
+          description: Possible values for Cubi.Accounts.WebApi.Dto.SubaccountDto.Status.
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.NachaCodesDto:
+      type: object
+      properties:
+        returnCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
       additionalProperties: false
     Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto:
       type: object
@@ -213,13 +215,11 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    Cubi.Ach.WebApi.Dto.NachaCodesDto:
+    Cubi.Ach.WebApi.Dto.ReferenceDataDto:
       type: object
       properties:
-        returnCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
+        nachaCodes:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.NachaCodesDto'
       additionalProperties: false
 x-refined-from:
 - customers-bank-accounts-openapi.json

@@ -1137,11 +1137,37 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.SubaccountDto'
       additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.SubaccountStatus:
-      enum:
-      - Active
-      - Closed
-      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
     Cubi.Accounts.WebApi.Dto.SubaccountDto:
       required:
       - accountNumber
@@ -1213,6 +1239,52 @@ components:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TagDto'
           description: Tags currently attached to this subaccount
       additionalProperties: false
+    Cubi.Accounts.Contracts.Messages.SubaccountStatus:
+      enum:
+      - Active
+      - Closed
+      type: string
+    Cubi.Accounts.Contracts.Messages.BalanceMode:
+      enum:
+      - Reserved
+      - Shared
+      type: string
+    Cubi.Accounts.WebApi.Dto.TagDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID (UUID) for the tag
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the tag
+        description:
+          type:
+          - string
+          - 'null'
+          description: Optional description of the tag
+      additionalProperties: false
+    Cubi.Accounts.WebApi.Dto.UpdateSubaccountDto:
+      type: object
+      properties:
+        description:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Optional description of the subaccount
+        externalReferenceId:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The external reference id, linking the subaccount back to your system
+      additionalProperties: false
     Cubi.Accounts.WebApi.Dto.CreateSubaccountDto:
       required:
       - name
@@ -1249,85 +1321,6 @@ components:
           description: The Id (UUID) of the parent account
           format: uuid
       additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.TagDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID (UUID) for the tag
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the tag
-        description:
-          type:
-          - string
-          - 'null'
-          description: Optional description of the tag
-      additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.BalanceMode:
-      enum:
-      - Reserved
-      - Shared
-      type: string
-    Cubi.Accounts.WebApi.Dto.UpdateSubaccountDto:
-      type: object
-      properties:
-        description:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Optional description of the subaccount
-        externalReferenceId:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: The external reference id, linking the subaccount back to your system
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -1353,6 +1346,13 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

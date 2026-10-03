@@ -581,6 +581,55 @@ paths:
                 traceId: string
 components:
   schemas:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Accounts.WebApi.Dto.CreateTagDto:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: The name of the tag
+        description:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Optional description of the tag
+      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.TagDto:
       type: object
       properties:
@@ -600,31 +649,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.TagDto'
-      additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.CreateTagDto:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: The name of the tag
-        description:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Optional description of the tag
-      additionalProperties: false
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
       additionalProperties: false
     Cubi.Accounts.WebApi.Dto.UpdateTagDto:
       required:
@@ -662,37 +686,6 @@ components:
           - 'null'
           description: Optional description of the tag
       additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -718,6 +711,13 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

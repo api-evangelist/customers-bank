@@ -269,41 +269,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.MessageDto:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int32
-        pageOffset:
-          type: integer
-          format: int32
-        totalPages:
-          type: integer
-          format: int32
-        totalItemCount:
-          type: integer
-          format: int32
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageDto'
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.MessageDto:
-      type: object
-      properties:
-        messageText:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageType'
-      additionalProperties: false
-    Cubi.Partners.WebApi.Dtos.MessageType:
-      enum:
-      - Banner
-      - Advisory
-      type: string
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -335,6 +300,36 @@ components:
             items:
               type: string
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.MessageDto:
+      type: object
+      properties:
+        messageText:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageType'
+      additionalProperties: false
+    Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.MessageDto:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int32
+        pageOffset:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        totalItemCount:
+          type: integer
+          format: int32
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageDto'
+      additionalProperties: false
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -360,6 +355,11 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Cubi.Partners.WebApi.Dtos.MessageType:
+      enum:
+      - Banner
+      - Advisory
+      type: string
 x-readme:
   explorer-enabled: false
   proxy-enabled: true
