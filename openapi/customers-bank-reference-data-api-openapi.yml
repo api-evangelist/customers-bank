@@ -107,62 +107,6 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/accounts/v1
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     Cubi.Accounts.WebApi.Dto.ReferenceDataDto:
       type: object
       properties:
@@ -197,14 +141,62 @@ components:
             type: string
           description: Possible values for Cubi.Accounts.WebApi.Dto.SubaccountDto.Status.
       additionalProperties: false
-    Cubi.Ach.WebApi.Dto.NachaCodesDto:
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
-        returnCodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
-      additionalProperties: false
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
     Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto:
       type: object
       properties:
@@ -214,6 +206,14 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.NachaCodesDto:
+      type: object
+      properties:
+        returnCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ReferenceDataDetailDto'
       additionalProperties: false
     Cubi.Ach.WebApi.Dto.ReferenceDataDto:
       type: object

@@ -1571,8 +1571,6 @@ apis:
   humanURL: https://cubiapi.readme.io/docs/accounts-3
   baseURL: https://cubi-sandbox-api.customersbank.com/accounts/v1
   tags:
-  - Web PubSub
-  tags_raw:
   - Web Pub Sub
   properties:
   - type: OpenAPI

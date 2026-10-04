@@ -552,37 +552,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Cubi.Common.Abstractions.Paginated_Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
       type: object
       properties:
@@ -620,6 +589,50 @@ components:
           type: string
           format: date-time
       additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id
+          format: uuid
+        accountId:
+          type: string
+          description: Account id
+          format: uuid
+          deprecated: true
+        eventTypeName:
+          type: string
+          description: Event type name
+        callbackUrl:
+          type: string
+          description: Callback url
+          format: uri
+        statusText:
+          type: string
+          description: Status text
+        jsonPayloadText:
+          type: string
+          description: Json payload text
+        attemptDate:
+          type: string
+          description: Attempt date
+          format: date-time
+        subscriptionId:
+          type:
+          - string
+          - 'null'
+          description: The ID of the subscription on which this event was sent
+          format: uuid
+      additionalProperties: false
+      description: A event history DTO abstraction.
     Cubi.Common.Abstractions.Paginated_Cubi.Webhooks.WebApi.Dtos.EventRunDto:
       type: object
       properties:
@@ -665,50 +678,37 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.Webhooks.WebApi.Dtos.EventHistoryDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id
-          format: uuid
-        accountId:
-          type: string
-          description: Account id
-          format: uuid
-          deprecated: true
-        eventTypeName:
-          type: string
-          description: Event type name
-        callbackUrl:
-          type: string
-          description: Callback url
-          format: uri
-        statusText:
-          type: string
-          description: Status text
-        jsonPayloadText:
-          type: string
-          description: Json payload text
-        attemptDate:
-          type: string
-          description: Attempt date
-          format: date-time
-        subscriptionId:
+        type:
           type:
           - string
           - 'null'
-          description: The ID of the subscription on which this event was sent
-          format: uuid
-      additionalProperties: false
-      description: A event history DTO abstraction.
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

@@ -347,6 +347,32 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/ach/v1
 components:
   schemas:
+    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the account
+          format: uuid
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+        accountNumber:
+          type: string
+          description: The account number
+      additionalProperties: false
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
       type: object
       properties:
@@ -367,6 +393,36 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.AccountControlTypeDto'
       additionalProperties: false
+    Cubi.Ach.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Microsoft.AspNetCore.Mvc.ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
       type: object
       properties:
@@ -398,67 +454,6 @@ components:
             items:
               type: string
       additionalProperties: {}
-    Cubi.Ach.WebApi.Dto.ControlTypeDto:
-      enum:
-      - Single
-      - Dual
-      type: string
-    Cubi.Ach.WebApi.Dto.UpdateAccountControlTypeDto:
-      type: object
-      properties:
-        controlType:
-          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
-      additionalProperties: false
-    Cubi.Ach.WebApi.Dto.AccountControlTypeDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the account
-          format: uuid
-        controlType:
-          $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.ControlTypeDto'
-        accountNumber:
-          type: string
-          description: The account number
-      additionalProperties: false
-    Microsoft.AspNetCore.Mvc.ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-      additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.ControlTypeDto:
-      enum:
-      - Single
-      - Dual
-      type: string
     Cubi.Common.Abstractions.Paginated_Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto:
       type: object
       properties:
@@ -479,12 +474,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto'
       additionalProperties: false
-    Cubi.InstantPayments.WebApi.Dto.UpdateAccountControlTypeDto:
-      type: object
-      properties:
-        controlType:
-          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.ControlTypeDto'
-      additionalProperties: false
     Cubi.InstantPayments.WebApi.Dto.AccountControlTypeDto:
       type: object
       properties:
@@ -500,6 +489,22 @@ components:
           - 'null'
           description: The account number
       additionalProperties: false
+    Cubi.InstantPayments.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
+    Cubi.InstantPayments.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.InstantPayments.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
+    Cubi.Wires.WebApi.Dto.ControlTypeDto:
+      enum:
+      - Single
+      - Dual
+      type: string
     Cubi.Common.Abstractions.Paginated_Cubi.Wires.WebApi.Dto.AccountControlTypeDto:
       type: object
       properties:
@@ -520,12 +525,6 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.AccountControlTypeDto'
       additionalProperties: false
-    Cubi.Wires.WebApi.Dto.UpdateAccountControlTypeDto:
-      type: object
-      properties:
-        controlType:
-          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ControlTypeDto'
-      additionalProperties: false
     Cubi.Wires.WebApi.Dto.AccountControlTypeDto:
       type: object
       properties:
@@ -539,11 +538,12 @@ components:
           type: string
           description: The account number
       additionalProperties: false
-    Cubi.Wires.WebApi.Dto.ControlTypeDto:
-      enum:
-      - Single
-      - Dual
-      type: string
+    Cubi.Wires.WebApi.Dto.UpdateAccountControlTypeDto:
+      type: object
+      properties:
+        controlType:
+          $ref: '#/components/schemas/Cubi.Wires.WebApi.Dto.ControlTypeDto'
+      additionalProperties: false
 x-refined-from:
 - customers-bank-ach-openapi.json
 - customers-bank-instantpayments-openapi.json

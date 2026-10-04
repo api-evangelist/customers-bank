@@ -269,37 +269,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
     Cubi.Partners.WebApi.Dtos.MessageDto:
       type: object
       properties:
@@ -310,6 +279,11 @@ components:
         type:
           $ref: '#/components/schemas/Cubi.Partners.WebApi.Dtos.MessageType'
       additionalProperties: false
+    Cubi.Partners.WebApi.Dtos.MessageType:
+      enum:
+      - Banner
+      - Advisory
+      type: string
     Cubi.Common.Abstractions.Paginated_Cubi.Partners.WebApi.Dtos.MessageDto:
       type: object
       properties:
@@ -355,11 +329,37 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Partners.WebApi.Dtos.MessageType:
-      enum:
-      - Banner
-      - Advisory
-      type: string
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
 x-readme:
   explorer-enabled: false
   proxy-enabled: true

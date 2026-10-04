@@ -666,62 +666,6 @@ paths:
     - url: https://cubi-sandbox-api.customersbank.com/consumerlending/v1
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Ach.Contracts.Messages.AchPaymentType:
-      enum:
-      - PPD
-      - CCD
-      - CTX
-      - TEL
-      - WEB
-      - ACK
-      - ADV
-      - ARC
-      - ATX
-      - BOC
-      - CIE
-      - COR
-      - DNE
-      - ENR
-      - IAT
-      - POP
-      - POS
-      - SHR
-      - MTE
-      - RCK
-      - TRX
-      - XCK
-      type: string
     Cubi.Ach.WebApi.Dto.PartnerProgramDto:
       required:
       - achCompanyId
@@ -777,6 +721,31 @@ components:
           items:
             $ref: '#/components/schemas/Cubi.Ach.WebApi.Dto.PartnerProgramDto'
       additionalProperties: false
+    Cubi.Ach.Contracts.Messages.AchPaymentType:
+      enum:
+      - PPD
+      - CCD
+      - CTX
+      - TEL
+      - WEB
+      - ACK
+      - ADV
+      - ARC
+      - ATX
+      - BOC
+      - CIE
+      - COR
+      - DNE
+      - ENR
+      - IAT
+      - POP
+      - POS
+      - SHR
+      - MTE
+      - RCK
+      - TRX
+      - XCK
+      type: string
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -802,6 +771,58 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto:
+      type: object
+      properties:
+        effectiveDate:
+          type: string
+          description: The date and time that this ruleset is effective on. The ApplicationDate on the loan application is compared to this value when selecting the appropriate ruleset to apply to the loan application.
+          format: date-time
+        creditPolicyVersion:
+          type:
+          - string
+          - 'null'
+          description: The version number of the credit policy that was used to create the approval rules in this ruleset
+        maximumNumberOfBorrowers:
+          type: integer
+          description: The maximum number of borrowers that will be accepted on a loan application which is verified by this ruleset
+          format: int32
+        maximumNumberOfCosigners:
+          type: integer
+          description: The maximum number of cosigners that will be accepted on a loan application which is verified by this ruleset
+          format: int32
+      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
       type: object
       properties:
@@ -829,6 +850,11 @@ components:
       - Origination
       - MdrAndOrigination
       type: string
+    Cubi.ConsumerLending.WebApi.Dto.ProgramType:
+      enum:
+      - Other
+      - HomeImprovement
+      type: string
     Cubi.ConsumerLending.WebApi.Dto.PartnerProgramResponseDto:
       type: object
       properties:
@@ -853,32 +879,6 @@ components:
             $ref: '#/components/schemas/Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto'
           description: List of the approval (credit policy) rules associated with this program
       additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ApprovalRuleResponseDto:
-      type: object
-      properties:
-        effectiveDate:
-          type: string
-          description: The date and time that this ruleset is effective on. The ApplicationDate on the loan application is compared to this value when selecting the appropriate ruleset to apply to the loan application.
-          format: date-time
-        creditPolicyVersion:
-          type:
-          - string
-          - 'null'
-          description: The version number of the credit policy that was used to create the approval rules in this ruleset
-        maximumNumberOfBorrowers:
-          type: integer
-          description: The maximum number of borrowers that will be accepted on a loan application which is verified by this ruleset
-          format: int32
-        maximumNumberOfCosigners:
-          type: integer
-          description: The maximum number of cosigners that will be accepted on a loan application which is verified by this ruleset
-          format: int32
-      additionalProperties: false
-    Cubi.ConsumerLending.WebApi.Dto.ProgramType:
-      enum:
-      - Other
-      - HomeImprovement
-      type: string
 x-refined-from:
 - customers-bank-ach-openapi.json
 - customers-bank-consumerlending-openapi.json

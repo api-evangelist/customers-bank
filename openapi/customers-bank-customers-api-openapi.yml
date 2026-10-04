@@ -655,54 +655,6 @@ paths:
                 traceId: string
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        traceId:
-          type:
-          - string
-          - 'null'
-        errors:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-      additionalProperties: {}
-    Cubi.Accounts.WebApi.Dto.CustomerDto:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID (UUID) for the customer
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-          description: The name of the customer
-        customerType:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
-        address:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
-      additionalProperties: false
     Cubi.Common.Abstractions.Paginated_Cubi.Accounts.WebApi.Dto.CustomerDto:
       type: object
       properties:
@@ -778,22 +730,12 @@ components:
         address:
           $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
       additionalProperties: false
-    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
-      required:
-      - address
-      - customerType
-      - name
+    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
       type: object
       properties:
-        name:
-          maxLength: 255
-          minLength: 0
+        id:
           type: string
-          description: The name of the customer
-        customerType:
-          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
-        address:
-          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
+          format: uuid
       additionalProperties: false
     Cubi.Accounts.WebApi.Dto.CreateAddressDto:
       required:
@@ -839,11 +781,6 @@ components:
           type: string
           description: Country Code
       additionalProperties: false
-    Cubi.Accounts.Contracts.Messages.CustomerType:
-      enum:
-      - Personal
-      - Business
-      type: string
     Microsoft.AspNetCore.Mvc.ProblemDetails:
       type: object
       properties:
@@ -869,12 +806,75 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    Cubi.Common.WebApi.Mediatr.Validation.IdentifierContainer_System.Guid:
+    Microsoft.AspNetCore.Mvc.ValidationProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        traceId:
+          type:
+          - string
+          - 'null'
+        errors:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+      additionalProperties: {}
+    Cubi.Accounts.WebApi.Dto.CustomerDto:
       type: object
       properties:
         id:
           type: string
+          description: The ID (UUID) for the customer
           format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.AddressDto'
+      additionalProperties: false
+    Cubi.Accounts.Contracts.Messages.CustomerType:
+      enum:
+      - Personal
+      - Business
+      type: string
+    Cubi.Accounts.WebApi.Dto.UpdateCustomerDto:
+      required:
+      - address
+      - customerType
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the customer
+        customerType:
+          $ref: '#/components/schemas/Cubi.Accounts.Contracts.Messages.CustomerType'
+        address:
+          $ref: '#/components/schemas/Cubi.Accounts.WebApi.Dto.CreateAddressDto'
       additionalProperties: false
 x-readme:
   explorer-enabled: false
