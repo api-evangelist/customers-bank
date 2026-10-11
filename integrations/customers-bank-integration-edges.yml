@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/customers-bank/integrations
+- https://n8n.io/integrations/customers-bank/
+- https://composio.dev/toolkits/customers-bank
+- https://monid.ai/tools/customers-bank
+checked:
+- https://composio.dev/toolkits/customers-bank
+- https://monid.ai/tools/customers-bank
+- https://n8n.io/integrations/customers-bank/
+- https://zapier.com/apps/customers-bank/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
