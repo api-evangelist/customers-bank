@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/customers-bank/integrations
 - https://n8n.io/integrations/customers-bank/
@@ -10,7 +10,49 @@ checked:
 - https://monid.ai/tools/customers-bank
 - https://n8n.io/integrations/customers-bank/
 - https://zapier.com/apps/customers-bank/integrations
+- https://data.gov.au/data/dataset/asic-credit-licensees
+- https://files.consumerfinance.gov/f/documents/CFPB_Institutions_06302026_Dist.xlsx
+- https://open.canada.ca/data/en/dataset/b27ec3ef-7338-4e76-a6fd-128339a92df5
+- https://register.fca.org.uk/s/
+- https://www.canada.ca/en/financial-consumer-agency.html
+- https://www.consumerfinance.gov/compliance/supervision-examinations/institutions/
+- https://www.nmlsconsumeraccess.org/
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: CFPB supervised depository institutions and affiliates
+  partner: null
+  partner_match: register-name
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://files.consumerfinance.gov/f/documents/CFPB_Institutions_06302026_Dist.xlsx
+  category: US CFPB consumer-finance supervision (depository institution over $10B)
+  contract_reference:
+    register: CFPB supervised depository institutions and affiliates
+    spec_file: null
+    standard: null
+    role: supervised-institution
+    registrations:
+    - registered_name: CUSTOMERS BANK
+      licences:
+      - depository institution over $10B
+      register_country: US
+      matched_domain: null
+      matched_by: register-name
+      register_id: '2354985'
+      state: PA
+      prudential_regulator: FRS
+      register_name_note: register-name 'customersbank' = customers-bank; no wikidata P856
+    signal_note: 'participation only: a regulator licence / supervision listing; no API conformance is published
+      by this register'
+    detected_by: sweep-consumer-lending-licensing.py
+    detected: '2026-10-21'
+    matched_by: register-name
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-consumer-lending-licensing.py
+  first_seen: '2026-10-21'
 templates: []
